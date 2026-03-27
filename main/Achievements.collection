@@ -1,0 +1,6 @@
+name: "Achievements"
+instances {
+  id: "Achievements"
+  prototype: "/Objects/Achievements.go"
+}
+scale_along_z: 0

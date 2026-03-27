@@ -1,0 +1,67 @@
+script: "/GUIs/MiniGameSelect.gui_script"
+textures {
+  name: "CranePageGUI"
+  texture: "/Visual Assets/SpriteAtlas/CranePageGUI.atlas"
+}
+nodes {
+  position {
+    x: 1050.0
+    y: 360.0
+  }
+  scale {
+    x: 0.6
+    y: 0.6
+  }
+  type: TYPE_BOX
+  texture: "CranePageGUI/flapping-fish-sign"
+  id: "FlappyFIsh"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 640.0
+    y: 360.0
+  }
+  scale {
+    x: 0.6
+    y: 0.6
+  }
+  type: TYPE_BOX
+  texture: "CranePageGUI/matching-sign"
+  id: "box1"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 250.0
+    y: 360.0
+  }
+  scale {
+    x: 0.6
+    y: 0.6
+  }
+  type: TYPE_BOX
+  texture: "CranePageGUI/tic-tac-toe-sign"
+  id: "box2"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 100.0
+    y: 650.0
+  }
+  scale {
+    x: 0.35
+    y: 0.35
+  }
+  type: TYPE_BOX
+  texture: "CranePageGUI/return-button"
+  id: "ReturnArrow"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+material: "/builtins/materials/gui.material"
+adjust_reference: ADJUST_REFERENCE_PARENT

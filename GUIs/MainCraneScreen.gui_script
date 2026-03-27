@@ -25,15 +25,15 @@ function on_input(self, action_id, action)
 			
 		elseif gui.pick_node(shelf, action.x, action.y) then
 			
-			print("Shelf Clicked")
+			msg.post("Loader:/Loader", "load Collection")
 			
 		elseif gui.pick_node(sign, action.x, action.y) then
 			
-			print("Sign Clicked")
+			msg.post("Loader:/Loader", "load MiniGameSelect")
 			
 		elseif gui.pick_node(tacklebox, action.x, action.y) then
 			
-			print("TackleBox Clicked")
+			msg.post("Loader:/Loader", "load Achievement")
 			
 		end
 		

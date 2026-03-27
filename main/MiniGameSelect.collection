@@ -1,0 +1,6 @@
+name: "MiniGameSelect"
+instances {
+  id: "MiniGameSelectGUI"
+  prototype: "/Objects/MiniGameSelectGUI.go"
+}
+scale_along_z: 0

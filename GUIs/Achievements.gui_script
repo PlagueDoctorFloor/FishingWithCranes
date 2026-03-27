@@ -4,7 +4,7 @@ end
 
 function on_input(self, action_id, action)
 	if action_id == hash("LeftClick") and action.pressed then
-
+		
 		local back = gui.get_node("ReturnArrow")
 
 		if gui.pick_node(back, action.x, action.y) then
@@ -12,9 +12,9 @@ function on_input(self, action_id, action)
 			msg.post("Loader:/Loader", "load Crane")
 
 		end
-
+		
 	end
-
+	
 end
 
 function final(self)
