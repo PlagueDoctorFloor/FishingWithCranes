@@ -1,0 +1,6 @@
+name: "Collection"
+instances {
+  id: "CollectionGUI"
+  prototype: "/Objects/CollectionGUI.go"
+}
+scale_along_z: 0

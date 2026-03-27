@@ -1,5 +1,5 @@
 [bootstrap]
-main_collection = /main/CraneScreen.collectionc
+main_collection = /main/Collection.collectionc
 
 [script]
 shared_state = 1

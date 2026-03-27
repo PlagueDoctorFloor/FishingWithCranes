@@ -1,0 +1,82 @@
+script: "/GUIs/Collection.gui_script"
+textures {
+  name: "CranePageGUI"
+  texture: "/Visual Assets/SpriteAtlas/CranePageGUI.atlas"
+}
+nodes {
+  position {
+    x: 450.0
+    y: 360.0
+  }
+  scale {
+    x: 0.5
+    y: 0.75
+  }
+  type: TYPE_BOX
+  texture: "CranePageGUI/cabinet-small"
+  id: "FreshwaterShelf"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 450.0
+    y: 360.0
+  }
+  scale {
+    x: 0.75
+    y: 0.75
+  }
+  type: TYPE_BOX
+  texture: "CranePageGUI/freshwater-sign"
+  id: "FreshwaterChoice"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 960.0
+    y: 360.0
+  }
+  scale {
+    x: 0.5
+    y: 0.75
+  }
+  type: TYPE_BOX
+  texture: "CranePageGUI/cabinet-small"
+  id: "SaltwaterShelf"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 960.0
+    y: 360.0
+  }
+  scale {
+    x: 0.75
+    y: 0.75
+  }
+  type: TYPE_BOX
+  texture: "CranePageGUI/saltwater-sign"
+  id: "SaltwaterChoice"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 100.0
+    y: 650.0
+  }
+  scale {
+    x: 0.35
+    y: 0.35
+  }
+  type: TYPE_BOX
+  texture: "CranePageGUI/return-button"
+  id: "ReturnArrow"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+material: "/builtins/materials/gui.material"
+adjust_reference: ADJUST_REFERENCE_PARENT
