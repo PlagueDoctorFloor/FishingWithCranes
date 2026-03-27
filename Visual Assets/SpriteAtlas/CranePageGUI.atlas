@@ -1,0 +1,77 @@
+images {
+  image: "/Visual Assets/Raw Images/token.png"
+}
+images {
+  image: "/Visual Assets/Raw Images/cabinet-small.png"
+}
+images {
+  image: "/Visual Assets/Raw Images/GUI/arrow.png"
+}
+images {
+  image: "/Visual Assets/Raw Images/GUI/big-sign.png"
+}
+images {
+  image: "/Visual Assets/Raw Images/GUI/flapping-fish-sign.png"
+}
+images {
+  image: "/Visual Assets/Raw Images/GUI/freshwater-sign.png"
+}
+images {
+  image: "/Visual Assets/Raw Images/GUI/glow.png"
+}
+images {
+  image: "/Visual Assets/Raw Images/GUI/label.png"
+}
+images {
+  image: "/Visual Assets/Raw Images/GUI/matching-sign.png"
+}
+images {
+  image: "/Visual Assets/Raw Images/GUI/return-button.png"
+}
+images {
+  image: "/Visual Assets/Raw Images/GUI/saltwater-sign.png"
+}
+images {
+  image: "/Visual Assets/Raw Images/GUI/tackle-box.png"
+}
+images {
+  image: "/Visual Assets/Raw Images/GUI/tackle-shop-sign.png"
+}
+images {
+  image: "/Visual Assets/Raw Images/GUI/tall-big-sign.png"
+}
+images {
+  image: "/Visual Assets/Raw Images/GUI/tic-tac-toe-sign.png"
+}
+images {
+  image: "/Visual Assets/Raw Images/GUI/unknown-fish.png"
+}
+images {
+  image: "/Visual Assets/Raw Images/GUI/x-out-button.png"
+}
+images {
+  image: "/Visual Assets/Raw Images/hook-machine.png"
+}
+animations {
+  id: "NewFishPull"
+  images {
+    image: "/Visual Assets/Raw Images/Animations/new-draw-1.png"
+  }
+  images {
+    image: "/Visual Assets/Raw Images/Animations/new-draw-2.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 4
+}
+animations {
+  id: "FishPull"
+  images {
+    image: "/Visual Assets/Raw Images/Animations/draw-background-1.png"
+  }
+  images {
+    image: "/Visual Assets/Raw Images/Animations/draw-background-2.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 4
+}
+extrude_borders: 2

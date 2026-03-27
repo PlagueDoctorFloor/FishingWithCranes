@@ -1,0 +1,70 @@
+
+function on_input(self, action_id, action)
+	if action_id == nil then
+		local tackleBox = gui.get_node("TackleBox")
+		if gui.pick_node(tackleBox, action.x, action.y) then
+			-- Mouse is over the node
+			gui.set_visible(gui.get_node("TackleBoxGlow"), true)
+		else
+			-- Mouse is NOT over the node
+			gui.set_visible(gui.get_node("TackleBoxGlow"), false)
+		end
+	end
+
+	if action_id == hash("LeftClick") and action.pressed then
+		
+		local crane = gui.get_node("Crane")
+		local shelf = gui.get_node("Shelf")
+		local sign = gui.get_node("MiniGames")
+		local tacklebox = gui.get_node("TackleBox")
+
+		if gui.pick_node(crane, action.x, action.y) then
+			
+			gui.set_visible(gui.get_node("FishPull"), true)
+			gui.set_visible(gui.get_node("NewFishGlitter"), true)
+			
+		elseif gui.pick_node(shelf, action.x, action.y) then
+			
+			print("Shelf Clicked")
+			
+		elseif gui.pick_node(sign, action.x, action.y) then
+			
+			print("Sign Clicked")
+			
+		elseif gui.pick_node(tacklebox, action.x, action.y) then
+			
+			print("TackleBox Clicked")
+			
+		end
+		
+	end
+	
+end
+
+function init(self)
+	msg.post(".", "acquire_input_focus")
+end
+
+function final(self)
+	-- Add finalization code here
+	-- Learn more: https://defold.com/manuals/script/
+	-- Remove this function if not needed
+end
+
+function update(self, dt)
+	-- Add update code here
+	-- Learn more: https://defold.com/manuals/script/
+	-- Remove this function if not needed
+end
+
+function on_message(self, message_id, message, sender)
+	-- Add message-handling code here
+	-- Learn more: https://defold.com/manuals/message-passing/
+	-- Remove this function if not needed
+end
+
+function on_reload(self)
+	-- Add reload-handling code here
+	-- Learn more: https://defold.com/manuals/hot-reload/
+	-- Remove this function if not needed
+end

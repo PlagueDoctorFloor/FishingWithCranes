@@ -1,12 +1,297 @@
+script: "/GUIs/MainCraneScreen.gui_script"
+fonts {
+  name: "Permanent Marker"
+  font: "/Visual Assets/Fonts/Permanent Marker.font"
+}
+textures {
+  name: "CranePageGUI"
+  texture: "/Visual Assets/SpriteAtlas/CranePageGUI.atlas"
+}
 nodes {
+  position {
+    x: 640.0
+    y: 300.0
+  }
+  scale {
+    x: 0.6
+    y: 0.6
+  }
+  type: TYPE_BOX
+  texture: "CranePageGUI/hook-machine"
+  id: "Crane"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 640.0
+    y: 650.0
+  }
+  scale {
+    x: 0.6
+    y: 0.3
+  }
+  type: TYPE_BOX
+  texture: "CranePageGUI/label"
+  id: "ClawMachineLabel"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 1140.0
+    y: 580.0
+  }
+  scale {
+    x: 0.55
+    y: 0.3
+  }
+  type: TYPE_BOX
+  texture: "CranePageGUI/label"
+  id: "ShelfLabel"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 640.0
+    y: 650.0
+  }
+  scale {
+    x: 2.0
+    y: 2.0
+  }
   size {
     x: 200.0
     y: 100.0
   }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "Claw Machine"
+  font: "Permanent Marker"
+  id: "CraneLabelText"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 1140.0
+    y: 580.0
+  }
+  scale {
+    x: 2.0
+    y: 2.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "Collection\n"
+  ""
+  font: "Permanent Marker"
+  id: "ShelfLabelText"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 150.0
+    y: 150.0
+  }
+  scale {
+    x: 0.5
+    y: 0.5
+  }
   type: TYPE_BOX
-  id: "box"
+  texture: "CranePageGUI/glow"
+  id: "TackleBoxGlow"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
+  visible: false
+}
+nodes {
+  position {
+    x: 150.0
+    y: 150.0
+    z: 1.0
+  }
+  scale {
+    x: 0.5
+    y: 0.5
+  }
+  type: TYPE_BOX
+  texture: "CranePageGUI/tackle-box"
+  id: "TackleBox"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 154.0
+    y: 83.0
+  }
+  scale {
+    x: 1.5
+    y: 1.5
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "Achievements\n"
+  ""
+  font: "Permanent Marker"
+  id: "TackleBoxText"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 210.0
+    y: 540.0
+  }
+  scale {
+    x: 0.75
+    y: 0.75
+  }
+  type: TYPE_BOX
+  texture: "CranePageGUI/big-sign"
+  id: "MiniGames"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 210.0
+    y: 500.0
+  }
+  scale {
+    x: 3.0
+    y: 3.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "Earn\n"
+  "More\n"
+  "Tokens!!!"
+  font: "Permanent Marker"
+  id: "MiniGameText"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 1200.0
+    y: 260.0
+  }
+  scale {
+    x: 0.5
+    y: 0.525
+  }
+  type: TYPE_BOX
+  texture: "CranePageGUI/cabinet-small"
+  id: "Shelf"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 640.0
+    y: 400.0
+  }
+  type: TYPE_BOX
+  texture: "CranePageGUI/FishPull"
+  id: "FishPull"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+  visible: false
+}
+nodes {
+  position {
+    x: 640.0
+    y: 400.0
+  }
+  type: TYPE_BOX
+  texture: "CranePageGUI/NewFishPull"
+  id: "NewFishGlitter"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+  visible: false
+}
+nodes {
+  position {
+    x: 875.0
+    y: 630.0
+  }
+  scale {
+    x: 0.3
+    y: 0.2
+  }
+  type: TYPE_BOX
+  texture: "CranePageGUI/label"
+  id: "TokenLabel"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 835.0
+    y: 630.0
+  }
+  scale {
+    x: 0.5
+    y: 0.5
+  }
+  type: TYPE_BOX
+  texture: "CranePageGUI/token"
+  id: "TokenSymbol"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 875.0
+    y: 630.0
+  }
+  scale {
+    x: 2.0
+    y: 2.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "0\n"
+  ""
+  font: "Permanent Marker"
+  id: "TokenText"
+  inherit_alpha: true
 }
 material: "/builtins/materials/gui.material"
 adjust_reference: ADJUST_REFERENCE_PARENT
