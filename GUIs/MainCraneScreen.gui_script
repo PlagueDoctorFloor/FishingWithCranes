@@ -1,40 +1,56 @@
+local fishPulled = false
 
 function on_input(self, action_id, action)
 	if action_id == nil then
 		local tackleBox = gui.get_node("TackleBox")
 		if gui.pick_node(tackleBox, action.x, action.y) then
-			-- Mouse is over the node
 			gui.set_visible(gui.get_node("TackleBoxGlow"), true)
 		else
-			-- Mouse is NOT over the node
 			gui.set_visible(gui.get_node("TackleBoxGlow"), false)
 		end
 	end
 
 	if action_id == hash("LeftClick") and action.pressed then
-		
-		local crane = gui.get_node("Crane")
-		local shelf = gui.get_node("Shelf")
-		local sign = gui.get_node("MiniGames")
-		local tacklebox = gui.get_node("TackleBox")
 
-		if gui.pick_node(crane, action.x, action.y) then
+		if fishPulled == false then
+		
+			local crane = gui.get_node("Crane")
+			local shelf = gui.get_node("Shelf")
+			local sign = gui.get_node("MiniGames")
+			local tacklebox = gui.get_node("TackleBox")
+
+			if gui.pick_node(crane, action.x, action.y) then
+
+				if tokens > 0 then
+					tokens = tokens -1
+					gui.set_text(gui.get_node("TokenText"),tokens)
+					fishPulled = true
+					gui.set_visible(gui.get_node("FishPull"), true)
+					gui.set_visible(gui.get_node("NewFishGlitter"), true)
+				else
+					print("No Tokens :(")
+				end
 			
-			gui.set_visible(gui.get_node("FishPull"), true)
-			gui.set_visible(gui.get_node("NewFishGlitter"), true)
+			elseif gui.pick_node(shelf, action.x, action.y) then
 			
-		elseif gui.pick_node(shelf, action.x, action.y) then
+				msg.post("Loader:/Loader", "load Collection")
 			
-			msg.post("Loader:/Loader", "load Collection")
+			elseif gui.pick_node(sign, action.x, action.y) then
 			
-		elseif gui.pick_node(sign, action.x, action.y) then
+				msg.post("Loader:/Loader", "load MiniGameSelect")
 			
-			msg.post("Loader:/Loader", "load MiniGameSelect")
+			elseif gui.pick_node(tacklebox, action.x, action.y) then
 			
-		elseif gui.pick_node(tacklebox, action.x, action.y) then
+				msg.post("Loader:/Loader", "load Achievement")
 			
-			msg.post("Loader:/Loader", "load Achievement")
-			
+			end
+
+		elseif fishPulled == true then
+
+			gui.set_visible(gui.get_node("FishPull"), false)
+			gui.set_visible(gui.get_node("NewFishGlitter"), false)
+			fishPulled = false
+
 		end
 		
 	end
