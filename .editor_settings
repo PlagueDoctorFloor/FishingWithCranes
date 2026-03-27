@@ -1,0 +1,22 @@
+{
+  :workflow {
+    :open-tabs [
+      [
+      ]
+    ]
+    :recent-files [
+      [
+        "/README.md"
+        :html
+      ]
+      [
+        "/main/main.collection"
+        :scene
+      ]
+      [
+        "/GUIs/MainCraneScreen.gui"
+        :scene
+      ]
+    ]
+  }
+}
