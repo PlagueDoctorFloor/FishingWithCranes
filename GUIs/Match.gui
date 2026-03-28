@@ -1,0 +1,288 @@
+script: "/GUIs/Match.gui_script"
+fonts {
+  name: "Permanent Marker"
+  font: "/Visual Assets/Fonts/Permanent Marker.font"
+}
+textures {
+  name: "Match"
+  texture: "/Visual Assets/SpriteAtlas/Match.atlas"
+}
+nodes {
+  position {
+    x: 200.0
+    y: 163.0
+  }
+  rotation {
+    x: 180.0
+  }
+  scale {
+    x: 0.75
+    y: 0.75
+  }
+  type: TYPE_BOX
+  texture: "Match/big-sign"
+  id: "InformationSign"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 100.0
+    y: 625.0
+  }
+  scale {
+    x: 0.25
+    y: 0.25
+  }
+  type: TYPE_BOX
+  texture: "Match/x-out-button"
+  id: "Exit"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 573.0
+    y: 528.0
+  }
+  scale {
+    x: 0.4
+    y: 0.4
+  }
+  type: TYPE_BOX
+  texture: "Match/fish-match-card-back"
+  id: "card1"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 800.0
+    y: 529.0
+  }
+  scale {
+    x: 0.4
+    y: 0.4
+  }
+  type: TYPE_BOX
+  texture: "Match/fish-match-card-back"
+  id: "card2"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 1031.0
+    y: 529.0
+  }
+  scale {
+    x: 0.4
+    y: 0.4
+  }
+  type: TYPE_BOX
+  texture: "Match/fish-match-card-back"
+  id: "card3"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 573.0
+    y: 307.0
+  }
+  scale {
+    x: 0.4
+    y: 0.4
+  }
+  type: TYPE_BOX
+  texture: "Match/fish-match-card-back"
+  id: "card4"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 804.0
+    y: 309.0
+  }
+  scale {
+    x: 0.4
+    y: 0.4
+  }
+  type: TYPE_BOX
+  texture: "Match/fish-match-card-back"
+  id: "card5"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 1031.0
+    y: 310.0
+  }
+  scale {
+    x: 0.4
+    y: 0.4
+  }
+  type: TYPE_BOX
+  texture: "Match/fish-match-card-back"
+  id: "card6"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 100.0
+    y: 468.0
+  }
+  scale {
+    x: 0.3
+    y: 0.2
+  }
+  type: TYPE_BOX
+  texture: "Match/label"
+  id: "TokenLabel"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 60.0
+    y: 468.0
+  }
+  scale {
+    x: 0.5
+    y: 0.5
+  }
+  type: TYPE_BOX
+  texture: "Match/token"
+  id: "TokenSymbol"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 100.0
+    y: 469.0
+  }
+  scale {
+    x: 2.0
+    y: 2.0
+  }
+  size {
+    x: 50.0
+    y: 50.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "0\n"
+  ""
+  font: "Permanent Marker"
+  id: "TokenText"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 322.0
+    y: 595.0
+  }
+  scale {
+    x: 0.5
+    y: 0.25
+  }
+  type: TYPE_BOX
+  texture: "Match/label"
+  id: "FlipLabel"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 316.0
+    y: 595.0
+  }
+  scale {
+    x: 2.0
+    y: 2.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "Flips: 10\n"
+  ""
+  font: "Permanent Marker"
+  id: "FlipText"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 1078.0
+    y: 101.0
+  }
+  scale {
+    x: 0.5
+    y: 0.25
+  }
+  type: TYPE_BOX
+  texture: "Match/label"
+  id: "playAgain"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 1078.0
+    y: 101.0
+  }
+  scale {
+    x: 2.0
+    y: 2.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "Play Again?"
+  font: "Permanent Marker"
+  id: "playAgainText"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 655.0
+    y: 102.0
+  }
+  scale {
+    x: 3.0
+    y: 3.0
+  }
+  size {
+    x: 100.0
+    y: 50.0
+  }
+  type: TYPE_TEXT
+  text: "<text>"
+  font: "Permanent Marker"
+  id: "endGameText"
+  inherit_alpha: true
+  visible: false
+}
+material: "/builtins/materials/gui.material"
+adjust_reference: ADJUST_REFERENCE_PARENT

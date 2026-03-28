@@ -1,0 +1,55 @@
+images {
+  image: "/Visual Assets/Raw Images/GUI/x-out-button.png"
+}
+images {
+  image: "/Visual Assets/Raw Images/Minigames/fish-match-card-back.png"
+}
+images {
+  image: "/Visual Assets/Raw Images/Minigames/fish-match-card-front-1.png"
+}
+images {
+  image: "/Visual Assets/Raw Images/Minigames/fish-match-card-front-2.png"
+}
+images {
+  image: "/Visual Assets/Raw Images/Minigames/fish-match-card-front-3.png"
+}
+images {
+  image: "/Visual Assets/Raw Images/token.png"
+}
+images {
+  image: "/Visual Assets/Raw Images/GUI/label.png"
+}
+images {
+  image: "/Visual Assets/Raw Images/GUI/big-sign.png"
+}
+animations {
+  id: "Animation1"
+  images {
+    image: "/Visual Assets/Raw Images/Minigames/fish-match-card-front-1.png"
+  }
+  images {
+    image: "/Visual Assets/Raw Images/Minigames/fish-match-card-front-1.png"
+  }
+  fps: 2
+}
+animations {
+  id: "Animation2"
+  images {
+    image: "/Visual Assets/Raw Images/Minigames/fish-match-card-front-2.png"
+  }
+  images {
+    image: "/Visual Assets/Raw Images/Minigames/fish-match-card-front-2.png"
+  }
+  fps: 2
+}
+animations {
+  id: "Animation3"
+  images {
+    image: "/Visual Assets/Raw Images/Minigames/fish-match-card-front-3.png"
+  }
+  images {
+    image: "/Visual Assets/Raw Images/Minigames/fish-match-card-front-3.png"
+  }
+  fps: 2
+}
+extrude_borders: 2

@@ -1,0 +1,6 @@
+name: "Match"
+instances {
+  id: "Match"
+  prototype: "/Objects/Match.go"
+}
+scale_along_z: 0
