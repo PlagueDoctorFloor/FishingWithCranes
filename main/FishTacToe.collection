@@ -1,0 +1,6 @@
+name: "FishTacToe"
+instances {
+  id: "FishTacToe"
+  prototype: "/Objects/FishTacToe.go"
+}
+scale_along_z: 0

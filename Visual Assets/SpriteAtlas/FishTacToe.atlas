@@ -1,0 +1,22 @@
+images {
+  image: "/Visual Assets/Raw Images/Minigames/sea-urchin.png"
+}
+images {
+  image: "/Visual Assets/Raw Images/Minigames/starfish.png"
+}
+images {
+  image: "/Visual Assets/Raw Images/Minigames/tic-tac-toe-board.png"
+}
+images {
+  image: "/Visual Assets/Raw Images/GUI/label.png"
+}
+images {
+  image: "/Visual Assets/Raw Images/GUI/tall-big-sign.png"
+}
+images {
+  image: "/Visual Assets/Raw Images/token.png"
+}
+images {
+  image: "/Visual Assets/Raw Images/GUI/x-out-button.png"
+}
+extrude_borders: 2

@@ -29,7 +29,7 @@ nodes {
   }
   type: TYPE_BOX
   texture: "CranePageGUI/matching-sign"
-  id: "box1"
+  id: "Match"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
 }
@@ -44,7 +44,7 @@ nodes {
   }
   type: TYPE_BOX
   texture: "CranePageGUI/tic-tac-toe-sign"
-  id: "box2"
+  id: "FishTacToe"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
 }

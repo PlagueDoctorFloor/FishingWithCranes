@@ -1,0 +1,269 @@
+local board = {0,0,0,0,0,0,0,0,0}
+
+local playerTurn = true
+
+local won = false
+
+local lost = false
+
+local stalemate = false
+
+local function Reset() 
+	won = false
+	lost = false
+	stalemate = false
+	board = {0,0,0,0,0,0,0,0,0}
+	playerTurn = true
+	gui.set_visible(gui.get_node("endGameText"), false)
+	gui.set_enabled(gui.get_node("playAgain"), false)
+	gui.set_visible(gui.get_node("playAgain"), false)
+	gui.set_visible(gui.get_node("playAgainText"),false)
+	gui.set_visible(gui.get_node("box1"), false)
+	gui.set_visible(gui.get_node("box2"), false)
+	gui.set_visible(gui.get_node("box3"), false)
+	gui.set_visible(gui.get_node("box4"), false)
+	gui.set_visible(gui.get_node("box5"), false)
+	gui.set_visible(gui.get_node("box6"), false)
+	gui.set_visible(gui.get_node("box7"), false)
+	gui.set_visible(gui.get_node("box8"), false)
+	gui.set_visible(gui.get_node("box9"), false)
+end
+
+function init(self)
+	msg.post(".","acquire_input_focus")
+	gui.set_text(gui.get_node("TokenText"),tokens)
+	math.randomseed(socket.gettime() * 100000)
+end
+
+function on_input(self, action_id, action)
+	
+	if action_id == hash("LeftClick") and action.pressed then
+
+		local goBack = gui.get_node("Exit")
+
+		if gui.pick_node(goBack, action.x, action.y) then
+			msg.post("Loader:/Loader", "load MiniGameSelect")
+		end
+
+		if not won and not lost and not stalemate then
+
+			if playerTurn then
+				local space1 = gui.get_node("box1")
+				local space2 = gui.get_node("box2")
+				local space3 = gui.get_node("box3")
+				local space4 = gui.get_node("box4")
+				local space5 = gui.get_node("box5")
+				local space6 = gui.get_node("box6")
+				local space7 = gui.get_node("box7")
+				local space8 = gui.get_node("box8")
+				local space9 = gui.get_node("box9")	
+
+				if gui.pick_node(space1, action.x, action.y) then
+					if board[1] ~= 1 and board[1] ~= 2 then
+						playerTurn = false
+						board[1] = 1
+						gui.set_visible(space1, true)
+						gui.play_flipbook(space1, "starfish")
+						msg.post("#","evaluate",{caller = 1})
+					end
+				elseif gui.pick_node(space2, action.x, action.y) then
+					if board[2] ~= 1 and board[2] ~= 2 then
+						playerTurn = false
+						board[2] = 1
+						gui.set_visible(space2, true)
+						gui.play_flipbook(space2, "starfish")
+						msg.post("#","evaluate",{caller = 1})
+					end
+				elseif gui.pick_node(space3, action.x, action.y) then
+					if board[3] ~= 1 and board[3] ~= 2 then
+						playerTurn = false
+						board[3] = 1
+						gui.set_visible(space3, true)
+						gui.play_flipbook(space3, "starfish")
+						msg.post("#","evaluate",{caller = 1})
+					end
+				elseif gui.pick_node(space4, action.x, action.y) then
+					if board[4] ~= 1 and board[4] ~= 2 then
+						playerTurn = false
+						board[4] = 1
+						gui.set_visible(space4, true)
+						gui.play_flipbook(space4, "starfish")
+						msg.post("#","evaluate",{caller = 1})
+					end
+				elseif gui.pick_node(space5, action.x, action.y) then
+					if board[5] ~= 1 and board[5] ~= 2 then
+						playerTurn = false
+						board[5] = 1
+						gui.set_visible(space5, true)
+						gui.play_flipbook(space5, "starfish")
+						msg.post("#","evaluate",{caller = 1})
+					end
+				elseif gui.pick_node(space6, action.x, action.y) then
+					if board[6] ~= 1 and board[6] ~= 2 then
+						playerTurn = false
+						board[6] = 1
+						gui.set_visible(space6, true)
+						gui.play_flipbook(space6, "starfish")
+						msg.post("#","evaluate",{caller = 1})
+					end
+				elseif gui.pick_node(space7, action.x, action.y) then
+					if board[7] ~= 1 and board[7] ~= 2 then
+						playerTurn = false
+						board[7] = 1
+						gui.set_visible(space7, true)
+						gui.play_flipbook(space7, "starfish")
+						msg.post("#","evaluate",{caller = 1})
+					end
+				elseif gui.pick_node(space8, action.x, action.y) then
+					if board[8] ~= 1 and board[8] ~= 2 then
+						playerTurn = false
+						board[8] = 1
+						gui.set_visible(space8, true)
+						gui.play_flipbook(space8, "starfish")
+						msg.post("#","evaluate",{caller = 1})
+					end
+				elseif gui.pick_node(space9, action.x, action.y) then
+					if board[9] ~= 1 and board[9] ~= 2 then
+						playerTurn = false
+						board[9] = 1
+						gui.set_visible(space9, true)
+						gui.play_flipbook(space9, "starfish")
+						msg.post("#","evaluate",{caller = 1})
+					end
+				end
+			end
+		elseif won or lost or stalemate then
+			local playAgain = gui.get_node("playAgain")
+			if gui.pick_node(playAgain, action.x, action.y) then
+				Reset()
+			end
+		end
+	end
+	
+end
+
+function on_message(self, message_id, message, sender)
+
+	if message_id == hash("myTurn") then
+		local noCrash = false
+		for i = 1, 9, 1 do
+			if board[i] == 0 then
+				noCrash = true
+			end
+		end
+
+		if noCrash then				
+		
+			local spotSelect = math.random(1,9)
+			while board[spotSelect] == 1 or board[spotSelect] == 2 do
+				spotSelect = math.random(1,9)
+			end
+
+			board[spotSelect] = 2
+			gui.set_visible(gui.get_node("box"..spotSelect), true)
+			gui.play_flipbook(gui.get_node("box"..spotSelect), "sea-urchin")
+			msg.post("#","evaluate",{caller = 2})
+			playerTurn = true
+			
+		end
+	end
+
+	if message_id == hash("evaluate") then
+
+		local winner = false
+		
+		--123
+		if board[1] ~= 0 and board[1] == board[2] and board[1] == board[3] then
+			winner = true
+		--147
+		elseif board[1] ~= 0 and board[1] == board[4] and board[1] == board[7] then
+			winner = true
+		--159
+		elseif board[1] ~= 0 and board[1] == board[5] and board[1] == board[9] then
+			winner = true
+		--258
+		elseif board[2] ~= 0 and board[2] == board[5] and board[2] == board[8] then
+			winner = true
+		--369
+		elseif board[3] ~= 0 and board[3] == board[6] and board[3] == board[9] then
+			winner = true
+		--357
+		elseif board[3] ~= 0 and board[3] == board[5] and board[3] == board[7] then
+			winner = true
+		--456
+		elseif board[4] ~= 0 and board[4] == board[5] and board[4] == board[6] then
+			winner = true
+		--789
+		elseif board[7] ~= 0 and board[7] == board[8] and board[7] == board[9] then
+			winner = true
+		end
+
+		local noSpacesLeft = false
+		for i = 1, 9, 1 do
+			if board[i] == 0 then
+				noSpacesLeft = true
+			end
+		end
+
+		if winner then
+			if message.caller == 1 then
+				won = true
+				tokens = tokens+1
+				gui.set_text(gui.get_node("TokenText"), tokens)
+				FishTacToeWins = FishTacToeWins+1
+				gui.set_text(gui.get_node("winsInformation"),"Wins: "..FishTacToeWins)
+				gui.set_visible(gui.get_node("endGameText"),true)
+				gui.set_text(gui.get_node("endGameText"),"You Win!")
+				gui.set_enabled(gui.get_node("playAgain"), true)
+				gui.set_visible(gui.get_node("playAgain"), true)
+				gui.set_visible(gui.get_node("playAgainText"),true)
+			elseif message.caller == 2 then
+				lost = true
+				FishTacToeLosses = FishTacToeLosses+1
+				gui.set_text(gui.get_node("lossInformation"),"Losses: "..FishTacToeLosses)
+				gui.set_visible(gui.get_node("endGameText"),true)
+				gui.set_text(gui.get_node("endGameText"),"You Lose!")
+				gui.set_enabled(gui.get_node("playAgain"), true)
+				gui.set_visible(gui.get_node("playAgain"), true)
+				gui.set_visible(gui.get_node("playAgainText"),true)
+			end
+		elseif not winner and not noSpacesLeft then
+			stalemate = true
+			FishTacToeStalemates = FishTacToeStalemates+1
+			gui.set_text(gui.get_node("stalemateInformation"),"Stalemates: "..FishTacToeStalemates)
+			gui.set_visible(gui.get_node("endGameText"),true)
+			gui.set_text(gui.get_node("endGameText"),"Stalemate")
+			gui.set_enabled(gui.get_node("playAgain"), true)
+			gui.set_visible(gui.get_node("playAgain"), true)
+			gui.set_visible(gui.get_node("playAgainText"),true)
+		else 
+			if message.caller == 1 then
+				msg.post("#","myTurn")
+			elseif message.caller == 2 then
+				playerTurn = true
+			end
+		end
+
+	end
+	
+end
+
+
+
+function final(self)
+	-- Add finalization code here
+	-- Learn more: https://defold.com/manuals/script/
+	-- Remove this function if not needed
+end
+
+function update(self, dt)
+	-- Add update code here
+	-- Learn more: https://defold.com/manuals/script/
+	-- Remove this function if not needed
+end
+
+function on_reload(self)
+	-- Add reload-handling code here
+	-- Learn more: https://defold.com/manuals/hot-reload/
+	-- Remove this function if not needed
+end
