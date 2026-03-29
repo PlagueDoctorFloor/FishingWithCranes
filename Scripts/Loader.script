@@ -1,4 +1,4 @@
-tokens = 50
+tokens = 3
 
 FreshwaterFish = {0,0,0,0,0,0,0,0}
 SaltwaterFish = {0,0,0,0,0,0,0,0}
@@ -43,7 +43,6 @@ function on_message(self, message_id, message, sender)
 		end
 
 	elseif message_id == hash("load Crane") then
-		print(sender)
 		msg.post("#Crane", "enable")
 		msg.post("main:/CraneScreenGUI#MainCraneScreen", "Update")
 

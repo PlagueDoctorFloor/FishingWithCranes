@@ -9,6 +9,17 @@ textures {
 }
 nodes {
   position {
+    x: 640.0
+    y: 360.0
+  }
+  type: TYPE_BOX
+  texture: "Match/background"
+  id: "Background"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
     x: 200.0
     y: 163.0
   }

@@ -19,4 +19,7 @@ images {
 images {
   image: "/Visual Assets/Raw Images/GUI/x-out-button.png"
 }
+images {
+  image: "/Visual Assets/Background/background.png"
+}
 extrude_borders: 2

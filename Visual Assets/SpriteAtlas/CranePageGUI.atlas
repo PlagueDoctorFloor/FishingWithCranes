@@ -272,4 +272,11 @@ animations {
   }
   fps: 12
 }
+animations {
+  id: "NoTokens"
+  images {
+    image: "/Visual Assets/Raw Images/GUI/label.png"
+  }
+  fps: 2
+}
 extrude_borders: 2

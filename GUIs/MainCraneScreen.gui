@@ -391,5 +391,45 @@ nodes {
   size_mode: SIZE_MODE_AUTO
   visible: false
 }
+nodes {
+  position {
+    x: 640.0
+    y: 360.0
+  }
+  scale {
+    y: 0.5
+  }
+  type: TYPE_BOX
+  texture: "CranePageGUI/NoTokens"
+  id: "NoTokensLabel"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+  visible: false
+}
+nodes {
+  position {
+    x: 640.0
+    y: 360.0
+  }
+  scale {
+    x: 4.0
+    y: 4.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "No Tokens!"
+  font: "Permanent Marker"
+  id: "NoTokensText"
+  inherit_alpha: true
+  visible: false
+}
 material: "/builtins/materials/gui.material"
 adjust_reference: ADJUST_REFERENCE_PARENT
