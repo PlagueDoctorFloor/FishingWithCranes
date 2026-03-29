@@ -150,14 +150,11 @@ function on_message(self, message_id, message, sender)
 	end
 
 	if message_id == hash("evalute") then
-		print("evaulating")
 		
 		if cardsPlace[cardsFlipped[1]] == cardsPlace[cardsFlipped[2]] then
-			print("Match!")
 			cardsPlace[cardsFlipped[1]] = 0
 			cardsPlace[cardsFlipped[2]] = 0
 		else
-			print("Not Match")
 			gui.play_flipbook(gui.get_node("card"..cardsFlipped[1]), "fish-match-card-back")
 			gui.play_flipbook(gui.get_node("card"..cardsFlipped[2]), "fish-match-card-back")
 			flippedOver[cardsFlipped[1]] = 0
