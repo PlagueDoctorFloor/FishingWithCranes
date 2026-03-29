@@ -110,4 +110,11 @@ animations {
   }
   fps: 1
 }
+animations {
+  id: "unknown-fish"
+  images {
+    image: "/Visual Assets/Raw Images/GUI/unknown-fish.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
 extrude_borders: 2

@@ -23,3 +23,6 @@ scale_mode = stretch
 [project]
 title = FishingWithCranes
 
+[collection_proxy]
+max_count = 10
+

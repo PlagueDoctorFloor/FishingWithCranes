@@ -1,7 +1,7 @@
 tokens = 5
 
-FreshwaterFish = {0,0,0,0,0,0,0,0}
-SaltwaterFish = {0,0,0,0,0,0,0,0}
+FreshwaterFish = {4,1,10,0,0,6,0,3}
+SaltwaterFish = {4,1,10,0,0,6,0,3}
 
 -- Fish Tac Toe
 FishTacToeWins = 0
@@ -17,6 +17,9 @@ function init(self)
 	msg.post("#MiniGameSelect","load")
 	msg.post("#FishTacToe", "load")
 	msg.post("#FishMatch","load")
+	msg.post("#FreshwaterCollection","load")
+	msg.post("#SaltwaterCollection","load")
+	msg.post("#DetailedFish","load")
 end
 
 function on_message(self, message_id, message, sender)
@@ -45,7 +48,13 @@ function on_message(self, message_id, message, sender)
 	elseif message_id == hash("load Collection") then
 		msg.post("#Collection", "enable")
 
-		msg.post("#Crane", "disable")
+		if sender.fragment == hash("MainCraneScreen") then
+			msg.post("#Crane", "disable")
+		elseif sender.fragment == hash("FreshwaterCollection") then
+			msg.post("#FreshwaterCollection", "disable")
+		elseif sender.fragment == hash("SaltwaterCollection") then
+			msg.post("#SaltwaterCollection","disable")
+		end
 
 	elseif message_id == hash("load Achievement") then
 		msg.post("#Achievements", "enable")
@@ -53,7 +62,6 @@ function on_message(self, message_id, message, sender)
 		msg.post("#Crane", "disable")
 		
 	elseif message_id == hash("load MiniGameSelect") then
-		print(sender)
 		msg.post("#MiniGameSelect", "enable")
 
 		if sender.fragment == hash("MainCraneScreen") then
@@ -75,7 +83,36 @@ function on_message(self, message_id, message, sender)
 		msg.post("Match:/Match#Match", "Update")
 
 		msg.post("#MiniGameSelect", "disable")
-		
+
+	elseif message_id == hash("load FreshCollection") then
+		msg.post("#FreshwaterCollection","enable")
+		msg.post("FishCollection:/FreshwaterCollection#FreshwaterCollection", "Update")
+
+		if sender.fragment == hash("Collection") then
+			msg.post("#Collection", "disable")
+		elseif sender.fragment == hash("DetailedFish") then
+			msg.post("#DetailedFish","disable")
+		end
+
+	elseif message_id == hash("load SaltCollection") then
+		msg.post("#SaltwaterCollection","enable")
+		msg.post("SaltwaterCollection:/SaltwaterCollection#SaltwaterCollection", "Update")
+
+		if sender.fragment == hash("Collection") then
+			msg.post("#Collection", "disable")
+		elseif sender.fragment == hash("DetailedFish") then
+			msg.post("#DetailedFish","disable")
+		end
+
+	elseif message_id == hash("load DetailedFish") then
+		msg.post("#DetailedFish", "enable")
+		msg.post("DetailedFish:/DetailedFish#DetailedFish","setUp", {set = message.set, fish = message.fish})
+
+		if sender.fragment == hash("FreshwaterCollection") then
+			msg.post("#FreshwaterCollection", "disable")
+		elseif sender.fragment == hash("SaltwaterCollection") then
+			msg.post("#SaltwaterCollection","disable")
+		end
 	end
 end
 

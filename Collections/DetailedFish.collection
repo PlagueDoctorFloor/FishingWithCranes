@@ -1,0 +1,6 @@
+name: "DetailedFish"
+instances {
+  id: "DetailedFish"
+  prototype: "/Objects/DetailedFish.go"
+}
+scale_along_z: 0

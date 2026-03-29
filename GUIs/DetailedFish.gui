@@ -1,4 +1,4 @@
-script: "/GUIs/MainCraneScreen.gui_script"
+script: "/GUIs/DetailedFish.gui_script"
 fonts {
   name: "Permanent Marker"
   font: "/Visual Assets/Fonts/Permanent Marker.font"
@@ -27,213 +27,31 @@ nodes {
     x: 640.0
     y: 300.0
   }
-  scale {
-    x: 0.6
-    y: 0.6
-  }
   type: TYPE_BOX
-  texture: "CranePageGUI/hook-machine"
-  id: "Crane"
+  texture: "fish/unknown-fish"
+  id: "fish"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
-  enabled: false
 }
 nodes {
   position {
-    x: 640.0
+    x: 80.0
     y: 650.0
   }
   scale {
-    x: 0.6
-    y: 0.3
+    x: 0.25
+    y: 0.25
   }
   type: TYPE_BOX
-  texture: "CranePageGUI/label"
-  id: "ClawMachineLabel"
+  texture: "CranePageGUI/x-out-button"
+  id: "Exit"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
 }
 nodes {
   position {
-    x: 1140.0
-    y: 580.0
-  }
-  scale {
-    x: 0.55
-    y: 0.3
-  }
-  type: TYPE_BOX
-  texture: "CranePageGUI/label"
-  id: "ShelfLabel"
-  inherit_alpha: true
-  size_mode: SIZE_MODE_AUTO
-}
-nodes {
-  position {
-    x: 640.0
+    x: 250.0
     y: 650.0
-  }
-  scale {
-    x: 2.0
-    y: 2.0
-  }
-  size {
-    x: 200.0
-    y: 100.0
-  }
-  color {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-  }
-  type: TYPE_TEXT
-  text: "Choose Set"
-  font: "Permanent Marker"
-  id: "CraneLabelText"
-  inherit_alpha: true
-}
-nodes {
-  position {
-    x: 1140.0
-    y: 580.0
-  }
-  scale {
-    x: 2.0
-    y: 2.0
-  }
-  size {
-    x: 200.0
-    y: 100.0
-  }
-  color {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-  }
-  type: TYPE_TEXT
-  text: "Collection\n"
-  ""
-  font: "Permanent Marker"
-  id: "ShelfLabelText"
-  inherit_alpha: true
-}
-nodes {
-  position {
-    x: 150.0
-    y: 150.0
-  }
-  scale {
-    x: 0.5
-    y: 0.5
-  }
-  type: TYPE_BOX
-  texture: "CranePageGUI/glow"
-  id: "TackleBoxGlow"
-  inherit_alpha: true
-  size_mode: SIZE_MODE_AUTO
-  visible: false
-}
-nodes {
-  position {
-    x: 150.0
-    y: 150.0
-    z: 1.0
-  }
-  scale {
-    x: 0.5
-    y: 0.5
-  }
-  type: TYPE_BOX
-  texture: "CranePageGUI/tackle-box"
-  id: "TackleBox"
-  inherit_alpha: true
-  size_mode: SIZE_MODE_AUTO
-}
-nodes {
-  position {
-    x: 154.0
-    y: 83.0
-  }
-  scale {
-    x: 1.5
-    y: 1.5
-  }
-  size {
-    x: 200.0
-    y: 100.0
-  }
-  color {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-  }
-  type: TYPE_TEXT
-  text: "Achievements\n"
-  ""
-  font: "Permanent Marker"
-  id: "TackleBoxText"
-  inherit_alpha: true
-}
-nodes {
-  position {
-    x: 210.0
-    y: 540.0
-  }
-  scale {
-    x: 0.75
-    y: 0.75
-  }
-  type: TYPE_BOX
-  texture: "CranePageGUI/big-sign"
-  id: "MiniGames"
-  inherit_alpha: true
-  size_mode: SIZE_MODE_AUTO
-}
-nodes {
-  position {
-    x: 210.0
-    y: 500.0
-  }
-  scale {
-    x: 3.0
-    y: 3.0
-  }
-  size {
-    x: 200.0
-    y: 100.0
-  }
-  color {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-  }
-  type: TYPE_TEXT
-  text: "Earn\n"
-  "More\n"
-  "Tokens!!!"
-  font: "Permanent Marker"
-  id: "MiniGameText"
-  inherit_alpha: true
-}
-nodes {
-  position {
-    x: 1200.0
-    y: 260.0
-  }
-  scale {
-    x: 0.5
-    y: 0.525
-  }
-  type: TYPE_BOX
-  texture: "CranePageGUI/cabinet-small"
-  id: "Shelf"
-  inherit_alpha: true
-  size_mode: SIZE_MODE_AUTO
-}
-nodes {
-  position {
-    x: 875.0
-    y: 630.0
   }
   scale {
     x: 0.3
@@ -247,8 +65,8 @@ nodes {
 }
 nodes {
   position {
-    x: 835.0
-    y: 630.0
+    x: 205.0
+    y: 650.0
   }
   scale {
     x: 0.5
@@ -262,8 +80,8 @@ nodes {
 }
 nodes {
   position {
-    x: 875.0
-    y: 630.0
+    x: 250.0
+    y: 650.0
   }
   scale {
     x: 2.0
@@ -287,109 +105,263 @@ nodes {
 }
 nodes {
   position {
-    x: 675.0
-    y: 300.0
+    x: 640.0
+    y: 600.0
   }
   scale {
     x: 0.6
-    y: 0.6
+    y: 0.3
   }
   type: TYPE_BOX
-  texture: "CranePageGUI/HookGrabBlue"
-  id: "CranePickAnimation"
-  inherit_alpha: true
-  size_mode: SIZE_MODE_AUTO
-  visible: false
-}
-nodes {
-  position {
-    x: 640.0
-    y: 450.0
-  }
-  scale {
-    x: 0.55
-    y: 0.55
-  }
-  type: TYPE_BOX
-  texture: "CranePageGUI/freshwater-sign"
-  id: "FreshwaterSelect"
+  texture: "CranePageGUI/label"
+  id: "fishName"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
 }
 nodes {
   position {
     x: 640.0
-    y: 150.0
+    y: 600.0
   }
   scale {
-    x: 0.55
-    y: 0.55
+    x: 2.0
+    y: 2.0
   }
-  type: TYPE_BOX
-  texture: "CranePageGUI/saltwater-sign"
-  id: "SaltwaterSelect"
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "?"
+  font: "Permanent Marker"
+  id: "fishNameText"
   inherit_alpha: true
-  size_mode: SIZE_MODE_AUTO
 }
 nodes {
   position {
-    x: 350.0
-    y: 275.0
+    x: 80.0
+    y: 360.0
   }
   scale {
-    x: 0.35
-    y: 0.35
+    x: 0.25
+    y: 0.25
   }
   type: TYPE_BOX
-  texture: "CranePageGUI/return-button"
-  id: "ReturnArrow"
+  texture: "CranePageGUI/arrow"
+  id: "ArrowLeft"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
   enabled: false
 }
 nodes {
   position {
-    x: 640.0
-    y: 400.0
+    x: 1200.0
+    y: 360.0
+  }
+  rotation {
+    z: 180.0
+  }
+  scale {
+    x: 0.25
+    y: 0.25
+  }
+  type: TYPE_BOX
+  texture: "CranePageGUI/arrow"
+  id: "ArrowRight"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+  enabled: false
+}
+nodes {
+  position {
+    x: 290.0
+    y: 550.0
+  }
+  scale {
+    x: 0.45
+    y: 0.25
+  }
+  type: TYPE_BOX
+  texture: "CranePageGUI/label"
+  id: "numberLabel"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 280.0
+    y: 550.0
   }
   scale {
     x: 1.8
     y: 1.8
   }
-  type: TYPE_BOX
-  texture: "CranePageGUI/FishPull"
-  id: "FishPull"
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "# Owned: 0\n"
+  ""
+  font: "Permanent Marker"
+  id: "numberText"
   inherit_alpha: true
-  size_mode: SIZE_MODE_AUTO
-  visible: false
 }
 nodes {
   position {
-    x: 640.0
-    y: 300.0
+    x: 250.0
+    y: 125.0
+  }
+  rotation {
+    z: 180.0
+  }
+  scale {
+    x: 0.6
+    y: 0.6
+  }
+  type: TYPE_BOX
+  texture: "CranePageGUI/big-sign"
+  id: "TradeInfoSign"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 300.0
+    y: 400.0
+  }
+  scale {
+    x: 0.4
+    y: 0.25
+  }
+  type: TYPE_BOX
+  texture: "CranePageGUI/label"
+  id: "TradeButton"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+  enabled: false
+}
+nodes {
+  position {
+    x: 300.0
+    y: 400.0
   }
   scale {
     x: 2.0
     y: 2.0
   }
-  type: TYPE_BOX
-  texture: "CranePageGUI/NewFishPull"
-  id: "NewFishGlitter"
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "Trade"
+  font: "Permanent Marker"
+  id: "TradeText"
   inherit_alpha: true
-  size_mode: SIZE_MODE_AUTO
   visible: false
 }
 nodes {
   position {
-    x: 640.0
-    y: 400.0
+    x: 250.0
+    y: 160.0
+  }
+  scale {
+    x: 2.0
+    y: 2.0
+  }
+  size {
+    x: 200.0
+    y: 175.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "Trade:\n"
+  "3 Fish\n"
+  "=\n"
+  "1 Token"
+  font: "Permanent Marker"
+  id: "TradeSignText"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 300.0
+    y: 140.0
+  }
+  scale {
+    x: 0.65
+    y: 0.65
+  }
+  type: TYPE_BOX
+  texture: "CranePageGUI/token"
+  id: "InfoToken"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 175.0
+    y: 160.0
+  }
+  scale {
+    x: 0.1
+    y: 0.1
   }
   type: TYPE_BOX
   texture: "fish/freshwater-1"
-  id: "Fish"
+  id: "carp1"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
-  visible: false
+}
+nodes {
+  position {
+    x: 200.0
+    y: 140.0
+  }
+  scale {
+    x: 0.1
+    y: 0.1
+  }
+  type: TYPE_BOX
+  texture: "fish/freshwater-1"
+  id: "carp2"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 165.0
+    y: 120.0
+  }
+  scale {
+    x: 0.1
+    y: 0.1
+  }
+  type: TYPE_BOX
+  texture: "fish/freshwater-1"
+  id: "carp3"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
 }
 material: "/builtins/materials/gui.material"
 adjust_reference: ADJUST_REFERENCE_PARENT

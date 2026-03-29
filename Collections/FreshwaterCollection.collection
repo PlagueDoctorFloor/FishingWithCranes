@@ -1,0 +1,6 @@
+name: "FishCollection"
+instances {
+  id: "FreshwaterCollection"
+  prototype: "/Objects/FreshwaterCollection.go"
+}
+scale_along_z: 0

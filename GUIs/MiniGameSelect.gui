@@ -5,31 +5,27 @@ textures {
 }
 nodes {
   position {
-    x: 1050.0
-    y: 360.0
-  }
-  scale {
-    x: 0.6
-    y: 0.6
+    x: 641.0
+    y: 363.0
   }
   type: TYPE_BOX
-  texture: "CranePageGUI/flapping-fish-sign"
-  id: "FlappyFIsh"
+  texture: "CranePageGUI/background"
+  id: "Background"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
 }
 nodes {
   position {
-    x: 640.0
-    y: 360.0
+    x: 100.0
+    y: 650.0
   }
   scale {
-    x: 0.6
-    y: 0.6
+    x: 0.35
+    y: 0.35
   }
   type: TYPE_BOX
-  texture: "CranePageGUI/matching-sign"
-  id: "Match"
+  texture: "CranePageGUI/return-button"
+  id: "ReturnArrow"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
 }
@@ -50,16 +46,31 @@ nodes {
 }
 nodes {
   position {
-    x: 100.0
-    y: 650.0
+    x: 640.0
+    y: 360.0
   }
   scale {
-    x: 0.35
-    y: 0.35
+    x: 0.6
+    y: 0.6
   }
   type: TYPE_BOX
-  texture: "CranePageGUI/return-button"
-  id: "ReturnArrow"
+  texture: "CranePageGUI/matching-sign"
+  id: "Match"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 1050.0
+    y: 360.0
+  }
+  scale {
+    x: 0.6
+    y: 0.6
+  }
+  type: TYPE_BOX
+  texture: "CranePageGUI/flapping-fish-sign"
+  id: "FlappyFIsh"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
 }

@@ -1,0 +1,167 @@
+local fishNames = {"Carp","Rainbow Trout","Alligator Gar","Ghost Knifefish","Arowana","Elephantfish","Koi","A Hundred Gar"}
+
+local function updateDisplay()
+
+	for i=1,8,1 do
+		if FreshwaterFish[i] ~= 0 then
+			gui.set_text(gui.get_node("fish"..i.."text"),fishNames[i])
+			gui.set_visible(gui.get_node("fish"..i),true)
+		else
+			gui.set_text(gui.get_node("fish"..i.."text"),"?")
+			gui.set_visible(gui.get_node("fish"..i),false)
+		end
+	end
+	
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id == hash("Update") then
+		updateDisplay()
+	end
+end
+
+function init(self)
+	msg.post(".","acquire_input_focus")
+end
+
+function on_input(self, action_id, action)
+
+	local fish1 = gui.get_node("fish1")
+	local fish2 = gui.get_node("fish2")
+	local fish3 = gui.get_node("fish3")
+	local fish4 = gui.get_node("fish4")
+	local fish5 = gui.get_node("fish5")
+	local fish6 = gui.get_node("fish6")
+	local fish7 = gui.get_node("fish7")
+	local fish8 = gui.get_node("fish8")
+	
+	if action_id == nil then
+		
+		if gui.pick_node(fish1, action.x, action.y) then
+			gui.set_visible(gui.get_node("fish1glow"), true)
+			gui.set_visible(gui.get_node("fish2glow"), false)
+			gui.set_visible(gui.get_node("fish3glow"), false)
+			gui.set_visible(gui.get_node("fish4glow"), false)
+			gui.set_visible(gui.get_node("fish5glow"), false)
+			gui.set_visible(gui.get_node("fish6glow"), false)
+			gui.set_visible(gui.get_node("fish7glow"), false)
+			gui.set_visible(gui.get_node("fish8glow"), false)
+		elseif gui.pick_node(fish2, action.x, action.y) then
+			gui.set_visible(gui.get_node("fish2glow"), true)
+			gui.set_visible(gui.get_node("fish1glow"), false)
+			gui.set_visible(gui.get_node("fish3glow"), false)
+			gui.set_visible(gui.get_node("fish4glow"), false)
+			gui.set_visible(gui.get_node("fish5glow"), false)
+			gui.set_visible(gui.get_node("fish6glow"), false)
+			gui.set_visible(gui.get_node("fish7glow"), false)
+			gui.set_visible(gui.get_node("fish8glow"), false)
+		elseif gui.pick_node(fish3, action.x, action.y) then
+			gui.set_visible(gui.get_node("fish3glow"), true)
+			gui.set_visible(gui.get_node("fish1glow"), false)
+			gui.set_visible(gui.get_node("fish2glow"), false)
+			gui.set_visible(gui.get_node("fish4glow"), false)
+			gui.set_visible(gui.get_node("fish5glow"), false)
+			gui.set_visible(gui.get_node("fish6glow"), false)
+			gui.set_visible(gui.get_node("fish7glow"), false)
+			gui.set_visible(gui.get_node("fish8glow"), false)
+		elseif gui.pick_node(fish4, action.x, action.y) then
+			gui.set_visible(gui.get_node("fish4glow"), true)
+			gui.set_visible(gui.get_node("fish1glow"), false)
+			gui.set_visible(gui.get_node("fish2glow"), false)
+			gui.set_visible(gui.get_node("fish3glow"), false)
+			gui.set_visible(gui.get_node("fish5glow"), false)
+			gui.set_visible(gui.get_node("fish6glow"), false)
+			gui.set_visible(gui.get_node("fish7glow"), false)
+			gui.set_visible(gui.get_node("fish8glow"), false)
+		elseif gui.pick_node(fish5, action.x, action.y) then
+			gui.set_visible(gui.get_node("fish5glow"), true)
+			gui.set_visible(gui.get_node("fish1glow"), false)
+			gui.set_visible(gui.get_node("fish2glow"), false)
+			gui.set_visible(gui.get_node("fish3glow"), false)
+			gui.set_visible(gui.get_node("fish4glow"), false)
+			gui.set_visible(gui.get_node("fish6glow"), false)
+			gui.set_visible(gui.get_node("fish7glow"), false)
+			gui.set_visible(gui.get_node("fish8glow"), false)
+		elseif gui.pick_node(fish6, action.x, action.y) then
+			gui.set_visible(gui.get_node("fish6glow"), true)
+			gui.set_visible(gui.get_node("fish1glow"), false)
+			gui.set_visible(gui.get_node("fish2glow"), false)
+			gui.set_visible(gui.get_node("fish3glow"), false)
+			gui.set_visible(gui.get_node("fish4glow"), false)
+			gui.set_visible(gui.get_node("fish5glow"), false)
+			gui.set_visible(gui.get_node("fish7glow"), false)
+			gui.set_visible(gui.get_node("fish8glow"), false)
+		elseif gui.pick_node(fish7, action.x, action.y) then
+			gui.set_visible(gui.get_node("fish7glow"), true)
+			gui.set_visible(gui.get_node("fish1glow"), false)
+			gui.set_visible(gui.get_node("fish2glow"), false)
+			gui.set_visible(gui.get_node("fish3glow"), false)
+			gui.set_visible(gui.get_node("fish4glow"), false)
+			gui.set_visible(gui.get_node("fish5glow"), false)
+			gui.set_visible(gui.get_node("fish6glow"), false)
+			gui.set_visible(gui.get_node("fish8glow"), false)
+		elseif gui.pick_node(fish8, action.x, action.y) then
+			gui.set_visible(gui.get_node("fish8glow"), true)
+			gui.set_visible(gui.get_node("fish1glow"), false)
+			gui.set_visible(gui.get_node("fish2glow"), false)
+			gui.set_visible(gui.get_node("fish3glow"), false)
+			gui.set_visible(gui.get_node("fish4glow"), false)
+			gui.set_visible(gui.get_node("fish5glow"), false)
+			gui.set_visible(gui.get_node("fish6glow"), false)
+			gui.set_visible(gui.get_node("fish7glow"), false)
+		else
+			gui.set_visible(gui.get_node("fish1glow"), false)
+			gui.set_visible(gui.get_node("fish2glow"), false)
+			gui.set_visible(gui.get_node("fish3glow"), false)
+			gui.set_visible(gui.get_node("fish4glow"), false)
+			gui.set_visible(gui.get_node("fish5glow"), false)
+			gui.set_visible(gui.get_node("fish6glow"), false)
+			gui.set_visible(gui.get_node("fish7glow"), false)
+			gui.set_visible(gui.get_node("fish8glow"), false)
+		end
+	end
+
+	
+	if action_id == hash("LeftClick") and action.pressed then
+		local back = gui.get_node("ReturnArrow")
+
+		if gui.pick_node(back, action.x, action.y) then
+
+			msg.post("Loader:/Loader", "load Collection")
+		elseif gui.pick_node(fish1, action.x, action.y) then
+			msg.post("Loader:/Loader","load DetailedFish",{set = 1, fish = 1})
+		elseif gui.pick_node(fish2, action.x, action.y) then
+			msg.post("Loader:/Loader","load DetailedFish",{set = 1, fish = 2})
+		elseif gui.pick_node(fish3, action.x, action.y) then
+			msg.post("Loader:/Loader","load DetailedFish",{set = 1, fish = 3})
+		elseif gui.pick_node(fish4, action.x, action.y) then
+			msg.post("Loader:/Loader","load DetailedFish",{set = 1, fish = 4})
+		elseif gui.pick_node(fish5, action.x, action.y) then
+			msg.post("Loader:/Loader","load DetailedFish",{set = 1, fish = 5})
+		elseif gui.pick_node(fish6, action.x, action.y) then
+			msg.post("Loader:/Loader","load DetailedFish",{set = 1, fish = 6})
+		elseif gui.pick_node(fish7, action.x, action.y) then
+			msg.post("Loader:/Loader","load DetailedFish",{set = 1, fish = 7})
+		elseif gui.pick_node(fish8, action.x, action.y) then
+			msg.post("Loader:/Loader","load DetailedFish",{set = 1, fish = 8})
+		end
+	end
+end
+
+function final(self)
+	-- Add finalization code here
+	-- Learn more: https://defold.com/manuals/script/
+	-- Remove this function if not needed
+end
+
+function update(self, dt)
+	-- Add update code here
+	-- Learn more: https://defold.com/manuals/script/
+	-- Remove this function if not needed
+end
+
+function on_reload(self)
+	-- Add reload-handling code here
+	-- Learn more: https://defold.com/manuals/hot-reload/
+	-- Remove this function if not needed
+end

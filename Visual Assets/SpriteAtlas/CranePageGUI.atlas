@@ -52,6 +52,12 @@ images {
 images {
   image: "/Visual Assets/Raw Images/hook-machine.png"
 }
+images {
+  image: "/Visual Assets/Background/background-unblurred.png"
+}
+images {
+  image: "/Visual Assets/Background/background.png"
+}
 animations {
   id: "NewFishPull"
   images {
