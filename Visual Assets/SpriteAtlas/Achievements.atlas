@@ -1,0 +1,28 @@
+images {
+  image: "/Visual Assets/Raw Images/Fish-20260329T033519Z-1-001/Fish/Freshwater/freshwater-8.png"
+}
+images {
+  image: "/Visual Assets/Raw Images/GUI/tackle-box.png"
+}
+images {
+  image: "/Visual Assets/Raw Images/Fish-20260329T033519Z-1-001/Fish/Saltwater/saltwater-4.png"
+}
+images {
+  image: "/Visual Assets/Raw Images/Minigames/fish-match-card-front-1.png"
+}
+images {
+  image: "/Visual Assets/Raw Images/Fish-20260329T033519Z-1-001/Fish/Freshwater/freshwater-1.png"
+}
+images {
+  image: "/Visual Assets/Raw Images/GUI/freshwater-sign.png"
+}
+images {
+  image: "/Visual Assets/Raw Images/GUI/saltwater-sign.png"
+}
+images {
+  image: "/Visual Assets/Raw Images/Fish-20260329T033519Z-1-001/Fish/Saltwater/saltwater-2.png"
+}
+images {
+  image: "/Visual Assets/Raw Images/GUI/unknown-fish.png"
+}
+extrude_borders: 2

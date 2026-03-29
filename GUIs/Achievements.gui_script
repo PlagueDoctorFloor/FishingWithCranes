@@ -1,44 +1,61 @@
 local achievementText = {"Collect All\nFreshwater Fish","Collect All\nSaltwater Fish","Collect 50 Fish","Play Match\n10 Times","Lose in\nTic Tac Toe\n10 Times","Stalemate In\nTic Tac Toe\n10 Times","Pet Fish 100 Times","Get All Achievements"}
 local hintText = {"Freshwater\nFish","Saltwater\nFish","Have Lots\nof Fish","Match","Tic Tac Toe,\nBadly","Tic Tac Toe,\nStalemate","That Fish\nLooks Like\nIt Could\nUse A\nBelly Rub","Get All\nAchievements"}
 
+local one = false
+local two = false
+local three = false
+local four = false
+local five = false
+local six = false
+local seven = false
+local eight = false
+
 local function updateAchievements()
 	local allAchievements = true
 	if FreshwaterFound then
+		one = true
 		gui.set_visible(gui.get_node("achievement1"), true)
 	else
 		allAchievements = false
 	end
 	if SaltwaterFound then
+		two = true
 		gui.set_visible(gui.get_node("achievement2"), true)
 	else
 		allAchievements = false
 	end
 	if TotalFishPulled >= 50 then
+		three = true
 		gui.set_visible(gui.get_node("achievement3"), true)
 	else
 		allAchievements = false
 	end
 	if FishTacToeLosses >= 10 then
+		four = true
 		gui.set_visible(gui.get_node("achievement4"), true)
 	else
 		allAchievements = false
 	end
 	if FishTacToeStalemates >= 10 then
+		five = true
 		gui.set_visible(gui.get_node("achievement5"), true)
 	else
 		allAchievements = false
 	end
 	if MatchPlayed >= 10 then 
+		six = true
 		gui.set_visible(gui.get_node("achievement6"), true)
 	else
 		allAchievements = false
 	end
 	if petFish >= 100 then
+		seven = true
 		gui.set_visible(gui.get_node("achievement7"), true)
 	else
 		allAchievements = false
 	end
 	if allAchievements then
+		eight = true
 		gui.set_visible(gui.get_node("achievement8"), true)
 	end
 end
@@ -157,44 +174,100 @@ function on_input(self, action_id, action)
 			msg.post("Loader:/Loader", "load Crane")
 
 		elseif gui.pick_node(fish1, action.x, action.y) then
-			gui.set_visible(achievementHighlight, true)
-			gui.set_visible(achievementHighlightText, true)
-			gui.set_text(achievementHighlightText, achievementText[1])
+			if one then
+				gui.set_visible(achievementHighlight, true)
+				gui.play_flipbook(achievementHighlight, "freshwater-sign")
+				gui.set_visible(achievementHighlightText, true)
+				gui.set_text(achievementHighlightText, achievementText[1])
+			else
+				gui.set_visible(achievementHighlight, true)
+				gui.play_flipbook(achievementHighlight, "unknown-fish")
+				gui.set_visible(achievementHighlightText, false)
+			end
 			gui.set_text(hintTextNode, hintText[1])
 		elseif gui.pick_node(fish2, action.x, action.y) then
-			gui.set_visible(achievementHighlight, true)
-			gui.set_visible(achievementHighlightText, true)
-			gui.set_text(achievementHighlightText, achievementText[2])
+			if two then
+				gui.set_visible(achievementHighlight, true)
+				gui.play_flipbook(achievementHighlight, "saltwater-sign")
+				gui.set_visible(achievementHighlightText, true)
+				gui.set_text(achievementHighlightText, achievementText[2])
+			else
+				gui.set_visible(achievementHighlight, true)
+				gui.play_flipbook(achievementHighlight, "unknown-fish")
+				gui.set_visible(achievementHighlightText, false)
+			end
 			gui.set_text(hintTextNode, hintText[2])
 		elseif gui.pick_node(fish3, action.x, action.y) then
-			gui.set_visible(achievementHighlight, true)
-			gui.set_visible(achievementHighlightText, true)
-			gui.set_text(achievementHighlightText, achievementText[3])
+			if three then
+				gui.set_visible(achievementHighlight, true)
+				gui.play_flipbook(achievementHighlight, "freshwater-8")
+				gui.set_visible(achievementHighlightText, true)
+				gui.set_text(achievementHighlightText, achievementText[3])
+			else
+				gui.set_visible(achievementHighlight, true)
+				gui.play_flipbook(achievementHighlight, "unknown-fish")
+				gui.set_visible(achievementHighlightText, false)
+			end
 			gui.set_text(hintTextNode, hintText[3])
 		elseif gui.pick_node(fish4, action.x, action.y) then
-			gui.set_visible(achievementHighlight, true)
-			gui.set_visible(achievementHighlightText, true)
-			gui.set_text(achievementHighlightText, achievementText[4])
+			if four then
+				gui.set_visible(achievementHighlight, true)
+				gui.play_flipbook(achievementHighlight, "freshwater-1")
+				gui.set_visible(achievementHighlightText, true)
+				gui.set_text(achievementHighlightText, achievementText[4])
+			else
+				gui.set_visible(achievementHighlight, true)
+				gui.play_flipbook(achievementHighlight, "unknown-fish")
+				gui.set_visible(achievementHighlightText, false)
+			end
 			gui.set_text(hintTextNode, hintText[4])
 		elseif gui.pick_node(fish5, action.x, action.y) then
-			gui.set_visible(achievementHighlight, true)
-			gui.set_visible(achievementHighlightText, true)
-			gui.set_text(achievementHighlightText, achievementText[5])
+			if five then
+				gui.set_visible(achievementHighlight, true)
+				gui.play_flipbook(achievementHighlight, "saltwater-4")
+				gui.set_visible(achievementHighlightText, true)
+				gui.set_text(achievementHighlightText, achievementText[5])
+			else
+				gui.set_visible(achievementHighlight, true)
+				gui.play_flipbook(achievementHighlight, "unknown-fish")
+				gui.set_visible(achievementHighlightText, false)
+			end
 			gui.set_text(hintTextNode, hintText[5])
 		elseif gui.pick_node(fish6, action.x, action.y) then
-			gui.set_visible(achievementHighlight, true)
-			gui.set_visible(achievementHighlightText, true)
-			gui.set_text(achievementHighlightText, achievementText[6])
+			if six then
+				gui.set_visible(achievementHighlight, true)
+				gui.play_flipbook(achievementHighlight, "fish-match-card-front-1")
+				gui.set_visible(achievementHighlightText, true)
+				gui.set_text(achievementHighlightText, achievementText[6])
+			else
+				gui.set_visible(achievementHighlight, true)
+				gui.play_flipbook(achievementHighlight, "unknown-fish")
+				gui.set_visible(achievementHighlightText, false)
+			end
 			gui.set_text(hintTextNode, hintText[6])
 		elseif gui.pick_node(fish7, action.x, action.y) then
-			gui.set_visible(achievementHighlight, true)
-			gui.set_visible(achievementHighlightText, true)
-			gui.set_text(achievementHighlightText, achievementText[7])
+			if seven then
+				gui.set_visible(achievementHighlight, true)
+				gui.play_flipbook(achievementHighlight, "saltwater-2")
+				gui.set_visible(achievementHighlightText, true)
+				gui.set_text(achievementHighlightText, achievementText[7])
+			else
+				gui.set_visible(achievementHighlight, true)
+				gui.play_flipbook(achievementHighlight, "unknown-fish")
+				gui.set_visible(achievementHighlightText, false)
+			end
 			gui.set_text(hintTextNode, hintText[7])
 		elseif gui.pick_node(fish8, action.x, action.y) then
-			gui.set_visible(achievementHighlight, true)
-			gui.set_visible(achievementHighlightText, true)
-			gui.set_text(achievementHighlightText, achievementText[8])
+			if eight then
+				gui.set_visible(achievementHighlight, true)
+				gui.play_flipbook(achievementHighlight, "tackle-box")
+				gui.set_visible(achievementHighlightText, true)
+				gui.set_text(achievementHighlightText, achievementText[8])
+			else
+				gui.set_visible(achievementHighlight, true)
+				gui.play_flipbook(achievementHighlight, "unknown-fish")
+				gui.set_visible(achievementHighlightText, false)
+			end
 			gui.set_text(hintTextNode, hintText[8])
 		end
 		

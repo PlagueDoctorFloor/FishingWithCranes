@@ -7,6 +7,10 @@ textures {
   name: "CranePageGUI"
   texture: "/Visual Assets/SpriteAtlas/CranePageGUI.atlas"
 }
+textures {
+  name: "Achievements"
+  texture: "/Visual Assets/SpriteAtlas/Achievements.atlas"
+}
 nodes {
   position {
     x: 641.0
@@ -70,11 +74,12 @@ nodes {
     x: 1100.0
     y: 425.0
   }
-  size {
-    x: 200.0
-    y: 300.0
+  scale {
+    x: 0.5
+    y: 0.5
   }
   type: TYPE_BOX
+  texture: "Achievements/fish-match-card-front-1"
   id: "AchievementHighlight"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
