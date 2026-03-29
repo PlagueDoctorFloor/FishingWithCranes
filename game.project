@@ -1,5 +1,5 @@
 [bootstrap]
-main_collection = /Collections/Match.collectionc
+main_collection = /Collections/Loader.collectionc
 
 [script]
 shared_state = 1

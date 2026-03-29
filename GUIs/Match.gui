@@ -239,6 +239,8 @@ nodes {
   id: "playAgain"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
+  enabled: false
+  visible: false
 }
 nodes {
   position {
@@ -263,6 +265,7 @@ nodes {
   font: "Permanent Marker"
   id: "playAgainText"
   inherit_alpha: true
+  visible: false
 }
 nodes {
   position {

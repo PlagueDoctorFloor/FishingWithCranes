@@ -13,6 +13,7 @@ function init(self)
 	msg.post("#Achievements","load")
 	msg.post("#MiniGameSelect","load")
 	msg.post("#FishTacToe", "load")
+	msg.post("#FishMatch","load")
 end
 
 function on_message(self, message_id, message, sender)
@@ -55,10 +56,17 @@ function on_message(self, message_id, message, sender)
 			msg.post("#Crane", "disable")
 		elseif sender.fragment == hash("FishTacToe") then
 			msg.post("#FishTacToe", "disable")
+		elseif sender.fragment == hash("Match") then
+			msg.post("#FishMatch","disable")
 		end
 
 	elseif message_id == hash("load FishTacToe") then
 		msg.post("#FishTacToe", "enable")
+
+		msg.post("#MiniGameSelect", "disable")
+
+	elseif message_id == hash("load FishMatch") then
+		msg.post("#FishMatch","enable")
 
 		msg.post("#MiniGameSelect", "disable")
 		
