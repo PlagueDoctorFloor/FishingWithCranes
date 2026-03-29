@@ -78,11 +78,16 @@ nodes {
   id: "AchievementHighlight"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
+  visible: false
 }
 nodes {
   position {
     x: 1100.0
     y: 260.0
+  }
+  scale {
+    x: 2.0
+    y: 2.0
   }
   size {
     x: 275.0
@@ -95,6 +100,7 @@ nodes {
   id: "AchievementHighlightText"
   pivot: PIVOT_N
   inherit_alpha: true
+  visible: false
 }
 nodes {
   position {
@@ -107,9 +113,307 @@ nodes {
   }
   type: TYPE_BOX
   texture: "CranePageGUI/tall-big-sign"
-  id: "Display"
+  id: "HintDisplay"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 110.0
+    y: 360.0
+  }
+  scale {
+    x: 1.5
+    y: 1.5
+  }
+  size {
+    x: 135.0
+    y: 150.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "Hint\n"
+  "\n"
+  ""
+  font: "Permanent Marker"
+  id: "HintText"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 400.0
+    y: 525.0
+  }
+  scale {
+    x: 2.0
+    y: 2.0
+  }
+  size {
+    x: 150.0
+    y: 50.0
+  }
+  type: TYPE_TEXT
+  text: "Freshwater Fish\n"
+  "\n"
+  ""
+  font: "Permanent Marker"
+  id: "achievement1"
+  inherit_alpha: true
+  visible: false
+}
+nodes {
+  scale {
+    x: 0.3
+    y: 0.1
+  }
+  type: TYPE_BOX
+  texture: "CranePageGUI/glow"
+  id: "fish1glow"
+  parent: "achievement1"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+  visible: false
+}
+nodes {
+  position {
+    x: 400.0
+    y: 385.0
+  }
+  scale {
+    x: 2.0
+    y: 2.0
+  }
+  size {
+    x: 150.0
+    y: 50.0
+  }
+  type: TYPE_TEXT
+  text: "Saltwater Fish\n"
+  "\n"
+  ""
+  font: "Permanent Marker"
+  id: "achievement2"
+  inherit_alpha: true
+  visible: false
+}
+nodes {
+  scale {
+    x: 0.3
+    y: 0.1
+  }
+  type: TYPE_BOX
+  texture: "CranePageGUI/glow"
+  id: "fish2glow"
+  parent: "achievement2"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+  visible: false
+}
+nodes {
+  position {
+    x: 400.0
+    y: 255.0
+  }
+  scale {
+    x: 2.0
+    y: 2.0
+  }
+  size {
+    x: 150.0
+    y: 50.0
+  }
+  type: TYPE_TEXT
+  text: "Lots of Fish\n"
+  "\n"
+  ""
+  font: "Permanent Marker"
+  id: "achievement3"
+  inherit_alpha: true
+  visible: false
+}
+nodes {
+  scale {
+    x: 0.3
+    y: 0.1
+  }
+  type: TYPE_BOX
+  texture: "CranePageGUI/glow"
+  id: "fish3glow"
+  parent: "achievement3"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+  visible: false
+}
+nodes {
+  position {
+    x: 400.0
+    y: 125.0
+  }
+  scale {
+    x: 2.0
+    y: 2.0
+  }
+  size {
+    x: 150.0
+    y: 50.0
+  }
+  type: TYPE_TEXT
+  text: "Tic Tac Toe Loser\n"
+  "\n"
+  ""
+  font: "Permanent Marker"
+  id: "achievement4"
+  inherit_alpha: true
+  visible: false
+}
+nodes {
+  scale {
+    x: 0.3
+    y: 0.1
+  }
+  type: TYPE_BOX
+  texture: "CranePageGUI/glow"
+  id: "fish4glow"
+  parent: "achievement4"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+  visible: false
+}
+nodes {
+  position {
+    x: 750.0
+    y: 525.0
+  }
+  scale {
+    x: 2.0
+    y: 2.0
+  }
+  size {
+    x: 150.0
+    y: 50.0
+  }
+  type: TYPE_TEXT
+  text: "Tic Tac Toe Master"
+  font: "Permanent Marker"
+  id: "achievement5"
+  inherit_alpha: true
+  visible: false
+}
+nodes {
+  scale {
+    x: 0.3
+    y: 0.1
+  }
+  type: TYPE_BOX
+  texture: "CranePageGUI/glow"
+  id: "fish5glow"
+  parent: "achievement5"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+  visible: false
+}
+nodes {
+  position {
+    x: 750.0
+    y: 385.0
+  }
+  scale {
+    x: 2.0
+    y: 2.0
+  }
+  size {
+    x: 150.0
+    y: 50.0
+  }
+  type: TYPE_TEXT
+  text: "Match Obsessed"
+  font: "Permanent Marker"
+  id: "achievement6"
+  inherit_alpha: true
+  visible: false
+}
+nodes {
+  scale {
+    x: 0.3
+    y: 0.1
+  }
+  type: TYPE_BOX
+  texture: "CranePageGUI/glow"
+  id: "fish6glow"
+  parent: "achievement6"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+  visible: false
+}
+nodes {
+  position {
+    x: 750.0
+    y: 255.0
+  }
+  scale {
+    x: 2.0
+    y: 2.0
+  }
+  size {
+    x: 150.0
+    y: 50.0
+  }
+  type: TYPE_TEXT
+  text: "Fish Are Friends"
+  font: "Permanent Marker"
+  id: "achievement7"
+  inherit_alpha: true
+  visible: false
+}
+nodes {
+  scale {
+    x: 0.3
+    y: 0.1
+  }
+  type: TYPE_BOX
+  texture: "CranePageGUI/glow"
+  id: "fish7glow"
+  parent: "achievement7"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+  visible: false
+}
+nodes {
+  position {
+    x: 750.0
+    y: 125.0
+  }
+  scale {
+    x: 2.0
+    y: 2.0
+  }
+  size {
+    x: 150.0
+    y: 50.0
+  }
+  type: TYPE_TEXT
+  text: "You\'re Winner!"
+  font: "Permanent Marker"
+  id: "achievement8"
+  inherit_alpha: true
+  visible: false
+}
+nodes {
+  scale {
+    x: 0.3
+    y: 0.1
+  }
+  type: TYPE_BOX
+  texture: "CranePageGUI/glow"
+  id: "fish8glow"
+  parent: "achievement8"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+  visible: false
 }
 material: "/builtins/materials/gui.material"
 adjust_reference: ADJUST_REFERENCE_PARENT

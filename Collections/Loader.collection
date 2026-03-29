@@ -62,3 +62,14 @@ embedded_instances {
   "}\n"
   ""
 }
+embedded_instances {
+  id: "go"
+  data: "embedded_components {\n"
+  "  id: \"BackgroundSong\"\n"
+  "  type: \"sound\"\n"
+  "  data: \"sound: \\\"/Sound/MainTrack.wav\\\"\\n"
+  "looping: 1\\n"
+  "\"\n"
+  "}\n"
+  ""
+}

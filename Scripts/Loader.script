@@ -1,12 +1,21 @@
-tokens = 5
+tokens = 50
 
-FreshwaterFish = {4,1,10,0,0,6,0,3}
-SaltwaterFish = {4,1,10,0,0,6,0,3}
+FreshwaterFish = {0,0,0,0,0,0,0,0}
+SaltwaterFish = {0,0,0,0,0,0,0,0}
+
+FreshwaterFound = false
+SaltwaterFound = false
+
+TotalFishPulled = 0
 
 -- Fish Tac Toe
 FishTacToeWins = 0
 FishTacToeLosses = 0
-FishTacToeStalemates = 0 
+FishTacToeStalemates = 0
+
+MatchPlayed = 0
+
+petFish = 0
 
 function init(self)
 	msg.post(".","acquire_input_focus")
@@ -34,6 +43,7 @@ function on_message(self, message_id, message, sender)
 		end
 
 	elseif message_id == hash("load Crane") then
+		print(sender)
 		msg.post("#Crane", "enable")
 		msg.post("main:/CraneScreenGUI#MainCraneScreen", "Update")
 
@@ -57,7 +67,28 @@ function on_message(self, message_id, message, sender)
 		end
 
 	elseif message_id == hash("load Achievement") then
+		local freshFishFound = true
+		for i=1,8,1 do
+			if FreshwaterFish[i] == 0 then
+				freshFishFound = false
+			end
+		end
+		if freshFishFound then
+			FreshwaterFound = true
+		end
+
+		local saltFishFound = true
+		for i=1,8,1 do
+			if SaltwaterFish[i] == 0 then
+				saltFishFound = false
+			end
+		end
+		if saltFishFound then
+			SaltwaterFound = true
+		end
+		
 		msg.post("#Achievements", "enable")
+		msg.post("Achievements:/Achievements#Achievements", "Display")
 
 		msg.post("#Crane", "disable")
 		

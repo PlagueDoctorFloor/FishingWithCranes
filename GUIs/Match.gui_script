@@ -174,6 +174,7 @@ function on_message(self, message_id, message, sender)
 
 		if flipsLeft == 0 and not winner then
 			lost = true
+			MatchPlayed = MatchPlayed +1
 			gui.set_visible(gui.get_node("endGameText"),true)
 			gui.set_text(gui.get_node("endGameText"),"You Lose!")
 			gui.set_enabled(gui.get_node("playAgain"), true)
@@ -184,6 +185,7 @@ function on_message(self, message_id, message, sender)
 		if winner then
 			won = true	
 			tokens = tokens+1
+			MatchPlayed = MatchPlayed +1
 			gui.set_text(gui.get_node("TokenText"),tokens)
 			gui.set_visible(gui.get_node("endGameText"),true)
 			gui.set_text(gui.get_node("endGameText"),"You Win!")

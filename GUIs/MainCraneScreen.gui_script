@@ -143,6 +143,7 @@ function on_input(self, action_id, action)
 					
 						tokens = tokens -1
 						gui.set_text(gui.get_node("TokenText"),tokens)
+						TotalFishPulled = TotalFishPulled + 1
 						fishPulled = true
 						clickAllowed = false
 						fishPull()
