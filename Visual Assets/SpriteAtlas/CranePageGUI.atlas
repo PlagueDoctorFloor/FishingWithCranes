@@ -74,4 +74,196 @@ animations {
   playback: PLAYBACK_LOOP_FORWARD
   fps: 4
 }
+animations {
+  id: "HookGrabBlue"
+  images {
+    image: "/Visual Assets/Raw Images/Animations/Hook Grab-20260329T033550Z-1-001/Hook Grab/hook-grab_0001.png"
+  }
+  images {
+    image: "/Visual Assets/Raw Images/Animations/Hook Grab-20260329T033550Z-1-001/Hook Grab/hook-grab_0002.png"
+  }
+  images {
+    image: "/Visual Assets/Raw Images/Animations/Hook Grab-20260329T033550Z-1-001/Hook Grab/hook-grab_0003.png"
+  }
+  images {
+    image: "/Visual Assets/Raw Images/Animations/Hook Grab-20260329T033550Z-1-001/Hook Grab/hook-grab_0004.png"
+  }
+  images {
+    image: "/Visual Assets/Raw Images/Animations/Hook Grab-20260329T033550Z-1-001/Hook Grab/hook-grab_0005.png"
+  }
+  images {
+    image: "/Visual Assets/Raw Images/Animations/Hook Grab-20260329T033550Z-1-001/Hook Grab/hook-grab_0006.png"
+  }
+  images {
+    image: "/Visual Assets/Raw Images/Animations/Hook Grab-20260329T033550Z-1-001/Hook Grab/hook-grab_0007.png"
+  }
+  images {
+    image: "/Visual Assets/Raw Images/Animations/Hook Grab-20260329T033550Z-1-001/Hook Grab/hook-grab_0008.png"
+  }
+  images {
+    image: "/Visual Assets/Raw Images/Animations/Hook Grab-20260329T033550Z-1-001/Hook Grab/hook-grab_0009.png"
+  }
+  images {
+    image: "/Visual Assets/Raw Images/Animations/Hook Grab-20260329T033550Z-1-001/Hook Grab/hook-grab_0010.png"
+  }
+  images {
+    image: "/Visual Assets/Raw Images/Animations/Hook Grab-20260329T033550Z-1-001/Hook Grab/hook-grab_0011.png"
+  }
+  images {
+    image: "/Visual Assets/Raw Images/Animations/Hook Grab-20260329T033550Z-1-001/Hook Grab/hook-grab_0012.png"
+  }
+  images {
+    image: "/Visual Assets/Raw Images/Animations/Hook Grab-20260329T033550Z-1-001/Hook Grab/hook-grab_0013.png"
+  }
+  images {
+    image: "/Visual Assets/Raw Images/Animations/Hook Grab-20260329T033550Z-1-001/Hook Grab/hook-grab_0014.png"
+  }
+  images {
+    image: "/Visual Assets/Raw Images/Animations/Hook Grab-20260329T033550Z-1-001/Hook Grab/hook-grab-blue_0015.png"
+  }
+  images {
+    image: "/Visual Assets/Raw Images/Animations/Hook Grab-20260329T033550Z-1-001/Hook Grab/hook-grab-blue_0016.png"
+  }
+  images {
+    image: "/Visual Assets/Raw Images/Animations/Hook Grab-20260329T033550Z-1-001/Hook Grab/hook-grab-blue_0017.png"
+  }
+  images {
+    image: "/Visual Assets/Raw Images/Animations/Hook Grab-20260329T033550Z-1-001/Hook Grab/hook-grab-blue_0018.png"
+  }
+  images {
+    image: "/Visual Assets/Raw Images/Animations/Hook Grab-20260329T033550Z-1-001/Hook Grab/hook-grab-blue_0019.png"
+  }
+  images {
+    image: "/Visual Assets/Raw Images/Animations/Hook Grab-20260329T033550Z-1-001/Hook Grab/hook-grab-blue_0020.png"
+  }
+  fps: 12
+}
+animations {
+  id: "HookGrabRed"
+  images {
+    image: "/Visual Assets/Raw Images/Animations/Hook Grab-20260329T033550Z-1-001/Hook Grab/hook-grab_0001.png"
+  }
+  images {
+    image: "/Visual Assets/Raw Images/Animations/Hook Grab-20260329T033550Z-1-001/Hook Grab/hook-grab_0002.png"
+  }
+  images {
+    image: "/Visual Assets/Raw Images/Animations/Hook Grab-20260329T033550Z-1-001/Hook Grab/hook-grab_0003.png"
+  }
+  images {
+    image: "/Visual Assets/Raw Images/Animations/Hook Grab-20260329T033550Z-1-001/Hook Grab/hook-grab_0004.png"
+  }
+  images {
+    image: "/Visual Assets/Raw Images/Animations/Hook Grab-20260329T033550Z-1-001/Hook Grab/hook-grab_0005.png"
+  }
+  images {
+    image: "/Visual Assets/Raw Images/Animations/Hook Grab-20260329T033550Z-1-001/Hook Grab/hook-grab_0006.png"
+  }
+  images {
+    image: "/Visual Assets/Raw Images/Animations/Hook Grab-20260329T033550Z-1-001/Hook Grab/hook-grab_0007.png"
+  }
+  images {
+    image: "/Visual Assets/Raw Images/Animations/Hook Grab-20260329T033550Z-1-001/Hook Grab/hook-grab_0008.png"
+  }
+  images {
+    image: "/Visual Assets/Raw Images/Animations/Hook Grab-20260329T033550Z-1-001/Hook Grab/hook-grab_0009.png"
+  }
+  images {
+    image: "/Visual Assets/Raw Images/Animations/Hook Grab-20260329T033550Z-1-001/Hook Grab/hook-grab_0010.png"
+  }
+  images {
+    image: "/Visual Assets/Raw Images/Animations/Hook Grab-20260329T033550Z-1-001/Hook Grab/hook-grab_0011.png"
+  }
+  images {
+    image: "/Visual Assets/Raw Images/Animations/Hook Grab-20260329T033550Z-1-001/Hook Grab/hook-grab_0012.png"
+  }
+  images {
+    image: "/Visual Assets/Raw Images/Animations/Hook Grab-20260329T033550Z-1-001/Hook Grab/hook-grab_0013.png"
+  }
+  images {
+    image: "/Visual Assets/Raw Images/Animations/Hook Grab-20260329T033550Z-1-001/Hook Grab/hook-grab_0014.png"
+  }
+  images {
+    image: "/Visual Assets/Raw Images/Animations/Hook Grab-20260329T033550Z-1-001/Hook Grab/hook-grab-red_0015.png"
+  }
+  images {
+    image: "/Visual Assets/Raw Images/Animations/Hook Grab-20260329T033550Z-1-001/Hook Grab/hook-grab-red_0016.png"
+  }
+  images {
+    image: "/Visual Assets/Raw Images/Animations/Hook Grab-20260329T033550Z-1-001/Hook Grab/hook-grab-red_0017.png"
+  }
+  images {
+    image: "/Visual Assets/Raw Images/Animations/Hook Grab-20260329T033550Z-1-001/Hook Grab/hook-grab-red_0018.png"
+  }
+  images {
+    image: "/Visual Assets/Raw Images/Animations/Hook Grab-20260329T033550Z-1-001/Hook Grab/hook-grab-red_0019.png"
+  }
+  images {
+    image: "/Visual Assets/Raw Images/Animations/Hook Grab-20260329T033550Z-1-001/Hook Grab/hook-grab-red_0020.png"
+  }
+  fps: 12
+}
+animations {
+  id: "HookGrabGold"
+  images {
+    image: "/Visual Assets/Raw Images/Animations/Hook Grab-20260329T033550Z-1-001/Hook Grab/hook-grab_0001.png"
+  }
+  images {
+    image: "/Visual Assets/Raw Images/Animations/Hook Grab-20260329T033550Z-1-001/Hook Grab/hook-grab_0002.png"
+  }
+  images {
+    image: "/Visual Assets/Raw Images/Animations/Hook Grab-20260329T033550Z-1-001/Hook Grab/hook-grab_0003.png"
+  }
+  images {
+    image: "/Visual Assets/Raw Images/Animations/Hook Grab-20260329T033550Z-1-001/Hook Grab/hook-grab_0004.png"
+  }
+  images {
+    image: "/Visual Assets/Raw Images/Animations/Hook Grab-20260329T033550Z-1-001/Hook Grab/hook-grab_0005.png"
+  }
+  images {
+    image: "/Visual Assets/Raw Images/Animations/Hook Grab-20260329T033550Z-1-001/Hook Grab/hook-grab_0006.png"
+  }
+  images {
+    image: "/Visual Assets/Raw Images/Animations/Hook Grab-20260329T033550Z-1-001/Hook Grab/hook-grab_0007.png"
+  }
+  images {
+    image: "/Visual Assets/Raw Images/Animations/Hook Grab-20260329T033550Z-1-001/Hook Grab/hook-grab_0008.png"
+  }
+  images {
+    image: "/Visual Assets/Raw Images/Animations/Hook Grab-20260329T033550Z-1-001/Hook Grab/hook-grab_0009.png"
+  }
+  images {
+    image: "/Visual Assets/Raw Images/Animations/Hook Grab-20260329T033550Z-1-001/Hook Grab/hook-grab_0010.png"
+  }
+  images {
+    image: "/Visual Assets/Raw Images/Animations/Hook Grab-20260329T033550Z-1-001/Hook Grab/hook-grab_0011.png"
+  }
+  images {
+    image: "/Visual Assets/Raw Images/Animations/Hook Grab-20260329T033550Z-1-001/Hook Grab/hook-grab_0012.png"
+  }
+  images {
+    image: "/Visual Assets/Raw Images/Animations/Hook Grab-20260329T033550Z-1-001/Hook Grab/hook-grab_0013.png"
+  }
+  images {
+    image: "/Visual Assets/Raw Images/Animations/Hook Grab-20260329T033550Z-1-001/Hook Grab/hook-grab_0014.png"
+  }
+  images {
+    image: "/Visual Assets/Raw Images/Animations/Hook Grab-20260329T033550Z-1-001/Hook Grab/hook-grab-yellow_0015.png"
+  }
+  images {
+    image: "/Visual Assets/Raw Images/Animations/Hook Grab-20260329T033550Z-1-001/Hook Grab/hook-grab-yellow_0016.png"
+  }
+  images {
+    image: "/Visual Assets/Raw Images/Animations/Hook Grab-20260329T033550Z-1-001/Hook Grab/hook-grab-yellow_0017.png"
+  }
+  images {
+    image: "/Visual Assets/Raw Images/Animations/Hook Grab-20260329T033550Z-1-001/Hook Grab/hook-grab-yellow_0018.png"
+  }
+  images {
+    image: "/Visual Assets/Raw Images/Animations/Hook Grab-20260329T033550Z-1-001/Hook Grab/hook-grab-yellow_0019.png"
+  }
+  images {
+    image: "/Visual Assets/Raw Images/Animations/Hook Grab-20260329T033550Z-1-001/Hook Grab/hook-grab-yellow_0020.png"
+  }
+  fps: 12
+}
 extrude_borders: 2

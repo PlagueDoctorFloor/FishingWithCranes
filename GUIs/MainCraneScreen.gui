@@ -7,6 +7,10 @@ textures {
   name: "CranePageGUI"
   texture: "/Visual Assets/SpriteAtlas/CranePageGUI.atlas"
 }
+textures {
+  name: "fish"
+  texture: "/Visual Assets/SpriteAtlas/fish.atlas"
+}
 nodes {
   position {
     x: 640.0
@@ -21,6 +25,7 @@ nodes {
   id: "Crane"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
+  enabled: false
 }
 nodes {
   position {
@@ -71,7 +76,7 @@ nodes {
     z: 0.0
   }
   type: TYPE_TEXT
-  text: "Claw Machine"
+  text: "Choose Set"
   font: "Permanent Marker"
   id: "CraneLabelText"
   inherit_alpha: true
@@ -216,30 +221,6 @@ nodes {
 }
 nodes {
   position {
-    x: 640.0
-    y: 400.0
-  }
-  type: TYPE_BOX
-  texture: "CranePageGUI/FishPull"
-  id: "FishPull"
-  inherit_alpha: true
-  size_mode: SIZE_MODE_AUTO
-  visible: false
-}
-nodes {
-  position {
-    x: 640.0
-    y: 400.0
-  }
-  type: TYPE_BOX
-  texture: "CranePageGUI/NewFishPull"
-  id: "NewFishGlitter"
-  inherit_alpha: true
-  size_mode: SIZE_MODE_AUTO
-  visible: false
-}
-nodes {
-  position {
     x: 875.0
     y: 630.0
   }
@@ -292,6 +273,112 @@ nodes {
   font: "Permanent Marker"
   id: "TokenText"
   inherit_alpha: true
+}
+nodes {
+  position {
+    x: 675.0
+    y: 300.0
+  }
+  scale {
+    x: 0.6
+    y: 0.6
+  }
+  type: TYPE_BOX
+  texture: "CranePageGUI/HookGrabBlue"
+  id: "CranePickAnimation"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+  visible: false
+}
+nodes {
+  position {
+    x: 640.0
+    y: 450.0
+  }
+  scale {
+    x: 0.55
+    y: 0.55
+  }
+  type: TYPE_BOX
+  texture: "CranePageGUI/freshwater-sign"
+  id: "FreshwaterSelect"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 640.0
+    y: 150.0
+  }
+  scale {
+    x: 0.55
+    y: 0.55
+  }
+  type: TYPE_BOX
+  texture: "CranePageGUI/saltwater-sign"
+  id: "SaltwaterSelect"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 350.0
+    y: 275.0
+  }
+  scale {
+    x: 0.35
+    y: 0.35
+  }
+  type: TYPE_BOX
+  texture: "CranePageGUI/return-button"
+  id: "ReturnArrow"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+  enabled: false
+}
+nodes {
+  position {
+    x: 640.0
+    y: 400.0
+  }
+  scale {
+    x: 1.8
+    y: 1.8
+  }
+  type: TYPE_BOX
+  texture: "CranePageGUI/FishPull"
+  id: "FishPull"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+  visible: false
+}
+nodes {
+  position {
+    x: 640.0
+    y: 300.0
+  }
+  scale {
+    x: 2.0
+    y: 2.0
+  }
+  type: TYPE_BOX
+  texture: "CranePageGUI/NewFishPull"
+  id: "NewFishGlitter"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+  visible: false
+}
+nodes {
+  position {
+    x: 640.0
+    y: 400.0
+  }
+  type: TYPE_BOX
+  texture: "fish/freshwater-1"
+  id: "Fish"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+  visible: false
 }
 material: "/builtins/materials/gui.material"
 adjust_reference: ADJUST_REFERENCE_PARENT

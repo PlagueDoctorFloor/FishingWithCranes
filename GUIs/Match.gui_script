@@ -132,6 +132,10 @@ end
 
 function on_message(self, message_id, message, sender)
 
+	if message_id == hash("Update") then
+		gui.set_text(gui.get_node("TokenText"),tokens)
+	end
+
 	if message_id == hash("flip") then
 		flipsLeft = flipsLeft - 1
 		gui.set_text(gui.get_node("FlipText"), "Flips: "..flipsLeft)

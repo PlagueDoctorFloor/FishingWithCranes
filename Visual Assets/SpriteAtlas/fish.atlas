@@ -1,0 +1,113 @@
+animations {
+  id: "freshwater-1"
+  images {
+    image: "/Visual Assets/Raw Images/Fish-20260329T033519Z-1-001/Fish/Freshwater/freshwater-1.png"
+  }
+  fps: 1
+}
+animations {
+  id: "freshwater-2"
+  images {
+    image: "/Visual Assets/Raw Images/Fish-20260329T033519Z-1-001/Fish/Freshwater/freshwater-2.png"
+  }
+  fps: 1
+}
+animations {
+  id: "freshwater-3"
+  images {
+    image: "/Visual Assets/Raw Images/Fish-20260329T033519Z-1-001/Fish/Freshwater/freshwater-3.png"
+  }
+  fps: 1
+}
+animations {
+  id: "freshwater-4"
+  images {
+    image: "/Visual Assets/Raw Images/Fish-20260329T033519Z-1-001/Fish/Freshwater/freshwater-4.png"
+  }
+  fps: 1
+}
+animations {
+  id: "freshwater-5"
+  images {
+    image: "/Visual Assets/Raw Images/Fish-20260329T033519Z-1-001/Fish/Freshwater/freshwater-5.png"
+  }
+  fps: 1
+}
+animations {
+  id: "freshwater-6"
+  images {
+    image: "/Visual Assets/Raw Images/Fish-20260329T033519Z-1-001/Fish/Freshwater/freshwater-6.png"
+  }
+  fps: 1
+}
+animations {
+  id: "freshwater-7"
+  images {
+    image: "/Visual Assets/Raw Images/Fish-20260329T033519Z-1-001/Fish/Freshwater/freshwater-7.png"
+  }
+  fps: 1
+}
+animations {
+  id: "freshwater-8"
+  images {
+    image: "/Visual Assets/Raw Images/Fish-20260329T033519Z-1-001/Fish/Freshwater/freshwater-8.png"
+  }
+  fps: 1
+}
+animations {
+  id: "saltwater-1"
+  images {
+    image: "/Visual Assets/Raw Images/Fish-20260329T033519Z-1-001/Fish/Saltwater/saltwater-1.png"
+  }
+  fps: 1
+}
+animations {
+  id: "saltwater-2"
+  images {
+    image: "/Visual Assets/Raw Images/Fish-20260329T033519Z-1-001/Fish/Saltwater/saltwater-2.png"
+  }
+  fps: 1
+}
+animations {
+  id: "saltwater-3"
+  images {
+    image: "/Visual Assets/Raw Images/Fish-20260329T033519Z-1-001/Fish/Saltwater/saltwater-3.png"
+  }
+  fps: 1
+}
+animations {
+  id: "saltwater-4"
+  images {
+    image: "/Visual Assets/Raw Images/Fish-20260329T033519Z-1-001/Fish/Saltwater/saltwater-4.png"
+  }
+  fps: 1
+}
+animations {
+  id: "saltwater-5"
+  images {
+    image: "/Visual Assets/Raw Images/Fish-20260329T033519Z-1-001/Fish/Saltwater/saltwater-5.png"
+  }
+  fps: 1
+}
+animations {
+  id: "saltwater-6"
+  images {
+    image: "/Visual Assets/Raw Images/Fish-20260329T033519Z-1-001/Fish/Saltwater/saltwater-6.png"
+  }
+  fps: 1
+}
+animations {
+  id: "saltwater-7"
+  images {
+    image: "/Visual Assets/Raw Images/Fish-20260329T033519Z-1-001/Fish/Saltwater/saltwater-7.png"
+  }
+  fps: 1
+}
+animations {
+  id: "saltwater-8"
+  images {
+    image: "/Visual Assets/Raw Images/Fish-20260329T033519Z-1-001/Fish/Saltwater/saltwater-8.png"
+  }
+  fps: 1
+}
+extrude_borders: 2

@@ -144,6 +144,10 @@ end
 
 function on_message(self, message_id, message, sender)
 
+	if message_id == hash("Update") then
+		gui.set_text(gui.get_node("TokenText"),tokens)
+	end
+
 	if message_id == hash("myTurn") then
 		local noCrash = false
 		for i = 1, 9, 1 do

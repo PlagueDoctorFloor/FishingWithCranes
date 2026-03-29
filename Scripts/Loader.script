@@ -1,5 +1,8 @@
 tokens = 5
 
+FreshwaterFish = {0,0,0,0,0,0,0,0}
+SaltwaterFish = {0,0,0,0,0,0,0,0}
+
 -- Fish Tac Toe
 FishTacToeWins = 0
 FishTacToeLosses = 0
@@ -50,6 +53,7 @@ function on_message(self, message_id, message, sender)
 		msg.post("#Crane", "disable")
 		
 	elseif message_id == hash("load MiniGameSelect") then
+		print(sender)
 		msg.post("#MiniGameSelect", "enable")
 
 		if sender.fragment == hash("MainCraneScreen") then
@@ -62,11 +66,13 @@ function on_message(self, message_id, message, sender)
 
 	elseif message_id == hash("load FishTacToe") then
 		msg.post("#FishTacToe", "enable")
+		msg.post("FishTacToe:/FishTacToe#FishTacToe", "Update")
 
 		msg.post("#MiniGameSelect", "disable")
 
 	elseif message_id == hash("load FishMatch") then
 		msg.post("#FishMatch","enable")
+		msg.post("Match:/Match#Match", "Update")
 
 		msg.post("#MiniGameSelect", "disable")
 		
