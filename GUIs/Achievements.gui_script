@@ -12,52 +12,61 @@ local eight = false
 
 local function updateAchievements()
 	local allAchievements = true
+	
 	if FreshwaterFound then
 		one = true
 		gui.set_visible(gui.get_node("achievement1"), true)
 	else
 		allAchievements = false
 	end
+	
 	if SaltwaterFound then
 		two = true
 		gui.set_visible(gui.get_node("achievement2"), true)
 	else
 		allAchievements = false
 	end
+	
 	if TotalFishPulled >= 50 then
 		three = true
 		gui.set_visible(gui.get_node("achievement3"), true)
 	else
 		allAchievements = false
 	end
-	if FishTacToeLosses >= 10 then
+	
+	if MatchPlayed >= 10 then
 		four = true
 		gui.set_visible(gui.get_node("achievement4"), true)
 	else
 		allAchievements = false
 	end
-	if FishTacToeStalemates >= 10 then
+	
+	if FishTacToeLosses >= 10 then
 		five = true
 		gui.set_visible(gui.get_node("achievement5"), true)
 	else
 		allAchievements = false
 	end
-	if MatchPlayed >= 10 then 
+	
+	if FishTacToeStalemates >= 10 then 
 		six = true
 		gui.set_visible(gui.get_node("achievement6"), true)
 	else
 		allAchievements = false
 	end
+	
 	if petFish >= 100 then
 		seven = true
 		gui.set_visible(gui.get_node("achievement7"), true)
 	else
 		allAchievements = false
 	end
+	
 	if allAchievements then
 		eight = true
 		gui.set_visible(gui.get_node("achievement8"), true)
 	end
+	
 end
 
 function init(self)

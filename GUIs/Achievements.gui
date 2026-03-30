@@ -267,7 +267,7 @@ nodes {
     y: 50.0
   }
   type: TYPE_TEXT
-  text: "Tic Tac Toe Loser\n"
+  text: "Match Obsessed\n"
   "\n"
   ""
   font: "Permanent Marker"
@@ -302,7 +302,7 @@ nodes {
     y: 50.0
   }
   type: TYPE_TEXT
-  text: "Tic Tac Toe Master"
+  text: "Tic Tac Toe Loser"
   font: "Permanent Marker"
   id: "achievement5"
   inherit_alpha: true
@@ -335,7 +335,7 @@ nodes {
     y: 50.0
   }
   type: TYPE_TEXT
-  text: "Match Obsessed"
+  text: "Tic Tac Toe Master"
   font: "Permanent Marker"
   id: "achievement6"
   inherit_alpha: true
