@@ -8,6 +8,11 @@ local lost = false
 
 local stalemate = false
 
+local function fishThinkEnd(self)
+	gui.set_visible(gui.get_node("FishThinking"), false)
+	msg.post("#","myTurn")
+end
+
 local function Reset() 
 	won = false
 	lost = false
@@ -59,78 +64,25 @@ function on_input(self, action_id, action)
 				local space9 = gui.get_node("box9")	
 
 				if gui.pick_node(space1, action.x, action.y) then
-					if board[1] ~= 1 and board[1] ~= 2 then
-						playerTurn = false
-						board[1] = 1
-						gui.set_visible(space1, true)
-						gui.play_flipbook(space1, "starfish")
-						msg.post("#","evaluate",{caller = 1})
-					end
+					msg.post("#", "playerTurn", {space = 1})
 				elseif gui.pick_node(space2, action.x, action.y) then
-					if board[2] ~= 1 and board[2] ~= 2 then
-						playerTurn = false
-						board[2] = 1
-						gui.set_visible(space2, true)
-						gui.play_flipbook(space2, "starfish")
-						msg.post("#","evaluate",{caller = 1})
-					end
+					msg.post("#", "playerTurn", {space = 2})
 				elseif gui.pick_node(space3, action.x, action.y) then
-					if board[3] ~= 1 and board[3] ~= 2 then
-						playerTurn = false
-						board[3] = 1
-						gui.set_visible(space3, true)
-						gui.play_flipbook(space3, "starfish")
-						msg.post("#","evaluate",{caller = 1})
-					end
+					msg.post("#", "playerTurn", {space = 3})
 				elseif gui.pick_node(space4, action.x, action.y) then
-					if board[4] ~= 1 and board[4] ~= 2 then
-						playerTurn = false
-						board[4] = 1
-						gui.set_visible(space4, true)
-						gui.play_flipbook(space4, "starfish")
-						msg.post("#","evaluate",{caller = 1})
-					end
+					msg.post("#", "playerTurn", {space = 4})
 				elseif gui.pick_node(space5, action.x, action.y) then
-					if board[5] ~= 1 and board[5] ~= 2 then
-						playerTurn = false
-						board[5] = 1
-						gui.set_visible(space5, true)
-						gui.play_flipbook(space5, "starfish")
-						msg.post("#","evaluate",{caller = 1})
-					end
+					msg.post("#", "playerTurn", {space = 5})
 				elseif gui.pick_node(space6, action.x, action.y) then
-					if board[6] ~= 1 and board[6] ~= 2 then
-						playerTurn = false
-						board[6] = 1
-						gui.set_visible(space6, true)
-						gui.play_flipbook(space6, "starfish")
-						msg.post("#","evaluate",{caller = 1})
-					end
+					msg.post("#", "playerTurn", {space = 6})
 				elseif gui.pick_node(space7, action.x, action.y) then
-					if board[7] ~= 1 and board[7] ~= 2 then
-						playerTurn = false
-						board[7] = 1
-						gui.set_visible(space7, true)
-						gui.play_flipbook(space7, "starfish")
-						msg.post("#","evaluate",{caller = 1})
-					end
+					msg.post("#", "playerTurn", {space = 7})
 				elseif gui.pick_node(space8, action.x, action.y) then
-					if board[8] ~= 1 and board[8] ~= 2 then
-						playerTurn = false
-						board[8] = 1
-						gui.set_visible(space8, true)
-						gui.play_flipbook(space8, "starfish")
-						msg.post("#","evaluate",{caller = 1})
-					end
+					msg.post("#", "playerTurn", {space = 8})
 				elseif gui.pick_node(space9, action.x, action.y) then
-					if board[9] ~= 1 and board[9] ~= 2 then
-						playerTurn = false
-						board[9] = 1
-						gui.set_visible(space9, true)
-						gui.play_flipbook(space9, "starfish")
-						msg.post("#","evaluate",{caller = 1})
-					end
+					msg.post("#", "playerTurn", {space = 9})
 				end
+				
 			end
 		elseif won or lost or stalemate then
 			local playAgain = gui.get_node("playAgain")
@@ -146,6 +98,17 @@ function on_message(self, message_id, message, sender)
 
 	if message_id == hash("Update") then
 		gui.set_text(gui.get_node("TokenText"),tokens)
+	end
+
+	if message_id == hash("playerTurn") then
+		if board[message.space] ~= 1 and board[message.space] ~= 2 then
+			playerTurn = false
+			board[message.space] = 1
+			msg.post("Loader:/Loader", "Sound", {sound = 5})
+			gui.set_visible(gui.get_node("box"..message.space), true)
+			gui.play_flipbook(gui.get_node("box"..message.space), "starfish")
+			msg.post("#","evaluate",{caller = 1})
+		end
 	end
 
 	if message_id == hash("myTurn") then
@@ -164,6 +127,7 @@ function on_message(self, message_id, message, sender)
 			end
 
 			board[spotSelect] = 2
+			msg.post("Loader:/Loader", "Sound", {sound = 5})
 			gui.set_visible(gui.get_node("box"..spotSelect), true)
 			gui.play_flipbook(gui.get_node("box"..spotSelect), "sea-urchin")
 			msg.post("#","evaluate",{caller = 2})
@@ -242,7 +206,8 @@ function on_message(self, message_id, message, sender)
 			gui.set_visible(gui.get_node("playAgainText"),true)
 		else 
 			if message.caller == 1 then
-				msg.post("#","myTurn")
+				gui.set_visible(gui.get_node("FishThinking"), true)
+				gui.play_flipbook(gui.get_node("FishThinking"), "FishThinking", fishThinkEnd)
 			elseif message.caller == 2 then
 				playerTurn = true
 			end

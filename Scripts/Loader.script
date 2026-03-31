@@ -17,6 +17,27 @@ MatchPlayed = 0
 
 petFish = 0
 
+local function soundEnd(self)
+
+	msg.post("main:/CraneScreenGUI#MainCraneScreen","Coin Done")
+	sound.play("go#CraneOperation")
+	
+end
+
+local function playNoise(soundNumber)
+	if soundNumber == 1 then
+		sound.play("go#FishNoise")
+	elseif soundNumber == 2 then
+		sound.play("go#CardFlip")
+	elseif soundNumber == 3 then
+		sound.play("go#CoinIn", nil, soundEnd)
+	elseif soundNumber == 4 then
+		sound.play("go#WinFish")
+	elseif soundNumber == 5 then
+		sound.play("go#TicTacToePlace")
+	end
+end
+
 function init(self)
 	msg.post(".","acquire_input_focus")
 
@@ -34,6 +55,12 @@ function init(self)
 end
 
 function on_message(self, message_id, message, sender)
+
+	if message_id == hash("Sound") then
+		playNoise(message.sound)
+	end
+
+	
 	-- Sent back from the proxy's after they are asked to load
 	if message_id == hash("proxy_loaded") then
 

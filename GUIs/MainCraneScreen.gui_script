@@ -21,6 +21,7 @@ local function spawnFish(self)
 
 	gui.set_visible(gui.get_node("CranePickAnimation"), false)
 	gui.set_visible(gui.get_node("FishPull"), true)
+	msg.post("Loader:/Loader", "Sound", {sound=4})
 	if setSelected == 1 then
 		if FreshwaterFish[selectedFish] == 0 then
 			gui.set_visible(gui.get_node("NewFishGlitter"), true)
@@ -148,7 +149,7 @@ function on_input(self, action_id, action)
 						TotalFishPulled = TotalFishPulled + 1
 						fishPulled = true
 						clickAllowed = false
-						fishPull()
+						msg.post("Loader:/Loader", "Sound", {sound = 3})
 
 					else
 						gui.set_visible(gui.get_node("NoTokensLabel"), true)
@@ -193,6 +194,10 @@ function on_message(self, message_id, message, sender)
 
 	if message_id == hash("Update") then
 		gui.set_text(gui.get_node("TokenText"),tokens)
+	end
+
+	if message_id == hash("Coin Done") then
+		fishPull()
 	end
 
 end

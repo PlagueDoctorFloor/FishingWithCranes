@@ -5,6 +5,8 @@ local setSelect = 0
 
 local fishSelect = 0
 
+local haveFish = false
+
 local function displayFish()
 	local fish = gui.get_node("fish")
 	local fishName = gui.get_node("fishNameText")
@@ -18,6 +20,7 @@ local function displayFish()
 	if setSelect == 1 then
 
 		if FreshwaterFish[fishSelect] ~= 0 then
+			haveFish = true
 			gui.play_flipbook(fish, "freshwater-"..fishSelect)
 			gui.set_text(fishName, FreshFishNames[fishSelect])
 			gui.set_text(numberOwned,"# Owned: "..FreshwaterFish[fishSelect])
@@ -30,6 +33,7 @@ local function displayFish()
 				gui.set_visible(gui.get_node("TradeText"), false)
 			end
 		elseif FreshwaterFish[fishSelect] == 0 then
+			haveFish = false
 			gui.play_flipbook(fish, "unknown-fish")
 			gui.set_text(fishName,"?")
 			gui.set_text(numberOwned,"# Owned: 0")
@@ -38,6 +42,7 @@ local function displayFish()
 		end
 	elseif setSelect == 2 then
 		if SaltwaterFish[fishSelect] ~= 0 then
+			haveFish = true
 			gui.play_flipbook(fish, "saltwater-"..fishSelect)
 			gui.set_text(fishName, SaltFishNames[fishSelect])
 			gui.set_text(numberOwned,"# Owned: "..SaltwaterFish[fishSelect])
@@ -50,6 +55,7 @@ local function displayFish()
 				gui.set_visible(gui.get_node("TradeText"), false)
 			end
 		elseif SaltwaterFish[fishSelect] == 0 then
+			haveFish = false
 			gui.play_flipbook(fish, "unknown-fish")
 			gui.set_text(fishName,"?")
 			gui.set_text(numberOwned,"# Owned: 0")
@@ -85,13 +91,14 @@ function on_message(self, message_id, message, sender)
 end
 
 function on_input(self, action_id, action)
+
+	local fish = gui.get_node("fish")
 	
 	if action_id == hash("LeftClick") and action.pressed then
 		local back = gui.get_node("Exit")
 		local arrowRight = gui.get_node("ArrowRight")
 		local arrowLeft = gui.get_node("ArrowLeft")
 		local trade = gui.get_node("TradeButton")
-		local fish = gui.get_node("fish")
 
 		if gui.pick_node(back, action.x, action.y) then
 
@@ -129,8 +136,14 @@ function on_input(self, action_id, action)
 				end
 			end
 		elseif gui.pick_node(fish, action.x, action.y) then
-			petFish = petFish+1
+			if haveFish then
+				petFish = petFish+1
+				gui.set_scale(fish, vmath.vector3(.9,.9,0))
+				msg.post("Loader:/Loader","Sound", {sound = 1})
+			end
 		end
+	elseif action_id == hash("LeftClick") and action.released then
+		gui.set_scale(fish, vmath.vector3(1,1,0))
 	end
 	
 end

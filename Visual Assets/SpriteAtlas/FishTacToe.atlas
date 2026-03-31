@@ -22,4 +22,20 @@ images {
 images {
   image: "/Visual Assets/Background/background.png"
 }
+animations {
+  id: "FishThinking"
+  images {
+    image: "/Visual Assets/Raw Images/Animations/thinking-fish-1.png"
+  }
+  images {
+    image: "/Visual Assets/Raw Images/Animations/thinking-fish-2.png"
+  }
+  images {
+    image: "/Visual Assets/Raw Images/Animations/thinking-fish-3.png"
+  }
+  images {
+    image: "/Visual Assets/Raw Images/Animations/thinking-fish-4.png"
+  }
+  fps: 4
+}
 extrude_borders: 2
