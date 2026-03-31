@@ -29,6 +29,8 @@ function init(self)
 	msg.post("#FreshwaterCollection","load")
 	msg.post("#SaltwaterCollection","load")
 	msg.post("#DetailedFish","load")
+
+	sound.play("go#BackgroundSong")
 end
 
 function on_message(self, message_id, message, sender)

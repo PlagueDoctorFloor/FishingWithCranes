@@ -67,7 +67,7 @@ embedded_instances {
   data: "embedded_components {\n"
   "  id: \"BackgroundSong\"\n"
   "  type: \"sound\"\n"
-  "  data: \"sound: \\\"/Sound/MainTrack.wav\\\"\\n"
+  "  data: \"sound: \\\"/Sound/MainTrack(16bit)2.wav\\\"\\n"
   "looping: 1\\n"
   "\"\n"
   "}\n"
