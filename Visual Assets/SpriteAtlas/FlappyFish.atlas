@@ -1,0 +1,32 @@
+images {
+  image: "/Visual Assets/Raw Images/GUI/x-out-button.png"
+}
+images {
+  image: "/Visual Assets/Raw Images/Minigames/coral-1.png"
+}
+images {
+  image: "/Visual Assets/Raw Images/Minigames/coral-2.png"
+}
+images {
+  image: "/Visual Assets/Raw Images/token.png"
+}
+images {
+  image: "/Visual Assets/Raw Images/GUI/label.png"
+}
+images {
+  image: "/Visual Assets/Raw Images/GUI/big-sign.png"
+}
+images {
+  image: "/Visual Assets/Background/background.png"
+}
+animations {
+  id: "FlyingFish"
+  images {
+    image: "/Visual Assets/Raw Images/Animations/flying-fish-1.png"
+  }
+  images {
+    image: "/Visual Assets/Raw Images/Animations/flying-fish-2.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
+extrude_borders: 2
