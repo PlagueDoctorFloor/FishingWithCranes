@@ -1,0 +1,336 @@
+script: "/GUIs/FishTank.gui_script"
+fonts {
+  name: "Permanent Marker"
+  font: "/Visual Assets/Fonts/Permanent Marker.font"
+}
+textures {
+  name: "FishTank"
+  texture: "/Visual Assets/SpriteAtlas/FishTank.atlas"
+}
+nodes {
+  position {
+    x: 150.0
+    y: 650.0
+  }
+  scale {
+    x: 0.5
+    y: 0.25
+  }
+  type: TYPE_BOX
+  texture: "FishTank/label"
+  id: "ScreenshotModeButton"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 150.0
+    y: 650.0
+  }
+  scale {
+    x: 1.5
+    y: 1.5
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "Screenshot Mode"
+  font: "Permanent Marker"
+  id: "ScreenshotModeText"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 200.0
+    y: 300.0
+  }
+  scale {
+    x: 0.75
+    y: 2.0
+  }
+  type: TYPE_BOX
+  texture: "FishTank/label"
+  id: "DecorSelect"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+  visible: false
+}
+nodes {
+  position {
+    x: 100.0
+    y: 530.0
+  }
+  scale {
+    x: 0.1
+    y: 0.1
+  }
+  type: TYPE_BOX
+  texture: "FishTank/x-out-button"
+  id: "X"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+  visible: false
+}
+nodes {
+  position {
+    x: 120.0
+    y: 450.0
+  }
+  scale {
+    x: 0.25
+    y: 0.25
+  }
+  type: TYPE_BOX
+  texture: "FishTank/freshwater-1"
+  id: "fish1"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+  visible: false
+}
+nodes {
+  position {
+    x: 275.0
+    y: 450.0
+  }
+  scale {
+    x: 0.25
+    y: 0.25
+  }
+  type: TYPE_BOX
+  texture: "FishTank/freshwater-1"
+  id: "fish2"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+  visible: false
+}
+nodes {
+  position {
+    x: 120.0
+    y: 340.0
+  }
+  scale {
+    x: 0.25
+    y: 0.25
+  }
+  type: TYPE_BOX
+  texture: "FishTank/freshwater-1"
+  id: "fish3"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+  visible: false
+}
+nodes {
+  position {
+    x: 275.0
+    y: 340.0
+  }
+  scale {
+    x: 0.25
+    y: 0.25
+  }
+  type: TYPE_BOX
+  texture: "FishTank/freshwater-1"
+  id: "fish4"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+  visible: false
+}
+nodes {
+  position {
+    x: 120.0
+    y: 230.0
+  }
+  scale {
+    x: 0.25
+    y: 0.25
+  }
+  type: TYPE_BOX
+  texture: "FishTank/freshwater-1"
+  id: "fish5"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+  visible: false
+}
+nodes {
+  position {
+    x: 275.0
+    y: 230.0
+  }
+  scale {
+    x: 0.25
+    y: 0.25
+  }
+  type: TYPE_BOX
+  texture: "FishTank/freshwater-1"
+  id: "fish6"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+  visible: false
+}
+nodes {
+  position {
+    x: 120.0
+    y: 120.0
+  }
+  scale {
+    x: 0.25
+    y: 0.25
+  }
+  type: TYPE_BOX
+  texture: "FishTank/freshwater-1"
+  id: "fish7"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+  visible: false
+}
+nodes {
+  position {
+    x: 150.0
+    y: 530.0
+  }
+  scale {
+    x: 0.1
+    y: 0.1
+  }
+  type: TYPE_BOX
+  texture: "FishTank/arrow"
+  id: "LeftArrow"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+  visible: false
+}
+nodes {
+  position {
+    x: 325.0
+    y: 530.0
+  }
+  rotation {
+    z: 180.0
+  }
+  scale {
+    x: 0.1
+    y: 0.1
+  }
+  type: TYPE_BOX
+  texture: "FishTank/arrow"
+  id: "RightArrow"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+  visible: false
+}
+nodes {
+  position {
+    x: 240.0
+    y: 530.0
+  }
+  scale {
+    x: 0.25
+    y: 0.1
+  }
+  type: TYPE_BOX
+  texture: "FishTank/label"
+  id: "SetName"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+  visible: false
+}
+nodes {
+  position {
+    x: 240.0
+    y: 530.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "Freshwater"
+  font: "Permanent Marker"
+  id: "SetNameText"
+  inherit_alpha: true
+  visible: false
+}
+nodes {
+  position {
+    x: 50.0
+    y: 50.0
+  }
+  scale {
+    x: 0.25
+    y: 0.25
+  }
+  type: TYPE_BOX
+  texture: "FishTank/return-button"
+  id: "ReturnArrow"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 125.0
+    y: 350.0
+  }
+  scale {
+    x: 0.4
+    y: 0.25
+  }
+  type: TYPE_BOX
+  texture: "FishTank/label"
+  id: "DecorButton"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 125.0
+    y: 350.0
+  }
+  scale {
+    x: 1.5
+    y: 1.5
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "Fish & Decor"
+  font: "Permanent Marker"
+  id: "DecorText"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 275.0
+    y: 120.0
+  }
+  scale {
+    x: 0.25
+    y: 0.25
+  }
+  type: TYPE_BOX
+  texture: "FishTank/freshwater-1"
+  id: "fish8"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+  visible: false
+}
+material: "/builtins/materials/gui.material"
+adjust_reference: ADJUST_REFERENCE_PARENT

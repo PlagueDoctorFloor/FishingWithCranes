@@ -1,0 +1,104 @@
+local screenshotMode = false
+
+local currentlyVisible = {}
+
+local decorTime = false
+
+function init(self)
+	msg.post(".", "acquire_input_focus")
+
+	--guiNodes = {gui.get_node("ScreenshotModeButton"),gui.get_node("ScreenshotModeText"),gui.get_node("DecorSelect"),gui.get_node("X"),gui.get_node("fish1"),gui.get_node("fish2"),gui.get_node("fish3"),gui.get_node("fish4"),gui.get_node("fish5"),gui.get_node("fish6"),gui.get_node("fish7"),gui.get_node("fish8"),gui.get_node("LeftArrow"),gui.get_node("RightArrow"),gui.get_node("SetName"),gui.get_node("SetNameText"),gui.get_node("ReturnArrow"),gui.get_node("DecorButton"),gui.get_node("DecorText")}
+	currentlyVisible = {gui.get_node("ScreenshotModeButton"),gui.get_node("ScreenshotModeText"),gui.get_node("ReturnArrow"),gui.get_node("DecorButton"),gui.get_node("DecorText")}
+end
+
+function final(self)
+	-- Add finalization code here
+	-- Learn more: https://defold.com/manuals/script/
+	-- Remove this function if not needed
+end
+
+function update(self, dt)
+	-- Add update code here
+	-- Learn more: https://defold.com/manuals/script/
+	-- Remove this function if not needed
+end
+
+function on_message(self, message_id, message, sender)
+	-- Add message-handling code here
+	-- Learn more: https://defold.com/manuals/message-passing/
+	-- Remove this function if not needed
+end
+
+function on_input(self, action_id, action)
+
+	if not screenshotMode then
+
+		if action_id == hash("LeftClick") and action.pressed then
+
+			local screenshot = gui.get_node("ScreenshotModeButton")
+			local decor = gui.get_node("DecorButton")
+
+			if gui.pick_node(screenshot, action.x, action.y) then
+				screenshotMode = true
+
+				for i=1,#currentlyVisible,1 do
+					gui.set_visible(currentlyVisible[i],false)
+				end
+			end
+
+			if not decorTime then	
+				if gui.pick_node(decor, action.x, action.y) then
+				
+					for i=1,#currentlyVisible,1 do
+						gui.set_visible(currentlyVisible[i],false)
+					end
+				
+					currentlyVisible = {gui.get_node("ScreenshotModeButton"),gui.get_node("ScreenshotModeText"),gui.get_node("DecorSelect"),gui.get_node("X"),gui.get_node("fish1"),gui.get_node("fish2"),gui.get_node("fish3"),gui.get_node("fish4"),gui.get_node("fish5"),gui.get_node("fish6"),gui.get_node("fish7"),gui.get_node("fish8"),gui.get_node("LeftArrow"),gui.get_node("RightArrow"),gui.get_node("SetName"),gui.get_node("SetNameText")}
+
+					for i=1,#currentlyVisible,1 do
+						gui.set_visible(currentlyVisible[i],true)
+					end
+				
+				end
+
+			else
+
+				local close = gui.get_node("X")
+				local left = gui.get_node("LeftArrow")
+				local right = gui.get_node("RightArrow")
+				local left = gui.get_node("LeftArrow")
+				local fish1 = gui.get_node("fish1")
+				local fish2 = gui.get_node("fish2")
+				local fish3 = gui.get_node("fish3")
+				local fish4 = gui.get_node("fish4")
+				local fish5 = gui.get_node("fish5")
+				local fish6 = gui.get_node("fish6")
+				local fish7 = gui.get_node("fish7")
+				local fish8 = gui.get_node("fish8")
+
+				if gui.pick_node(node, action.x, action.y)
+
+			end
+			
+		end
+
+	elseif screenshotMode then
+
+		if action_id == hash("LeftClick") and action.pressed then
+		
+			screenshotMode = false
+			for i=1,#currentlyVisible,1 do
+				gui.set_visible(currentlyVisible[i],true)
+			end
+
+		end
+		
+	end
+	
+end
+
+function on_reload(self)
+	-- Add reload-handling code here
+	-- Learn more: https://defold.com/manuals/hot-reload/
+	-- Remove this function if not needed
+end

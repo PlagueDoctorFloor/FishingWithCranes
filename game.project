@@ -1,5 +1,5 @@
 [bootstrap]
-main_collection = /Collections/FlappyFish.collectionc
+main_collection = /Collections/FishTank.collectionc
 
 [script]
 shared_state = 1

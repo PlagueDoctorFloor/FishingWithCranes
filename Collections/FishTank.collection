@@ -1,0 +1,29 @@
+name: "FishTank"
+instances {
+  id: "FishTankGUI"
+  prototype: "/Objects/FishTankGUI.go"
+}
+scale_along_z: 0
+embedded_instances {
+  id: "Background"
+  data: "embedded_components {\n"
+  "  id: \"sprite\"\n"
+  "  type: \"sprite\"\n"
+  "  data: \"default_animation: \\\"flappy-fish-background\\\"\\n"
+  "material: \\\"/builtins/materials/sprite.material\\\"\\n"
+  "textures {\\n"
+  "  sampler: \\\"texture_sampler\\\"\\n"
+  "  texture: \\\"/Visual Assets/SpriteAtlas/FishTank.atlas\\\"\\n"
+  "}\\n"
+  "\"\n"
+  "  position {\n"
+  "    x: 550.0\n"
+  "    y: 300.0\n"
+  "  }\n"
+  "}\n"
+  ""
+  scale3 {
+    x: 1.2
+    y: 1.2
+  }
+}
