@@ -1,10 +1,21 @@
+local died = false
 
 function update(self, dt)
 
-	local pos = go.get_position("Course1")
-	pos.x = pos.x - 3
-	pos.y = 0
-	go.set_position(pos,"Course1")
+	if not died then
+		local pos = go.get_position("Course1")
+		pos.x = pos.x - 3
+		pos.y = 0
+		go.set_position(pos,"Course1")
+	end
+
+end
+
+function on_message(self, message_id, message, sender)
+
+	if message_id == hash("died") then
+		died = true
+	end
 
 end
 
@@ -32,12 +43,6 @@ function fixed_update(self, dt)
 	-- Physics section of game.project
 	-- Add update code here
 	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
-end
-
-function on_message(self, message_id, message, sender)
-	-- Add message-handling code here
-	-- Learn more: https://defold.com/manuals/message-passing/
 	-- Remove this function if not needed
 end
 
