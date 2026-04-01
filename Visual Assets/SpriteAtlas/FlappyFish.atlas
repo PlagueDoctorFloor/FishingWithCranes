@@ -19,14 +19,17 @@ images {
 images {
   image: "/Visual Assets/Background/background.png"
 }
+images {
+  image: "/Visual Assets/Raw Images/Animations/flying-fish-1.png"
+}
 animations {
   id: "FlyingFish"
   images {
-    image: "/Visual Assets/Raw Images/Animations/flying-fish-1.png"
-  }
-  images {
     image: "/Visual Assets/Raw Images/Animations/flying-fish-2.png"
   }
-  playback: PLAYBACK_LOOP_FORWARD
+  images {
+    image: "/Visual Assets/Raw Images/Animations/flying-fish-1.png"
+  }
+  fps: 5
 }
 extrude_borders: 2
