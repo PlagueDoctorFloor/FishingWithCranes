@@ -79,7 +79,7 @@ nodes {
     y: 0.5
   }
   type: TYPE_BOX
-  texture: "Achievements/fish-match-card-front-1"
+  texture: "Achievements/achievement-1"
   id: "AchievementHighlight"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
@@ -154,31 +154,12 @@ nodes {
     y: 525.0
   }
   scale {
-    x: 2.0
-    y: 2.0
-  }
-  size {
-    x: 150.0
-    y: 50.0
-  }
-  type: TYPE_TEXT
-  text: "Freshwater Fish\n"
-  "\n"
-  ""
-  font: "Permanent Marker"
-  id: "achievement1"
-  inherit_alpha: true
-  visible: false
-}
-nodes {
-  scale {
     x: 0.3
-    y: 0.1
+    y: 0.3
   }
   type: TYPE_BOX
-  texture: "CranePageGUI/glow"
-  id: "fish1glow"
-  parent: "achievement1"
+  texture: "Achievements/achievement-1"
+  id: "achivement1"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
   visible: false
@@ -189,31 +170,12 @@ nodes {
     y: 385.0
   }
   scale {
-    x: 2.0
-    y: 2.0
-  }
-  size {
-    x: 150.0
-    y: 50.0
-  }
-  type: TYPE_TEXT
-  text: "Saltwater Fish\n"
-  "\n"
-  ""
-  font: "Permanent Marker"
-  id: "achievement2"
-  inherit_alpha: true
-  visible: false
-}
-nodes {
-  scale {
     x: 0.3
-    y: 0.1
+    y: 0.3
   }
   type: TYPE_BOX
-  texture: "CranePageGUI/glow"
-  id: "fish2glow"
-  parent: "achievement2"
+  texture: "Achievements/achievement-2"
+  id: "achivement2"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
   visible: false
@@ -224,31 +186,12 @@ nodes {
     y: 255.0
   }
   scale {
-    x: 2.0
-    y: 2.0
-  }
-  size {
-    x: 150.0
-    y: 50.0
-  }
-  type: TYPE_TEXT
-  text: "Lots of Fish\n"
-  "\n"
-  ""
-  font: "Permanent Marker"
-  id: "achievement3"
-  inherit_alpha: true
-  visible: false
-}
-nodes {
-  scale {
     x: 0.3
-    y: 0.1
+    y: 0.3
   }
   type: TYPE_BOX
-  texture: "CranePageGUI/glow"
-  id: "fish3glow"
-  parent: "achievement3"
+  texture: "Achievements/achievement-3-1"
+  id: "achivement3"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
   visible: false
@@ -259,31 +202,12 @@ nodes {
     y: 125.0
   }
   scale {
-    x: 2.0
-    y: 2.0
-  }
-  size {
-    x: 150.0
-    y: 50.0
-  }
-  type: TYPE_TEXT
-  text: "Match Obsessed\n"
-  "\n"
-  ""
-  font: "Permanent Marker"
-  id: "achievement4"
-  inherit_alpha: true
-  visible: false
-}
-nodes {
-  scale {
     x: 0.3
-    y: 0.1
+    y: 0.3
   }
   type: TYPE_BOX
-  texture: "CranePageGUI/glow"
-  id: "fish4glow"
-  parent: "achievement4"
+  texture: "Achievements/achievement-4"
+  id: "achivement4"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
   visible: false
@@ -294,29 +218,12 @@ nodes {
     y: 525.0
   }
   scale {
-    x: 2.0
-    y: 2.0
-  }
-  size {
-    x: 150.0
-    y: 50.0
-  }
-  type: TYPE_TEXT
-  text: "Tic Tac Toe Loser"
-  font: "Permanent Marker"
-  id: "achievement5"
-  inherit_alpha: true
-  visible: false
-}
-nodes {
-  scale {
     x: 0.3
-    y: 0.1
+    y: 0.3
   }
   type: TYPE_BOX
-  texture: "CranePageGUI/glow"
-  id: "fish5glow"
-  parent: "achievement5"
+  texture: "Achievements/achievement-5"
+  id: "achivement5"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
   visible: false
@@ -327,29 +234,12 @@ nodes {
     y: 385.0
   }
   scale {
-    x: 2.0
-    y: 2.0
-  }
-  size {
-    x: 150.0
-    y: 50.0
-  }
-  type: TYPE_TEXT
-  text: "Tic Tac Toe Master"
-  font: "Permanent Marker"
-  id: "achievement6"
-  inherit_alpha: true
-  visible: false
-}
-nodes {
-  scale {
     x: 0.3
-    y: 0.1
+    y: 0.3
   }
   type: TYPE_BOX
-  texture: "CranePageGUI/glow"
-  id: "fish6glow"
-  parent: "achievement6"
+  texture: "Achievements/achievement-6"
+  id: "achivement6"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
   visible: false
@@ -360,29 +250,12 @@ nodes {
     y: 255.0
   }
   scale {
-    x: 2.0
-    y: 2.0
-  }
-  size {
-    x: 150.0
-    y: 50.0
-  }
-  type: TYPE_TEXT
-  text: "Fish Are Friends"
-  font: "Permanent Marker"
-  id: "achievement7"
-  inherit_alpha: true
-  visible: false
-}
-nodes {
-  scale {
     x: 0.3
-    y: 0.1
+    y: 0.3
   }
   type: TYPE_BOX
-  texture: "CranePageGUI/glow"
-  id: "fish7glow"
-  parent: "achievement7"
+  texture: "Achievements/achievement-7"
+  id: "achivement7"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
   visible: false
@@ -393,29 +266,12 @@ nodes {
     y: 125.0
   }
   scale {
-    x: 2.0
-    y: 2.0
-  }
-  size {
-    x: 150.0
-    y: 50.0
-  }
-  type: TYPE_TEXT
-  text: "You\'re Winner!"
-  font: "Permanent Marker"
-  id: "achievement8"
-  inherit_alpha: true
-  visible: false
-}
-nodes {
-  scale {
     x: 0.3
-    y: 0.1
+    y: 0.3
   }
   type: TYPE_BOX
-  texture: "CranePageGUI/glow"
-  id: "fish8glow"
-  parent: "achievement8"
+  texture: "Achievements/achievement-8"
+  id: "achivement8"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
   visible: false

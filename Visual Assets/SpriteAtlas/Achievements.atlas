@@ -1,28 +1,73 @@
 images {
-  image: "/Visual Assets/Raw Images/Fish-20260329T033519Z-1-001/Fish/Freshwater/freshwater-8.png"
-}
-images {
-  image: "/Visual Assets/Raw Images/GUI/tackle-box.png"
-}
-images {
-  image: "/Visual Assets/Raw Images/Fish-20260329T033519Z-1-001/Fish/Saltwater/saltwater-4.png"
-}
-images {
-  image: "/Visual Assets/Raw Images/Minigames/fish-match-card-front-1.png"
-}
-images {
-  image: "/Visual Assets/Raw Images/Fish-20260329T033519Z-1-001/Fish/Freshwater/freshwater-1.png"
-}
-images {
-  image: "/Visual Assets/Raw Images/GUI/freshwater-sign.png"
-}
-images {
-  image: "/Visual Assets/Raw Images/GUI/saltwater-sign.png"
-}
-images {
-  image: "/Visual Assets/Raw Images/Fish-20260329T033519Z-1-001/Fish/Saltwater/saltwater-2.png"
-}
-images {
   image: "/Visual Assets/Raw Images/GUI/unknown-fish.png"
+}
+images {
+  image: "/Visual Assets/Raw Images/Achievements/Achievements/achievement-1.png"
+}
+images {
+  image: "/Visual Assets/Raw Images/Achievements/Achievements/achievement-2.png"
+}
+images {
+  image: "/Visual Assets/Raw Images/Achievements/Achievements/achievement-3-1.png"
+}
+images {
+  image: "/Visual Assets/Raw Images/Achievements/Achievements/achievement-3-2.png"
+}
+images {
+  image: "/Visual Assets/Raw Images/Achievements/Achievements/achievement-3-3.png"
+}
+images {
+  image: "/Visual Assets/Raw Images/Achievements/Achievements/achievement-3-4.png"
+}
+images {
+  image: "/Visual Assets/Raw Images/Achievements/Achievements/achievement-3-5.png"
+}
+images {
+  image: "/Visual Assets/Raw Images/Achievements/Achievements/achievement-3-6.png"
+}
+images {
+  image: "/Visual Assets/Raw Images/Achievements/Achievements/achievement-3-7.png"
+}
+images {
+  image: "/Visual Assets/Raw Images/Achievements/Achievements/achievement-3-8.png"
+}
+images {
+  image: "/Visual Assets/Raw Images/Achievements/Achievements/achievement-3-9.png"
+}
+images {
+  image: "/Visual Assets/Raw Images/Achievements/Achievements/achievement-3-10.png"
+}
+images {
+  image: "/Visual Assets/Raw Images/Achievements/Achievements/achievement-3-11.png"
+}
+images {
+  image: "/Visual Assets/Raw Images/Achievements/Achievements/achievement-3-12.png"
+}
+images {
+  image: "/Visual Assets/Raw Images/Achievements/Achievements/achievement-3-13.png"
+}
+images {
+  image: "/Visual Assets/Raw Images/Achievements/Achievements/achievement-3-14.png"
+}
+images {
+  image: "/Visual Assets/Raw Images/Achievements/Achievements/achievement-3-15.png"
+}
+images {
+  image: "/Visual Assets/Raw Images/Achievements/Achievements/achievement-3-16.png"
+}
+images {
+  image: "/Visual Assets/Raw Images/Achievements/Achievements/achievement-4.png"
+}
+images {
+  image: "/Visual Assets/Raw Images/Achievements/Achievements/achievement-5.png"
+}
+images {
+  image: "/Visual Assets/Raw Images/Achievements/Achievements/achievement-6.png"
+}
+images {
+  image: "/Visual Assets/Raw Images/Achievements/Achievements/achievement-7.png"
+}
+images {
+  image: "/Visual Assets/Raw Images/Achievements/Achievements/achievement-8.png"
 }
 extrude_borders: 2

@@ -15,56 +15,56 @@ local function updateAchievements()
 	
 	if FreshwaterFound then
 		one = true
-		gui.set_visible(gui.get_node("achievement1"), true)
+		gui.set_visible(gui.get_node("achivement1"), true)
 	else
 		allAchievements = false
 	end
 	
 	if SaltwaterFound then
 		two = true
-		gui.set_visible(gui.get_node("achievement2"), true)
+		gui.set_visible(gui.get_node("achivement2"), true)
 	else
 		allAchievements = false
 	end
 	
 	if TotalFishPulled >= 50 then
 		three = true
-		gui.set_visible(gui.get_node("achievement3"), true)
+		gui.set_visible(gui.get_node("achivement3"), true)
 	else
 		allAchievements = false
 	end
 	
 	if MatchPlayed >= 10 then
 		four = true
-		gui.set_visible(gui.get_node("achievement4"), true)
+		gui.set_visible(gui.get_node("achivement4"), true)
 	else
 		allAchievements = false
 	end
 	
 	if FishTacToeLosses >= 10 then
 		five = true
-		gui.set_visible(gui.get_node("achievement5"), true)
+		gui.set_visible(gui.get_node("achivement5"), true)
 	else
 		allAchievements = false
 	end
 	
 	if FishTacToeStalemates >= 10 then 
 		six = true
-		gui.set_visible(gui.get_node("achievement6"), true)
+		gui.set_visible(gui.get_node("achivement6"), true)
 	else
 		allAchievements = false
 	end
 	
 	if petFish >= 100 then
 		seven = true
-		gui.set_visible(gui.get_node("achievement7"), true)
+		gui.set_visible(gui.get_node("achivement7"), true)
 	else
 		allAchievements = false
 	end
 	
 	if allAchievements then
 		eight = true
-		gui.set_visible(gui.get_node("achievement8"), true)
+		gui.set_visible(gui.get_node("achivement8"), true)
 	end
 	
 end
@@ -75,14 +75,14 @@ end
 
 function on_input(self, action_id, action)
 
-	local fish1 = gui.get_node("achievement1")
-	local fish2 = gui.get_node("achievement2")
-	local fish3 = gui.get_node("achievement3")
-	local fish4 = gui.get_node("achievement4")
-	local fish5 = gui.get_node("achievement5")
-	local fish6 = gui.get_node("achievement6")
-	local fish7 = gui.get_node("achievement7")
-	local fish8 = gui.get_node("achievement8")
+	local fish1 = gui.get_node("achivement1")
+	local fish2 = gui.get_node("achivement2")
+	local fish3 = gui.get_node("achivement3")
+	local fish4 = gui.get_node("achivement4")
+	local fish5 = gui.get_node("achivement5")
+	local fish6 = gui.get_node("achivement6")
+	local fish7 = gui.get_node("achivement7")
+	local fish8 = gui.get_node("achivement8")
 
 	local achievementHighlight = gui.get_node("AchievementHighlight")
 	local achievementHighlightText = gui.get_node("AchievementHighlightText")
