@@ -2,6 +2,12 @@ local gameStart = false
 
 local died = false
 
+local function reset()
+	go.set_position(vmath.vector3(1280,0,0),"Course1")
+	gameStart = false
+	died = false
+end
+
 function update(self, dt)
 
 	if gameStart then
@@ -23,6 +29,8 @@ function on_message(self, message_id, message, sender)
 		died = true
 	elseif message_id == hash("gameStart") then
 		gameStart = true
+	elseif message_id == hash("Reset") then
+		reset()
 	end
 
 end
