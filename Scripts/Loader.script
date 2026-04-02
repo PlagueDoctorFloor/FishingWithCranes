@@ -2,12 +2,14 @@ tokens = 3
 
 FreshwaterFish = {0,0,0,0,0,0,0,0}
 SaltwaterFish = {0,0,0,0,0,0,0,0}
+TankDecor = {0,0,0,0,0,0,0,0}
 
 
-FreshwaterFound = true
+FreshwaterFound = false
 SaltwaterFound = false
 
 TotalFishPulled = 0
+FiftiethFish = {0,0}
 
 -- Fish Tac Toe
 FishTacToeWins = 0
@@ -15,6 +17,8 @@ FishTacToeLosses = 0
 FishTacToeStalemates = 0
 
 MatchPlayed = 0
+
+coursesComplete = {0,0,0}
 
 petFish = 0
 
@@ -123,7 +127,6 @@ function on_message(self, message_id, message, sender)
 		msg.post("#Crane", "disable")
 		
 	elseif message_id == hash("load MiniGameSelect") then
-		print(sender.fragment)
 		msg.post("#MiniGameSelect", "enable")
 
 		if sender.fragment == hash("MainCraneScreen") then

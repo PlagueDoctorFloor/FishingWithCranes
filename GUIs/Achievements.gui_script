@@ -1,5 +1,5 @@
-local achievementText = {"Collect All\nFreshwater Fish","Collect All\nSaltwater Fish","Collect 50 Fish","Play Match\n10 Times","Lose in\nTic Tac Toe\n10 Times","Stalemate In\nTic Tac Toe\n10 Times","Pet Fish 100 Times","Get All Achievements"}
-local hintText = {"Freshwater\nFish","Saltwater\nFish","Have Lots\nof Fish","Match","Tic Tac Toe,\nBadly","Tic Tac Toe,\nStalemate","That Fish\nLooks Like\nIt Could\nUse A\nBelly Rub","Get All\nAchievements"}
+local achievementText = {"Collect All\nFreshwater Fish","Collect All\nSaltwater Fish","Collect 50 Fish","Play Match\n10 Times","Stalemate In\nTic Tac Toe\n10 Times","Win All 3\nFlapping Fish\nMaps","Pet Fish 100 Times","Get All Achievements"}
+local hintText = {"Freshwater\nFish","Saltwater\nFish","Have Lots\nof Fish","Match","Tic Tac Toe,\nStalemate","All Flapping\nFish Levels","That Fish\nLooks Like\nIt Could\nUse A\nBelly Rub","Get All\nAchievements"}
 
 local one = false
 local two = false
@@ -9,6 +9,8 @@ local five = false
 local six = false
 local seven = false
 local eight = false
+
+local fiftiethFish = ""
 
 local function updateAchievements()
 	local allAchievements = true
@@ -29,7 +31,80 @@ local function updateAchievements()
 	
 	if TotalFishPulled >= 50 then
 		three = true
-		gui.set_visible(gui.get_node("achivement3"), true)
+		if FiftiethFish[1] == 1 then
+			if FiftiethFish[2] == 1 then
+				gui.play_flipbook(gui.get_node("achivement3"), "achievement-3-9")
+				gui.set_visible(gui.get_node("achivement3"), true)
+				fiftiethFish = "achievement-3-9"
+			elseif FiftiethFish[2] == 7 then
+				gui.play_flipbook(gui.get_node("achivement3"), "achievement-3-10")
+				gui.set_visible(gui.get_node("achivement3"), true)
+				fiftiethFish = "achievement-3-10"
+			elseif FiftiethFish[2] == 2 then
+				gui.play_flipbook(gui.get_node("achivement3"), "achievement-3-11")
+				gui.set_visible(gui.get_node("achivement3"), true)
+				fiftiethFish = "achievement-3-11"
+			elseif FiftiethFish[2] == 3 then
+				gui.play_flipbook(gui.get_node("achivement3"), "achievement-3-12")
+				gui.set_visible(gui.get_node("achivement3"), true)
+				fiftiethFish = "achievement-3-12"
+			elseif FiftiethFish[2] == 8 then
+				gui.play_flipbook(gui.get_node("achivement3"), "achievement-3-13")
+				gui.set_visible(gui.get_node("achivement3"), true)
+				fiftiethFish = "achievement-3-13"
+			elseif FiftiethFish[2] == 4 then
+				gui.play_flipbook(gui.get_node("achivement3"), "achievement-3-14")
+				gui.set_visible(gui.get_node("achivement3"), true)
+				fiftiethFish = "achievement-3-14"
+			elseif FiftiethFish[2] == 6 then
+				gui.play_flipbook(gui.get_node("achivement3"), "achievement-3-15")
+				gui.set_visible(gui.get_node("achivement3"), true)
+				fiftiethFish = "achievement-3-15"
+			elseif FiftiethFish[2] == 5 then
+				gui.play_flipbook(gui.get_node("achivement3"), "achievement-3-16")
+				gui.set_visible(gui.get_node("achivement3"), true)
+				fiftiethFish = "achievement-3-16"
+			end
+		elseif FiftiethFish[1] == 2 then
+			-- Sturgeon 1
+			if FiftiethFish[2] == 4 then
+				gui.play_flipbook(gui.get_node("achivement3"), "achievement-3-1")
+				gui.set_visible(gui.get_node("achivement3"), true)
+				fiftiethFish = "achievement-3-1"
+			-- Mola Mola 2
+			elseif FiftiethFish[2] == 5 then
+				gui.play_flipbook(gui.get_node("achivement3"), "achievement-3-2")
+				gui.set_visible(gui.get_node("achivement3"), true)
+				fiftiethFish = "achievement-3-2"
+			-- Blenny 3
+			elseif FiftiethFish[2] == 6 then
+				gui.play_flipbook(gui.get_node("achivement3"), "achievement-3-3")
+				gui.set_visible(gui.get_node("achivement3"), true)
+				fiftiethFish = "achievement-3-3"
+			-- Frogfish 4
+			elseif FiftiethFish[2] == 7 then
+				gui.play_flipbook(gui.get_node("achivement3"), "achievement-3-4")
+				gui.set_visible(gui.get_node("achivement3"), true)
+				fiftiethFish = "achievement-3-4"
+			elseif FiftiethFish[2] == 8 then
+				gui.play_flipbook(gui.get_node("achivement3"), "achievement-3-5")
+				gui.set_visible(gui.get_node("achivement3"), true)
+				fiftiethFish = "achievement-3-5"
+			elseif FiftiethFish[2] == 3 then
+				gui.play_flipbook(gui.get_node("achivement3"), "achievement-3-6")
+				gui.set_visible(gui.get_node("achivement3"), true)
+				fiftiethFish = "achievement-3-6"
+			elseif FiftiethFish[2] == 1 then
+				gui.play_flipbook(gui.get_node("achivement3"), "achievement-3-7")
+				gui.set_visible(gui.get_node("achivement3"), true)
+				fiftiethFish = "achievement-3-7"
+			elseif FiftiethFish[2] == 2 then
+				gui.play_flipbook(gui.get_node("achivement3"), "achievement-3-8")
+				gui.set_visible(gui.get_node("achivement3"), true)
+				fiftiethFish = "achievement-3-8"
+			end
+		end
+			
 	else
 		allAchievements = false
 	end
@@ -41,14 +116,14 @@ local function updateAchievements()
 		allAchievements = false
 	end
 	
-	if FishTacToeLosses >= 10 then
+	if FishTacToeStalemates >= 10 then
 		five = true
 		gui.set_visible(gui.get_node("achivement5"), true)
 	else
 		allAchievements = false
 	end
 	
-	if FishTacToeStalemates >= 10 then 
+	if coursesComplete[1] == 1 and coursesComplete[2] == 1 and coursesComplete[3] == 1 then 
 		six = true
 		gui.set_visible(gui.get_node("achivement6"), true)
 	else
@@ -185,7 +260,7 @@ function on_input(self, action_id, action)
 		elseif gui.pick_node(fish1, action.x, action.y) then
 			if one then
 				gui.set_visible(achievementHighlight, true)
-				gui.play_flipbook(achievementHighlight, "freshwater-sign")
+				gui.play_flipbook(achievementHighlight, "achievement-1")
 				gui.set_visible(achievementHighlightText, true)
 				gui.set_text(achievementHighlightText, achievementText[1])
 			else
@@ -197,7 +272,7 @@ function on_input(self, action_id, action)
 		elseif gui.pick_node(fish2, action.x, action.y) then
 			if two then
 				gui.set_visible(achievementHighlight, true)
-				gui.play_flipbook(achievementHighlight, "saltwater-sign")
+				gui.play_flipbook(achievementHighlight, "achievement-2")
 				gui.set_visible(achievementHighlightText, true)
 				gui.set_text(achievementHighlightText, achievementText[2])
 			else
@@ -209,7 +284,7 @@ function on_input(self, action_id, action)
 		elseif gui.pick_node(fish3, action.x, action.y) then
 			if three then
 				gui.set_visible(achievementHighlight, true)
-				gui.play_flipbook(achievementHighlight, "freshwater-8")
+				gui.play_flipbook(achievementHighlight, fiftiethFish)
 				gui.set_visible(achievementHighlightText, true)
 				gui.set_text(achievementHighlightText, achievementText[3])
 			else
@@ -221,7 +296,7 @@ function on_input(self, action_id, action)
 		elseif gui.pick_node(fish4, action.x, action.y) then
 			if four then
 				gui.set_visible(achievementHighlight, true)
-				gui.play_flipbook(achievementHighlight, "freshwater-1")
+				gui.play_flipbook(achievementHighlight, "achievement-4")
 				gui.set_visible(achievementHighlightText, true)
 				gui.set_text(achievementHighlightText, achievementText[4])
 			else
@@ -233,7 +308,7 @@ function on_input(self, action_id, action)
 		elseif gui.pick_node(fish5, action.x, action.y) then
 			if five then
 				gui.set_visible(achievementHighlight, true)
-				gui.play_flipbook(achievementHighlight, "saltwater-4")
+				gui.play_flipbook(achievementHighlight, "achievement-5")
 				gui.set_visible(achievementHighlightText, true)
 				gui.set_text(achievementHighlightText, achievementText[5])
 			else
@@ -245,7 +320,7 @@ function on_input(self, action_id, action)
 		elseif gui.pick_node(fish6, action.x, action.y) then
 			if six then
 				gui.set_visible(achievementHighlight, true)
-				gui.play_flipbook(achievementHighlight, "fish-match-card-front-1")
+				gui.play_flipbook(achievementHighlight, "achievement-6")
 				gui.set_visible(achievementHighlightText, true)
 				gui.set_text(achievementHighlightText, achievementText[6])
 			else
@@ -257,7 +332,7 @@ function on_input(self, action_id, action)
 		elseif gui.pick_node(fish7, action.x, action.y) then
 			if seven then
 				gui.set_visible(achievementHighlight, true)
-				gui.play_flipbook(achievementHighlight, "saltwater-2")
+				gui.play_flipbook(achievementHighlight, "achievement-7")
 				gui.set_visible(achievementHighlightText, true)
 				gui.set_text(achievementHighlightText, achievementText[7])
 			else
@@ -269,7 +344,7 @@ function on_input(self, action_id, action)
 		elseif gui.pick_node(fish8, action.x, action.y) then
 			if eight then
 				gui.set_visible(achievementHighlight, true)
-				gui.play_flipbook(achievementHighlight, "tackle-box")
+				gui.play_flipbook(achievementHighlight, "achievement-8")
 				gui.set_visible(achievementHighlightText, true)
 				gui.set_text(achievementHighlightText, achievementText[8])
 			else

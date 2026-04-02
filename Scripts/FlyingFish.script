@@ -10,6 +10,8 @@ local dead = false
 
 local courseID = 0
 
+local currentCourse = 0
+
 local function reset()
 	go.set_position(vmath.vector3(640,360,0),"FlyingFish")
 	gameStart = false
@@ -76,11 +78,13 @@ function on_message(self, message_id, message, sender)
 			tokens = tokens+1
 			msg.post("/FlappyFishGUI","Won")
 			gameWin = true
+			coursesComplete[currentCourse] = 1
 		end
 	elseif message_id == hash("Reset") then
 		reset()
 	elseif message_id == hash("Course") then
 		courseID = message.id
+		currentCourse = message.course
 	end
 	
 end

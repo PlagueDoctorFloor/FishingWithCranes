@@ -60,6 +60,15 @@ local function fishPull()
 		gui.play_flipbook(CraneAnimation, "HookGrabGold", spawnFish)
 	end
 
+	if TotalFishPulled == 50 then
+		FiftiethFish[1] = setSelected
+		FiftiethFish[2] = selectedFish
+
+		for i = 1, 2, 1 do
+			print(FiftiethFish[i])
+		end
+	end
+
 end
 
 local function craneSetup()

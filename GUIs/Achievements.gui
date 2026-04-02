@@ -165,6 +165,19 @@ nodes {
   visible: false
 }
 nodes {
+  scale {
+    x: 2.0
+    y: 0.75
+  }
+  type: TYPE_BOX
+  texture: "CranePageGUI/glow"
+  id: "fish1glow"
+  parent: "achivement1"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+  visible: false
+}
+nodes {
   position {
     x: 400.0
     y: 385.0
@@ -176,6 +189,19 @@ nodes {
   type: TYPE_BOX
   texture: "Achievements/achievement-2"
   id: "achivement2"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+  visible: false
+}
+nodes {
+  scale {
+    x: 2.0
+    y: 0.75
+  }
+  type: TYPE_BOX
+  texture: "CranePageGUI/glow"
+  id: "fish2glow"
+  parent: "achivement2"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
   visible: false
@@ -197,6 +223,19 @@ nodes {
   visible: false
 }
 nodes {
+  scale {
+    x: 2.0
+    y: 0.75
+  }
+  type: TYPE_BOX
+  texture: "CranePageGUI/glow"
+  id: "fish3glow"
+  parent: "achivement3"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+  visible: false
+}
+nodes {
   position {
     x: 400.0
     y: 125.0
@@ -208,6 +247,19 @@ nodes {
   type: TYPE_BOX
   texture: "Achievements/achievement-4"
   id: "achivement4"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+  visible: false
+}
+nodes {
+  scale {
+    x: 2.0
+    y: 0.75
+  }
+  type: TYPE_BOX
+  texture: "CranePageGUI/glow"
+  id: "fish4glow"
+  parent: "achivement4"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
   visible: false
@@ -229,6 +281,19 @@ nodes {
   visible: false
 }
 nodes {
+  scale {
+    x: 2.0
+    y: 0.75
+  }
+  type: TYPE_BOX
+  texture: "CranePageGUI/glow"
+  id: "fish5glow"
+  parent: "achivement5"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+  visible: false
+}
+nodes {
   position {
     x: 750.0
     y: 385.0
@@ -240,6 +305,19 @@ nodes {
   type: TYPE_BOX
   texture: "Achievements/achievement-6"
   id: "achivement6"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+  visible: false
+}
+nodes {
+  scale {
+    x: 2.0
+    y: 0.75
+  }
+  type: TYPE_BOX
+  texture: "CranePageGUI/glow"
+  id: "fish6glow"
+  parent: "achivement6"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
   visible: false
@@ -261,6 +339,19 @@ nodes {
   visible: false
 }
 nodes {
+  scale {
+    x: 2.0
+    y: 0.75
+  }
+  type: TYPE_BOX
+  texture: "CranePageGUI/glow"
+  id: "fish7glow"
+  parent: "achivement7"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+  visible: false
+}
+nodes {
   position {
     x: 750.0
     y: 125.0
@@ -272,6 +363,19 @@ nodes {
   type: TYPE_BOX
   texture: "Achievements/achievement-8"
   id: "achivement8"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+  visible: false
+}
+nodes {
+  scale {
+    x: 2.0
+    y: 0.75
+  }
+  type: TYPE_BOX
+  texture: "CranePageGUI/glow"
+  id: "fish8glow"
+  parent: "achivement8"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
   visible: false
