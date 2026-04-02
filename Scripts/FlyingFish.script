@@ -8,6 +8,8 @@ local dy = 200
 
 local dead = false
 
+local courseID = 0
+
 local function reset()
 	go.set_position(vmath.vector3(640,360,0),"FlyingFish")
 	gameStart = false
@@ -52,7 +54,7 @@ function on_input(self, action_id, action)
 
 			if not gameStart then
 				gameStart = true
-				msg.post("/FlappyFishCourse1/Course1","gameStart")
+				msg.post(courseID,"gameStart")
 			end
 			dy = -300
 			sprite.play_flipbook("#sprite","FlyingFish")
@@ -66,17 +68,19 @@ function on_message(self, message_id, message, sender)
 	if message_id == hash("trigger_response") and message.enter then
 		if message.other_group == hash("Coral") then
 			dead = true
-			msg.post("/FlappyFishCourse1/Course1","died")
+			msg.post(courseID,"died")
 			msg.post("/FlappyFishGUI","Lost")
 		elseif message.other_group == hash("WinTrigger") then
 			gameStart = false
-			msg.post("/FlappyFishCourse1/Course1","died")
+			msg.post(courseID,"died")
 			tokens = tokens+1
 			msg.post("/FlappyFishGUI","Won")
 			gameWin = true
 		end
 	elseif message_id == hash("Reset") then
 		reset()
+	elseif message_id == hash("Course") then
+		courseID = message.id
 	end
 	
 end

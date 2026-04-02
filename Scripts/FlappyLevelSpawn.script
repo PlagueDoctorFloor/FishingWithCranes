@@ -1,42 +1,30 @@
-local gameStart = false
+local courseID = 0
 
-local died = false
-
-local selfID = 0
-
-function update(self, dt)
-
-	if gameStart then
-		
-		if not died then
-			local pos = go.get_position(selfID)
-			pos.x = pos.x - 3
-			pos.y = 0
-			go.set_position(pos,selfID)
-		end
-
-	end
-
+function init(self)
+	courseID = factory.create("#Course1",vmath.vector3(1280,0,0))
+	msg.post("/FlyingFish","Course",{id = courseID})
+	msg.post("/FlappyFishGUI","Course",{id = courseID})
 end
 
 function on_message(self, message_id, message, sender)
 
-	if message_id == hash("died") then
-		died = true
-	elseif message_id == hash("gameStart") then
-		gameStart = true
+	if message_id == hash("Reset") then
+		go.delete(courseID)
+		courseID = factory.create("#Course1",vmath.vector3(1280,0,0))
+		msg.post("/FlyingFish","Course",{id = courseID})
+		msg.post("/FlappyFishGUI","Course",{id = courseID})
 	end
-
 end
 
-function init(self)
-	selfID = go.get_id()
-	gameStart = false
-	died = false
-end
 
 function final(self)
 	-- Add finalization code here
+	-- Learn more: https://defold.com/manuals/script/
+	-- Remove this function if not needed
+end
+
+function update(self, dt)
+	-- Add update code here
 	-- Learn more: https://defold.com/manuals/script/
 	-- Remove this function if not needed
 end

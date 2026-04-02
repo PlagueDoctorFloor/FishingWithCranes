@@ -3,13 +3,6 @@ instances {
   id: "FlappyFishGUI"
   prototype: "/Objects/FlappyFishGUI.go"
 }
-collection_instances {
-  id: "FlappyFishCourse1"
-  collection: "/Collections/FlappyFishCourses/FlappyFishCourse1.collection"
-  position {
-    x: 1280.0
-  }
-}
 scale_along_z: 0
 embedded_instances {
   id: "Background"
@@ -171,4 +164,18 @@ embedded_instances {
     x: 0.25
     y: 0.25
   }
+}
+embedded_instances {
+  id: "LevelSpawn"
+  data: "components {\n"
+  "  id: \"FlappyLevelSpawn\"\n"
+  "  component: \"/Scripts/FlappyLevelSpawn.script\"\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"Course1\"\n"
+  "  type: \"factory\"\n"
+  "  data: \"prototype: \\\"/Objects/FlappyCourse1.go\\\"\\n"
+  "\"\n"
+  "}\n"
+  ""
 }

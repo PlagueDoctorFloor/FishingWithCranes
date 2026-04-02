@@ -2,6 +2,8 @@ local gameStart = false
 
 local gameEnd = false
 
+local courseID = 0
+
 local function reset()
 
 	gameStart = false
@@ -35,7 +37,7 @@ function on_input(self, action_id, action)
 			if gui.pick_node(playAgain, action.x, action.y) then
 				reset()
 				msg.post("/FlyingFish","Reset")
-				msg.post("/FlappyFishCourse1/Course1","Reset")
+				msg.post("/LevelSpawn","Reset")
 			end
 		end
 
@@ -61,6 +63,8 @@ function on_message(self, message_id, message, sender)
 		gui.set_text(gui.get_node("GameEndText"), "You Lost")
 		gui.set_visible(gui.get_node("playAgain"), true)
 		gui.set_visible(gui.get_node("playAgainText"), true)
+	elseif message_id == hash("Course") then
+		courseID = message.id
 	end
 end
 
