@@ -60,6 +60,12 @@ embedded_instances {
   "  data: \"collection: \\\"/Collections/DetailedFish.collection\\\"\\n"
   "\"\n"
   "}\n"
+  "embedded_components {\n"
+  "  id: \"FlappyFish\"\n"
+  "  type: \"collectionproxy\"\n"
+  "  data: \"collection: \\\"/Collections/FlappyFish.collection\\\"\\n"
+  "\"\n"
+  "}\n"
   ""
 }
 embedded_instances {

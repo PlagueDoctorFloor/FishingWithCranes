@@ -1,3 +1,9 @@
+local gameStart = false
+
+local gameWin = false
+
+local gameLost = false
+
 local dy = 200
 
 local dead = false
@@ -16,6 +22,8 @@ end
 
 function update(self, dt)
 
+	if gameStart then
+
 		local pos = go.get_position("FlyingFish")
 	
 		pos.y = pos.y - (dy * dt)
@@ -23,6 +31,8 @@ function update(self, dt)
 		dy = clamp(dy,-1000,500)
 	
 		go.set_position(pos, "FlyingFish")
+
+	end
 		
 end
 
@@ -30,6 +40,11 @@ function on_input(self, action_id, action)
 	if not dead then
 		
 		if action_id == hash("LeftClick") and action.pressed then
+
+			if not gameStart then
+				gameStart = true
+				msg.post("/FlappyFishCourse1/Course1","gameStart")
+			end
 			dy = -300
 			sprite.play_flipbook("#sprite","FlyingFish")
 		end
@@ -40,9 +55,17 @@ end
 function on_message(self, message_id, message, sender)
 	
 	if message_id == hash("trigger_response") and message.enter then
-		print(message.other_id)
-		dead = true
-		msg.post("/FlappyFishCourse1/Course1","died")
+		if message.other_group == hash("Coral") then
+			dead = true
+			msg.post("/FlappyFishCourse1/Course1","died")
+			msg.post("/FlappyFishGUI","Lost")
+		elseif message.other_group == hash("WinTrigger") then
+			gameStart = false
+			msg.post("/FlappyFishCourse1/Course1","died")
+			tokens = tokens+1
+			msg.post("/FlappyFishGUI","Won")
+			gameWin = true
+		end
 	end
 	
 end

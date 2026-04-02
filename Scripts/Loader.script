@@ -41,17 +41,18 @@ end
 function init(self)
 	msg.post(".","acquire_input_focus")
 
-	msg.post("#Crane","load")
-	msg.post("#Collection","load")
-	msg.post("#Achievements","load")
+	--msg.post("#Crane","load")
+	--msg.post("#Collection","load")
+	--msg.post("#Achievements","load")
 	msg.post("#MiniGameSelect","load")
-	msg.post("#FishTacToe", "load")
-	msg.post("#FishMatch","load")
-	msg.post("#FreshwaterCollection","load")
-	msg.post("#SaltwaterCollection","load")
-	msg.post("#DetailedFish","load")
+	--msg.post("#FishTacToe", "load")
+	--msg.post("#FishMatch","load")
+	--msg.post("#FreshwaterCollection","load")
+	--msg.post("#SaltwaterCollection","load")
+	--msg.post("#DetailedFish","load")
+	msg.post("#FlappyFish", "load")
 
-	sound.play("go#BackgroundSong")
+	--sound.play("go#BackgroundSong")
 end
 
 function on_message(self, message_id, message, sender)
@@ -66,6 +67,10 @@ function on_message(self, message_id, message, sender)
 
 		-- Tells the sender (proxy which was loaded) to initialize (execute init() code)
 		msg.post(sender, "init")
+
+		if sender.fragment == hash("FlappyFish") then
+			msg.post(sender, "enable")
+		end
 
 		if sender.fragment == hash("Crane") then
 			msg.post(sender, "enable")

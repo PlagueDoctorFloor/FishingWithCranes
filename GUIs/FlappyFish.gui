@@ -1,0 +1,188 @@
+script: "/GUIs/FlappyFish.gui_script"
+fonts {
+  name: "Permanent Marker"
+  font: "/Visual Assets/Fonts/Permanent Marker.font"
+}
+textures {
+  name: "FlappyFish"
+  texture: "/Visual Assets/SpriteAtlas/FlappyFish.atlas"
+}
+nodes {
+  position {
+    x: 100.0
+    y: 651.0
+  }
+  scale {
+    x: 0.3
+    y: 0.2
+  }
+  type: TYPE_BOX
+  texture: "FlappyFish/label"
+  id: "TokenLabel"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 60.0
+    y: 651.0
+  }
+  scale {
+    x: 0.5
+    y: 0.5
+  }
+  type: TYPE_BOX
+  texture: "FlappyFish/token"
+  id: "TokenSymbol"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 100.0
+    y: 652.0
+  }
+  scale {
+    x: 2.0
+    y: 2.0
+  }
+  size {
+    x: 50.0
+    y: 50.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "0\n"
+  ""
+  font: "Permanent Marker"
+  id: "TokenText"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 100.0
+    y: 100.0
+  }
+  scale {
+    x: 0.25
+    y: 0.25
+  }
+  type: TYPE_BOX
+  texture: "FlappyFish/x-out-button"
+  id: "Exit"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 640.0
+    y: 550.0
+  }
+  scale {
+    x: 3.0
+    y: 3.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "Click Anywhere To Start"
+  font: "Permanent Marker"
+  id: "GameStartText"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 1100.0
+    y: 350.0
+  }
+  scale {
+    x: 0.5
+    y: 0.25
+  }
+  type: TYPE_BOX
+  texture: "FlappyFish/label"
+  id: "playAgain"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+  visible: false
+}
+nodes {
+  position {
+    x: 1100.0
+    y: 350.0
+  }
+  scale {
+    x: 2.0
+    y: 2.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "Play Again?"
+  font: "Permanent Marker"
+  id: "playAgainText"
+  inherit_alpha: true
+  visible: false
+}
+nodes {
+  position {
+    x: 1100.0
+    y: 450.0
+  }
+  scale {
+    x: 0.5
+    y: 0.25
+  }
+  type: TYPE_BOX
+  texture: "FlappyFish/label"
+  id: "GameEnd"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+  visible: false
+}
+nodes {
+  position {
+    x: 1100.0
+    y: 450.0
+  }
+  scale {
+    x: 2.0
+    y: 2.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "You Win!\n"
+  ""
+  font: "Permanent Marker"
+  id: "GameEndText"
+  inherit_alpha: true
+  visible: false
+}
+material: "/builtins/materials/gui.material"
+adjust_reference: ADJUST_REFERENCE_PARENT

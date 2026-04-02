@@ -1,12 +1,18 @@
+local gameStart = false
+
 local died = false
 
 function update(self, dt)
 
-	if not died then
-		local pos = go.get_position("Course1")
-		pos.x = pos.x - 3
-		pos.y = 0
-		go.set_position(pos,"Course1")
+	if gameStart then
+		
+		if not died then
+			local pos = go.get_position("Course1")
+			pos.x = pos.x - 3
+			pos.y = 0
+			go.set_position(pos,"Course1")
+		end
+
 	end
 
 end
@@ -15,6 +21,8 @@ function on_message(self, message_id, message, sender)
 
 	if message_id == hash("died") then
 		died = true
+	elseif message_id == hash("gameStart") then
+		gameStart = true
 	end
 
 end
