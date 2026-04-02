@@ -117,4 +117,60 @@ animations {
   }
   playback: PLAYBACK_LOOP_FORWARD
 }
+animations {
+  id: "decor-1"
+  images {
+    image: "/Visual Assets/Raw Images/Decorations/Decorations/tacklebox-plant-small.png"
+  }
+  fps: 1
+}
+animations {
+  id: "decor-2"
+  images {
+    image: "/Visual Assets/Raw Images/Decorations/Decorations/tacklebox-plant-medium.png"
+  }
+  fps: 1
+}
+animations {
+  id: "decor-3"
+  images {
+    image: "/Visual Assets/Raw Images/Decorations/Decorations/tacklebox-plant-large.png"
+  }
+  fps: 1
+}
+animations {
+  id: "decor-4"
+  images {
+    image: "/Visual Assets/Raw Images/Decorations/Decorations/tacklebox-stones.png"
+  }
+  fps: 1
+}
+animations {
+  id: "decor-5"
+  images {
+    image: "/Visual Assets/Raw Images/Decorations/Decorations/tacklebox-cave.png"
+  }
+  fps: 1
+}
+animations {
+  id: "decor-6"
+  images {
+    image: "/Visual Assets/Raw Images/Decorations/Decorations/tacklebox-gravel.png"
+  }
+  fps: 1
+}
+animations {
+  id: "decor-7"
+  images {
+    image: "/Visual Assets/Raw Images/Decorations/Decorations/tacklebox-castle.png"
+  }
+  fps: 1
+}
+animations {
+  id: "decor-8"
+  images {
+    image: "/Visual Assets/Raw Images/Decorations/Decorations/tacklebox-diver.png"
+  }
+  fps: 1
+}
 extrude_borders: 2

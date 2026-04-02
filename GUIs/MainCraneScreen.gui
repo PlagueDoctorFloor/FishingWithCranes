@@ -303,7 +303,7 @@ nodes {
 }
 nodes {
   position {
-    x: 640.0
+    x: 550.0
     y: 450.0
   }
   scale {
@@ -318,8 +318,8 @@ nodes {
 }
 nodes {
   position {
-    x: 640.0
-    y: 150.0
+    x: 850.0
+    y: 450.0
   }
   scale {
     x: 0.55
@@ -430,6 +430,21 @@ nodes {
   id: "NoTokensText"
   inherit_alpha: true
   visible: false
+}
+nodes {
+  position {
+    x: 640.0
+    y: 150.0
+  }
+  scale {
+    x: 0.55
+    y: 0.55
+  }
+  type: TYPE_BOX
+  texture: "CranePageGUI/tacklebox-sign"
+  id: "DecorSelect"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
 }
 material: "/builtins/materials/gui.material"
 adjust_reference: ADJUST_REFERENCE_PARENT

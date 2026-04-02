@@ -58,6 +58,9 @@ images {
 images {
   image: "/Visual Assets/Background/background.png"
 }
+images {
+  image: "/Visual Assets/Raw Images/Decorations/tacklebox-sign.png"
+}
 animations {
   id: "NewFishPull"
   images {
