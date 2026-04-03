@@ -1,5 +1,6 @@
 local stickerTable = {}
 local stickerNumber = 1
+local sticker_grabbed = false
 
 function init(self)
 	print("triggered")
@@ -42,14 +43,19 @@ function on_input(self, action_id, action)
 
 		-- check if the mouse button was pressed
 		if action.pressed then
-			--print("start")
+			print("start")
 			for i=1,#stickerTable do
-				--print(i)
-				local chosenSticker = self.sticker
-				if gui.pick_node(self.sticker, action.x, action.y) and self.number == i then
-					-- keep track of the box as being dragged
-					self.dragged_box = self.sticker
-					break
+				if not sticker_grabbed then
+					print(i)
+					local chosenSticker = self.sticker
+					if gui.pick_node(chosenSticker, action.x, action.y) then
+						if self.number == i then
+							-- keep track of the box as being dragged
+							self.dragged_box = chosenSticker
+							sticker_grabbed = true
+							return
+						end
+					end
 				end
 			end
 			
@@ -57,6 +63,7 @@ function on_input(self, action_id, action)
 			-- clear the variable which keeps track of which box is dragged
 		elseif action.released then
 			self.dragged_box = nil
+			sticker_grabbed = false
 		end
 	end
 end
