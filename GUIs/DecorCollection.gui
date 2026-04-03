@@ -1,4 +1,4 @@
-script: "/GUIs/DecorCollection.gui_script"
+script: "/GUIs/SaltwaterCollection.gui_script"
 fonts {
   name: "Permanent Marker"
   font: "/Visual Assets/Fonts/Permanent Marker.font"

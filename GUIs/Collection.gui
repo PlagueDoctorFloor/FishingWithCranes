@@ -31,11 +31,11 @@ nodes {
 }
 nodes {
   position {
-    x: 960.0
+    x: 725.0
     y: 360.0
   }
   scale {
-    x: 0.5
+    x: 0.4
     y: 0.75
   }
   type: TYPE_BOX
@@ -46,11 +46,11 @@ nodes {
 }
 nodes {
   position {
-    x: 450.0
+    x: 350.0
     y: 360.0
   }
   scale {
-    x: 0.5
+    x: 0.4
     y: 0.75
   }
   type: TYPE_BOX
@@ -61,8 +61,12 @@ nodes {
 }
 nodes {
   position {
-    x: 450.0
+    x: 350.0
     y: 360.0
+  }
+  scale {
+    x: 0.75
+    y: 0.75
   }
   type: TYPE_BOX
   texture: "CranePageGUI/glow"
@@ -73,8 +77,12 @@ nodes {
 }
 nodes {
   position {
-    x: 960.0
+    x: 725.0
     y: 360.0
+  }
+  scale {
+    x: 0.75
+    y: 0.75
   }
   type: TYPE_BOX
   texture: "CranePageGUI/glow"
@@ -85,12 +93,12 @@ nodes {
 }
 nodes {
   position {
-    x: 450.0
+    x: 350.0
     y: 360.0
   }
   scale {
-    x: 0.75
-    y: 0.75
+    x: 0.5
+    y: 0.5
   }
   type: TYPE_BOX
   texture: "CranePageGUI/freshwater-sign"
@@ -100,7 +108,37 @@ nodes {
 }
 nodes {
   position {
-    x: 960.0
+    x: 725.0
+    y: 360.0
+  }
+  scale {
+    x: 0.5
+    y: 0.5
+  }
+  type: TYPE_BOX
+  texture: "CranePageGUI/saltwater-sign"
+  id: "SaltwaterChoice"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 1100.0
+    y: 360.0
+  }
+  scale {
+    x: 0.4
+    y: 0.75
+  }
+  type: TYPE_BOX
+  texture: "CranePageGUI/cabinet-small"
+  id: "DecorShelf"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 1100.0
     y: 360.0
   }
   scale {
@@ -108,8 +146,24 @@ nodes {
     y: 0.75
   }
   type: TYPE_BOX
-  texture: "CranePageGUI/saltwater-sign"
-  id: "SaltwaterChoice"
+  texture: "CranePageGUI/glow"
+  id: "DecorGlow"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+  visible: false
+}
+nodes {
+  position {
+    x: 1100.0
+    y: 360.0
+  }
+  scale {
+    x: 0.5
+    y: 0.5
+  }
+  type: TYPE_BOX
+  texture: "CranePageGUI/tacklebox-sign"
+  id: "DecorChoice"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
 }

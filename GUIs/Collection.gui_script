@@ -7,13 +7,20 @@ function on_input(self, action_id, action)
 	if action_id == nil then
 		local freshSelect = gui.get_node("FreshwaterChoice")
 		local saltSelect = gui.get_node("SaltwaterChoice")
+		local decorSelect = gui.get_node("DecorChoice")
+		
 		if gui.pick_node(freshSelect, action.x, action.y) then
 			gui.set_visible(gui.get_node("FreshGlow"), true)
+			
 		elseif gui.pick_node(saltSelect, action.x, action.y) then
 			gui.set_visible(gui.get_node("SaltGlow"), true)
+			
+		elseif gui.pick_node(decorSelect, action.x, action.y) then
+			gui.set_visible(gui.get_node("DecorGlow"), true)
 		else
 			gui.set_visible(gui.get_node("FreshGlow"), false)
 			gui.set_visible(gui.get_node("SaltGlow"), false)
+			gui.set_visible(gui.get_node("DecorGlow"), false)
 		end
 	end
 	
@@ -22,6 +29,7 @@ function on_input(self, action_id, action)
 		local back = gui.get_node("ReturnArrow")
 		local freshSelect = gui.get_node("FreshwaterChoice")
 		local saltSelect = gui.get_node("SaltwaterChoice")
+		local decorSelect = gui.get_node("DecorChoice")
 
 		if gui.pick_node(back, action.x, action.y) then
 
@@ -32,6 +40,10 @@ function on_input(self, action_id, action)
 			msg.post("Loader:/Loader", "load FreshCollection")
 
 		elseif gui.pick_node(saltSelect, action.x, action.y) then
+
+			msg.post("Loader:/Loader", "load SaltCollection")
+
+		elseif gui.pick_node(decorSelect, action.x, action.y) then
 
 			msg.post("Loader:/Loader", "load SaltCollection")
 
