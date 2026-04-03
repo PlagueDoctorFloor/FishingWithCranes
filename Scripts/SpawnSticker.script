@@ -1,8 +1,20 @@
+
+local spawnedStickers = {}
+
 function on_message(self, message_id, message, sender)
 
 	if message_id == hash("spawnSticker") then
 		local stickerID = factory.create("#StickerSpawner")
 		msg.post(stickerID,"setUp", {set = message.set, item = message.item})
+		table.insert(spawnedStickers,stickerID)
+	elseif message_id == hash("Delete") then
+		for i=1,#spawnedStickers do
+			msg.post(spawnedStickers[i],"Delete")
+		end
+	elseif message_id == hash("DoneDelete") then
+		for i=1,#spawnedStickers do
+			msg.post(spawnedStickers[i],"DoneDelete")
+		end
 	end
 	
 end

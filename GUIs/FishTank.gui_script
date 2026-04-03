@@ -6,6 +6,8 @@ local decorTime = false
 
 local setSelect = 1
 
+local deleteTime = false
+
 local function displayStickers()
 
 	local fish1 = gui.get_node("fish1")
@@ -63,27 +65,38 @@ function on_input(self, action_id, action)
 
 	if not screenshotMode then
 
+		if action_id == hash("space") and action.pressed then
+			screenshotMode = true
+
+			for i=1,#currentlyVisible,1 do
+				gui.set_visible(currentlyVisible[i],false)
+			end
+		end
+
 		if action_id == hash("LeftClick") and action.pressed then
 
-			local screenshot = gui.get_node("ScreenshotModeButton")
 			local decor = gui.get_node("DecorButton")
+			local delete = gui.get_node("DeleteButton")
 
-			if gui.pick_node(screenshot, action.x, action.y) then
-				screenshotMode = true
-
-				for i=1,#currentlyVisible,1 do
-					gui.set_visible(currentlyVisible[i],false)
+			if gui.pick_node(delete, action.x, action.y) then
+				if deleteTime then
+					deleteTime = false
+					msg.post("/Spawner","DoneDelete")
+				else
+					deleteTime = true
+					msg.post("/Spawner","Delete")
 				end
 			end
 
 			if not decorTime then	
+				
 				if gui.pick_node(decor, action.x, action.y) then
 				
 					for i=1,#currentlyVisible,1 do
 						gui.set_visible(currentlyVisible[i],false)
 					end
 				
-					currentlyVisible = {gui.get_node("ScreenshotModeButton"),gui.get_node("ScreenshotModeText"),gui.get_node("DecorSelect"),gui.get_node("X"),gui.get_node("fish1"),gui.get_node("fish2"),gui.get_node("fish3"),gui.get_node("fish4"),gui.get_node("fish5"),gui.get_node("fish6"),gui.get_node("fish7"),gui.get_node("fish8"),gui.get_node("RightArrow"),gui.get_node("SetName"),gui.get_node("SetNameText")}
+					currentlyVisible = {gui.get_node("ScreenshotModeButton"),gui.get_node("ScreenshotModeText"),gui.get_node("ReturnArrow"),gui.get_node("DecorSelect"),gui.get_node("X"),gui.get_node("fish1"),gui.get_node("fish2"),gui.get_node("fish3"),gui.get_node("fish4"),gui.get_node("fish5"),gui.get_node("fish6"),gui.get_node("fish7"),gui.get_node("fish8"),gui.get_node("RightArrow"),gui.get_node("SetName"),gui.get_node("SetNameText")}
 
 					for i=1,#currentlyVisible,1 do
 						gui.set_visible(currentlyVisible[i],true)
@@ -142,7 +155,7 @@ function on_input(self, action_id, action)
 
 	elseif screenshotMode then
 
-		if action_id == hash("LeftClick") and action.pressed then
+		if action_id == hash("space") and action.pressed then
 		
 			screenshotMode = false
 			for i=1,#currentlyVisible,1 do
