@@ -120,56 +120,56 @@ animations {
 animations {
   id: "decor-1"
   images {
-    image: "/Visual Assets/Raw Images/Decorations/Decorations/tacklebox-plant-small.png"
+    image: "/Visual Assets/Raw Images/Decorations/Decorations/decor-1.png"
   }
   fps: 1
 }
 animations {
   id: "decor-2"
   images {
-    image: "/Visual Assets/Raw Images/Decorations/Decorations/tacklebox-plant-medium.png"
+    image: "/Visual Assets/Raw Images/Decorations/Decorations/decor-2.png"
   }
   fps: 1
 }
 animations {
   id: "decor-3"
   images {
-    image: "/Visual Assets/Raw Images/Decorations/Decorations/tacklebox-plant-large.png"
+    image: "/Visual Assets/Raw Images/Decorations/Decorations/decor-3.png"
   }
   fps: 1
 }
 animations {
   id: "decor-4"
   images {
-    image: "/Visual Assets/Raw Images/Decorations/Decorations/tacklebox-stones.png"
+    image: "/Visual Assets/Raw Images/Decorations/Decorations/decor-4.png"
   }
   fps: 1
 }
 animations {
   id: "decor-5"
   images {
-    image: "/Visual Assets/Raw Images/Decorations/Decorations/tacklebox-cave.png"
+    image: "/Visual Assets/Raw Images/Decorations/Decorations/decor-5.png"
   }
   fps: 1
 }
 animations {
   id: "decor-6"
   images {
-    image: "/Visual Assets/Raw Images/Decorations/Decorations/tacklebox-gravel.png"
+    image: "/Visual Assets/Raw Images/Decorations/Decorations/decor-6.png"
   }
   fps: 1
 }
 animations {
   id: "decor-7"
   images {
-    image: "/Visual Assets/Raw Images/Decorations/Decorations/tacklebox-castle.png"
+    image: "/Visual Assets/Raw Images/Decorations/Decorations/decor-7.png"
   }
   fps: 1
 }
 animations {
   id: "decor-8"
   images {
-    image: "/Visual Assets/Raw Images/Decorations/Decorations/tacklebox-diver.png"
+    image: "/Visual Assets/Raw Images/Decorations/Decorations/decor-8.png"
   }
   fps: 1
 }

@@ -66,6 +66,12 @@ embedded_instances {
   "  data: \"collection: \\\"/Collections/FlappyFish.collection\\\"\\n"
   "\"\n"
   "}\n"
+  "embedded_components {\n"
+  "  id: \"FishTank\"\n"
+  "  type: \"collectionproxy\"\n"
+  "  data: \"collection: \\\"/Collections/FishTank.collection\\\"\\n"
+  "\"\n"
+  "}\n"
   ""
 }
 embedded_instances {

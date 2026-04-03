@@ -27,3 +27,17 @@ embedded_instances {
     y: 1.2
   }
 }
+embedded_instances {
+  id: "Spawner"
+  data: "components {\n"
+  "  id: \"SpawnSticker\"\n"
+  "  component: \"/Scripts/SpawnSticker.script\"\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"StickerSpawner\"\n"
+  "  type: \"factory\"\n"
+  "  data: \"prototype: \\\"/Objects/TankSticker.go\\\"\\n"
+  "\"\n"
+  "}\n"
+  ""
+}

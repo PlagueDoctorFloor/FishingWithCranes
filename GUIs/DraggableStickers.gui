@@ -1,0 +1,22 @@
+script: "/GUIs/DraggableStickers.gui_script"
+textures {
+  name: "fish"
+  texture: "/Visual Assets/SpriteAtlas/fish.atlas"
+}
+nodes {
+  position {
+    x: 640.0
+    y: 360.0
+  }
+  scale {
+    x: 0.5
+    y: 0.5
+  }
+  type: TYPE_BOX
+  texture: "fish/freshwater-1"
+  id: "Sticker"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+material: "/builtins/materials/gui.material"
+adjust_reference: ADJUST_REFERENCE_PARENT

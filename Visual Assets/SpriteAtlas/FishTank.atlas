@@ -61,4 +61,28 @@ images {
 images {
   image: "/Visual Assets/Raw Images/GUI/return-button.png"
 }
+images {
+  image: "/Visual Assets/Raw Images/Decorations/Decorations/decor-7.png"
+}
+images {
+  image: "/Visual Assets/Raw Images/Decorations/Decorations/decor-5.png"
+}
+images {
+  image: "/Visual Assets/Raw Images/Decorations/Decorations/decor-8.png"
+}
+images {
+  image: "/Visual Assets/Raw Images/Decorations/Decorations/decor-6.png"
+}
+images {
+  image: "/Visual Assets/Raw Images/Decorations/Decorations/decor-3.png"
+}
+images {
+  image: "/Visual Assets/Raw Images/Decorations/Decorations/decor-2.png"
+}
+images {
+  image: "/Visual Assets/Raw Images/Decorations/Decorations/decor-1.png"
+}
+images {
+  image: "/Visual Assets/Raw Images/Decorations/Decorations/decor-4.png"
+}
 extrude_borders: 2
