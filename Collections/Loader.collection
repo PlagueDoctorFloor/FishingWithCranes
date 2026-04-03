@@ -72,6 +72,12 @@ embedded_instances {
   "  data: \"collection: \\\"/Collections/FishTank.collection\\\"\\n"
   "\"\n"
   "}\n"
+  "embedded_components {\n"
+  "  id: \"DecorCollection\"\n"
+  "  type: \"collectionproxy\"\n"
+  "  data: \"collection: \\\"/Collections/DecorCollection.collection\\\"\\n"
+  "\"\n"
+  "}\n"
   ""
 }
 embedded_instances {

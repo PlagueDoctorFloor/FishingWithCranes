@@ -1,2 +1,6 @@
 name: "DecorCollection"
+instances {
+  id: "DecorCollection"
+  prototype: "/Objects/DecorCollection.go"
+}
 scale_along_z: 0

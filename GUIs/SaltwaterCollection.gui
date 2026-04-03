@@ -1,4 +1,4 @@
-script: "/GUIs/DecorCollection.gui_script"
+script: "/GUIs/SaltwaterCollection.gui_script"
 fonts {
   name: "Permanent Marker"
   font: "/Visual Assets/Fonts/Permanent Marker.font"
@@ -365,7 +365,7 @@ nodes {
     y: 0.4
   }
   type: TYPE_BOX
-  texture: "fish/decor-1"
+  texture: "fish/saltwater-1"
   id: "fish1"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
@@ -376,12 +376,15 @@ nodes {
     x: 450.0
     y: 400.0
   }
+  rotation {
+    z: -15.0
+  }
   scale {
     x: 0.35
     y: 0.35
   }
   type: TYPE_BOX
-  texture: "fish/decor-2"
+  texture: "fish/saltwater-2"
   id: "fish2"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
@@ -393,11 +396,11 @@ nodes {
     y: 240.0
   }
   scale {
-    x: 0.25
-    y: 0.25
+    x: 0.3
+    y: 0.3
   }
   type: TYPE_BOX
-  texture: "fish/decor-3"
+  texture: "fish/saltwater-3"
   id: "fish3"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
@@ -409,11 +412,11 @@ nodes {
     y: 80.0
   }
   scale {
-    x: 0.3
-    y: 0.3
+    x: 0.4
+    y: 0.4
   }
   type: TYPE_BOX
-  texture: "fish/decor-4"
+  texture: "fish/saltwater-4"
   id: "fish4"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
@@ -429,7 +432,7 @@ nodes {
     y: 0.25
   }
   type: TYPE_BOX
-  texture: "fish/decor-5"
+  texture: "fish/saltwater-5"
   id: "fish5"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
@@ -438,14 +441,14 @@ nodes {
 nodes {
   position {
     x: 800.0
-    y: 420.0
+    y: 390.0
   }
   scale {
     x: 0.35
     y: 0.35
   }
   type: TYPE_BOX
-  texture: "fish/decor-6"
+  texture: "fish/saltwater-6"
   id: "fish6"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
@@ -457,11 +460,11 @@ nodes {
     y: 240.0
   }
   scale {
-    x: 0.25
-    y: 0.25
+    x: 0.3
+    y: 0.3
   }
   type: TYPE_BOX
-  texture: "fish/decor-7"
+  texture: "fish/saltwater-7"
   id: "fish7"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
@@ -477,7 +480,7 @@ nodes {
     y: 0.25
   }
   type: TYPE_BOX
-  texture: "fish/decor-8"
+  texture: "fish/saltwater-8"
   id: "fish8"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
