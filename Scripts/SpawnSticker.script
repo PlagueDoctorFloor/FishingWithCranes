@@ -9,12 +9,18 @@ function on_message(self, message_id, message, sender)
 		table.insert(spawnedStickers,stickerID)
 	elseif message_id == hash("Delete") then
 		for i=1,#spawnedStickers do
-			msg.post(spawnedStickers[i],"Delete")
+			if spawnedStickers[i] ~= nil then
+				msg.post(spawnedStickers[i],"Delete")
+			end
 		end
 	elseif message_id == hash("DoneDelete") then
 		for i=1,#spawnedStickers do
-			msg.post(spawnedStickers[i],"DoneDelete")
+			if spawnedStickers[i] ~= nil then
+				msg.post(spawnedStickers[i],"DoneDelete")
+			end
 		end
+	elseif message_id == hash("deleteSticker") then
+		spawnedStickers[message.number] = nil
 	end
 	
 end

@@ -4,14 +4,12 @@ local sticker_grabbed = false
 local deleteTime = false
 
 function init(self)
-	print("triggered")
 	msg.post(".", "acquire_input_focus")
 
 	-- list of boxes to drag
 	table.insert(stickerTable, stickerNumber)
 	self.sticker = gui.get_node("Sticker")
 	self.number = stickerNumber
-	print(self.number)
 
 	stickerNumber = stickerNumber+1
 
@@ -32,12 +30,9 @@ function on_message(self, message_id, message, sender)
 
 	elseif message_id == hash("Delete") then
 		deleteTime = true
-		print("DeleteTime "..self.number)
 
 	elseif message_id == hash("DoneDelete") then
 		deleteTime = false
-		print("Delete Over"..self.number)
-		
 	end
 	
 end
@@ -56,13 +51,15 @@ function on_input(self, action_id, action)
 			if action.pressed then
 				for i=1,#stickerTable do
 					if not sticker_grabbed then
-						local chosenSticker = self.sticker
-						if gui.pick_node(chosenSticker, action.x, action.y) then
-							if self.number == i then
-								-- keep track of the box as being dragged
-								self.dragged_box = chosenSticker
-								sticker_grabbed = true
-								return
+						if self.sticker ~= nil then
+							local chosenSticker = self.sticker
+							if gui.pick_node(chosenSticker, action.x, action.y) then
+								if self.number == i then
+									-- keep track of the box as being dragged
+									self.dragged_box = chosenSticker
+									sticker_grabbed = true
+									return
+								end
 							end
 						end
 					end
@@ -74,22 +71,30 @@ function on_input(self, action_id, action)
 				self.dragged_box = nil
 				sticker_grabbed = false
 			end
+			
 		else
 
 			if action.pressed then
 				for i=1,#stickerTable do
 					if not sticker_grabbed then
-						local chosenSticker = self.sticker
-						if gui.pick_node(chosenSticker, action.x, action.y) then
-							if self.number == i then
-								-- keep track of the box as being dragged
-								sticker_grabbed = true
-								gui.delete_node(self.sticker)
-								return
+						if self.sticker ~= nil then
+							local chosenSticker = self.sticker
+							if gui.pick_node(chosenSticker, action.x, action.y) then
+								if self.number == i then
+									-- keep track of the box as being dragged
+									sticker_grabbed = true
+									gui.delete_node(self.sticker)
+									msg.post("/Spawner","deleteSticker",{number = self.number})
+									self.sticker = nil
+									return
+								end
 							end
 						end
 					end
 				end
+
+			elseif action.released then
+				sticker_grabbed = false
 			end
 
 		end
