@@ -1,42 +1,69 @@
+-- Global Variables
+
+-- Tokens player has
 tokens = 3
 
-
+-- Item's Encountered & Amount owned
+-- Freshwater set
 FreshwaterFish = {0,0,0,0,0,0,0,0}
+-- Saltwater set
 SaltwaterFish = {0,0,0,0,0,0,0,0}
+-- Tank Decor set
 TankDecor = {0,0,0,0,0,0,0,0}
 
-
+-- Booleans For Whether Player Has Completed Set
 FreshwaterFound = false
 SaltwaterFound = false
 
+-- Integer keeping track of total fish pulled
 TotalFishPulled = 0
+-- Array to keep track of 50th fish pulled
+-- Position 1: Set, Position 2: Fish Number
 FiftiethFish = {0,0}
 
--- Fish Tac Toe
+-- Fish Tac Toe Statistics
+-- Wins
 FishTacToeWins = 0
+-- Losses
 FishTacToeLosses = 0
+-- Stalemates
 FishTacToeStalemates = 0
 
+-- Number of Times Match Game Played
 MatchPlayed = 0
 
+-- Array To Keep Track Of Flappy Fish Course Completes
+-- Each position corresponds to a course, which are flipped when the user completes it
 coursesComplete = {0,0,0}
 
+-- Integer keeping track of times fish is clicked in detailed inventory screen
 petFish = 0
 
+-- Custom Function
+-- Used when the coin sound finishes playing, triggered from clicking the crane
+-- Plays the crane operation sound
 local function soundEnd(self)
 
+	-- Lets the MainCraneScreen know that the coin sound is done playing so it can play the crane animation
 	msg.post("main:/CraneScreenGUI#MainCraneScreen","Coin Done")
+	-- Plays the sound of the crane moving alongside the crane animation
 	sound.play("go#CraneOperation")
 	
 end
 
+-- Custom Function
+-- Handles which sounds should be played when a sound is requested
 local function playNoise(soundNumber)
+	
 	if soundNumber == 1 then
 		sound.play("go#FishNoise")
 	elseif soundNumber == 2 then
 		sound.play("go#CardFlip")
+	-- Triggered when player clicks crane on the main page, plays a noise of a coin going into a slot
 	elseif soundNumber == 3 then
+		-- When the sounds end it triggers other sounds and animatoins
 		sound.play("go#CoinIn", nil, soundEnd)
+	-- 
 	elseif soundNumber == 4 then
 		sound.play("go#WinFish")
 	elseif soundNumber == 5 then

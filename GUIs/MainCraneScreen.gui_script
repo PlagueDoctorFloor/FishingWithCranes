@@ -10,8 +10,6 @@ local clickAllowed = true
 
 local function allowClicks(self)
 	clickAllowed = true
-	print("clickAllowed: "..clickAllowed)
-	print("fishPulled: "..clickAllowed)
 end
 
 local function noTokens(self)
@@ -72,10 +70,6 @@ local function fishPull()
 	if TotalFishPulled == 50 then
 		FiftiethFish[1] = setSelected
 		FiftiethFish[2] = selectedFish
-
-		for i = 1, 2, 1 do
-			print(FiftiethFish[i])
-		end
 	end
 
 end
@@ -204,8 +198,6 @@ function on_input(self, action_id, action)
 				end
 
 			elseif fishPulled == true and clickAllowed then
-
-				print("here")
 
 				gui.set_visible(gui.get_node("FishPull"), false)
 				gui.set_visible(gui.get_node("NewFishGlitter"), false)
