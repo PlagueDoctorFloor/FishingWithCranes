@@ -58,7 +58,7 @@ function init(self)
 	msg.post(".", "acquire_input_focus")
 
 	--guiNodes = {gui.get_node("ScreenshotModeButton"),gui.get_node("ScreenshotModeText"),gui.get_node("DecorSelect"),gui.get_node("X"),gui.get_node("fish1"),gui.get_node("fish2"),gui.get_node("fish3"),gui.get_node("fish4"),gui.get_node("fish5"),gui.get_node("fish6"),gui.get_node("fish7"),gui.get_node("fish8"),gui.get_node("RightArrow"),gui.get_node("SetName"),gui.get_node("SetNameText"),gui.get_node("ReturnArrow"),gui.get_node("DecorButton"),gui.get_node("DecorText")}
-	currentlyVisible = {gui.get_node("ScreenshotModeButton"),gui.get_node("ScreenshotModeText"),gui.get_node("ReturnArrow"),gui.get_node("DecorButton"),gui.get_node("DecorText")}
+	currentlyVisible = {gui.get_node("ScreenshotModeButton"),gui.get_node("ScreenshotModeText"),gui.get_node("ReturnArrow"),gui.get_node("DecorButton"),gui.get_node("DecorText"),gui.get_node("DeleteButton"),gui.get_node("DeleteText")}
 end
 
 function on_input(self, action_id, action)
@@ -77,13 +77,23 @@ function on_input(self, action_id, action)
 
 			local decor = gui.get_node("DecorButton")
 			local delete = gui.get_node("DeleteButton")
+			local goBack = gui.get_node("ReturnArrow")
+
+			if gui.pick_node(goBack, action.x, action.y) then
+
+				msg.post("Loader:/Loader", "load Collection")
+				
+			end
 
 			if gui.pick_node(delete, action.x, action.y) then
+				local deleteText = gui.get_node("DeleteText")
 				if deleteTime then
 					deleteTime = false
+					gui.set_text(deleteText, "Delete")
 					msg.post("/Spawner","DoneDelete")
 				else
 					deleteTime = true
+					gui.set_text(deleteText, "Done Deleting")
 					msg.post("/Spawner","Delete")
 				end
 			end
@@ -96,7 +106,7 @@ function on_input(self, action_id, action)
 						gui.set_visible(currentlyVisible[i],false)
 					end
 				
-					currentlyVisible = {gui.get_node("ScreenshotModeButton"),gui.get_node("ScreenshotModeText"),gui.get_node("ReturnArrow"),gui.get_node("DecorSelect"),gui.get_node("X"),gui.get_node("fish1"),gui.get_node("fish2"),gui.get_node("fish3"),gui.get_node("fish4"),gui.get_node("fish5"),gui.get_node("fish6"),gui.get_node("fish7"),gui.get_node("fish8"),gui.get_node("RightArrow"),gui.get_node("SetName"),gui.get_node("SetNameText")}
+					currentlyVisible = {gui.get_node("ScreenshotModeButton"),gui.get_node("ScreenshotModeText"),gui.get_node("ReturnArrow"),gui.get_node("DecorSelect"),gui.get_node("X"),gui.get_node("fish1"),gui.get_node("fish2"),gui.get_node("fish3"),gui.get_node("fish4"),gui.get_node("fish5"),gui.get_node("fish6"),gui.get_node("fish7"),gui.get_node("fish8"),gui.get_node("RightArrow"),gui.get_node("SetName"),gui.get_node("SetNameText"),gui.get_node("DeleteButton"),gui.get_node("DeleteText")}
 
 					for i=1,#currentlyVisible,1 do
 						gui.set_visible(currentlyVisible[i],true)
@@ -120,7 +130,7 @@ function on_input(self, action_id, action)
 						gui.set_visible(currentlyVisible[i],false)
 					end
 
-					currentlyVisible = {gui.get_node("ScreenshotModeButton"),gui.get_node("ScreenshotModeText"),gui.get_node("ReturnArrow"),gui.get_node("DecorButton"),gui.get_node("DecorText")}
+					currentlyVisible = {gui.get_node("ScreenshotModeButton"),gui.get_node("ScreenshotModeText"),gui.get_node("ReturnArrow"),gui.get_node("DecorButton"),gui.get_node("DecorText"),gui.get_node("DeleteButton"),gui.get_node("DeleteText")}
 
 					for i=1,#currentlyVisible,1 do
 						gui.set_visible(currentlyVisible[i],true)
@@ -145,7 +155,10 @@ function on_input(self, action_id, action)
 				for i=1,#stickerNodes do
 					local node = stickerNodes[i]
 					if gui.pick_node(node, action.x, action.y) then
-						msg.post("/Spawner","spawnSticker",{set = setSelect, item = i})
+						if gui.get_visible(node) then
+							local referencenode = gui.get_node("DecorSelect")
+							msg.post("/Spawner","spawnSticker",{set = setSelect, item = i})
+						end
 					end
 				end
 
@@ -161,6 +174,7 @@ function on_input(self, action_id, action)
 			for i=1,#currentlyVisible,1 do
 				gui.set_visible(currentlyVisible[i],true)
 			end
+			displayStickers()
 			
 		end
 		

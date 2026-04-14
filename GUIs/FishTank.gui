@@ -9,7 +9,7 @@ textures {
 }
 nodes {
   position {
-    x: 275.0
+    x: 640.0
     y: 650.0
   }
   scale {
@@ -24,7 +24,7 @@ nodes {
 }
 nodes {
   position {
-    x: 275.0
+    x: 640.0
     y: 650.0
   }
   scale {
@@ -322,7 +322,7 @@ nodes {
     y: 650.0
   }
   scale {
-    x: 0.4
+    x: 0.5
     y: 0.25
   }
   type: TYPE_BOX

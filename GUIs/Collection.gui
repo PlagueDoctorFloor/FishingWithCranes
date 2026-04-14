@@ -1,4 +1,8 @@
 script: "/GUIs/Collection.gui_script"
+fonts {
+  name: "Permanent Marker"
+  font: "/Visual Assets/Fonts/Permanent Marker.font"
+}
 textures {
   name: "CranePageGUI"
   texture: "/Visual Assets/SpriteAtlas/CranePageGUI.atlas"
@@ -16,7 +20,7 @@ nodes {
 }
 nodes {
   position {
-    x: 100.0
+    x: 150.0
     y: 650.0
   }
   scale {
@@ -31,7 +35,7 @@ nodes {
 }
 nodes {
   position {
-    x: 725.0
+    x: 775.0
     y: 360.0
   }
   scale {
@@ -46,7 +50,7 @@ nodes {
 }
 nodes {
   position {
-    x: 350.0
+    x: 450.0
     y: 360.0
   }
   scale {
@@ -61,7 +65,7 @@ nodes {
 }
 nodes {
   position {
-    x: 350.0
+    x: 450.0
     y: 360.0
   }
   scale {
@@ -77,7 +81,7 @@ nodes {
 }
 nodes {
   position {
-    x: 725.0
+    x: 775.0
     y: 360.0
   }
   scale {
@@ -93,7 +97,7 @@ nodes {
 }
 nodes {
   position {
-    x: 350.0
+    x: 450.0
     y: 360.0
   }
   scale {
@@ -108,7 +112,7 @@ nodes {
 }
 nodes {
   position {
-    x: 725.0
+    x: 775.0
     y: 360.0
   }
   scale {
@@ -166,6 +170,62 @@ nodes {
   id: "DecorChoice"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 150.0
+    y: 360.0
+  }
+  scale {
+    x: 0.75
+    y: 0.75
+  }
+  type: TYPE_BOX
+  texture: "CranePageGUI/glow"
+  id: "TankSignGlow"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 150.0
+    y: 500.0
+  }
+  scale {
+    x: 0.5
+    y: 0.5
+  }
+  type: TYPE_BOX
+  texture: "CranePageGUI/tall-big-sign"
+  id: "FishTankSign"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 150.0
+    y: 360.0
+  }
+  scale {
+    x: 1.5
+    y: 2.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "Decorate Your \n"
+  "Fish Tank \n"
+  "Here!"
+  font: "Permanent Marker"
+  id: "FishTankText"
+  inherit_alpha: true
 }
 material: "/builtins/materials/gui.material"
 adjust_reference: ADJUST_REFERENCE_PARENT

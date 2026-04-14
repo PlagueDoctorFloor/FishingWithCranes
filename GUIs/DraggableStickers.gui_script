@@ -5,6 +5,7 @@ local deleteTime = false
 
 function init(self)
 	msg.post(".", "acquire_input_focus")
+	
 
 	-- list of boxes to drag
 	table.insert(stickerTable, stickerNumber)
@@ -27,7 +28,6 @@ function on_message(self, message_id, message, sender)
 		elseif message.set == 3 then
 			gui.play_flipbook(gui.get_node("Sticker"), "decor-"..message.item)
 		end
-
 	elseif message_id == hash("Delete") then
 		deleteTime = true
 

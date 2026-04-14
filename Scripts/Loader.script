@@ -1,9 +1,9 @@
 tokens = 3
 
 
-FreshwaterFish = {3,1,2,1,1,5,1,4}
-SaltwaterFish = {1,1,1,1,1,1,1,1}
-TankDecor = {1,1,1,1,1,1,1,1}
+FreshwaterFish = {0,0,0,0,0,0,0,0}
+SaltwaterFish = {0,0,0,0,0,0,0,0}
+TankDecor = {0,0,0,0,0,0,0,0}
 
 
 FreshwaterFound = false
@@ -47,17 +47,17 @@ end
 function init(self)
 	msg.post(".","acquire_input_focus")
 
-	--msg.post("#Crane","load")
-	--msg.post("#Collection","load")
-	--msg.post("#Achievements","load")
-	--msg.post("#MiniGameSelect","load")
-	--msg.post("#FishTacToe", "load")
-	--msg.post("#FishMatch","load")
-	--msg.post("#FreshwaterCollection","load")
-	--msg.post("#SaltwaterCollection","load")
-	--msg.post("#DetailedFish","load")
-	--msg.post("#FlappyFish", "load")
-	--msg.post("#DecorCollection", "load")
+	msg.post("#Crane","load")
+	msg.post("#Collection","load")
+	msg.post("#Achievements","load")
+	msg.post("#MiniGameSelect","load")
+	msg.post("#FishTacToe", "load")
+	msg.post("#FishMatch","load")
+	msg.post("#FreshwaterCollection","load")
+	msg.post("#SaltwaterCollection","load")
+	msg.post("#DetailedFish","load")
+	msg.post("#FlappyFish", "load")
+	msg.post("#DecorCollection", "load")
 	msg.post("#FishTank", "load")
 
 	sound.play("go#BackgroundSong")
@@ -75,8 +75,6 @@ function on_message(self, message_id, message, sender)
 
 		-- Tells the sender (proxy which was loaded) to initialize (execute init() code)
 		msg.post(sender, "init")
-
-		msg.post(sender, "enable")
 
 		if sender.fragment == hash("Crane") then
 			msg.post(sender, "enable")
@@ -105,6 +103,8 @@ function on_message(self, message_id, message, sender)
 			msg.post("#SaltwaterCollection","disable")
 		elseif sender.fragment == hash("DecorCollection") then
 			msg.post("#DecorCollection","disable")
+		elseif sender.fragment == hash("FishTank") then
+			msg.post("#FishTank","disable")
 		end
 
 	elseif message_id == hash("load Achievement") then
@@ -192,7 +192,12 @@ function on_message(self, message_id, message, sender)
 			msg.post("#Collection", "disable")
 		elseif sender.fragment == hash("DetailedFish") then
 			msg.post("#DetailedFish","disable")
-		end		
+		end	
+
+	elseif message_id == hash("load FishTank") then
+		msg.post("#FishTank","enable")
+
+		msg.post("#Collection", "disable")
 
 	elseif message_id == hash("load DetailedFish") then
 		msg.post("#DetailedFish", "enable")
