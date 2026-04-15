@@ -1,117 +1,230 @@
+--
+-- TODO:
+-- 1. Consider combining the "no tokens" function to also display them
+--
+
+-- Local Variables
+
+-- craneSelected keeps track of whether a crane has been selected, to limit which nodes can clicked to which are visible
 local craneSelected = false
 
+-- setSelected keeps track of which set the player has selected, used in determining which items to reward the player with when using the crane
 local setSelected = 0
 
+-- fishPulled keeps track of whether a fish is being pulled
 local fishPulled = false
 
+-- selectedFish keeps track of which fish the game is giving to the player during a pull
 local selectedFish = 0
 
+-- clickAllowed is used to prevent the player from clicking nodes during animations
 local clickAllowed = true
 
+-- Custom Function
+-- Used at the end of the fish pulling chain to reinstate clicking when an animation ends
 local function allowClicks(self)
+	
+	-- Sets clickAllowed to true, allowing the game to process inputs again
 	clickAllowed = true
+	
 end
 
+-- Custom Function
+-- sets the "no tokens" UI elements to not visible when the user clicks after triggering them
 local function noTokens(self)
+	
+	-- Sets the label and texts to not visibl
 	gui.set_visible(gui.get_node("NoTokensLabel"), false)
 	gui.set_visible(gui.get_node("NoTokensText"), false)
+	
 end
 
+-- Custom Function
+-- Handles when the player clicks on the crane and the animation of the crane pulling an item has finished playing
+-- Sets the correct fish sprite and plays the animation, calling "allowClicks()" when the animation ends
 local function spawnFish(self)
 
+	-- Sets crane pulling animation invisible
 	gui.set_visible(gui.get_node("CranePickAnimation"), false)
+	-- Sets the circle background for the pulled fish to visible
 	gui.set_visible(gui.get_node("FishPull"), true)
+	-- Message the loader to play a victory sound for pulling the fish
 	msg.post("Loader:/Loader", "Sound", {sound=4})
+	-- If the freshwater set is currently selected
 	if setSelected == 1 then
+		
+		-- Check if the selected fish is set to 0 in the global variable, meaning it's never been pulled before
 		if FreshwaterFish[selectedFish] == 0 then
+			-- Sets the new fish glitter to visible
 			gui.set_visible(gui.get_node("NewFishGlitter"), true)
 		end
+
+		-- Increase the global array position to keep track of how many of the selected fish are owned
 		FreshwaterFish[selectedFish] = FreshwaterFish[selectedFish]+1
+		-- Sets the fish node to true
 		gui.set_visible(gui.get_node("Fish"), true)
+		-- plays the right animation for the selected fish
 		gui.play_flipbook(gui.get_node("Fish"), "freshwater-"..selectedFish, allowClicks)
+
+	-- If the saltwater set is currently selected
 	elseif setSelected == 2 then
+
+		-- Check if the selected fish is set to 0 in the global variable, meaning it's never been pulled before
 		if SaltwaterFish[selectedFish] == 0 then
+			-- Sets the new fish glitter to visible
 			gui.set_visible(gui.get_node("NewFishGlitter"), true)
 		end
+
+		-- Increase the global array position to keep track of how many of the selected fish are owned
 		SaltwaterFish[selectedFish] = SaltwaterFish[selectedFish]+1
+		-- Sets the fish node to true
 		gui.set_visible(gui.get_node("Fish"), true)
+		-- plays the right animation for the selected fish
 		gui.play_flipbook(gui.get_node("Fish"), "saltwater-"..selectedFish, allowClicks)
+
+	-- If the decor set is currently selected
 	elseif setSelected == 3 then
+
+		-- Check if the selected item is set to 0 in the global variable, meaning it's never been pulled before
 		if TankDecor[selectedFish] == 0 then
+			-- Sets the new fish glitter to visible
 			gui.set_visible(gui.get_node("NewFishGlitter"), true)
 		end
+
+		-- Increase the global array position to keep track of how many of the selected items are owned
 		TankDecor[selectedFish] = TankDecor[selectedFish]+1
+		-- Sets the fish node to true
 		gui.set_visible(gui.get_node("Fish"), true)
+		-- plays the right animation for the selected item
 		gui.play_flipbook(gui.get_node("Fish"), "decor-"..selectedFish, allowClicks)
+		
 	end
 
 end
 
+-- Custom Function
+-- Triggered when the player clicks on the crane with adequate coins
+-- Determines which fish is being pulled and plays the correct crane animation to reflect it's rarity
+-- Sets the fiftieth fish when it's pulled
 local function fishPull()
 
+	-- Gets the crane animation node
 	local CraneAnimation = gui.get_node("CranePickAnimation")
-	
+
+	-- Selects a random number to determine the rarity
 	local raritySelect = math.random(1,100)
 
+	-- If below 80, So Common Rarity
 	if raritySelect < 80 then
+		
+		-- Select a number between 1 and 5
 		selectedFish = math.random(1,5)
+		-- Set the crane animation to true
 		gui.set_visible(CraneAnimation, true)
+		-- Play the animation with the "blue", common ball
 		gui.play_flipbook(CraneAnimation, "HookGrabBlue", spawnFish)
+		
+	-- If below above 80 but below 100, So Rare Rarity
 	elseif raritySelect < 100 then
+	
+		-- Select a number between 6 and 7
 		selectedFish = math.random(6,7)
+		-- Set the crane animation to true
 		gui.set_visible(CraneAnimation, true)
+		-- Play the animation with the "red", rare ball
 		gui.play_flipbook(CraneAnimation, "HookGrabRed", spawnFish)
+		
+	-- If equal to 100
 	elseif raritySelect == 100 then
+	
+		-- Selected fish set to 8
 		selectedFish = 8
+		-- Set the crane animation to true
 		gui.set_visible(CraneAnimation, true)
+		-- Play the animation with the "yellow", legendary ball
 		gui.play_flipbook(CraneAnimation, "HookGrabGold", spawnFish)
+		
 	end
 
+	-- If the global variable TotalFishPulled is equal to 50
 	if TotalFishPulled == 50 then
+		
+		-- Set position one to the current setSelected
 		FiftiethFish[1] = setSelected
+		-- Set position two to the selectedFish
 		FiftiethFish[2] = selectedFish
+		
 	end
 
 end
 
+-- Custom Function
+-- Called when players select a set to pull on
+-- Sets nodes visibility
 local function craneSetup()
 
+	-- Sets craneSelected to true so the user can only interact with crane-related nodes
 	craneSelected = true
+	-- Sets all of the set selection buttons to not visible
 	gui.set_enabled(gui.get_node("FreshwaterSelect"), false)
 	gui.set_enabled(gui.get_node("SaltwaterSelect"), false)
 	gui.set_enabled(gui.get_node("DecorSelect"), false)
+	-- Sets the Crane visible
 	gui.set_enabled(gui.get_node("Crane"), true)
+	-- Sets the return arrow to visible
 	gui.set_enabled(gui.get_node("ReturnArrow"), true)
+	-- Changes the label text to say "Claw Machine"
 	gui.set_text(gui.get_node("CraneLabelText"),"Claw Machine")
 
 end
 
+-- Custom Function
+-- Called when players selects the arrow to go back to set select
+-- Sets nodes visibility
 local function selectSetup()
-	
+
+	-- Sets craneSelected to true so the user can't interact with crane-related nodes
 	craneSelected = false
+	-- Sets all of the set selection buttons to visible
 	gui.set_enabled(gui.get_node("FreshwaterSelect"), true)
 	gui.set_enabled(gui.get_node("SaltwaterSelect"), true)
 	gui.set_enabled(gui.get_node("DecorSelect"), true)
+	-- Sets the Crane not visible
 	gui.set_enabled(gui.get_node("Crane"), false)
+	-- Sets the return arrow to not visible
 	gui.set_enabled(gui.get_node("ReturnArrow"), false)
+	-- Changes the label text to say "Choose Set"
 	gui.set_text(gui.get_node("CraneLabelText"),"Choose Set")
 
 end
 
+-- Executes when the script receives input
 function on_input(self, action_id, action)
+	
+	-- If there's no action being received
 	if action_id == nil then
+		
+		-- Gets the Achivement node
 		local tackleBox = gui.get_node("TackleBox")
+		-- if the player is hovering over the achievment button
 		if gui.pick_node(tackleBox, action.x, action.y) then
+			-- Set the glow to visible
 			gui.set_visible(gui.get_node("TackleBoxGlow"), true)
+		-- If the player is not hovered over the achievement button
 		else
+			-- Set the glow to not visible
 			gui.set_visible(gui.get_node("TackleBoxGlow"), false)
 		end
+		
 	end
 
+	-- If the player clicks with their left mouse button
 	if action_id == hash("LeftClick") and action.pressed then
 
+		-- If a set has not been selected to pull on
 		if craneSelected == false then
 
+			-- Gets the currently visible nodes
 			local freshwater = gui.get_node("FreshwaterSelect")
 			local saltwater = gui.get_node("SaltwaterSelect")
 			local decor = gui.get_node("DecorSelect")
@@ -119,16 +232,23 @@ function on_input(self, action_id, action)
 			local sign = gui.get_node("MiniGames")
 			local tacklebox = gui.get_node("TackleBox")
 
+			-- If the player clicks the freshwater collection
 			if gui.pick_node(freshwater, action.x, action.y) then 
 
+				-- Set setSelected to 1
 				setSelected = 1
+				-- Calls Crane setup
 				craneSetup()
 
+			-- If the player clicks the saltwater collection
 			elseif gui.pick_node(saltwater, action.x, action.y) then
 
+				-- Set setSelected to 1
 				setSelected = 2
+				-- Calls Crane setup
 				craneSetup()
 
+			-- 
 			elseif gui.pick_node(decor, action.x, action.y) then
 
 				setSelected = 3
