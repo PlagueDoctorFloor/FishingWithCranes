@@ -1,3 +1,10 @@
+--
+-- TODO:
+-- 1. Combine the sender checks into 1 function which does it for all of them
+-- 2. Consider turning the Collection pages into 1 page
+--
+
+
 -- Global Variables
 
 -- Tokens player has
@@ -54,26 +61,34 @@ end
 -- Custom Function
 -- Handles which sounds should be played when a sound is requested
 local function playNoise(soundNumber)
-	
+
+	-- Triggered when a player clicks on the fish in the detailed view
 	if soundNumber == 1 then
 		sound.play("go#FishNoise")
+	-- Triggered when players flip a card in the match game
 	elseif soundNumber == 2 then
 		sound.play("go#CardFlip")
 	-- Triggered when player clicks crane on the main page, plays a noise of a coin going into a slot
 	elseif soundNumber == 3 then
 		-- When the sounds end it triggers other sounds and animatoins
 		sound.play("go#CoinIn", nil, soundEnd)
-	-- 
+	-- Triggered when the fish appears after the Crane animation plays
 	elseif soundNumber == 4 then
 		sound.play("go#WinFish")
+	-- Triggered when player or bot place a symbol in tic tac toe
 	elseif soundNumber == 5 then
 		sound.play("go#TicTacToePlace")
 	end
+	
 end
 
+-- Runs the first time that the script is loaded
 function init(self)
+	
+	-- Acquires input focus 
 	msg.post(".","acquire_input_focus")
 
+	-- Loads all of the collections when the game loads
 	msg.post("#Crane","load")
 	msg.post("#Collection","load")
 	msg.post("#Achievements","load")
@@ -87,158 +102,250 @@ function init(self)
 	msg.post("#DecorCollection", "load")
 	msg.post("#FishTank", "load")
 
+	-- Begins playing the background song
 	sound.play("go#BackgroundSong")
+	
 end
 
+-- Executes when the script receives a message
 function on_message(self, message_id, message, sender)
 
+	-- If the loader receives a message with the hash sound
 	if message_id == hash("Sound") then
+		-- Calls play noise and passes the number of the sound that was called
 		playNoise(message.sound)
 	end
 
-	
-	-- Sent back from the proxy's after they are asked to load
+	-- Message sent back when the Proxy collections finish loading
 	if message_id == hash("proxy_loaded") then
 
 		-- Tells the sender (proxy which was loaded) to initialize (execute init() code)
 		msg.post(sender, "init")
 
+		-- If the sender (the proxy that loaded) is the Crane page, it is sent a message to enable
 		if sender.fragment == hash("Crane") then
+
+			-- Sends a message to the loaded proxy enabling it, making it visible
 			msg.post(sender, "enable")
+			
 		end
 
+	-- Message received to load the ManeCraneScreen, where you can pick sets and pull on the crane
 	elseif message_id == hash("load Crane") then
+		-- Enable the crane proxy
 		msg.post("#Crane", "enable")
+		-- Send a message to the crane collection to update GUI elements tied to global variables
 		msg.post("main:/CraneScreenGUI#MainCraneScreen", "Update")
 
+		-- Checks which collection called the crane scene to load, to know which scene to disable to hide from the user
+		-- if it's the Achievements collection
 		if sender.fragment == hash("Achievements") then
 			msg.post("#Achievements", "disable")
+		-- if it's the collection selection page
 		elseif sender.fragment == hash("Collection") then
 			msg.post("#Collection", "disable")
+		-- if it's the mini game select page
 		elseif sender.fragment == hash("MiniGameSelect") then
 			msg.post("#MiniGameSelect", "disable")
 		end
 
+	-- If the message is to load the collection selection page 
 	elseif message_id == hash("load Collection") then
+		-- Enable the collection proxy
 		msg.post("#Collection", "enable")
 
+		-- Checks which collection called the Collection Select scene to load, to know which scene to disable to hide from the user
+		-- If it was the main crane page
 		if sender.fragment == hash("MainCraneScreen") then
 			msg.post("#Crane", "disable")
+		-- If it was the freshwater collection page
 		elseif sender.fragment == hash("FreshwaterCollection") then
 			msg.post("#FreshwaterCollection", "disable")
+		-- If it was the saltwater collection page
 		elseif sender.fragment == hash("SaltwaterCollection") then
 			msg.post("#SaltwaterCollection","disable")
+		-- If it was the decor collection page
 		elseif sender.fragment == hash("DecorCollection") then
 			msg.post("#DecorCollection","disable")
+			-- If it was the Fish Tank page
 		elseif sender.fragment == hash("FishTank") then
 			msg.post("#FishTank","disable")
 		end
 
+	-- If the message was to load the Achievement page
 	elseif message_id == hash("load Achievement") then
+
+		-- Set "Sentinel" Variable true
 		local freshFishFound = true
+		-- Iterate through the FreshwaterCollection array
 		for i=1,8,1 do
+			-- Check if the position is equal to 0, meaning it's not been found
 			if FreshwaterFish[i] == 0 then
+				-- Sets the "sentinel" variable false
 				freshFishFound = false
 			end
 		end
+		-- If the variable is still true, meaning that all of the spots in the array are higher than 0
 		if freshFishFound then
+			-- Sets FreshwaterFound to true, which will be permanently true
 			FreshwaterFound = true
 		end
 
+		-- Set "Sentinel" Variable true
 		local saltFishFound = true
+		-- Iterate through the SaltwaterCollection array
 		for i=1,8,1 do
+			-- Check if the position is equal to 0, meaning it's not been found
 			if SaltwaterFish[i] == 0 then
+				-- Sets the "sentinel" variable false
 				saltFishFound = false
 			end
 		end
+		-- If the variable is still true, meaning that all of the spots in the array are higher than 0
 		if saltFishFound then
+			-- Sets FreshwaterFound to true, which will be permanently true
 			SaltwaterFound = true
 		end
-		
+
+		-- Enable the achievement collction so it can be seen
 		msg.post("#Achievements", "enable")
+		-- Send a message to the achievements page to update and display the achievements
 		msg.post("Achievements:/Achievements#Achievements", "Display")
 
+		-- Disable the main crane page. This is the only page that can call the achievements page
 		msg.post("#Crane", "disable")
-		
+
+	-- If the message was to load the mini game select page
 	elseif message_id == hash("load MiniGameSelect") then
+		-- enable the mini game select collection
 		msg.post("#MiniGameSelect", "enable")
 
+		-- Checks which collection called the mini game select scene to load, to know which scene to disable to hide from the user
+		-- If it was the main crane page
 		if sender.fragment == hash("MainCraneScreen") then
 			msg.post("#Crane", "disable")
+		-- If it was the TicTacToe collection
 		elseif sender.fragment == hash("FishTacToe") then
 			msg.post("#FishTacToe", "disable")
+		-- If it was the Match collection
 		elseif sender.fragment == hash("Match") then
 			msg.post("#FishMatch","disable")
+		-- If it was the FlappyFish collection
 		elseif sender.fragment == hash("FlappyFish") then
 			msg.post("#FlappyFish","disable")
 		end
 
+	-- If the message was to load the Tic Tac Toe minigame
 	elseif message_id == hash("load FishTacToe") then
+		-- enable the mini game select collection
 		msg.post("#FishTacToe", "enable")
+		-- Send a message to the tic tac toe collection to update GUI elements tied to global variables
 		msg.post("FishTacToe:/FishTacToe#FishTacToe", "Update")
 
+		-- Disable the minigame select collection to hide it
 		msg.post("#MiniGameSelect", "disable")
 
+	-- If the message was to load the Match minigame
 	elseif message_id == hash("load FishMatch") then
+		-- enable the Match collection
 		msg.post("#FishMatch","enable")
+		-- Send a message to the Match collection to update GUI elements tied to global variables
 		msg.post("Match:/Match#Match", "Update")
 
+		-- Disable the minigame select collection to hide it
 		msg.post("#MiniGameSelect", "disable")
 
+	-- If the message was to load the Flappy Fish minigame
 	elseif message_id == hash("load FlappingFish") then
+		-- enable the Flappy Fish collection
 		msg.post("#FlappyFish","enable")
+		-- Send a message to the Flappy Fish collection to update GUI elements tied to global variables
 		msg.post("FlappyFish:/FlappyFishGUI#FlappyFish", "Update")
 
+		-- Disable the minigame select collection to hide it
 		msg.post("#MiniGameSelect", "disable")
 
+	-- If the message was to load the Freshwater Collection
 	elseif message_id == hash("load FreshCollection") then
+		-- enable the Freshwater Collection page
 		msg.post("#FreshwaterCollection","enable")
+		-- Send a message to the Freshwater collection to update GUI elements tied to global variables
 		msg.post("FishCollection:/FreshwaterCollection#FreshwaterCollection", "Update")
 
+		-- Checks which collection called the Freshwater Collection scene to load, to know which scene to disable to hide from the user
+		-- If it was the Collection selection page
 		if sender.fragment == hash("Collection") then
 			msg.post("#Collection", "disable")
+		-- If it was the detailed inventory page
 		elseif sender.fragment == hash("DetailedFish") then
 			msg.post("#DetailedFish","disable")
 		end
 
+	-- If the message was to load the Saltwater Collection
 	elseif message_id == hash("load SaltCollection") then
+		-- enable the Saltwater Collection page
 		msg.post("#SaltwaterCollection","enable")
+		-- Send a message to the Saltwater collection to update GUI elements tied to global variables
 		msg.post("SaltwaterCollection:/SaltwaterCollection#SaltwaterCollection", "Update")
 
+		-- Checks which collection called the Freshwater Collection scene to load, to know which scene to disable to hide from the user
+		-- If it was the Collection selection page
 		if sender.fragment == hash("Collection") then
 			msg.post("#Collection", "disable")
+		-- If it was the detailed inventory page
 		elseif sender.fragment == hash("DetailedFish") then
 			msg.post("#DetailedFish","disable")
 		end
 
+	-- If the message was to load the Decor Collection
 	elseif message_id == hash("load DecorCollection") then
+		-- enable the Decor Collection page
 		msg.post("#DecorCollection","enable")
+		-- Send a message to the Decor collection to update GUI elements tied to global variables
 		msg.post("DecorCollection:/DecorCollection#DecorCollection", "Update")
 
+		-- Checks which collection called the Freshwater Collection scene to load, to know which scene to disable to hide from the user
+		-- If it was the Collection selection page
 		if sender.fragment == hash("Collection") then
 			msg.post("#Collection", "disable")
+		-- If it was the detailed inventory page
 		elseif sender.fragment == hash("DetailedFish") then
 			msg.post("#DetailedFish","disable")
 		end	
 
+	-- If the message was to load the Fish Tank
 	elseif message_id == hash("load FishTank") then
+		-- enable the Fish Tank page
 		msg.post("#FishTank","enable")
 
+		-- Disables the Collection selection 
 		msg.post("#Collection", "disable")
 
+	-- If the message was to load the Detailed Fish inventory page
 	elseif message_id == hash("load DetailedFish") then
+		-- enable the detailed inventory page
 		msg.post("#DetailedFish", "enable")
+		-- Send a message to the detailed inventory page, providing which set is being called and which fish
 		msg.post("DetailedFish:/DetailedFish#DetailedFish","setUp", {set = message.set, fish = message.fish})
 
+		-- Checks which collection called the Detailed Inventory scene to load, to know which scene to disable to hide from the user
+		-- If it was the freshwater collection selection page
 		if sender.fragment == hash("FreshwaterCollection") then
 			msg.post("#FreshwaterCollection", "disable")
+		-- If it was the saltwater collection selection page
 		elseif sender.fragment == hash("SaltwaterCollection") then
 			msg.post("#SaltwaterCollection","disable")
+		-- If it was the decor collection selection page
 		elseif sender.fragment == hash("DecorCollection") then
 			msg.post("#DecorCollection","disable")
 		end
+		
 	end
+	
 end
+
+
+-- Functions Below Not Currently Used
 
 function final(self)
 	-- Add finalization code here
