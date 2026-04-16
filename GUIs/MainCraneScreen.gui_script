@@ -1,6 +1,7 @@
 --
 -- TODO:
 -- 1. Consider combining the "no tokens" function to also display them
+-- 2. Do I need 2 variables to prevent clicking or can it be one?
 --
 
 -- Local Variables
@@ -243,85 +244,119 @@ function on_input(self, action_id, action)
 			-- If the player clicks the saltwater collection
 			elseif gui.pick_node(saltwater, action.x, action.y) then
 
-				-- Set setSelected to 1
+				-- Set setSelected to 2
 				setSelected = 2
 				-- Calls Crane setup
 				craneSetup()
 
-			-- 
+			-- If the player clicks the decor collection
 			elseif gui.pick_node(decor, action.x, action.y) then
 
+				-- Set setSelected to 2
 				setSelected = 3
+				-- Calls Crane setup
 				craneSetup()
-			
+
+			-- If the player clicks on the shelf to go to the Inventory Collection
 			elseif gui.pick_node(shelf, action.x, action.y) then
 
+				-- Sends a message to the loader to load the collection selection screen
 				msg.post("Loader:/Loader", "load Collection")
-	
+
+			-- If the player clicks on the sign advertising Minigames
 			elseif gui.pick_node(sign, action.x, action.y) then
 
+				-- Sends a message to the loader to load the minigame selection screen
 				msg.post("Loader:/Loader", "load MiniGameSelect")
 
+			-- If the player clicks on the achievements tacklebox
 			elseif gui.pick_node(tacklebox, action.x, action.y) then
-	
+
+				-- Sends a message to the loader to load the achievements page
 				msg.post("Loader:/Loader", "load Achievement")
 
 			end
 
 			
-
+		-- If a set has been selected and the crane is visible
 		elseif craneSelected == true then
 
+			-- If a fish is not being pulled
 			if fishPulled == false then
-		
+
+				-- Get Currently Visible Nodes
 				local crane = gui.get_node("Crane")
 				local shelf = gui.get_node("Shelf")
 				local sign = gui.get_node("MiniGames")
 				local tacklebox = gui.get_node("TackleBox")
 				local returnArrow = gui.get_node("ReturnArrow")
 
+				-- If the user clicks on the crane
 				if gui.pick_node(crane, action.x, action.y) then
 
+					-- If the player has more then 0 tokens
 					if tokens > 0 then
-					
+
+						-- Subtract one from the token counter
 						tokens = tokens -1
+						-- Sets the one screen token text to reflect the change
 						gui.set_text(gui.get_node("TokenText"),tokens)
+						-- If the set selected is NOT the decor set (so freshwater or saltwater)
 						if setSelected ~= 3 then
+							-- Add one to the fish pull counter
 							TotalFishPulled = TotalFishPulled + 1
 						end
+						-- Set fishPulled to true (to prevent players from clicking on nodes while animations are playing)
 						fishPulled = true
+						-- set clickAllowed to false (to prevent players from clicking on nodes while animations are playing)
 						clickAllowed = false
+						-- Send a message to the loader to play the coin insert sound
 						msg.post("Loader:/Loader", "Sound", {sound = 3})
 
+					-- If the player has 0 tokens
 					else
-						gui.set_visible(gui.get_node("NoTokensLabel"), true)
-						gui.set_visible(gui.get_node("NoTokensText"), true)
-						gui.play_flipbook(gui.get_node("NoTokensLabel"), "NoTokens", noTokens)
+					
+					-- Sets the No Token GUI elements to visible
+					gui.set_visible(gui.get_node("NoTokensLabel"), true)
+					gui.set_visible(gui.get_node("NoTokensText"), true)
+					gui.play_flipbook(gui.get_node("NoTokensLabel"), "NoTokens", noTokens)
+					
 					end
 
+				-- If the user clicks the return arrow
 				elseif gui.pick_node(returnArrow, action.x, action.y) then
 
+					-- Calls select setup to display the sets and disable the crane related nodes
 					selectSetup()
-			
+
+				-- If the player clicks on the shelf to go to the Inventory Collection
 				elseif gui.pick_node(shelf, action.x, action.y) then
-			
+
+					-- Sends a message to the loader to load the collection selection screen
 					msg.post("Loader:/Loader", "load Collection")
-			
+
+				-- If the player clicks on the sign advertising Minigames
 				elseif gui.pick_node(sign, action.x, action.y) then
-			
+
+					-- Sends a message to the loader to load the minigame selection screen
 					msg.post("Loader:/Loader", "load MiniGameSelect")
-			
+
+				-- If the player clicks on the achievements tacklebox
 				elseif gui.pick_node(tacklebox, action.x, action.y) then
-			
+
+					-- Sends a message to the loader to load the achievements page
 					msg.post("Loader:/Loader", "load Achievement")
 			
 				end
 
+			-- if fishPulled is true (so a fish is being pulled/displayed) and clickAllowed is true, so all the animations are done playing
 			elseif fishPulled == true and clickAllowed then
 
+				-- Sets the fish pulling nodes to not visible
 				gui.set_visible(gui.get_node("FishPull"), false)
 				gui.set_visible(gui.get_node("NewFishGlitter"), false)
 				gui.set_visible(gui.get_node("Fish"), false)
+				-- Sets fishPulled to false so players can interact
 				fishPulled = false
 	
 			end
@@ -332,25 +367,40 @@ function on_input(self, action_id, action)
 	
 end
 
+-- Executes when the script receives a message
 function on_message(self, message_id, message, sender)
 
+	-- If the message id is update (sent from loader when the page is enabled)
 	if message_id == hash("Update") then
+		
+		-- Update the gui token text
 		gui.set_text(gui.get_node("TokenText"),tokens)
-	end
 
-	if message_id == hash("Coin Done") then
+	-- If the message id is "Coin Done" (sent from the loader when the coin sound effect is finished)
+	elseif message_id == hash("Coin Done") then
+
+		-- Calls fishPull to contiue the fish pull process
 		fishPull()
+		
 	end
 
 end
 
+-- Executes when the script is first loaded
 function init(self)
+	
+	-- Acquires input focus
 	msg.post(".", "acquire_input_focus")
 
+	-- Seeds the random function with the clock so it's different every time
 	math.randomseed(socket.gettime() * 100000)
 
+	-- Updates the token GUI text
 	gui.set_text(gui.get_node("TokenText"),tokens)
+	
 end
+
+-- Currently Unused Functions
 
 function final(self)
 	-- Add finalization code here
