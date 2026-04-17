@@ -1,58 +1,95 @@
+--
+-- TODO:
+-- 1. Add making the other glows false when one is true, implement using a loop/custom function
+--
+
+-- Executes when the script first loads
 function init(self)
+	-- Acquires input focus
 	msg.post(".", "acquire_input_focus")
 end
 
+-- Executes when the script recieves input
 function on_input(self, action_id, action)
 
+	-- Gets the 4 visible nodes
 	local freshSelect = gui.get_node("FreshwaterChoice")
 	local saltSelect = gui.get_node("SaltwaterChoice")
 	local decorSelect = gui.get_node("DecorChoice")
 	local fishTankSelect = gui.get_node("FishTankSign")
 
+	-- If there is no specific action
 	if action_id == nil then
-		
+
+		-- If the user hovers over Freshwater Collection Select
 		if gui.pick_node(freshSelect, action.x, action.y) then
+
+			-- Set it's glow to visible
 			gui.set_visible(gui.get_node("FreshGlow"), true)
-			
+
+		-- If the user hovers over Saltwater Collection Select
 		elseif gui.pick_node(saltSelect, action.x, action.y) then
+
+			-- Set it's glow to visible
 			gui.set_visible(gui.get_node("SaltGlow"), true)
-			
+
+		-- If the user hovers over Decor Collection Select
 		elseif gui.pick_node(decorSelect, action.x, action.y) then
+
+			-- Set it's glow to visible
 			gui.set_visible(gui.get_node("DecorGlow"), true)
 
+		-- If the user hovers over the Fish Tank Select Sign
 		elseif gui.pick_node(fishTankSelect, action.x, action.y) then
+
+			-- Set it's glow to visible
 			gui.set_visible(gui.get_node("TankSignGlow"), true)
-			
+
+		-- If the player isn't hovering over any nodes
 		else
+			-- Set all the glows to not visible
 			gui.set_visible(gui.get_node("FreshGlow"), false)
 			gui.set_visible(gui.get_node("SaltGlow"), false)
 			gui.set_visible(gui.get_node("DecorGlow"), false)
 			gui.set_visible(gui.get_node("TankSignGlow"), false)
 		end
+		
 	end
-	
+
+	-- If the user left clicks
 	if action_id == hash("LeftClick") and action.pressed then
 
+		-- Gets the return arrow node
 		local back = gui.get_node("ReturnArrow")
 
+		-- If the user selects the return arrow
 		if gui.pick_node(back, action.x, action.y) then
 
+			-- Calls the loader to load the main crane screen
 			msg.post("Loader:/Loader", "load Crane")
 
+		-- If the user selects the freshwater collection
 		elseif gui.pick_node(freshSelect, action.x, action.y) then
 
+			-- Calls the loader to load the freshwater collection page
 			msg.post("Loader:/Loader", "load FreshCollection")
 
+		-- If the user selects the saltwater collection
 		elseif gui.pick_node(saltSelect, action.x, action.y) then
 
+			-- Calls the loader to load the saltwater collection page
 			msg.post("Loader:/Loader", "load SaltCollection")
 
+		-- If the user selects the decor collection
 		elseif gui.pick_node(decorSelect, action.x, action.y) then
 
+			-- Calls the loader to load the decor collection page
 			msg.post("Loader:/Loader", "load DecorCollection")
 
+		-- If the user selects the fish tank sign
 		elseif gui.pick_node(fishTankSelect, action.x, action.y) then
 
+			-- Calls the loader to load the fish tank
 			msg.post("Loader:/Loader", "load FishTank")
 
 		end
@@ -60,6 +97,9 @@ function on_input(self, action_id, action)
 	end
 
 end
+
+
+-- Unused Functions
 
 function final(self)
 	-- Add finalization code here
