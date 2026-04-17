@@ -1,6 +1,7 @@
 --
 -- TODO:
 -- 1. Add making the other glows false when one is true, implement using a loop/custom function
+-- 2. Mostly a loader problem, but try and make the different collections all show on one page
 --
 
 -- Executes when the script first loads
