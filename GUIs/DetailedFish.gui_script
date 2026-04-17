@@ -1,187 +1,335 @@
+--
+-- TODO:
+-- 1. See if there's a way to optimize how the repeated code is handled
+-- 2. Clean up how the trade button works
+-- 3. Should you be able to click on the unknown
+-- 
+
+-- Arrays which contain the names in order of all the items in the sets
 local FreshFishNames = {"Carp","Rainbow Trout","Alligator Gar","Ghost Knifefish","Arowana","Elephantfish","Koi","A Hundred Gar"}
 local SaltFishNames = {"Needlefish","Sculpin","Marlin","Sturgeon","Mola Mola","Blenny","Frogfish","Sea Dragon"}
 local DecorNames = {"Small Plant","Medium Plant","Large Plant","Rocks","Cave","Rainbow Rocks","Castle","Diver"}
 
+-- Local variable to keep track of which set is currently selected
 local setSelect = 0
 
+-- Local variable to keep track of which fish is currently selected
 local fishSelect = 0
 
+-- Boolean to determine whether the fish has been seen or not
 local haveFish = false
 
+-- Custom function
+-- Updates the displayed nodes with the proper item information
+-- Called every time the page is enabled and when a 
 local function displayFish()
+	
+	-- Grabs all the possibly visible nodes on screen
+	-- The item sprite node
 	local fish = gui.get_node("fish")
+	-- The item name text
 	local fishName = gui.get_node("fishNameText")
+	-- The text indicating the number owned
 	local numberOwned = gui.get_node("numberText")
+	-- The right arrow
 	local arrowRight = gui.get_node("ArrowRight")
+	-- the left arrow
 	local arrowLeft = gui.get_node("ArrowLeft")
+	-- the current token amount
 	local tokensText = gui.get_node("TokenText")
 
+	-- Sets the token text to the current global value
 	gui.set_text(tokensText,tokens)
-	
+
+	-- If the set is the freshwater set
 	if setSelect == 1 then
 
+		-- Check if the selected fish position in the global array is not equal to 0
 		if FreshwaterFish[fishSelect] ~= 0 then
+			
+			-- Set haveFish to true
 			haveFish = true
+			-- Play the correct sprite for the fish
 			gui.play_flipbook(fish, "freshwater-"..fishSelect)
+			-- Set the correct name for the fish
 			gui.set_text(fishName, FreshFishNames[fishSelect])
+			-- Set the owned number of this fish
 			gui.set_text(numberOwned,"# Owned: "..FreshwaterFish[fishSelect])
 
+			-- If the player owns 3 or more copies of the fish
 			if FreshwaterFish[fishSelect] > 2 then
+				-- Set the trade button and text to visible
 				gui.set_enabled(gui.get_node("TradeButton"), true)
 				gui.set_visible(gui.get_node("TradeText"), true)
+			-- If the player has 2 or less copies of the fish
 			else
+				-- sets the trade button and text to not visible
 				gui.set_enabled(gui.get_node("TradeButton"), false)
 				gui.set_visible(gui.get_node("TradeText"), false)
 			end
+			
+		-- if the selected fish position in the global array is equal to 0
 		elseif FreshwaterFish[fishSelect] == 0 then
+			-- Set haveFish to false 
 			haveFish = false
+			-- Set the sprite to unknown
 			gui.play_flipbook(fish, "unknown-fish")
+			-- Set the name to question mark
 			gui.set_text(fishName,"?")
+			-- Set the number owned text to 0
 			gui.set_text(numberOwned,"# Owned: 0")
+			-- Set the trade button and text to not visible
 			gui.set_enabled(gui.get_node("TradeButton"), false)
 			gui.set_visible(gui.get_node("TradeText"), false)
 		end
-		
+
+	-- If the set is the saltwater set
 	elseif setSelect == 2 then
-		
+
+		-- Check if the selected fish position in the global array is not equal to 0
 		if SaltwaterFish[fishSelect] ~= 0 then
+
+			-- Set haveFish to true
 			haveFish = true
+			-- Play the correct sprite for the fish
 			gui.play_flipbook(fish, "saltwater-"..fishSelect)
+			-- Set the correct name for the fish
 			gui.set_text(fishName, SaltFishNames[fishSelect])
+			-- Set the owned number of this fish
 			gui.set_text(numberOwned,"# Owned: "..SaltwaterFish[fishSelect])
 
+			-- If the player owns 3 or more copies of the fish
 			if SaltwaterFish[fishSelect] > 2 then
+				-- Set the trade button and text to visible
 				gui.set_enabled(gui.get_node("TradeButton"), true)
 				gui.set_visible(gui.get_node("TradeText"), true)
+			-- If the player has 2 or less copies of the fish
 			else
+				-- sets the trade button and text to not visible
 				gui.set_enabled(gui.get_node("TradeButton"), false)
 				gui.set_visible(gui.get_node("TradeText"), false)
 			end
+
+		-- if the selected fish position in the global array is equal to 0
 		elseif SaltwaterFish[fishSelect] == 0 then
+			-- Set haveFish to false 
 			haveFish = false
+			-- Set the sprite to unknown
 			gui.play_flipbook(fish, "unknown-fish")
+			-- Set the name to question mark
 			gui.set_text(fishName,"?")
+			-- Set the number owned text to 0
 			gui.set_text(numberOwned,"# Owned: 0")
+			-- Set the trade button and text to not visible
 			gui.set_enabled(gui.get_node("TradeButton"), false)
 			gui.set_visible(gui.get_node("TradeText"), false)
 		end
-		
+
+	-- If the set is the decor set
 	elseif setSelect == 3 then
-		
+
+		-- Check if the selected item position in the global array is not equal to 0
 		if TankDecor[fishSelect] ~= 0 then
+
+			-- Set haveFish to true
 			haveFish = true
+			-- Play the correct sprite for the item
 			gui.play_flipbook(fish, "decor-"..fishSelect)
+			-- Set the correct name for the item
 			gui.set_text(fishName, DecorNames[fishSelect])
+			-- Set the owned number of this item
 			gui.set_text(numberOwned,"# Owned: "..TankDecor[fishSelect])
 
+			-- If the player owns 3 or more copies of the item
 			if TankDecor[fishSelect] > 2 then
+				-- Set the trade button and text to visible
 				gui.set_enabled(gui.get_node("TradeButton"), true)
 				gui.set_visible(gui.get_node("TradeText"), true)
+			-- If the player has 2 or less copies of the item
 			else
+				-- sets the trade button and text to not visible
 				gui.set_enabled(gui.get_node("TradeButton"), false)
 				gui.set_visible(gui.get_node("TradeText"), false)
 			end
+
+		-- if the selected item position in the global array is equal to 0
 		elseif TankDecor[fishSelect] == 0 then
+			-- Set haveFish to false 
 			haveFish = false
+			-- Set the sprite to unknown
 			gui.play_flipbook(fish, "unknown-fish")
+			-- Set the name to question mark
 			gui.set_text(fishName,"?")
+			-- Set the number owned text to 0
 			gui.set_text(numberOwned,"# Owned: 0")
+			-- Set the trade button and text to not visible
 			gui.set_enabled(gui.get_node("TradeButton"), false)
 			gui.set_visible(gui.get_node("TradeText"), false)
 		end
 	end
 
+	-- If the item is the first in the set
 	if fishSelect == 1 then
+		-- Set the right arrow visible
 		gui.set_enabled(arrowRight,true)
+		-- Set the left arrow invisible
 		gui.set_enabled(arrowLeft,false)
+	-- If the item is in the middle of the set
 	elseif fishSelect > 1 and fishSelect < 8 then
+		-- Set both arrows visible
 		gui.set_enabled(arrowRight,true)
 		gui.set_enabled(arrowLeft,true)
+	-- If the item is the last in the set
 	elseif fishSelect == 8 then
+		-- Set left arrow visible
 		gui.set_enabled(arrowLeft,true)
+		-- Set right arrow invisible
 		gui.set_enabled(arrowRight,false)
 	end
+	
 end
 
+-- Executes when the script is first loaded
 function init(self)
+	-- Acquires input focus
 	msg.post(".","acquire_input_focus")
 end
 
+-- Executes when a message is received
 function on_message(self, message_id, message, sender)
 
+	-- If the message id is setUp (sent by the loader when the page is enabled)
 	if message_id == hash("setUp") then
+		-- Set passed from the collection where the fish was clicked on
 		setSelect = message.set
+		-- Fish passed from the collection where the fish was clicked on
 		fishSelect = message.fish
+		-- Calls display fish to set up the nodes
 		displayFish()
 	end
 
 end
 
+-- Executes when the script receives input
 function on_input(self, action_id, action)
 
+	-- Gets the item sprite node (Has to be gotten here to be used in clicks and releases)
 	local fish = gui.get_node("fish")
-	
+
+	-- If the user left clicks
 	if action_id == hash("LeftClick") and action.pressed then
+
+		-- Get all the UI nodes the player can interact with
 		local back = gui.get_node("Exit")
 		local arrowRight = gui.get_node("ArrowRight")
 		local arrowLeft = gui.get_node("ArrowLeft")
 		local trade = gui.get_node("TradeButton")
 
+		-- If the user selects the return arrow
 		if gui.pick_node(back, action.x, action.y) then
 
+			-- If the set is the freshwater set
 			if setSelect == 1 then
 
+				-- Send a message to the loader to enable the freshwater collection
 				msg.post("Loader:/Loader", "load FreshCollection")
 
+			-- If the set is the saltwater set
 			elseif setSelect == 2 then
 
+				-- Send a message to the loader to enable the saltwater collection
 				msg.post("Loader:/Loader", "load SaltCollection")
 
+			-- If the set is the decor set
 			elseif setSelect == 3 then
 
+				-- Send a message to the loader to enable the decor collection
 				msg.post("Loader:/Loader", "load DecorCollection")
 
 			end
 
+		-- If the players click on the right arrow 
 		elseif gui.pick_node(arrowRight, action.x, action.y) then
+
+			-- If the arrow is enabled (to prevent players from clicking on the node when it's not visible)
 			if gui.is_enabled(arrowRight) then
+				-- Increase fishSelect by one (to the next fish)
 				fishSelect = fishSelect + 1
-				displayFish()
-			end
-		elseif gui.pick_node(arrowLeft, action.x, action.y) then
-			if gui.is_enabled(arrowLeft) then
-				fishSelect = fishSelect - 1
+				-- Call displayFish to properly set the nodes
 				displayFish()
 			end
 
-		elseif gui.pick_node(trade, action.x, action.y) then
+		-- If the players clicks on the left arrow 
+		elseif gui.pick_node(arrowLeft, action.x, action.y) then
+
+			-- If the arrow is enabled (to prevent players from clicking on the node when it's not visible)
+			if gui.is_enabled(arrowLeft) then
+				-- Decrease fishSelect by one (to the previous fish)
+				fishSelect = fishSelect - 1
+				-- Call displayFish to properly set the nodes
+				displayFish()
+			end
+
+		-- If the player clicks on the trade button
+	elseif gui.pick_node(trade, action.x, action.y) then
+		
+			-- If the trade button is enables (to prevent players from clicking on it when it's not enabled)
 			if gui.is_enabled(trade) then
+				
+				-- If it's the freshwater set
 				if setSelect == 1 then
+					-- Remove 3 from the position in the global array
 					FreshwaterFish[fishSelect] = FreshwaterFish[fishSelect] - 3
+					-- Add one token to the global tokens
 					tokens = tokens+1
+					-- Call display fish to update the relevant nodes
 					displayFish()
+				-- If it's the saltwater set
 				elseif setSelect == 2 then
+					-- Remove 3 from the position in the global array
 					SaltwaterFish[fishSelect] = SaltwaterFish[fishSelect] - 3
+					-- Add one token to the global tokens
 					tokens = tokens+1
+					-- Call display fish to update the relevant nodes
 					displayFish()
+				-- If it's the decor set
 				elseif setSelect == 3 then
+					-- Remove 3 from the position in the global array
 					TankDecor[fishSelect] = TankDecor[fishSelect] - 3
+					-- Add one token to the global tokens
 					tokens = tokens+1
+					-- Call display fish to update the relevant nodes
 					displayFish()
 				end
+				
 			end
+
+		-- If the player clicks on the fish sprite node
 		elseif gui.pick_node(fish, action.x, action.y) then
+		
+			-- If haveFish is true, meaning the fish sprite is not unknown
 			if haveFish then
+				-- Increase the petFish counter
 				petFish = petFish+1
+				-- Set the scale slightly smaller
 				gui.set_scale(fish, vmath.vector3(.9,.9,0))
+				-- Send a message to the loader to play a fish blub sound
 				msg.post("Loader:/Loader","Sound", {sound = 1})
 			end
+			
 		end
+
+	-- When the player releases their clcik
 	elseif action_id == hash("LeftClick") and action.released then
+
+		-- Reset the fish scale back to normal 
 		gui.set_scale(fish, vmath.vector3(1,1,0))
+		
 	end
 	
 end
+
+-- Unused Functions
 
 function final(self)
 	-- Add finalization code here
