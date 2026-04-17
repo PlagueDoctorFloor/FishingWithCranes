@@ -1,105 +1,178 @@
+-- 
+-- WARNING: THIS IS IMPLEMENTED IN A BAD AND STUPID WAY. BUT IT IS FUNCTIONAL FOR THE PURPOSES OF THIS GAME SO I AM LEAVING IT
+-- TODO: 
+-- 1. Look into how new stickers interact with deleting/prevent player from moving/deleting while the new sticker menu is open
+-- 
+
+-- Variables local to all stickers
+-- Keeps track of a table of their number
 local stickerTable = {}
+-- Stickernumber starts at 1 with the first sticker
 local stickerNumber = 1
+-- Keep track of whether a sticker has been grabbed
 local sticker_grabbed = false
+-- Keeps track of whether we're in delete mode
 local deleteTime = false
 
+-- Executes each time a gui object is created
 function init(self)
+
+	-- Acquires input focus
 	msg.post(".", "acquire_input_focus")
 	
 
-	-- list of boxes to drag
+	-- Insert stickers number into the shared table
 	table.insert(stickerTable, stickerNumber)
+	-- Set the internal gui's sticker variable to the node
 	self.sticker = gui.get_node("Sticker")
+	-- Set the internal gui's number variable to it's number
 	self.number = stickerNumber
 
+	-- Increase sticker number for all the stickers so the next sticker gets the next number
 	stickerNumber = stickerNumber+1
 
 	-- variable where the currently dragged box is stored
 	self.dragged_box = nil
 end
 
+-- Executes when the script receives a message
 function on_message(self, message_id, message, sender)
-	
+
+	-- If the message id is setUp (sent from the SpawnSticker script with the stickers sprite info)
 	if message_id == hash("setUp") then
+		
+		-- Checks which set the sticker is meant to be from
+		-- If freshwater
 		if message.set == 1 then
+			-- Sets it to the appropriate freshwater sprite
 			gui.play_flipbook(gui.get_node("Sticker"), "freshwater-"..message.item)
+		-- If saltwater
 		elseif message.set == 2 then
+			-- Sets it to the appropriate saltwater sprite
 			gui.play_flipbook(gui.get_node("Sticker"), "saltwater-"..message.item)
+		-- If decor
 		elseif message.set == 3 then
+			-- Sets it to the appropriate saltwater sprite
 			gui.play_flipbook(gui.get_node("Sticker"), "decor-"..message.item)
 		end
+
+	-- If the message id is delete (sent from the SpawnSticker script to all stickers when delete time is activated)
 	elseif message_id == hash("Delete") then
+		-- deleteTime set to true
 		deleteTime = true
 
+	-- If the message id is DoneDelete (sent from the SpawnSticker script to all stickers when delete time is over)
 	elseif message_id == hash("DoneDelete") then
+		-- deleteTime set to false
 		deleteTime = false
 	end
 	
 end
 
+-- Executes when the script receives input
 function on_input(self, action_id, action)
+
+	-- if the player left clicks
 	if action_id == hash("LeftClick") then
 
+		-- if it's not delete time
 		if not deleteTime then
-			-- update the position of the currently dragged box
+			
+			-- If the script executing it attached to a node being dragged
 			if self.dragged_box then
+				-- Grab the position of the mouse
 				local mouse_position = vmath.vector3(action.x, action.y, 0)
+				-- Update the position of the currently dragged box to the mouse position
 				gui.set_position(self.dragged_box, mouse_position)
 			end
 
-			-- check if the mouse button was pressed
+			-- Check if the mouse button was pressed
 			if action.pressed then
+
+				-- This will trigger independently for each node, in the opposite order of which they were spawned
+				-- This for loop/if statement hell prevents 2 stickers stacked on top of each other from both being picked up
+				-- This will result in the most recently spawned sticker always being picked up when 2 stickers are overlapped
+				
+				-- Iterate through the sticker table
 				for i=1,#stickerTable do
+					
+					-- If a sticker has not yet been grabbed
 					if not sticker_grabbed then
+						-- Check if self.sticker is not equal to nil, as it will trigger on deleted nodes
 						if self.sticker ~= nil then
+							-- Grab the node 
 							local chosenSticker = self.sticker
+							-- Check if it's the node being clicked on
 							if gui.pick_node(chosenSticker, action.x, action.y) then
+								-- if their number matches the number currently being iterated
 								if self.number == i then
-									-- keep track of the box as being dragged
+									-- Set them as the box currently being dragged
 									self.dragged_box = chosenSticker
+									-- Set sticker grabbed to true so no other stickers will get set as being dragged
 									sticker_grabbed = true
+									-- Returns the for loop to stop iterating
 									return
 								end
 							end
 						end
 					end
+					
 				end
 			
-			-- check if the mouse button was released
-			-- clear the variable which keeps track of which box is dragged
+			-- Check if the mouse button was released
 			elseif action.released then
+				-- clear the variable which keeps track of which box is dragged
 				self.dragged_box = nil
+				-- Set sticker_grabbed to false 
 				sticker_grabbed = false
 			end
-			
+
+		-- If it is DELETE TIME
 		else
 
+			-- Check if a left click has bee done
 			if action.pressed then
+
+				-- Iterate through the sticker table
 				for i=1,#stickerTable do
+
+					-- If a sticker has not yet been chosen for death
 					if not sticker_grabbed then
+						-- Check if self.sticker is not equal to nil, as it will trigger on deleted nodes
 						if self.sticker ~= nil then
+							-- Grab the node 
 							local chosenSticker = self.sticker
+							-- Check if it's the node being clicked on
 							if gui.pick_node(chosenSticker, action.x, action.y) then
+								-- if their number matches the number currently being iterated
 								if self.number == i then
-									-- keep track of the box as being dragged
+									-- Set them as the box chosen for death
 									sticker_grabbed = true
+									-- Delete the node
 									gui.delete_node(self.sticker)
+									-- Send a message to SpawnSticker to delete the stickers address from it's array
 									msg.post("/Spawner","deleteSticker",{number = self.number})
+									-- set self.sticker to nil
 									self.sticker = nil
 									return
 								end
 							end
 						end
 					end
+					
 				end
 
+			-- When click is released in Delete Mode
 			elseif action.released then
+				-- Set sticker grabbed to false so more things can be deleted
 				sticker_grabbed = false
 			end
 
 		end
 	end
 end
+
+-- Unused Functions
 
 function final(self)
 	-- Add finalization code here
