@@ -1,29 +1,62 @@
+--
+-- TODO:
+-- 
 
+-- Local array to keep track of the node addresses which have been spawned
 local spawnedStickers = {}
 
+-- Executes whenever the scrip receives a message
 function on_message(self, message_id, message, sender)
 
+	-- If the message ID is spawnSticker
 	if message_id == hash("spawnSticker") then
+
+		-- Spawns a new object containing a sticker node and saves the address
 		local stickerID = factory.create("#StickerSpawner")
+		-- Sends a message to the new node with the ID "setUp" and passing it the set and item it's meant to represent
 		msg.post(stickerID,"setUp", {set = message.set, item = message.item})
+		-- Insert the ID into the spawnedStickers table for contacting later
 		table.insert(spawnedStickers,stickerID)
+
+	-- If the message ID is Delete
 	elseif message_id == hash("Delete") then
+	
+		-- Iterate through the length of the spawnedStickers list
 		for i=1,#spawnedStickers do
+			
+			-- Check if the sticker indice is not nil
 			if spawnedStickers[i] ~= nil then
+				-- Sends the sticker a message with the ID Delete
 				msg.post(spawnedStickers[i],"Delete")
 			end
+			
 		end
+
+	-- If the message ID is DoneDelete 
 	elseif message_id == hash("DoneDelete") then
+
+		-- Iterate through the length of the spawnedStickers list
 		for i=1,#spawnedStickers do
+			
+			-- Check if the sticker indice is not nil
 			if spawnedStickers[i] ~= nil then
+				-- Sends the sticker a message with the ID DoneDelete
 				msg.post(spawnedStickers[i],"DoneDelete")
 			end
+			
 		end
+
+	-- If the message ID is deleteSticker
 	elseif message_id == hash("deleteSticker") then
+
+		-- Sets the position of the deleted stickers into the array to nil
 		spawnedStickers[message.number] = nil
+		
 	end
 	
 end
+
+-- Unused Functions 
 
 function init(self)
 	-- Add initialization code here
