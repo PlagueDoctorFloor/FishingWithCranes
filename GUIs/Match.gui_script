@@ -1,41 +1,70 @@
+-- 
+-- TODO: 
+-- 1. Check the array iteration is optimized
+-- 2. Do we need a win/lost variable
+-- 3. Optimize how we check which card is clicked (can probably use a for loop)
+-- 4. Use custom functions instead of message passing
+-- 
+
+-- Local Variables
+
+-- Local Array holding the values of the cards in the match game
 local cards = {1,1,2,2,3,3}
 
+-- Local array holding the spots of where the cards are assigned
 local cardsPlace = {0,0,0,0,0,0}
 
+-- Variables keeping track of whether they lost or won
 local won = false
-
 local lost = false
 
--- Keep Track Of Positions
+-- Local small array to kee track Of the Positions of the cards flipped over
 local cardsFlipped = {0,0}
 
+-- Variable to keep track of how many cards have been flipped
 local flipAmount = 0
 
+-- Variable keeping track of the total number of flips the player has left
 local flipsLeft = 10
 
+-- Array keeping track of which cards have been flipped over
 local flippedOver = {0,0,0,0,0,0}
 
+-- Boolean keeping track of whether the game is currently evaluating a match
 local evaluating = false
 
+-- Custom function
+-- This function sets up which cards are in what positions at the beginning of the game
 local function cardSet()
 
+	-- Iterates for each card in the game
 	for i = 1, 6, 1 do
 
+		-- calls a random number between 1 and 6
 		local cardSelect = math.random(1,6)
 
+		-- Checks if the position chosen has already been chosen, so is set to 0
 		while cards[cardSelect] == 0 do
+			-- Calls a new random number until they hit a position that hasn't been called yet
 			cardSelect = math.random(1,6)
 		end
 
+		-- Sets the spot in card place to the selected card
 		cardsPlace[i] = cards[cardSelect]
+		-- Sets that spot in cards to 0 so the same card can't be chosen again. This ensures only 2 of each card is in 
 		cards[cardSelect] = 0
+		
 	end
 
 end
 
+-- Custom Function
+-- Resets all the variables and nodes so the game can be played again
 local function Reset() 
+	-- Reset the win/lost variables
 	won = false
 	lost = false
+	-- Resets the arrays and variables to their initial values
 	cards = {1,1,2,2,3,3}
 	cardsPlace = {0,0,0,0,0,0}
 	flipsLeft = 10
@@ -44,44 +73,64 @@ local function Reset()
 	flipsLeft = 10
 	flippedOver = {0,0,0,0,0,0}
 	evaluating = false
+	-- Sets all the game end nodes to not visible
 	gui.set_visible(gui.get_node("endGameText"), false)
 	gui.set_enabled(gui.get_node("playAgain"), false)
 	gui.set_visible(gui.get_node("playAgain"), false)
 	gui.set_visible(gui.get_node("playAgainText"),false)
+	-- Sets all the cards to the back animation
 	gui.play_flipbook(gui.get_node("card1"), "fish-match-card-back")
 	gui.play_flipbook(gui.get_node("card2"), "fish-match-card-back")
 	gui.play_flipbook(gui.get_node("card3"), "fish-match-card-back")
 	gui.play_flipbook(gui.get_node("card4"), "fish-match-card-back")
 	gui.play_flipbook(gui.get_node("card5"), "fish-match-card-back")
 	gui.play_flipbook(gui.get_node("card6"), "fish-match-card-back")
+	-- Calls cardSet to get a new card distribution
 	cardSet()
 end
 
+-- Custom Function
+-- called after an animation to evaluate whether the player has turned over a pair
+-- this makes it so it doesn't auto-evaluate, preventing the player from seeing the second card
 local function animationEnd(self)
+	-- Sends a message to itself with the ID evaluate
 	msg.post("#","evalute")
 end
 
+-- Execute when the script is first loaded
 function init(self)
+	-- Acquires input focus
 	msg.post(".","acquire_input_focus")
+	-- Sets the on screen token text
 	gui.set_text(gui.get_node("TokenText"),tokens)
+	-- Seeds the random 
 	math.randomseed(socket.gettime() * 100000)
+	-- Calls cardSet to set up the game
 	cardSet()
 end
 
+-- Executes when when the script receives input
 function on_input(self, action_id, action)
 
+	-- If the player left clicks
 	if action_id == hash("LeftClick") and action.pressed then
 
+		-- Get the return arrow node
 		local goBack = gui.get_node("Exit")
 
+		-- If the user clicks the arrow to go back
 		if gui.pick_node(goBack, action.x, action.y) then
+			-- Calls the loader to load the mini game select
 			msg.post("Loader:/Loader", "load MiniGameSelect")
 		end
 
+		-- If the player has not won or lost
 		if not won and not lost then
 
+			-- if the game is not currently evaluating
 			if not evaluating then
 
+				-- Get the 6 card nodes
 				local card1 = gui.get_node("card1")
 				local card2 = gui.get_node("card2")
 				local card3 = gui.get_node("card3")
@@ -89,28 +138,59 @@ function on_input(self, action_id, action)
 				local card5 = gui.get_node("card5")
 				local card6 = gui.get_node("card6")
 
+				-- Checks if the player clicked any of the card
+
+				-- If they clicked card 1
 				if gui.pick_node(card1, action.x, action.y) then
+
+					-- Checks if the node clicked has already been flipped over (set to anything other then 1 in the flippedOver array)
 					if flippedOver[1] ~= 1 then
+						-- Send a message to self with the data of which card was flipped
 						msg.post("#","flip",{card = 1})
 					end
+
+				-- If they clicked card 2
 				elseif gui.pick_node(card2, action.x, action.y) then
+
+					-- Checks if the node clicked has already been flipped over (set to anything other then 1 in the flippedOver array)
 					if flippedOver[2] ~= 1 then
+						-- Send a message to self with the data of which card was flipped
 						msg.post("#","flip",{card = 2})
 					end
+
+				-- If they clicked card 3
 				elseif gui.pick_node(card3, action.x, action.y) then
+
+					-- Checks if the node clicked has already been flipped over (set to anything other then 1 in the flippedOver array)
 					if flippedOver[3] ~= 1 then
+						-- Send a message to self with the data of which card was flipped
 						msg.post("#","flip",{card = 3})
-					end				
+					end
+							
+				-- If they clicked card 4	
 				elseif gui.pick_node(card4, action.x, action.y) then
+
+					-- Checks if the node clicked has already been flipped over (set to anything other then 1 in the flippedOver array)
 					if flippedOver[4] ~= 1 then
+						-- Send a message to self with the data of which card was flipped
 						msg.post("#","flip",{card = 4})
 					end
+
+				-- If they clicked card 5
 				elseif gui.pick_node(card5, action.x, action.y) then
+
+					-- Checks if the node clicked has already been flipped over (set to anything other then 1 in the flippedOver array)
 					if flippedOver[5] ~= 1 then
+						-- Send a message to self with the data of which card was flipped
 						msg.post("#","flip",{card = 5})
 					end
+
+				-- If they clicked card 6
 				elseif gui.pick_node(card6, action.x, action.y) then
+
+					-- Checks if the node clicked has already been flipped over (set to anything other then 1 in the flippedOver array)
 					if flippedOver[6] ~= 1 then
+						-- Send a message to self with the data of which card was flipped
 						msg.post("#","flip",{card = 6})
 					end
 				end
