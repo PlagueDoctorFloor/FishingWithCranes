@@ -1,30 +1,48 @@
+-- 
+-- TODO: 
+-- 1. Correctly set up the script info
+-- 
+
+-- Executes when the script first loads
 function init(self)
+	-- Acquire Input Focus
 	msg.post(".", "acquire_input_focus")
 end
 
+-- Executes when the script receives input
 function on_input(self, action_id, action)
-	
+
+	-- If the user left clicks
 	if action_id == hash("LeftClick") and action.pressed then
 
+		-- Get all of the choice nodes 
 		local back = gui.get_node("ReturnArrow")
 		local fishTacToe = gui.get_node("FishTacToe")
 		local fishMatch = gui.get_node("Match")
 		local flappyFish = gui.get_node("FlappingFish")
 
+		-- If the user selects the back arrow
 		if gui.pick_node(back, action.x, action.y) then
 
+			-- Send a message to the loader to load the main crane screen
 			msg.post("Loader:/Loader", "load Crane")
 
+		-- If the user selects Fish Tac Toe 
 		elseif gui.pick_node(fishTacToe, action.x, action.y) then
 
+			-- Sends a message to the loader to load the fish tac toe game
 			msg.post("Loader:/Loader", "load FishTacToe")
 
+		-- If the user selects the Match game
 		elseif gui.pick_node(fishMatch, action.x, action.y) then
 
+			-- Sends a message to the loader to load the match game
 			msg.post("Loader:/Loader", "load FishMatch")
 
+		-- If the user selects the flappy fish game
 		elseif gui.pick_node(flappyFish, action.x, action.y) then
 
+			-- Sends a message to the loader to load the flappy fish game
 			msg.post("Loader:/Loader", "load FlappingFish")
 
 		end
@@ -32,6 +50,8 @@ function on_input(self, action_id, action)
 	end
 
 end
+
+-- Unused Functions
 
 function final(self)
 	-- Add finalization code here

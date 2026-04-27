@@ -549,6 +549,8 @@ function on_message(self, message_id, message, sender)
 	end
 end
 
+-- Unused Functions
+
 function final(self)
 	-- Add finalization code here
 	-- Learn more: https://defold.com/manuals/script/

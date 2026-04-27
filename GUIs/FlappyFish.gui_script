@@ -126,6 +126,8 @@ function init(self)
 	gui.set_text(gui.get_node("TokenText"),tokens)
 end
 
+-- Unused Functions
+
 function final(self)
 	-- Add finalization code here
 	-- Learn more: https://defold.com/manuals/script/

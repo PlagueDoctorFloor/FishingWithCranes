@@ -54,7 +54,7 @@ end
 -- Executes when the script receives input
 function on_input(self, action_id, action)
 
-	-- Grab all of the achievements nodes
+	-- Grab all of the item nodes
 	local fish1 = gui.get_node("fish1")
 	local fish2 = gui.get_node("fish2")
 	local fish3 = gui.get_node("fish3")

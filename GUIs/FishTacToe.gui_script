@@ -337,7 +337,7 @@ function on_message(self, message_id, message, sender)
 	
 end
 
-
+-- Unused Functions
 
 function final(self)
 	-- Add finalization code here

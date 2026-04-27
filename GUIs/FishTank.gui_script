@@ -1,15 +1,28 @@
+-- 
+-- TODO:
+-- 1. Make it so you can only do one thing at a time - can't delete while choosing items
+-- 
+
+-- Boolean keeping track of whether we are in screenshot mode
 local screenshotMode = false
 
+-- Array to keep track of which nodes are currently visible for screenshot mode
 local currentlyVisible = {}
 
+-- Boolean keeping track of whether the player is choosing decor
 local decorTime = false
 
+-- Integer keeping track of which set the player is looking at
 local setSelect = 1
 
+-- Boolean keeping track of whether the player is deleting nodes or not
 local deleteTime = false
 
+-- Custom Function
+-- This function determines which items the player has encountered and displays them
 local function displayStickers()
 
+	-- Gets all 8 item nodes and the set name
 	local fish1 = gui.get_node("fish1")
 	local fish2 = gui.get_node("fish2")
 	local fish3 = gui.get_node("fish3")
@@ -20,33 +33,57 @@ local function displayStickers()
 	local fish8 = gui.get_node("fish8")
 	local SetName = gui.get_node("SetNameText")
 
+	-- If it's set 1
 	if setSelect == 1 then
+		-- Set the set name to Freshwater
 		gui.set_text(SetName,"Freshwater")
+		-- iterate through the global array
 		for i=1,8,1 do
+			-- Check if the position is not 0
 			if FreshwaterFish[i] ~= 0 then
+				-- Set the node visible
 				gui.set_visible(gui.get_node("fish"..i),true)
+				-- Set the node to the correct sprite
 				gui.play_flipbook(gui.get_node("fish"..i), "freshwater-"..i)
+			-- If the position in the array is 0
 			else
+				-- Set the node not visible
 				gui.set_visible(gui.get_node("fish"..i),false)
 			end
 		end
+	-- If the set is set 2
 	elseif setSelect == 2 then
+		-- Set the set name to Saltwater
 		gui.set_text(SetName,"Saltwater")
+		-- iterate through the global array
 		for i=1,8,1 do
+			-- Check if the position is not 0
 			if SaltwaterFish[i] ~= 0 then
+				-- Set the node visible
 				gui.set_visible(gui.get_node("fish"..i),true)
+				-- Set the node to the correct sprite
 				gui.play_flipbook(gui.get_node("fish"..i), "saltwater-"..i)
+			-- If the position in the array is 0
 			else
+				-- Set the node not visible
 				gui.set_visible(gui.get_node("fish"..i),false)
 			end
 		end
+	-- If the set is set 3
 	elseif setSelect == 3 then
+		-- Set the set name to Decor
 		gui.set_text(SetName,"Decor")
+		-- iterate through the global array
 		for i=1,8,1 do
+			-- Check if the position is not 0
 			if TankDecor[i] ~= 0 then
+				-- Set the node visible
 				gui.set_visible(gui.get_node("fish"..i),true)
+				-- Set the node to the correct sprite
 				gui.play_flipbook(gui.get_node("fish"..i), "decor-"..i)
+			-- If the position in the array is 0
 			else
+				-- Set the node not visible
 				gui.set_visible(gui.get_node("fish"..i),false)
 			end
 		end
@@ -54,109 +91,165 @@ local function displayStickers()
 
 end
 
+-- Executes when the script first loads
 function init(self)
+	-- Acquirs input focus
 	msg.post(".", "acquire_input_focus")
 
-	--guiNodes = {gui.get_node("ScreenshotModeButton"),gui.get_node("ScreenshotModeText"),gui.get_node("DecorSelect"),gui.get_node("X"),gui.get_node("fish1"),gui.get_node("fish2"),gui.get_node("fish3"),gui.get_node("fish4"),gui.get_node("fish5"),gui.get_node("fish6"),gui.get_node("fish7"),gui.get_node("fish8"),gui.get_node("RightArrow"),gui.get_node("SetName"),gui.get_node("SetNameText"),gui.get_node("ReturnArrow"),gui.get_node("DecorButton"),gui.get_node("DecorText")}
+	-- Sets up the currentlyVisible array with the nodes visible on first load
 	currentlyVisible = {gui.get_node("ScreenshotModeButton"),gui.get_node("ScreenshotModeText"),gui.get_node("ReturnArrow"),gui.get_node("DecorButton"),gui.get_node("DecorText"),gui.get_node("DeleteButton"),gui.get_node("DeleteText")}
 end
 
+-- Executes when the script receives input
 function on_input(self, action_id, action)
 
+	-- If the scenes not in screenshot mode 
 	if not screenshotMode then
 
+		-- If the player hits the spacebar
 		if action_id == hash("space") and action.pressed then
+
+			-- Set screenshotMode to true
 			screenshotMode = true
 
+			-- Iterate through the currentlyVisible array
 			for i=1,#currentlyVisible,1 do
+				-- Set the nodes to not visible
 				gui.set_visible(currentlyVisible[i],false)
 			end
+			
 		end
 
+		-- If the user left clicks
 		if action_id == hash("LeftClick") and action.pressed then
 
+			-- Grab the interactive buttons on screen
 			local decor = gui.get_node("DecorButton")
 			local delete = gui.get_node("DeleteButton")
 			local goBack = gui.get_node("ReturnArrow")
 
+			-- If the user selects the arrow to go back
 			if gui.pick_node(goBack, action.x, action.y) then
 
+				-- Sends a message to the loader to load the collection select screen
 				msg.post("Loader:/Loader", "load Collection")
 				
 			end
 
+			-- If the user selects the delete button
 			if gui.pick_node(delete, action.x, action.y) then
+
+				-- Grabs the delete text node
 				local deleteText = gui.get_node("DeleteText")
+
+				-- If deleteTime is true
 				if deleteTime then
+					-- Set deleteTime false
 					deleteTime = false
+					-- Set the button text to delete
 					gui.set_text(deleteText, "Delete")
+					-- Send a message to the node spawner letting it know deletion is done
 					msg.post("/Spawner","DoneDelete")
+				-- If deleteTime is False
 				else
+					-- Set deleteTime true
 					deleteTime = true
+					-- Set the button text to Done Deleting
 					gui.set_text(deleteText, "Done Deleting")
+					-- Send a message to the node spawner letting it know the player is deleting nodes
 					msg.post("/Spawner","Delete")
 				end
+				
 			end
 
+			-- If it is not decorTime
 			if not decorTime then	
-				
+
+				-- If the user chooses the decor button
 				if gui.pick_node(decor, action.x, action.y) then
-				
+
+					-- Iterates through the currentlyVisible array
 					for i=1,#currentlyVisible,1 do
+						-- Sets all of the nodes in the array to not visible
 						gui.set_visible(currentlyVisible[i],false)
 					end
-				
+
+					-- Sets the new nodes which should be visible in the array
 					currentlyVisible = {gui.get_node("ScreenshotModeButton"),gui.get_node("ScreenshotModeText"),gui.get_node("ReturnArrow"),gui.get_node("DecorSelect"),gui.get_node("X"),gui.get_node("fish1"),gui.get_node("fish2"),gui.get_node("fish3"),gui.get_node("fish4"),gui.get_node("fish5"),gui.get_node("fish6"),gui.get_node("fish7"),gui.get_node("fish8"),gui.get_node("RightArrow"),gui.get_node("SetName"),gui.get_node("SetNameText"),gui.get_node("DeleteButton"),gui.get_node("DeleteText")}
 
+					-- Iterates through the currentlyVisible array
 					for i=1,#currentlyVisible,1 do
+						-- Sets all of the nodes in the array to visible
 						gui.set_visible(currentlyVisible[i],true)
 					end
 
+					-- Set decorTime true
 					decorTime = true
 
+					-- Call displayStickers so the stickers displayed are accurate
 					displayStickers()
 				
 				end
 
+			-- If it is decorTime
 			else
 
+				-- Get the interactable nodes in the decor menu
 				local close = gui.get_node("X")
 				local right = gui.get_node("RightArrow")
+				-- Array of sticker nodes
 				local stickerNodes = {gui.get_node("fish1"),gui.get_node("fish2"),gui.get_node("fish3"),gui.get_node("fish4"),gui.get_node("fish5"),gui.get_node("fish6"),gui.get_node("fish7"),gui.get_node("fish8")}
 
+				-- If the user clicks the X
 				if gui.pick_node(close, action.x, action.y) then
-					
+
+					-- Iterate through the currentlyVisible array
 					for i=1,#currentlyVisible,1 do
+						-- Sets all the nodes invisible
 						gui.set_visible(currentlyVisible[i],false)
 					end
 
+					-- Sets the currentlyVisible node with the nodes that should be visible with the decor screen closed
 					currentlyVisible = {gui.get_node("ScreenshotModeButton"),gui.get_node("ScreenshotModeText"),gui.get_node("ReturnArrow"),gui.get_node("DecorButton"),gui.get_node("DecorText"),gui.get_node("DeleteButton"),gui.get_node("DeleteText")}
 
+					-- Iterates through the currentlyVisible array
 					for i=1,#currentlyVisible,1 do
+						-- Sets all the nodes visible
 						gui.set_visible(currentlyVisible[i],true)
 					end
 
+					-- Sets decorTime to false
 					decorTime = false
 					
 				end
 
+				-- If the user clicks the right arrow
 				if gui.pick_node(right, action.x, action.y) then
 
+					-- If set Select is currently 3 (displaying the decor set)
 					if setSelect == 3 then
+						-- Set to 1, back to the front
 						setSelect = 1
+					-- If setSelect is not 3
 					else 
+						-- Increase by 1
 						setSelect = setSelect+1
 					end
 
+					-- Calls displayStickers to iterate through the new set and display the correct stickers
 					displayStickers()
 
 				end
 
+				-- Iterates through the sticker nodes
 				for i=1,#stickerNodes do
+					-- Gets the node
 					local node = stickerNodes[i]
+					-- Checks if it was clicked
 					if gui.pick_node(node, action.x, action.y) then
+						-- Checks if the node is visible, in case player clicks on a not found item
 						if gui.get_visible(node) then
-							local referencenode = gui.get_node("DecorSelect")
+							-- Message sent to the spawner to spawn a sticker with the set and item number
 							msg.post("/Spawner","spawnSticker",{set = setSelect, item = i})
 						end
 					end
@@ -166,14 +259,20 @@ function on_input(self, action_id, action)
 			
 		end
 
+	-- if it's screenshot mode
 	elseif screenshotMode then
 
+		-- If the user presses the spacebar
 		if action_id == hash("space") and action.pressed then
-		
+
+			-- Set screenshotmode to false
 			screenshotMode = false
+			-- Iterate through the currentlyVisible array
 			for i=1,#currentlyVisible,1 do
+				-- Sets all nodes to visible
 				gui.set_visible(currentlyVisible[i],true)
 			end
+			-- Call display stickers in case it's decor time to make sure everything's displayed correctly
 			displayStickers()
 			
 		end
@@ -181,6 +280,8 @@ function on_input(self, action_id, action)
 	end
 	
 end
+
+-- Unused Functions
 
 function final(self)
 	-- Add finalization code here
