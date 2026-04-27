@@ -1,97 +1,170 @@
+-- 
+-- TODO:
+-- 1. Do we need win, lost, and died?
+-- 
+
+-- Boolean to keep track of whether the game has started
 local gameStart = false
 
+-- Boolean to keep track of whether the game was won
 local gameWin = false
 
+-- Boolean to keep track of whether the game was lost
 local gameLost = false
 
+-- Integer to help with accerleration 
 local dy = 200
 
+-- Boolean to keep track of whether the player has died
 local dead = false
 
+-- Variable to keep track of the current Course object ID
 local courseID = 0
 
+-- Integer to keep track of which course is currently spawned
 local currentCourse = 0
 
+-- Custom Function
+-- Resets the fish to the middle of the screen
+-- Resets the variables
 local function reset()
+
+	-- Sets the position of the fish back to the center of the screen
 	go.set_position(vmath.vector3(640,360,0),"FlyingFish")
+	-- Resets the variables to their starting values
 	gameStart = false
 	gameWin = false
 	gameLost = false
 	dy = 200
 	dead = false
+	
 end
 
+-- Custom Function
+-- A clamp function bounds a number within a provided minimum and maximum
 local function clamp(number,min,max)
 
+	-- Checks if the number is less than the minimum
 	if number < min then
+		-- Sets the number to the minimum value
 		number = min
+	-- Checks if the number is larger  than the maximum
 	elseif number > max then
+		-- Sets the number to the maximum value
 		number = max
 	end
 
+	-- Return the number
 	return number
 
 end
 
+-- Executes every frame
 function update(self, dt)
 
+	-- If gameStart is true
 	if gameStart then
 
+		-- Get the position of the fish object
 		local pos = go.get_position("FlyingFish")
-	
+
+		-- Subtract the acceleration variable times the time since the last frame from the current y position
 		pos.y = pos.y - (dy * dt)
+		-- Add 600 times the time since the last frame
 		dy = dy + (600*dt)
+		-- Call clamp to keep dy's accerlation between 2 values
 		dy = clamp(dy,-1000,500)
-	
+
+		-- Set the fish to the new position
 		go.set_position(pos, "FlyingFish")
 
 	end
 		
 end
 
+-- Executes when the script receives input
 function on_input(self, action_id, action)
+
+	-- If the player has not died
 	if not dead then
-		
+
+		-- If the player left clicks
 		if action_id == hash("LeftClick") and action.pressed then
 
+			-- If gameStart has not been set to true
 			if not gameStart then
+				-- Set it true
 				gameStart = true
+				-- Send a message to the coral course to tell it the game has started
 				msg.post(courseID,"gameStart")
 			end
+
+			-- Set the acceleration variable to -300 so the fish will go up for several frames
 			dy = -300
+			-- Play the fish flapping animation
 			sprite.play_flipbook("#sprite","FlyingFish")
+			
 		end
 		
 	end
 end
 
+-- Executes when the script receives a message
 function on_message(self, message_id, message, sender)
-	
+
+	-- If the message id is a trigger response from entering another collision object
 	if message_id == hash("trigger_response") and message.enter then
+		
+		-- If the other group is the coral
 		if message.other_group == hash("Coral") then
+			-- Set dead to true
 			dead = true
+			-- Send a message to the coral object telling it the player died
 			msg.post(courseID,"died")
+			-- Send a message to the GUI to tell it the player lost
 			msg.post("/FlappyFishGUI","Lost")
+
+		-- If the other group is the winTrigger
 		elseif message.other_group == hash("WinTrigger") then
+			-- Set gameStart to false
 			gameStart = false
+			-- Send a message to the coral object telling it the player died
 			msg.post(courseID,"died")
+			-- Add one to the global token variable
 			tokens = tokens+1
+			-- Send a message to the GUI to tell it the player won
 			msg.post("/FlappyFishGUI","Won")
+			-- set gameWin to true
 			gameWin = true
+			-- Set the course in the global CoursesComplete array to 1 to indicate it was beat
 			coursesComplete[currentCourse] = 1
 		end
+
+	-- If the message ID is reset
 	elseif message_id == hash("Reset") then
+
+		-- Call the reset function
 		reset()
+
+	-- If the message ID is Course
 	elseif message_id == hash("Course") then
+	
+		-- Set the course object ID to CourseID
 		courseID = message.id
+		-- Set the course number
 		currentCourse = message.course
+		
 	end
 	
 end
 
+-- Executes the first time the script is loaded
 function init(self)
+	-- Acquires input focus
 	msg.post(".","acquire_input_focus")
 end
+
+-- Unused Functions
 
 function final(self)
 	-- Add finalization code here

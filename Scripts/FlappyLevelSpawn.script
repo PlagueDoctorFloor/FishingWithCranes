@@ -1,27 +1,49 @@
+-- 
+-- TODO:
+-- 
+
+-- Variable to track the current course ID
 local courseID = 0
 
+-- Custom Function
+-- Chooses one of the 3 courses and calls the correct factory to spawn it
 function spawnCourse()
 
+	-- Chooses a random number between 1 and 3
 	local select = math.random(1,3)
+	-- Calls the correct factory to spawn the course off to the right of the screen and saves the returned object ID
 	courseID = factory.create("#Course"..select,vmath.vector3(1280,0,0))
+	-- Send a message to the flying fish script with the course object ID and the course number
 	msg.post("/FlyingFish","Course",{id = courseID, course = select})
+	-- Send a message to the GUI with the course object ID
 	msg.post("/FlappyFishGUI","Course",{id = courseID})
 
 end
 
+-- Executes when the script is first loaded
 function init(self)
+
+	-- Seed the random with the clock
 	math.randomseed(socket.gettime() * 100000)
+	-- Call spawnCourse
 	spawnCourse()
+	
 end
 
+-- Executes when the script receives a message
 function on_message(self, message_id, message, sender)
 
+	-- If the message ID is reset
 	if message_id == hash("Reset") then
+		-- Call delete on the courseID
 		go.delete(courseID)
+		-- call spawnCourse to spawn a new one
 		spawnCourse()
+		
 	end
 end
 
+-- Unused Functions
 
 function final(self)
 	-- Add finalization code here

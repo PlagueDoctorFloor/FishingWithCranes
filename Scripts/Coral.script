@@ -1,39 +1,69 @@
+-- 
+-- TODO:
+-- 1. Do we need died or just set gameStart to false
+-- 2. Do I need to set the y position
+-- 
+
+-- Boolean tracks whether the game has started
 local gameStart = false
 
+-- Boolean tracks whether the user died
 local died = false
 
+-- Keeps track of the ID of the spawned course object for moving
 local selfID = 0
 
+-- Executes once per frame
 function update(self, dt)
 
+	-- Checks if the gameStart variable is true. 
 	if gameStart then
-		
+
+		-- If the player has not died
 		if not died then
+
+			-- Gets the position of the course as a vector3
 			local pos = go.get_position(selfID)
+			-- Subtract 3 from the x position, so it moves to the left
 			pos.x = pos.x - 3
+			-- Ensure the y position is set to 0
 			pos.y = 0
+			-- Set the course position to the new position
 			go.set_position(pos,selfID)
+			
 		end
 
 	end
 
 end
 
+-- Executes when the script receives a message
 function on_message(self, message_id, message, sender)
 
+	-- If the message ID is died
 	if message_id == hash("died") then
+		-- Set died to true
 		died = true
+	-- If the message ID is gameStart
 	elseif message_id == hash("gameStart") then
+		-- Set gameStart to true
 		gameStart = true
 	end
 
 end
 
+-- Executes when the script first loads
 function init(self)
+	
+	-- Saves it's Object ID
 	selfID = go.get_id()
+	-- Set the variables to false
 	gameStart = false
 	died = false
+	
 end
+
+-- Unused Functions
 
 function final(self)
 	-- Add finalization code here
