@@ -78,6 +78,12 @@ embedded_instances {
   "  data: \"collection: \\\"/Collections/DecorCollection.collection\\\"\\n"
   "\"\n"
   "}\n"
+  "embedded_components {\n"
+  "  id: \"ItemCollection\"\n"
+  "  type: \"collectionproxy\"\n"
+  "  data: \"collection: \\\"/Collections/ItemCollection.collection\\\"\\n"
+  "\"\n"
+  "}\n"
   ""
 }
 embedded_instances {

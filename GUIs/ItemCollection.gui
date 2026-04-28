@@ -1,0 +1,490 @@
+script: "/GUIs/ItemCollection.gui_script"
+fonts {
+  name: "Permanent Marker"
+  font: "/Visual Assets/Fonts/Permanent Marker.font"
+}
+textures {
+  name: "fish"
+  texture: "/Visual Assets/SpriteAtlas/fish.atlas"
+}
+textures {
+  name: "CranePageGUI"
+  texture: "/Visual Assets/SpriteAtlas/CranePageGUI.atlas"
+}
+nodes {
+  position {
+    x: 641.0
+    y: 363.0
+  }
+  type: TYPE_BOX
+  texture: "CranePageGUI/background"
+  id: "Background"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 450.0
+    y: 355.0
+  }
+  scale {
+    x: 0.5
+    y: 0.7
+  }
+  type: TYPE_BOX
+  texture: "CranePageGUI/cabinet-small"
+  id: "cabinet1"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 800.0
+    y: 355.0
+  }
+  scale {
+    x: 0.5
+    y: 0.7
+  }
+  type: TYPE_BOX
+  texture: "CranePageGUI/cabinet-small"
+  id: "cabinet2"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 100.0
+    y: 650.0
+  }
+  scale {
+    x: 0.35
+    y: 0.35
+  }
+  type: TYPE_BOX
+  texture: "CranePageGUI/return-button"
+  id: "ReturnArrow"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 450.0
+    y: 640.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "?"
+  font: "Permanent Marker"
+  id: "fish1text"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 450.0
+    y: 475.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "?"
+  font: "Permanent Marker"
+  id: "fish2text"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 450.0
+    y: 315.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "?"
+  font: "Permanent Marker"
+  id: "fish3text"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 450.0
+    y: 155.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "?"
+  font: "Permanent Marker"
+  id: "fish4text"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 800.0
+    y: 640.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "?"
+  font: "Permanent Marker"
+  id: "fish5text"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 800.0
+    y: 475.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "?"
+  font: "Permanent Marker"
+  id: "fish6text"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 800.0
+    y: 315.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "?"
+  font: "Permanent Marker"
+  id: "fish7text"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 800.0
+    y: 155.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "?"
+  font: "Permanent Marker"
+  id: "fish8text"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 450.0
+    y: 560.0
+  }
+  scale {
+    x: 0.25
+    y: 0.25
+  }
+  type: TYPE_BOX
+  texture: "CranePageGUI/glow"
+  id: "fish1glow"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+  visible: false
+}
+nodes {
+  position {
+    x: 450.0
+    y: 400.0
+  }
+  scale {
+    x: 0.25
+    y: 0.25
+  }
+  type: TYPE_BOX
+  texture: "CranePageGUI/glow"
+  id: "fish2glow"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+  visible: false
+}
+nodes {
+  position {
+    x: 450.0
+    y: 240.0
+  }
+  scale {
+    x: 0.25
+    y: 0.25
+  }
+  type: TYPE_BOX
+  texture: "CranePageGUI/glow"
+  id: "fish3glow"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+  visible: false
+}
+nodes {
+  position {
+    x: 450.0
+    y: 80.0
+  }
+  scale {
+    x: 0.25
+    y: 0.25
+  }
+  type: TYPE_BOX
+  texture: "CranePageGUI/glow"
+  id: "fish4glow"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+  visible: false
+}
+nodes {
+  position {
+    x: 800.0
+    y: 560.0
+  }
+  scale {
+    x: 0.25
+    y: 0.25
+  }
+  type: TYPE_BOX
+  texture: "CranePageGUI/glow"
+  id: "fish5glow"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+  visible: false
+}
+nodes {
+  position {
+    x: 800.0
+    y: 400.0
+  }
+  scale {
+    x: 0.25
+    y: 0.25
+  }
+  type: TYPE_BOX
+  texture: "CranePageGUI/glow"
+  id: "fish6glow"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+  visible: false
+}
+nodes {
+  position {
+    x: 800.0
+    y: 240.0
+  }
+  scale {
+    x: 0.25
+    y: 0.25
+  }
+  type: TYPE_BOX
+  texture: "CranePageGUI/glow"
+  id: "fish7glow"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+  visible: false
+}
+nodes {
+  position {
+    x: 800.0
+    y: 80.0
+  }
+  scale {
+    x: 0.25
+    y: 0.25
+  }
+  type: TYPE_BOX
+  texture: "CranePageGUI/glow"
+  id: "fish8glow"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+  visible: false
+}
+nodes {
+  position {
+    x: 450.0
+    y: 560.0
+  }
+  scale {
+    x: 0.4
+    y: 0.4
+  }
+  type: TYPE_BOX
+  texture: "fish/saltwater-1"
+  id: "fish1"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+  visible: false
+}
+nodes {
+  position {
+    x: 450.0
+    y: 400.0
+  }
+  rotation {
+    z: -15.0
+  }
+  scale {
+    x: 0.35
+    y: 0.35
+  }
+  type: TYPE_BOX
+  texture: "fish/saltwater-2"
+  id: "fish2"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+  visible: false
+}
+nodes {
+  position {
+    x: 450.0
+    y: 240.0
+  }
+  scale {
+    x: 0.3
+    y: 0.3
+  }
+  type: TYPE_BOX
+  texture: "fish/saltwater-3"
+  id: "fish3"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+  visible: false
+}
+nodes {
+  position {
+    x: 450.0
+    y: 80.0
+  }
+  scale {
+    x: 0.4
+    y: 0.4
+  }
+  type: TYPE_BOX
+  texture: "fish/saltwater-4"
+  id: "fish4"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+  visible: false
+}
+nodes {
+  position {
+    x: 800.0
+    y: 560.0
+  }
+  scale {
+    x: 0.25
+    y: 0.25
+  }
+  type: TYPE_BOX
+  texture: "fish/saltwater-5"
+  id: "fish5"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+  visible: false
+}
+nodes {
+  position {
+    x: 800.0
+    y: 390.0
+  }
+  scale {
+    x: 0.35
+    y: 0.35
+  }
+  type: TYPE_BOX
+  texture: "fish/saltwater-6"
+  id: "fish6"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+  visible: false
+}
+nodes {
+  position {
+    x: 800.0
+    y: 240.0
+  }
+  scale {
+    x: 0.3
+    y: 0.3
+  }
+  type: TYPE_BOX
+  texture: "fish/saltwater-7"
+  id: "fish7"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+  visible: false
+}
+nodes {
+  position {
+    x: 800.0
+    y: 80.0
+  }
+  scale {
+    x: 0.3
+    y: 0.25
+  }
+  type: TYPE_BOX
+  texture: "fish/saltwater-8"
+  id: "fish8"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+  visible: false
+}
+material: "/builtins/materials/gui.material"
+adjust_reference: ADJUST_REFERENCE_PARENT

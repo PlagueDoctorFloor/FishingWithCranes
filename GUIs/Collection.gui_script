@@ -73,19 +73,19 @@ function on_input(self, action_id, action)
 		elseif gui.pick_node(freshSelect, action.x, action.y) then
 
 			-- Calls the loader to load the freshwater collection page
-			msg.post("Loader:/Loader", "load FreshCollection")
+			msg.post("Loader:/Loader", "load itemCollection", {set = 1})
 
 		-- If the user selects the saltwater collection
 		elseif gui.pick_node(saltSelect, action.x, action.y) then
 
 			-- Calls the loader to load the saltwater collection page
-			msg.post("Loader:/Loader", "load SaltCollection")
+			msg.post("Loader:/Loader", "load itemCollection", {set = 2})
 
 		-- If the user selects the decor collection
 		elseif gui.pick_node(decorSelect, action.x, action.y) then
 
 			-- Calls the loader to load the decor collection page
-			msg.post("Loader:/Loader", "load DecorCollection")
+			msg.post("Loader:/Loader", "load itemCollection", {set = 3})
 
 		-- If the user selects the fish tank sign
 		elseif gui.pick_node(fishTankSelect, action.x, action.y) then

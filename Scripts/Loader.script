@@ -12,11 +12,11 @@ tokens = 3
 
 -- Item's Encountered & Amount owned
 -- Freshwater set
-FreshwaterFish = {0,0,0,0,0,0,0,0}
+FreshwaterFish = {1,1,1,1,1,1,1,1}
 -- Saltwater set
-SaltwaterFish = {0,0,0,0,0,0,0,0}
+SaltwaterFish = {1,1,1,1,1,1,1,1}
 -- Tank Decor set
-TankDecor = {0,0,0,0,0,0,0,0}
+TankDecor = {1,1,1,1,1,1,1,1}
 
 -- Booleans For Whether Player Has Completed Set
 FreshwaterFound = false
@@ -91,15 +91,13 @@ function init(self)
 	-- Loads all of the collections when the game loads
 	msg.post("#Crane","load")
 	msg.post("#Collection","load")
+	msg.post("#ItemCollection", "load")
+	msg.post("#DetailedFish","load")
 	msg.post("#Achievements","load")
 	msg.post("#MiniGameSelect","load")
 	msg.post("#FishTacToe", "load")
 	msg.post("#FishMatch","load")
-	msg.post("#FreshwaterCollection","load")
-	msg.post("#SaltwaterCollection","load")
-	msg.post("#DetailedFish","load")
 	msg.post("#FlappyFish", "load")
-	msg.post("#DecorCollection", "load")
 	msg.post("#FishTank", "load")
 
 	-- Begins playing the background song
@@ -123,7 +121,8 @@ function on_message(self, message_id, message, sender)
 		msg.post(sender, "init")
 
 		-- If the sender (the proxy that loaded) is the Crane page, it is sent a message to enable
-		if sender.fragment == hash("Crane") then
+		--if sender.fragment == hash("Crane") then
+		if sender.fragment == hash("ItemCollection") then
 
 			-- Sends a message to the loaded proxy enabling it, making it visible
 			msg.post(sender, "enable")
@@ -159,19 +158,25 @@ function on_message(self, message_id, message, sender)
 		if sender.fragment == hash("MainCraneScreen") then
 			msg.post("#Crane", "disable")
 		-- If it was the freshwater collection page
-		elseif sender.fragment == hash("FreshwaterCollection") then
-			msg.post("#FreshwaterCollection", "disable")
+		elseif sender.fragment == hash("ItemCollection") then
+			msg.post("#ItemCollection", "disable")
+			print(sender)
 		-- If it was the saltwater collection page
-		elseif sender.fragment == hash("SaltwaterCollection") then
-			msg.post("#SaltwaterCollection","disable")
-		-- If it was the decor collection page
-		elseif sender.fragment == hash("DecorCollection") then
-			msg.post("#DecorCollection","disable")
-			-- If it was the Fish Tank page
 		elseif sender.fragment == hash("FishTank") then
 			msg.post("#FishTank","disable")
 		end
 
+	elseif message_id == hash("load itemCollection") then
+		-- Enable the collection proxy
+		msg.post("#ItemCollection", "enable")
+		msg.post("ItemCollection:/ItemCollection#ItemCollection","Update",{set = message.set})
+
+		if sender.fragment == hash("Collection") then
+			msg.post("#Collection", "disable")
+		elseif sender.fragment == hash("DetailedFish") then
+			msg.post("#DetailedFish", "disable")
+		end
+		
 	-- If the message was to load the Achievement page
 	elseif message_id == hash("load Achievement") then
 
@@ -265,54 +270,6 @@ function on_message(self, message_id, message, sender)
 		-- Disable the minigame select collection to hide it
 		msg.post("#MiniGameSelect", "disable")
 
-	-- If the message was to load the Freshwater Collection
-	elseif message_id == hash("load FreshCollection") then
-		-- enable the Freshwater Collection page
-		msg.post("#FreshwaterCollection","enable")
-		-- Send a message to the Freshwater collection to update GUI elements tied to global variables
-		msg.post("FishCollection:/FreshwaterCollection#FreshwaterCollection", "Update")
-
-		-- Checks which collection called the Freshwater Collection scene to load, to know which scene to disable to hide from the user
-		-- If it was the Collection selection page
-		if sender.fragment == hash("Collection") then
-			msg.post("#Collection", "disable")
-		-- If it was the detailed inventory page
-		elseif sender.fragment == hash("DetailedFish") then
-			msg.post("#DetailedFish","disable")
-		end
-
-	-- If the message was to load the Saltwater Collection
-	elseif message_id == hash("load SaltCollection") then
-		-- enable the Saltwater Collection page
-		msg.post("#SaltwaterCollection","enable")
-		-- Send a message to the Saltwater collection to update GUI elements tied to global variables
-		msg.post("SaltwaterCollection:/SaltwaterCollection#SaltwaterCollection", "Update")
-
-		-- Checks which collection called the Freshwater Collection scene to load, to know which scene to disable to hide from the user
-		-- If it was the Collection selection page
-		if sender.fragment == hash("Collection") then
-			msg.post("#Collection", "disable")
-		-- If it was the detailed inventory page
-		elseif sender.fragment == hash("DetailedFish") then
-			msg.post("#DetailedFish","disable")
-		end
-
-	-- If the message was to load the Decor Collection
-	elseif message_id == hash("load DecorCollection") then
-		-- enable the Decor Collection page
-		msg.post("#DecorCollection","enable")
-		-- Send a message to the Decor collection to update GUI elements tied to global variables
-		msg.post("DecorCollection:/DecorCollection#DecorCollection", "Update")
-
-		-- Checks which collection called the Freshwater Collection scene to load, to know which scene to disable to hide from the user
-		-- If it was the Collection selection page
-		if sender.fragment == hash("Collection") then
-			msg.post("#Collection", "disable")
-		-- If it was the detailed inventory page
-		elseif sender.fragment == hash("DetailedFish") then
-			msg.post("#DetailedFish","disable")
-		end	
-
 	-- If the message was to load the Fish Tank
 	elseif message_id == hash("load FishTank") then
 		-- enable the Fish Tank page
@@ -330,14 +287,8 @@ function on_message(self, message_id, message, sender)
 
 		-- Checks which collection called the Detailed Inventory scene to load, to know which scene to disable to hide from the user
 		-- If it was the freshwater collection selection page
-		if sender.fragment == hash("FreshwaterCollection") then
-			msg.post("#FreshwaterCollection", "disable")
-		-- If it was the saltwater collection selection page
-		elseif sender.fragment == hash("SaltwaterCollection") then
-			msg.post("#SaltwaterCollection","disable")
-		-- If it was the decor collection selection page
-		elseif sender.fragment == hash("DecorCollection") then
-			msg.post("#DecorCollection","disable")
+		if sender.fragment == hash("ItemCollection") then
+			msg.post("#ItemCollection", "disable")
 		end
 		
 	end

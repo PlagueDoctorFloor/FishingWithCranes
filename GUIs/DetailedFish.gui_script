@@ -232,19 +232,19 @@ function on_input(self, action_id, action)
 			if setSelect == 1 then
 
 				-- Send a message to the loader to enable the freshwater collection
-				msg.post("Loader:/Loader", "load FreshCollection")
+				msg.post("Loader:/Loader", "load itemCollection", {set = 1})
 
 			-- If the set is the saltwater set
 			elseif setSelect == 2 then
 
 				-- Send a message to the loader to enable the saltwater collection
-				msg.post("Loader:/Loader", "load SaltCollection")
+				msg.post("Loader:/Loader", "load itemCollection", {set = 2})
 
 			-- If the set is the decor set
 			elseif setSelect == 3 then
 
 				-- Send a message to the loader to enable the decor collection
-				msg.post("Loader:/Loader", "load DecorCollection")
+				msg.post("Loader:/Loader", "load itemCollection", {set = 3})
 
 			end
 

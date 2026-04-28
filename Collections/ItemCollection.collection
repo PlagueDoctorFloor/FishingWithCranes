@@ -1,0 +1,6 @@
+name: "ItemCollection"
+instances {
+  id: "ItemCollection"
+  prototype: "/Objects/ItemCollection.go"
+}
+scale_along_z: 0
