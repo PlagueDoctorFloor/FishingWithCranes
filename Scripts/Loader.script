@@ -23,10 +23,10 @@ FreshwaterFound = false
 SaltwaterFound = false
 
 -- Integer keeping track of total fish pulled
-TotalFishPulled = 0
+TotalFishPulled = 51
 -- Array to keep track of 50th fish pulled
 -- Position 1: Set, Position 2: Fish Number
-FiftiethFish = {0,0}
+FiftiethFish = {1,8}
 
 -- Fish Tac Toe Statistics
 -- Wins
@@ -34,17 +34,17 @@ FishTacToeWins = 0
 -- Losses
 FishTacToeLosses = 0
 -- Stalemates
-FishTacToeStalemates = 0
+FishTacToeStalemates = 11
 
 -- Number of Times Match Game Played
-MatchPlayed = 0
+MatchPlayed = 11
 
 -- Array To Keep Track Of Flappy Fish Course Completes
 -- Each position corresponds to a course, which are flipped when the user completes it
-coursesComplete = {0,0,0}
+coursesComplete = {1,1,1}
 
 -- Integer keeping track of times fish is clicked in detailed inventory screen
-petFish = 0
+petFish = 150
 
 -- Custom Function
 -- Used when the coin sound finishes playing, triggered from clicking the crane
@@ -121,8 +121,7 @@ function on_message(self, message_id, message, sender)
 		msg.post(sender, "init")
 
 		-- If the sender (the proxy that loaded) is the Crane page, it is sent a message to enable
-		--if sender.fragment == hash("Crane") then
-		if sender.fragment == hash("ItemCollection") then
+		if sender.fragment == hash("Crane") then
 
 			-- Sends a message to the loaded proxy enabling it, making it visible
 			msg.post(sender, "enable")
