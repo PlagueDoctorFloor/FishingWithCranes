@@ -1,8 +1,5 @@
 --
 -- TODO:
--- 1. Consider ways of optimizing the achievement detection, removing it from the loader, limiting the amount of code executed each time.
--- 2. Fix how the fiftieth fish sprite is determined
--- 5. Update function which resets the highlight/hint to invisible when the page is reloaded
 --
 
 -- Array holding the text that will display once the achievemnent is achieved/what the acheivement is, saved in order
@@ -17,8 +14,11 @@ local achieved = {false,false,false,false,false,false,false,false}
 -- Keeps track of the sprite name of the fiftieth pulled fish. Different name from the global variable
 local fiftiethFish = ""
 
+-- Custom Function
+-- Handles displaying the right achievement photo, highlight text, and hint text
 local function displayAchievementHint(achievementNumber)
 
+	-- Grab the highlight and hint nodes
 	local achievementHighlight = gui.get_node("AchievementHighlight")
 	local achievementHighlightText = gui.get_node("AchievementHighlightText")
 	local hintTextNode = gui.get_node("HintText")
@@ -26,14 +26,24 @@ local function displayAchievementHint(achievementNumber)
 	-- Set the highlight node to visible
 	gui.set_visible(achievementHighlight, true)
 
+	-- Checks if the achievement has been achieved (is set to true)
 	if achieved[achievementNumber] then
-		-- Set the highlight node sprite to the right sprite
-		gui.play_flipbook(achievementHighlight, "achievement-"..achievementNumber)
+
+		-- If it's achievement 3
+		if achievementNumber == 3 then
+			-- Set the highlight image to the one saved in fiftiethFish
+			gui.play_flipbook(achievementHighlight, fiftiethFish)
+		-- If it's any of the achievement
+		else
+			-- Set the highlight node sprite to the right sprite
+			gui.play_flipbook(achievementHighlight, "achievement-"..achievementNumber)
+		end
+		
 		-- Set the highlight text node to visible
 		gui.set_visible(achievementHighlightText, true)
 		-- Set the right achievement text
 		gui.set_text(achievementHighlightText, achievementText[achievementNumber])
-		-- If achievement one is false
+	-- If achievement the achievement has not been achieved, set to false
 	else
 		-- Set the highlight node sprite to the unknown fish icon
 		gui.play_flipbook(achievementHighlight, "unknown-fish")
@@ -42,7 +52,142 @@ local function displayAchievementHint(achievementNumber)
 	end
 	-- Set hint text to the right hint
 	gui.set_text(hintTextNode, hintText[achievementNumber])
+	-- Set hint text to visible
+	gui.set_visible(hintTextNode, true)
 
+
+end
+
+-- Custom Function
+-- Validate whether achievement one (all freshwater fish found) has been achieved
+local function checkOne()
+
+	-- Sentiel variable 
+	local freshFishFound = true
+
+	-- Iterate through the freshwater fish array
+	for j=1,#FreshwaterFish do
+		-- Check if the position is equal to 0, meaning it's not been found
+		if FreshwaterFish[j] == 0 then
+			-- Sets the "sentinel" variable false
+			freshFishFound = false
+		end
+	end 
+
+	-- Iff the sentinel variable is still true, meaning no fish were false
+	if freshFishFound then
+		-- Sets achievement one to true
+		achieved[1] = true
+		-- Makes achievement one node visible
+		gui.set_visible(gui.get_node("achivement1"), true)
+	end
+
+	-- Returns the value saved in the achieved array
+	return achieved[1]
+
+end
+
+-- Custom Function
+-- Validate whether achievement two (all saltwater fish found) has been achieved
+local function checkTwo()
+
+	-- Sentiel variable 
+	local saltFishFound = true
+
+	-- Iterate through the saltwater fish array
+	for j=1,#SaltwaterFish do
+		-- Check if the position is equal to 0, meaning it's not been found
+		if SaltwaterFish[j] == 0 then
+			-- Sets the "sentinel" variable false
+			saltFishFound = false
+		end
+	end 
+
+	-- Iff the sentinel variable is still true, meaning no fish were false
+	if saltFishFound then
+		-- Sets achievement one to true
+		achieved[2] = true
+		-- Makes achievement one node visible
+		gui.set_visible(gui.get_node("achivement2"), true)
+	end
+
+	return achieved[2]
+
+end
+
+local function checkThree()
+
+	if TotalFishPulled >= 50 then
+
+		achieved[3] = true
+
+		gui.set_visible(gui.get_node("achivement3"), true)
+
+		fiftiethFish = "achievement-3-"..FiftiethFish[1].."-"..FiftiethFish[2]
+		
+		gui.play_flipbook(gui.get_node("achivement3"), fiftiethFish)
+
+	end
+
+	return achieved[3]
+
+end
+
+local function checkFour()
+
+	if MatchPlayed >= 10 then
+
+		achieved[4] = true
+
+		gui.set_visible(gui.get_node("achivement4"), true)
+
+	end
+
+	return achieved[4]
+
+end
+
+local function checkFive()
+
+	if FishTacToeStalemates >= 10 then
+
+		achieved[5] = true
+		gui.set_visible(gui.get_node("achivement5"), true)
+
+	end
+
+	return achieved[5]
+	
+end
+
+local function checkSix()
+
+	if coursesComplete[1] == 1 and coursesComplete[2] == 1 and coursesComplete[3] == 1 then 
+
+		-- Set achievement six to true
+		achieved[6] = true
+		-- Makes achievement six node visible
+		gui.set_visible(gui.get_node("achivement6"), true)
+
+	end
+
+	return achieved[6]
+
+end
+
+local function checkSeven()
+
+	-- If global petFish is greater than or equal to 100
+	if petFish >= 100 then
+
+		-- Set achievement seven to true
+		achieved[7] = true
+		-- Makes achievement seven node visible
+		gui.set_visible(gui.get_node("achivement7"), true)
+
+	end
+
+	return achieved[7]
 
 end
 
@@ -51,132 +196,57 @@ end
 -- Checks global variables to determine if the achievement variables need to be set to true and the the nodes set to visible
 local function updateAchievements()
 
+	local achievementHighlight = gui.get_node("AchievementHighlight")
+	local achievementHighlightText = gui.get_node("AchievementHighlightText")
+	local hintTextNode = gui.get_node("HintText")
+	gui.set_visible(gui.get_node("AchievementHighlight"), false)
+	gui.set_visible(gui.get_node("AchievementHighlightText"), false)
+	gui.set_visible(gui.get_node("HintText"), false)
+
 	if not achieved[8] then
 		-- Sentinel variable set up to keep track if all achievements are achieved.
 		local allAchievements = true
 
-		for i=1,#achieved do
+		for i=1,#achieved-1 do
 			
 			if not achieved[i] then
 
+				local result = false
+
 				if i == 1 then
-					
-					local freshFishFound = true
 
-					for j=1,#FreshwaterFish do
-						-- Check if the position is equal to 0, meaning it's not been found
-						if FreshwaterFish[j] == 0 then
-							-- Sets the "sentinel" variable false
-							freshFishFound = false
-						end
-					end 
-
-					if freshFishFound then
-						-- Sets achievement one to true
-						achieved[i] = true
-						-- Makes achievement one node visible
-						gui.set_visible(gui.get_node("achivement1"), true)
-					else 
-						allAchievements = false
-					end
+					result = checkOne()
 
 				elseif i == 2 then
 
-					local saltFishFound = true
-
-					for j=1,#SaltwaterFish do
-						-- Check if the position is equal to 0, meaning it's not been found
-						if SaltwaterFish[j] == 0 then
-							-- Sets the "sentinel" variable false
-							saltFishFound = false
-						end
-					end 
-
-					if saltFishFound then
-						-- Sets achievement one to true
-						achieved[i] = true
-						-- Makes achievement one node visible
-						gui.set_visible(gui.get_node("achivement2"), true)
-					else 
-						allAchievements = false
-					end
+					result = checkTwo()
 
 				elseif i == 3 then
 
-					if TotalFishPulled >= 50 then
-
-						achieved[i] = true
-
-						gui.play_flipbook(gui.get_node("achivement3"), "achievement-3-9")
-
-					else
-
-						allAchievements = false
-
-					end
+					result = checkThree()
 
 				elseif i == 4 then
 
-					if MatchPlayed >= 10 then
-
-						achieved[i] = true
-
-						gui.set_visible(gui.get_node("achivement4"), true)
-
-					else
-						
-						-- set allAchievements to false since they have not all been achieved.
-						allAchievements = false
-
-					end
+					result = checkFour()
 
 				elseif i == 5 then
 
-					if FishTacToeStalemates >= 10 then
-
-						achieved[i] = true
-						gui.set_visible(gui.get_node("achivement5"), true)
-
-					else
-						
-						-- set allAchievements to false since they have not all been achieved.
-						allAchievements = false
-
-					end
+					result = checkFive()
 
 				elseif i == 6 then
 
-					if coursesComplete[1] == 1 and coursesComplete[2] == 1 and coursesComplete[3] == 1 then 
-						
-						-- Set achievement six to true
-						achieved[i] = true
-						-- Makes achievement six node visible
-						gui.set_visible(gui.get_node("achivement6"), true)
-
-					else
-						
-						-- set allAchievements to false since they have not all been achieved.
-						allAchievements = false
-						
-					end
+					result = checkSix()
 
 				elseif i == 7 then
 
-					-- If global petFish is greater than or equal to 100
-					if petFish >= 100 then
-						
-						-- Set achievement seven to true
-						seven = true
-						-- Makes achievement seven node visible
-						gui.set_visible(gui.get_node("achivement7"), true)
-						
-					else
-						
-						-- set allAchievements to false since they have not all been achieved.
-						allAchievements = false
-						
-					end
+					result = checkSeven()
 					
+				end
+
+				print(result)
+
+				if not result then
+					allAchievements = false
 				end
 
 			end

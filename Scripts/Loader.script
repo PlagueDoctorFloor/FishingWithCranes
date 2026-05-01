@@ -12,21 +12,17 @@ tokens = 3
 
 -- Item's Encountered & Amount owned
 -- Freshwater set
-FreshwaterFish = {1,1,1,1,1,1,1,1}
+FreshwaterFish = {0,0,0,0,0,0,0,0}
 -- Saltwater set
-SaltwaterFish = {1,1,1,1,1,1,1,1}
+SaltwaterFish = {0,0,0,0,0,0,0,0}
 -- Tank Decor set
-TankDecor = {1,1,1,1,1,1,1,1}
-
--- Booleans For Whether Player Has Completed Set
-FreshwaterFound = false
-SaltwaterFound = false
+TankDecor = {0,0,0,0,0,0,0,0}
 
 -- Integer keeping track of total fish pulled
-TotalFishPulled = 51
+TotalFishPulled = 0
 -- Array to keep track of 50th fish pulled
 -- Position 1: Set, Position 2: Fish Number
-FiftiethFish = {1,8}
+FiftiethFish = {0,0}
 
 -- Fish Tac Toe Statistics
 -- Wins
@@ -34,17 +30,17 @@ FishTacToeWins = 0
 -- Losses
 FishTacToeLosses = 0
 -- Stalemates
-FishTacToeStalemates = 11
+FishTacToeStalemates = 0
 
 -- Number of Times Match Game Played
-MatchPlayed = 11
+MatchPlayed = 0
 
 -- Array To Keep Track Of Flappy Fish Course Completes
 -- Each position corresponds to a course, which are flipped when the user completes it
-coursesComplete = {1,1,1}
+coursesComplete = {0,0,0}
 
 -- Integer keeping track of times fish is clicked in detailed inventory screen
-petFish = 150
+petFish = 0
 
 -- Custom Function
 -- Used when the coin sound finishes playing, triggered from clicking the crane
@@ -178,38 +174,6 @@ function on_message(self, message_id, message, sender)
 		
 	-- If the message was to load the Achievement page
 	elseif message_id == hash("load Achievement") then
-
-		-- Set "Sentinel" Variable true
-		local freshFishFound = true
-		-- Iterate through the FreshwaterCollection array
-		for i=1,8,1 do
-			-- Check if the position is equal to 0, meaning it's not been found
-			if FreshwaterFish[i] == 0 then
-				-- Sets the "sentinel" variable false
-				freshFishFound = false
-			end
-		end
-		-- If the variable is still true, meaning that all of the spots in the array are higher than 0
-		if freshFishFound then
-			-- Sets FreshwaterFound to true, which will be permanently true
-			FreshwaterFound = true
-		end
-
-		-- Set "Sentinel" Variable true
-		local saltFishFound = true
-		-- Iterate through the SaltwaterCollection array
-		for i=1,8,1 do
-			-- Check if the position is equal to 0, meaning it's not been found
-			if SaltwaterFish[i] == 0 then
-				-- Sets the "sentinel" variable false
-				saltFishFound = false
-			end
-		end
-		-- If the variable is still true, meaning that all of the spots in the array are higher than 0
-		if saltFishFound then
-			-- Sets FreshwaterFound to true, which will be permanently true
-			SaltwaterFound = true
-		end
 
 		-- Enable the achievement collction so it can be seen
 		msg.post("#Achievements", "enable")
