@@ -105,88 +105,116 @@ local function checkTwo()
 
 	-- Iff the sentinel variable is still true, meaning no fish were false
 	if saltFishFound then
-		-- Sets achievement one to true
+		-- Sets achievement two to true
 		achieved[2] = true
-		-- Makes achievement one node visible
+		-- Makes achievement two node visible
 		gui.set_visible(gui.get_node("achivement2"), true)
 	end
 
+	-- Returns the value saved in the achieved array
 	return achieved[2]
 
 end
 
+-- Custom Function
+-- Validate whether achievement three (50 fish pulled) has been achieved
 local function checkThree()
 
+	-- Checks if the global variable TotalFishPulled is equal to or greater than 50
 	if TotalFishPulled >= 50 then
 
+		-- Sets the position in the achieved array to true
 		achieved[3] = true
 
+		-- Sets the achievement 3 node to visible
 		gui.set_visible(gui.get_node("achivement3"), true)
 
+		-- Saves the string of the sprite for the achievement based on the fish saved in the global fiftiethfish array
 		fiftiethFish = "achievement-3-"..FiftiethFish[1].."-"..FiftiethFish[2]
-		
+
+		-- Sets the node to the correct sprite
 		gui.play_flipbook(gui.get_node("achivement3"), fiftiethFish)
 
 	end
 
+	-- Returns the value saved in the achieved array
 	return achieved[3]
 
 end
 
+-- Custom Function
+-- Validate whether achievement four (Match played 10 times) has been achieved
 local function checkFour()
 
+	-- If global MatchPlayed is 10 or greater
 	if MatchPlayed >= 10 then
 
+		-- Sets the position in the achieved array to true
 		achieved[4] = true
 
+		-- Sets the achievement 4 node to visible
 		gui.set_visible(gui.get_node("achivement4"), true)
 
 	end
 
+	-- Returns the value saved in the achieved array
 	return achieved[4]
 
 end
 
+-- Custom Function
+-- Validate whether achievement four (Match played 10 times) has been achieved
 local function checkFive()
 
+	-- If global FishTacToeStalemates is equal to or greater than 10
 	if FishTacToeStalemates >= 10 then
 
+		-- Sets the position in the achieved array to true
 		achieved[5] = true
+		-- Sets the achievement 5 node to visible
 		gui.set_visible(gui.get_node("achivement5"), true)
 
 	end
 
+	-- Returns the value saved in the achieved array
 	return achieved[5]
 	
 end
 
+-- Custom Function
+-- Validate whether achievement four (Match played 10 times) has been achieved
 local function checkSix()
 
+	-- If all positions in coursesComplete 
 	if coursesComplete[1] == 1 and coursesComplete[2] == 1 and coursesComplete[3] == 1 then 
 
-		-- Set achievement six to true
+		-- Sets the position in the achieved array to true
 		achieved[6] = true
 		-- Makes achievement six node visible
 		gui.set_visible(gui.get_node("achivement6"), true)
 
 	end
 
+	-- Returns the value saved in the achieved array
 	return achieved[6]
 
 end
 
+-- Custom Function
+-- Validate whether achievement four (Match played 10 times) has been achieved
 local function checkSeven()
 
 	-- If global petFish is greater than or equal to 100
 	if petFish >= 100 then
 
-		-- Set achievement seven to true
+		-- Sets the position in the achieved array to true
 		achieved[7] = true
 		-- Makes achievement seven node visible
 		gui.set_visible(gui.get_node("achivement7"), true)
 
 	end
 
+	-- Returns the value saved in the achieved array
 	return achieved[7]
 
 end
