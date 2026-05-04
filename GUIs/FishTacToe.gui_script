@@ -12,10 +12,167 @@ local board = {0,0,0,0,0,0,0,0,0}
 -- Boolean to keep track of whether it's the players turn
 local playerTurn = true
 
--- Boolean to keep track of whether the player won, lost, or stalemated
-local won = false
-local lost = false
-local stalemate = false
+-- Boolean to keep track of whether the game has ended
+local gameEnd = false
+
+
+
+
+
+local function evaluate(caller)
+
+	-- Set up a variable to track if there is a winner
+	local winner = 0
+
+	-- Checks each possible configuration of a line of 3
+	-- Checks if they're not set to 0 and all equal (so all 1 or all 2)
+	-- Only checks if the first item in the list is set to 0 since if it isn't the rest will always be fine
+	-- Sets local variable winner to true to indicate that someone has won
+
+	--123
+	if board[1] ~= 0 and board[1] == board[2] and board[1] == board[3] then
+		winner = board[1]
+	--147
+	elseif board[1] ~= 0 and board[1] == board[4] and board[1] == board[7] then
+		winner = board[1]
+	--159
+	elseif board[1] ~= 0 and board[1] == board[5] and board[1] == board[9] then
+		winner = board[1]
+	--258
+	elseif board[2] ~= 0 and board[2] == board[5] and board[2] == board[8] then
+		winner = board[2]
+	--369
+	elseif board[3] ~= 0 and board[3] == board[6] and board[3] == board[9] then
+		winner = board[3]
+	--357
+	elseif board[3] ~= 0 and board[3] == board[5] and board[3] == board[7] then
+		winner = board[3]
+	--456
+	elseif board[4] ~= 0 and board[4] == board[5] and board[4] == board[6] then
+		winner = board[4]
+	--789
+	elseif board[7] ~= 0 and board[7] == board[8] and board[7] == board[9] then
+		winner = board[7]
+	end
+
+	-- If the're a winner
+	if winner ~= 0 then
+
+		gameEnd = true
+
+		-- Check if the last move was the player
+		if winner == 1 then
+			-- Increases the global token value
+			tokens = tokens+1
+			-- Update the token text
+			gui.set_text(gui.get_node("TokenText"), tokens)
+			-- Increases the global tacker of fishtactoe wins
+			FishTacToeWins = FishTacToeWins+1
+			-- Update the win text with the global number of wins
+			gui.set_text(gui.get_node("winsInformation"),"Wins: "..FishTacToeWins)
+			-- Sets the end game text to "You Win!"
+			gui.set_text(gui.get_node("endGameText"),"You Win!")
+
+			-- Check if the last move was the bot
+		elseif winner == 2 then
+			-- Update the global fishtactoe lost tracker
+			FishTacToeLosses = FishTacToeLosses+1
+			-- Update the losses number with the global fishtactoe losses
+			gui.set_text(gui.get_node("lossInformation"),"Losses: "..FishTacToeLosses)
+			-- Sets the end game text to "You Lose!"
+			gui.set_text(gui.get_node("endGameText"),"You Lose!")
+
+		end
+
+		-- Sets the end game text to visible
+		gui.set_visible(gui.get_node("endGameText"),true)
+		-- enable and set visible the play again node and it's text
+		gui.set_enabled(gui.get_node("playAgain"), true)
+		gui.set_visible(gui.get_node("playAgain"), true)
+		gui.set_visible(gui.get_node("playAgainText"),true)
+
+		return
+
+	end
+
+	-- Sets up a boolean to check if the board is full
+	local noSpacesLeft = false
+	-- Iterates through the board
+	for i = 1, 9, 1 do
+		-- Checks if any of the spaces are empty
+		if board[i] == 0 then
+			-- Sets to true to indicate there are spaces left
+			noSpacesLeft = true
+		end
+	end
+
+	-- Checks if there is no winner, and also there are no open spaces left
+	if not noSpacesLeft then
+
+		-- updates the global fishtactoe stalemate counter
+		FishTacToeStalemates = FishTacToeStalemates+1
+		-- Update the losses number with the global fishtactoe losses
+		gui.set_text(gui.get_node("stalemateInformation"),"Stalemates: "..FishTacToeStalemates)
+		-- Sets the end game text to visible
+		gui.set_visible(gui.get_node("endGameText"),true)
+		-- Sets the end game text to "Stalement"
+		gui.set_text(gui.get_node("endGameText"),"Stalemate")
+		-- enable and set visible the play again node and it's text
+		gui.set_enabled(gui.get_node("playAgain"), true)
+		gui.set_visible(gui.get_node("playAgain"), true)
+		gui.set_visible(gui.get_node("playAgainText"),true)
+
+		return
+
+	-- If there's no winner and still spaces left
+	else 
+
+		whosTurn(caller)
+		
+	end
+
+end
+
+local function fishTurn()
+
+	-- Sets up a "sentinel" variable to make sure that the game doesn't crash
+	--local noCrash = false
+	-- Iterates through the board
+	--for i = 1, 9, 1 do
+	-- Checks if any of the positions are open
+	--if board[i] == 0 then
+	-- Sets noCrash to true, meaning it's safe for the AI to try and play
+	--noCrash = true
+	--end
+	--end
+
+	-- If noCrash is true, meaning there are still positions to play
+	--if noCrash then				
+
+	-- Selects a random number between 1 and 9
+	local spotSelect = math.random(1,9)
+	-- Checks if the spot selected is already full
+	while board[spotSelect] == 1 or board[spotSelect] == 2 do
+		-- Selects a new spot until it finds an empty one
+		spotSelect = math.random(1,9)
+	end
+
+	-- Sets the chosen board spot to 2, the bots number
+	board[spotSelect] = 2
+	-- Calls the loader to play the placing sound
+	msg.post("Loader:/Loader", "Sound", {sound = 5})
+	-- Sets the chosen node to visible
+	gui.set_visible(gui.get_node("box"..spotSelect), true)
+	-- Sets the chosen node to the bots icon
+	gui.play_flipbook(gui.get_node("box"..spotSelect), "sea-urchin")
+	-- Sends a message to self to evaluate if someone has won, passing it's number
+	evaluate(2)
+	-- Sets player turn to true so the player can click again
+	playerTurn = true
+
+	--end
+
+end
 
 -- Custum Function
 -- Triggers at the end of the fishThinking animation
@@ -24,7 +181,43 @@ local function fishThinkEnd(self)
 	-- Sets the fish thinking nods to not visible
 	gui.set_visible(gui.get_node("FishThinking"), false)
 	-- Sends a message to itself to take a turn
-	msg.post("#","myTurn")
+	fishTurn()
+end
+
+local function whosTurn(caller)
+
+	-- If the message was sent by the players input
+	if caller == 1 then
+		-- Set the fishthinking node to visible
+		gui.set_visible(gui.get_node("FishThinking"), true)
+		-- Play the fish thinking animation, and call fishThinkEnd when it's done
+		gui.play_flipbook(gui.get_node("FishThinking"), "FishThinking", fishThinkEnd)
+		-- If the messager was sent by the bot
+	elseif caller == 2 then
+		-- Sets playerTurn to true so they can take their turn
+		playerTurn = true
+	end
+
+end
+
+local function playerPlace(space)
+
+	-- Checks if the board space has already been marked 
+	if board[space] ~= 1 and board[space] ~= 2 then
+		-- Set playerTurn to false so they can't click on other nodes
+		playerTurn = false
+		-- Set the space to 1, indicating that the player chose this space
+		board[space] = 1
+		-- Call the loader to play the placing sound
+		msg.post("Loader:/Loader", "Sound", {sound = 5})
+		-- Sets the node in that board space to visible
+		gui.set_visible(gui.get_node("box"..space), true)
+		-- Set the node to the player animation
+		gui.play_flipbook(gui.get_node("box"..space), "starfish")
+		-- Sends a message to self to evaluate whether the player has one. Passes 1 to tell the script that last played was the player
+		msg.post("#","evaluate",{caller = 1})
+	end
+
 end
 
 -- Custom Function
@@ -80,47 +273,26 @@ function on_input(self, action_id, action)
 		end
 
 		-- Check if the game has not ended, by checking that all of the end conditions nodes are false
-		if not won and not lost and not stalemate then
+		if not gameEnd then
 
 			-- If it's the players turn
 			if playerTurn then
 
 				-- Get the nodes for each position on the board
-				local space1 = gui.get_node("box1")
-				local space2 = gui.get_node("box2")
-				local space3 = gui.get_node("box3")
-				local space4 = gui.get_node("box4")
-				local space5 = gui.get_node("box5")
-				local space6 = gui.get_node("box6")
-				local space7 = gui.get_node("box7")
-				local space8 = gui.get_node("box8")
-				local space9 = gui.get_node("box9")	
+				local boardSpaces = {gui.get_node("box1"),gui.get_node("box2"),gui.get_node("box3"),gui.get_node("box4"),gui.get_node("box5"),gui.get_node("box6"),gui.get_node("box7"),gui.get_node("box8"),gui.get_node("box9")}
 
-				-- Checks which space in the board the player clicked and sends a message to itself with the space number
-				if gui.pick_node(space1, action.x, action.y) then
-					msg.post("#", "playerTurn", {space = 1})
-				elseif gui.pick_node(space2, action.x, action.y) then
-					msg.post("#", "playerTurn", {space = 2})
-				elseif gui.pick_node(space3, action.x, action.y) then
-					msg.post("#", "playerTurn", {space = 3})
-				elseif gui.pick_node(space4, action.x, action.y) then
-					msg.post("#", "playerTurn", {space = 4})
-				elseif gui.pick_node(space5, action.x, action.y) then
-					msg.post("#", "playerTurn", {space = 5})
-				elseif gui.pick_node(space6, action.x, action.y) then
-					msg.post("#", "playerTurn", {space = 6})
-				elseif gui.pick_node(space7, action.x, action.y) then
-					msg.post("#", "playerTurn", {space = 7})
-				elseif gui.pick_node(space8, action.x, action.y) then
-					msg.post("#", "playerTurn", {space = 8})
-				elseif gui.pick_node(space9, action.x, action.y) then
-					msg.post("#", "playerTurn", {space = 9})
+				for i=1,#boardSpaces do
+
+					if gui.pick_node(boardSpaces[i], action.x, action.y) then
+						playerPlace(i)
+					end
+
 				end
 				
 			end
 
 		-- If the game has ended, so one of the win conditions boolean is true
-		elseif won or lost or stalemate then
+		elseif gameEnd then
 		
 			-- Get the now visible play again button node 
 			local playAgain = gui.get_node("playAgain")
@@ -145,195 +317,9 @@ function on_message(self, message_id, message, sender)
 		gui.set_text(gui.get_node("TokenText"),tokens)
 	end
 
-	-- If the messafe ID is playerTurn (Sent from self)
-	if message_id == hash("playerTurn") then
+	
+
 		
-		-- Checks if the board space has already been marked 
-		if board[message.space] ~= 1 and board[message.space] ~= 2 then
-			-- Set playerTurn to false so they can't click on other nodes
-			playerTurn = false
-			-- Set the space to 1, indicating that the player chose this space
-			board[message.space] = 1
-			-- Call the loader to play the placing sound
-			msg.post("Loader:/Loader", "Sound", {sound = 5})
-			-- Sets the node in that board space to visible
-			gui.set_visible(gui.get_node("box"..message.space), true)
-			-- Set the node to the player animation
-			gui.play_flipbook(gui.get_node("box"..message.space), "starfish")
-			-- Sends a message to self to evaluate whether the player has one. Passes 1 to tell the script that last played was the player
-			msg.post("#","evaluate",{caller = 1})
-		end
-		
-	end
-
-	-- If the message id is "myTurn" sent from self to executes the AI's turn
-	if message_id == hash("myTurn") then
-
-		-- Sets up a "sentinel" variable to make sure that the game doesn't crash
-		local noCrash = false
-		-- Iterates through the board
-		for i = 1, 9, 1 do
-			-- Checks if any of the positions are open
-			if board[i] == 0 then
-				-- Sets noCrash to true, meaning it's safe for the AI to try and play
-				noCrash = true
-			end
-		end
-
-		-- If noCrash is true, meaning there are still positions to play
-		if noCrash then				
-
-			-- Selects a random number between 1 and 9
-			local spotSelect = math.random(1,9)
-			-- Checks if the spot selected is already full
-			while board[spotSelect] == 1 or board[spotSelect] == 2 do
-				-- Selects a new spot until it finds an empty one
-				spotSelect = math.random(1,9)
-			end
-
-			-- Sets the chosen board spot to 2, the bots number
-			board[spotSelect] = 2
-			-- Calls the loader to play the placing sound
-			msg.post("Loader:/Loader", "Sound", {sound = 5})
-			-- Sets the chosen node to visible
-			gui.set_visible(gui.get_node("box"..spotSelect), true)
-			-- Sets the chosen node to the bots icon
-			gui.play_flipbook(gui.get_node("box"..spotSelect), "sea-urchin")
-			-- Sends a message to self to evaluate if someone has won, passing it's number
-			msg.post("#","evaluate",{caller = 2})
-			-- Sets player turn to true so the player can click again
-			playerTurn = true
-			
-		end
-		
-	end
-
-	-- If message id is evalute, sent from self
-	if message_id == hash("evaluate") then
-
-		-- Set up a variable to track if there is a winner
-		local winner = false
-
-		-- Checks each possible configuration of a line of 3
-		-- Checks if they're not set to 0 and all equal (so all 1 or all 2)
-		-- Only checks if the first item in the list is set to 0 since if it isn't the rest will always be fine
-		-- Sets local variable winner to true to indicate that someone has won
-		
-		--123
-		if board[1] ~= 0 and board[1] == board[2] and board[1] == board[3] then
-			winner = true
-		--147
-		elseif board[1] ~= 0 and board[1] == board[4] and board[1] == board[7] then
-			winner = true
-		--159
-		elseif board[1] ~= 0 and board[1] == board[5] and board[1] == board[9] then
-			winner = true
-		--258
-		elseif board[2] ~= 0 and board[2] == board[5] and board[2] == board[8] then
-			winner = true
-		--369
-		elseif board[3] ~= 0 and board[3] == board[6] and board[3] == board[9] then
-			winner = true
-		--357
-		elseif board[3] ~= 0 and board[3] == board[5] and board[3] == board[7] then
-			winner = true
-		--456
-		elseif board[4] ~= 0 and board[4] == board[5] and board[4] == board[6] then
-			winner = true
-		--789
-		elseif board[7] ~= 0 and board[7] == board[8] and board[7] == board[9] then
-			winner = true
-		end
-
-		-- Sets up a boolean to check if the board is full
-		local noSpacesLeft = false
-		-- Iterates through the board
-		for i = 1, 9, 1 do
-			-- Checks if any of the spaces are empty
-			if board[i] == 0 then
-				-- Sets to true to indicate there are spaces left
-				noSpacesLeft = true
-			end
-		end
-
-		-- If the're a winner
-		if winner then
-			
-			-- Check if the last move was the player
-			if message.caller == 1 then
-				-- Set won to true
-				won = true
-				-- Increases the global token value
-				tokens = tokens+1
-				-- Update the token text
-				gui.set_text(gui.get_node("TokenText"), tokens)
-				-- Increases the global tacker of fishtactoe wins
-				FishTacToeWins = FishTacToeWins+1
-				-- Update the win text with the global number of wins
-				gui.set_text(gui.get_node("winsInformation"),"Wins: "..FishTacToeWins)
-				-- Sets the end game text to visible
-				gui.set_visible(gui.get_node("endGameText"),true)
-				-- Sets the end game text to "You Win!"
-				gui.set_text(gui.get_node("endGameText"),"You Win!")
-				-- enable and set visible the play again node and it's text
-				gui.set_enabled(gui.get_node("playAgain"), true)
-				gui.set_visible(gui.get_node("playAgain"), true)
-				gui.set_visible(gui.get_node("playAgainText"),true)
-
-			-- Check if the last move was the bot
-			elseif message.caller == 2 then
-				-- Set lost to true
-				lost = true
-				-- Update the global fishtactoe lost tracker
-				FishTacToeLosses = FishTacToeLosses+1
-				-- Update the losses number with the global fishtactoe losses
-				gui.set_text(gui.get_node("lossInformation"),"Losses: "..FishTacToeLosses)
-				-- Sets the end game text to visible
-				gui.set_visible(gui.get_node("endGameText"),true)
-				-- Sets the end game text to "You Lose!"
-				gui.set_text(gui.get_node("endGameText"),"You Lose!")
-				-- enable and set visible the play again node and it's text
-				gui.set_enabled(gui.get_node("playAgain"), true)
-				gui.set_visible(gui.get_node("playAgain"), true)
-				gui.set_visible(gui.get_node("playAgainText"),true)
-			end
-			
-		-- Checks if there is no winner, and also there are no open spaces left
-		elseif not winner and not noSpacesLeft then
-		
-			-- Sets stalemate to true
-			stalemate = true
-			-- updates the global fishtactoe stalemate counter
-			FishTacToeStalemates = FishTacToeStalemates+1
-			-- Update the losses number with the global fishtactoe losses
-			gui.set_text(gui.get_node("stalemateInformation"),"Stalemates: "..FishTacToeStalemates)
-			-- Sets the end game text to visible
-			gui.set_visible(gui.get_node("endGameText"),true)
-			-- Sets the end game text to "Statement"
-			gui.set_text(gui.get_node("endGameText"),"Stalemate")
-			-- enable and set visible the play again node and it's text
-			gui.set_enabled(gui.get_node("playAgain"), true)
-			gui.set_visible(gui.get_node("playAgain"), true)
-			gui.set_visible(gui.get_node("playAgainText"),true)
-
-		-- If there's no winner and still spaces left
-		else 
-		
-			-- If the message was sent by the players input
-			if message.caller == 1 then
-				-- Set the fishthinking node to visible
-				gui.set_visible(gui.get_node("FishThinking"), true)
-				-- Play the fish thinking animation, and call fishThinkEnd when it's done
-				gui.play_flipbook(gui.get_node("FishThinking"), "FishThinking", fishThinkEnd)
-			-- If the messager was sent by the bot
-			elseif message.caller == 2 then
-				-- Sets playerTurn to true so they can take their turn
-				playerTurn = true
-			end
-			
-		end
-
-	end
 	
 end
 
