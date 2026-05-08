@@ -133,68 +133,18 @@ function on_input(self, action_id, action)
 			if not evaluating then
 
 				-- Get the 6 card nodes
-				local card1 = gui.get_node("card1")
-				local card2 = gui.get_node("card2")
-				local card3 = gui.get_node("card3")
-				local card4 = gui.get_node("card4")
-				local card5 = gui.get_node("card5")
-				local card6 = gui.get_node("card6")
+				local cards = {gui.get_node("card1"),gui.get_node("card2"),gui.get_node("card3"),gui.get_node("card4"),gui.get_node("card5"),gui.get_node("card6")}
 
 				-- Checks if the player clicked any of the card
 
-				-- If they clicked card 1
-				if gui.pick_node(card1, action.x, action.y) then
+				for i=1,#cards do
 
-					-- Checks if the node clicked has already been flipped over (set to anything other then 1 in the flippedOver array)
-					if flippedOver[1] ~= 1 then
-						-- Send a message to self with the data of which card was flipped
-						msg.post("#","flip",{card = 1})
+					if gui.pick_node(cards[i], action.x, action.y) then
+						if flippedOver[i] ~= 1 then
+							msg.post("#","flip",{card = i})
+						end
 					end
 
-				-- If they clicked card 2
-				elseif gui.pick_node(card2, action.x, action.y) then
-
-					-- Checks if the node clicked has already been flipped over (set to anything other then 1 in the flippedOver array)
-					if flippedOver[2] ~= 1 then
-						-- Send a message to self with the data of which card was flipped
-						msg.post("#","flip",{card = 2})
-					end
-
-				-- If they clicked card 3
-				elseif gui.pick_node(card3, action.x, action.y) then
-
-					-- Checks if the node clicked has already been flipped over (set to anything other then 1 in the flippedOver array)
-					if flippedOver[3] ~= 1 then
-						-- Send a message to self with the data of which card was flipped
-						msg.post("#","flip",{card = 3})
-					end
-							
-				-- If they clicked card 4	
-				elseif gui.pick_node(card4, action.x, action.y) then
-
-					-- Checks if the node clicked has already been flipped over (set to anything other then 1 in the flippedOver array)
-					if flippedOver[4] ~= 1 then
-						-- Send a message to self with the data of which card was flipped
-						msg.post("#","flip",{card = 4})
-					end
-
-				-- If they clicked card 5
-				elseif gui.pick_node(card5, action.x, action.y) then
-
-					-- Checks if the node clicked has already been flipped over (set to anything other then 1 in the flippedOver array)
-					if flippedOver[5] ~= 1 then
-						-- Send a message to self with the data of which card was flipped
-						msg.post("#","flip",{card = 5})
-					end
-
-				-- If they clicked card 6
-				elseif gui.pick_node(card6, action.x, action.y) then
-
-					-- Checks if the node clicked has already been flipped over (set to anything other then 1 in the flippedOver array)
-					if flippedOver[6] ~= 1 then
-						-- Send a message to self with the data of which card was flipped
-						msg.post("#","flip",{card = 6})
-					end
 				end
 				
 			end
