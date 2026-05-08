@@ -1,8 +1,5 @@
 -- 
 -- TODO:
--- 1. Make and call custom functions instead of sending messages to self
--- 2. Check if there is a better way to determine whether the bot needs to be stopped
--- 3. Reconsider how the evaluation functions
 -- 
 
 -- Local Variables
@@ -15,11 +12,11 @@ local playerTurn = true
 -- Boolean to keep track of whether the game has ended
 local gameEnd = false
 
-
-
-
-
-local function evaluate(caller)
+-- Custom Function
+-- Called to evaluate the board and check whether a line of 3 has happenened or if there's no available spaces to play
+-- Determines whether the player or the bot won, updates appropriate variables
+-- Sends a message to self to call correct animations
+local function evaluate(player)
 
 	-- Set up a variable to track if there is a winner
 	local winner = 0
@@ -58,6 +55,7 @@ local function evaluate(caller)
 	-- If the're a winner
 	if winner ~= 0 then
 
+		-- Set gameEnd to true so the user can't click on the board
 		gameEnd = true
 
 		-- Check if the last move was the player
@@ -73,7 +71,7 @@ local function evaluate(caller)
 			-- Sets the end game text to "You Win!"
 			gui.set_text(gui.get_node("endGameText"),"You Win!")
 
-			-- Check if the last move was the bot
+		-- Check if the last move was the bot
 		elseif winner == 2 then
 			-- Update the global fishtactoe lost tracker
 			FishTacToeLosses = FishTacToeLosses+1
@@ -91,6 +89,7 @@ local function evaluate(caller)
 		gui.set_visible(gui.get_node("playAgain"), true)
 		gui.set_visible(gui.get_node("playAgainText"),true)
 
+		-- Returns to avoid executing unnecessary code
 		return
 
 	end
@@ -109,6 +108,8 @@ local function evaluate(caller)
 	-- Checks if there is no winner, and also there are no open spaces left
 	if not noSpacesLeft then
 
+		gameEnd = true
+
 		-- updates the global fishtactoe stalemate counter
 		FishTacToeStalemates = FishTacToeStalemates+1
 		-- Update the losses number with the global fishtactoe losses
@@ -122,32 +123,27 @@ local function evaluate(caller)
 		gui.set_visible(gui.get_node("playAgain"), true)
 		gui.set_visible(gui.get_node("playAgainText"),true)
 
+		-- Returns to avoid executing unnecessary code
 		return
 
 	-- If there's no winner and still spaces left
 	else 
 
-		whosTurn(caller)
+		-- Sends message to self to update variables depending on which player called evaluate
+		msg.post(".","Change Turns", {caller = player})
 		
 	end
 
 end
 
-local function fishTurn()
+-- Custom Function
+-- Selects a random open spot on the board for the bot
+-- Displays the correct sprite in the chosen spot
+-- Calls evaluate to determine if anyone won
+local function fishTurn()			
 
-	-- Sets up a "sentinel" variable to make sure that the game doesn't crash
-	--local noCrash = false
-	-- Iterates through the board
-	--for i = 1, 9, 1 do
-	-- Checks if any of the positions are open
-	--if board[i] == 0 then
-	-- Sets noCrash to true, meaning it's safe for the AI to try and play
-	--noCrash = true
-	--end
-	--end
-
-	-- If noCrash is true, meaning there are still positions to play
-	--if noCrash then				
+	-- Sets the fish thinking nods to not visible
+	gui.set_visible(gui.get_node("FishThinking"), false)
 
 	-- Selects a random number between 1 and 9
 	local spotSelect = math.random(1,9)
@@ -167,39 +163,13 @@ local function fishTurn()
 	gui.play_flipbook(gui.get_node("box"..spotSelect), "sea-urchin")
 	-- Sends a message to self to evaluate if someone has won, passing it's number
 	evaluate(2)
-	-- Sets player turn to true so the player can click again
-	playerTurn = true
-
-	--end
 
 end
 
--- Custum Function
--- Triggers at the end of the fishThinking animation
--- Handles calling the AI to make a move, preventing it from auto-evaluating
-local function fishThinkEnd(self)
-	-- Sets the fish thinking nods to not visible
-	gui.set_visible(gui.get_node("FishThinking"), false)
-	-- Sends a message to itself to take a turn
-	fishTurn()
-end
-
-local function whosTurn(caller)
-
-	-- If the message was sent by the players input
-	if caller == 1 then
-		-- Set the fishthinking node to visible
-		gui.set_visible(gui.get_node("FishThinking"), true)
-		-- Play the fish thinking animation, and call fishThinkEnd when it's done
-		gui.play_flipbook(gui.get_node("FishThinking"), "FishThinking", fishThinkEnd)
-		-- If the messager was sent by the bot
-	elseif caller == 2 then
-		-- Sets playerTurn to true so they can take their turn
-		playerTurn = true
-	end
-
-end
-
+-- Custom Function
+-- Checks if the spot the user clicked is already visible
+-- Plays the correct sound and displays the correct sprite
+-- Calls evaluate to see if anyone won
 local function playerPlace(space)
 
 	-- Checks if the board space has already been marked 
@@ -215,7 +185,7 @@ local function playerPlace(space)
 		-- Set the node to the player animation
 		gui.play_flipbook(gui.get_node("box"..space), "starfish")
 		-- Sends a message to self to evaluate whether the player has one. Passes 1 to tell the script that last played was the player
-		msg.post("#","evaluate",{caller = 1})
+		evaluate(1)
 	end
 
 end
@@ -223,14 +193,13 @@ end
 -- Custom Function
 -- Handles resetting the game for a new play
 local function Reset() 
-	-- Sets the game ending booleans to false
-	won = false
-	lost = false
-	stalemate = false
+	
 	-- Sets the board array back to default
 	board = {0,0,0,0,0,0,0,0,0}
 	-- Sets player turn to true as they always go first
 	playerTurn = true
+	-- Set gameEnd back to false so players can interact with the board
+	gameEnd = false
 	-- Sets all the end game nodes and the board nodes to not visible
 	gui.set_visible(gui.get_node("endGameText"), false)
 	gui.set_enabled(gui.get_node("playAgain"), false)
@@ -245,6 +214,7 @@ local function Reset()
 	gui.set_visible(gui.get_node("box7"), false)
 	gui.set_visible(gui.get_node("box8"), false)
 	gui.set_visible(gui.get_node("box9"), false)
+	
 end
 
 -- Executes the first time the script is loaded
@@ -281,10 +251,15 @@ function on_input(self, action_id, action)
 				-- Get the nodes for each position on the board
 				local boardSpaces = {gui.get_node("box1"),gui.get_node("box2"),gui.get_node("box3"),gui.get_node("box4"),gui.get_node("box5"),gui.get_node("box6"),gui.get_node("box7"),gui.get_node("box8"),gui.get_node("box9")}
 
+				-- Iterates through the board space nodes
 				for i=1,#boardSpaces do
 
+					-- if that node was the clicked one
 					if gui.pick_node(boardSpaces[i], action.x, action.y) then
+						-- Call playerPlace to place or reject the users symbol
 						playerPlace(i)
+						-- Calls return to stop iterating as the user can only click on one node at a time
+						return
 					end
 
 				end
@@ -315,11 +290,20 @@ function on_message(self, message_id, message, sender)
 	if message_id == hash("Update") then
 		-- Updates the tokens text
 		gui.set_text(gui.get_node("TokenText"),tokens)
-	end
 
-	
-
-		
+	elseif message_id == hash("Change Turns") then
+		-- If the message was sent by the players input
+		if message.caller == 1 then
+			-- Set the fishthinking node to visible
+			gui.set_visible(gui.get_node("FishThinking"), true)
+			-- Play the fish thinking animation, and call fishThinkEnd when it's done
+			gui.play_flipbook(gui.get_node("FishThinking"), "FishThinking", fishTurn)
+		-- If the messager was sent by the bot
+		elseif message.caller == 2 then
+			-- Sets playerTurn to true so they can take their turn
+			playerTurn = true
+		end
+	end	
 	
 end
 
