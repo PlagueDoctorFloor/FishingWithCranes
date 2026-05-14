@@ -1,7 +1,5 @@
 --
 -- TODO:
--- 1. Add making the other glows false when one is true, implement using a loop/custom function
--- 2. Mostly a loader problem, but try and make the different collections all show on one page
 --
 
 -- Executes when the script first loads
@@ -13,46 +11,56 @@ end
 -- Executes when the script recieves input
 function on_input(self, action_id, action)
 
-	-- Gets the 4 visible nodes
-	local freshSelect = gui.get_node("FreshwaterChoice")
-	local saltSelect = gui.get_node("SaltwaterChoice")
-	local decorSelect = gui.get_node("DecorChoice")
-	local fishTankSelect = gui.get_node("FishTankSign")
-
+	-- Gets the 4 Option nodes
+	local optionSelect = {gui.get_node("FreshwaterChoice"),gui.get_node("SaltwaterChoice"),gui.get_node("DecorChoice"),gui.get_node("FishTankSign")}
+	
 	-- If there is no specific action
 	if action_id == nil then
 
-		-- If the user hovers over Freshwater Collection Select
-		if gui.pick_node(freshSelect, action.x, action.y) then
+		-- Gets the 4 glows
+		local optionsGlow = {gui.get_node("FreshGlow"),gui.get_node("SaltGlow"),gui.get_node("DecorGlow"),gui.get_node("TankSignGlow")}
 
-			-- Set it's glow to visible
-			gui.set_visible(gui.get_node("FreshGlow"), true)
+		-- Sentinel variable to determine if the user is currently hovering ofer a node
+		local hovering = false
 
-		-- If the user hovers over Saltwater Collection Select
-		elseif gui.pick_node(saltSelect, action.x, action.y) then
+		-- Iterates through the option nodes
+		for i=1,#optionSelect,1 do
 
-			-- Set it's glow to visible
-			gui.set_visible(gui.get_node("SaltGlow"), true)
+			-- Check if one of the nodes is being hovered over
+			if gui.pick_node(optionSelect[i], action.x, action.y) then
+				-- Sets hovering to true
+				hovering = true
 
-		-- If the user hovers over Decor Collection Select
-		elseif gui.pick_node(decorSelect, action.x, action.y) then
+				-- Sets the glow of the hovered item to visible
+				gui.set_visible(optionsGlow[i],true)
 
-			-- Set it's glow to visible
-			gui.set_visible(gui.get_node("DecorGlow"), true)
+				-- Iterates through the item glow nodes
+				for j=1,#optionsGlow do
 
-		-- If the user hovers over the Fish Tank Select Sign
-		elseif gui.pick_node(fishTankSelect, action.x, action.y) then
+					-- If the number does not equal the currently chosen node
+					if j ~= i then
+						-- Set the glow not visible
+						gui.set_visible(optionsGlow[j],false)
+					end
 
-			-- Set it's glow to visible
-			gui.set_visible(gui.get_node("TankSignGlow"), true)
+				end
 
-		-- If the player isn't hovering over any nodes
-		else
-			-- Set all the glows to not visible
-			gui.set_visible(gui.get_node("FreshGlow"), false)
-			gui.set_visible(gui.get_node("SaltGlow"), false)
-			gui.set_visible(gui.get_node("DecorGlow"), false)
-			gui.set_visible(gui.get_node("TankSignGlow"), false)
+				-- Breaks the loop to avoid unnecessary code execution
+				break
+				
+			end
+			
+		end
+
+		-- If the user is not hovering over any of the nodes
+		if not hovering then
+
+			-- Iterate through the glows
+			for k=1,#optionsGlow do
+				-- Set all of them to not visible
+				gui.set_visible(optionsGlow[k],false)
+			end
+
 		end
 		
 	end
@@ -69,29 +77,28 @@ function on_input(self, action_id, action)
 			-- Calls the loader to load the main crane screen
 			msg.post("Loader:/Loader", "load Crane")
 
-		-- If the user selects the freshwater collection
-		elseif gui.pick_node(freshSelect, action.x, action.y) then
+		-- If the user clicked on anything else
+		else
 
-			-- Calls the loader to load the freshwater collection page
-			msg.post("Loader:/Loader", "load itemCollection", {set = 1})
+			-- Iterate through the option nodes
+			for i=1,#optionSelect,1 do
 
-		-- If the user selects the saltwater collection
-		elseif gui.pick_node(saltSelect, action.x, action.y) then
+				-- If the node was clicked
+				if gui.pick_node(optionSelect[i], action.x, action.y) then
 
-			-- Calls the loader to load the saltwater collection page
-			msg.post("Loader:/Loader", "load itemCollection", {set = 2})
+					-- If i is less than 4, meaning it's one of the set options
+					if i < 4 then
+						-- Sends a message to the loader to load the item collection scene, passing the set number
+						msg.post("Loader:/Loader", "load itemCollection", {set = i})
+					-- If i is greater then 3, only the fish tank
+					else 
+						-- Call the loader to load the fish tank
+						msg.post("Loader:/Loader", "load FishTank")
+					end
 
-		-- If the user selects the decor collection
-		elseif gui.pick_node(decorSelect, action.x, action.y) then
+				end
 
-			-- Calls the loader to load the decor collection page
-			msg.post("Loader:/Loader", "load itemCollection", {set = 3})
-
-		-- If the user selects the fish tank sign
-		elseif gui.pick_node(fishTankSelect, action.x, action.y) then
-
-			-- Calls the loader to load the fish tank
-			msg.post("Loader:/Loader", "load FishTank")
+			end
 
 		end
 

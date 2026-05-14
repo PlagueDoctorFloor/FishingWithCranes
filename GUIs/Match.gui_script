@@ -247,6 +247,8 @@ function on_input(self, action_id, action)
 					if flippedOver[i] ~= 1 then
 						-- Call the flip function with the node number
 						flip(i)
+						-- Ends the loop to avoid unnecessary code execution
+						break
 					end
 				end
 			end
