@@ -28,6 +28,8 @@ local flippedOver = {0,0,0,0,0,0}
 -- Boolean keeping track of whether the game is currently evaluating a match
 local evaluating = false
 
+-- Custom Function
+-- Evaluates whether all cards have been flipped over, meaning all matches have been found
 local function winEvaluate()
 
 	-- Set a sentinel variable to true
@@ -42,15 +44,15 @@ local function winEvaluate()
 		end								
 	end	
 
-	-- If winner is still true, meaning 
+	-- If winner is still true, meaning all cards have been flipped over
 	if winner then
-		-- Set won to true
+		-- Set gameEnd to true
 		gameEnd = true	
 		-- Increase global tokens
 		tokens = tokens+1
 		-- Increase global match played
 		MatchPlayed = MatchPlayed +1
-		-- Update On Screen Tokens
+		-- Update On Screen Tokens Text
 		gui.set_text(gui.get_node("TokenText"),tokens)
 		-- Set end game text to visible
 		gui.set_visible(gui.get_node("endGameText"),true)
@@ -60,12 +62,13 @@ local function winEvaluate()
 		gui.set_visible(gui.get_node("playAgain"), true)
 		gui.set_visible(gui.get_node("playAgainText"),true)
 
+		-- Return to avoid unnecessary code execution
 		return
 	end
 
-	-- If the player is out of flips and has not won
+	-- If the player is out of flips (Only executes if the player has not won)
 	if flipsLeft == 0 then
-		-- Set lost to true
+		-- Set gameEnd to true
 		gameEnd = true
 		-- Increase global match played
 		MatchPlayed = MatchPlayed +1
@@ -74,22 +77,22 @@ local function winEvaluate()
 		-- Set end game text to You Lose!
 		gui.set_text(gui.get_node("endGameText"),"You Lose!")
 		-- Set the play again button to visible
-		gui.set_enabled(gui.get_node("playAgain"), true)
 		gui.set_visible(gui.get_node("playAgain"), true)
 		gui.set_visible(gui.get_node("playAgainText"),true)
 
+		-- Return to avoid unnecessary code execution
 		return
 	end
 
-	-- Set flipAmount back to 0
-	flippedAmount = 0
-	-- Reset the cardFlipped array
-	currentPairFlipped = {0,0}
+	-- Only executes if the user has not won and still has flips left
+	
 	-- Set evaluating to false so user can input again
 	evaluating = false
 
 end
 
+-- Custom Function
+-- Evaluates the 2 cards flipped over to determine if they match
 local function pairEvaluate()
 	
 	-- If the chosen cards don't match
@@ -97,21 +100,31 @@ local function pairEvaluate()
 		-- Set both cards to their back animations
 		gui.play_flipbook(gui.get_node("card"..currentPairFlipped[1]), "fish-match-card-back")
 		gui.play_flipbook(gui.get_node("card"..currentPairFlipped[2]), "fish-match-card-back")
-		-- Set both positions of the flippedOver array to 0
+		-- Set both positions of the flippedOver array to 0, indicating they are no longer flipped over
 		flippedOver[currentPairFlipped[1]] = 0
 		flippedOver[currentPairFlipped[2]] = 0
 	end
 
+	-- Sets flippedAmount back to 0
+	flippedAmount = 0
+	-- Resets the currentPairFlipped array
+	currentPairFlipped = {0,0}
+
+	-- If flipsLeft is less than 5, meaning 6 flips have been done so it's possible the player has won
 	if flipsLeft < 5 then
+		-- Calls winEvaluate to check if the player has won
 		winEvaluate()
+	-- If flipLeft is 5 or higher, meaning not flips have been made for the player to have won
 	else
+		-- Sets evaluating to false so the player can input 
 		evaluating = false
-		flippedAmount = 0
-		currentPairFlipped = {0,0}
 	end
 
 end
 
+-- Custom Function
+-- Called when a player clicks a card that isn't already flipped over as long as nothing is being evaluated
+-- Handles changing the sprite, changing the number of flips the user has, and calling to evaluate the pair if 2 cards are flipped
 local function flip(cardPosition)
 
 	-- Subtract one from the flips left
@@ -121,13 +134,13 @@ local function flip(cardPosition)
 	-- Send a message to the loader to play the flip noise
 	msg.post("Loader:/Loader","Sound", {sound = 2})
 
-	-- Add one
+	-- Add one to the amount of cards flipped over
 	flippedAmount = flippedAmount +1
-	-- Add the flipped card to the cardsFlipped array in the position it was flipped
+	-- Add the flipped cards position to the currentPairFlipped array in the position it was flipped
 	currentPairFlipped[flippedAmount] = cardPosition
-	-- Set the card in the flipped over array to 1 to represent being flipped
+	-- Set the card in the flippedOver array to 1 to represent being flipped (so the user can't click on it again until it's turned back over)
 	flippedOver[cardPosition] = 1
-	-- If flipamount is 1, so only one card has been flipped
+	-- If flippedAmount is 1, so only one card has been flipped
 	if flippedAmount == 1 then
 		-- Set the card to the the correct face animation
 		gui.play_flipbook(gui.get_node("card"..cardPosition), "Animation"..cardsPlace[cardPosition])
@@ -167,17 +180,16 @@ local function cardSet()
 end
 
 -- Custom Function
--- Resets all the variables and nodes so the game can be played again
+-- Resets all the variables and nodes so the game can be played from the beginning
 local function Reset() 
-	-- Reset the gameEnd variables
+	-- Reset the gameEnd variable
 	gameEnd = false
 	-- Resets the arrays and variables to their initial values
 	cards = {1,1,2,2,3,3}
 	cardsPlace = {0,0,0,0,0,0}
 	flipsLeft = 10
-	flippedAmount = 0
-	flipsLeft = 10
 	gui.set_text(gui.get_node("FlipText"), "Flips: "..flipsLeft)
+	flippedAmount = 0
 	currentPairFlipped = {0,0}
 	flippedOver = {0,0,0,0,0,0}
 	evaluating = false
@@ -186,12 +198,9 @@ local function Reset()
 	gui.set_visible(gui.get_node("playAgain"), false)
 	gui.set_visible(gui.get_node("playAgainText"),false)
 	-- Sets all the cards to the back animation
-	gui.play_flipbook(gui.get_node("card1"), "fish-match-card-back")
-	gui.play_flipbook(gui.get_node("card2"), "fish-match-card-back")
-	gui.play_flipbook(gui.get_node("card3"), "fish-match-card-back")
-	gui.play_flipbook(gui.get_node("card4"), "fish-match-card-back")
-	gui.play_flipbook(gui.get_node("card5"), "fish-match-card-back")
-	gui.play_flipbook(gui.get_node("card6"), "fish-match-card-back")
+	for i=1,6,1 do
+		gui.play_flipbook(gui.get_node("card"..i), "fish-match-card-back")
+	end
 	-- Calls cardSet to get a new card distribution
 	cardSet()
 end
@@ -224,21 +233,22 @@ function on_input(self, action_id, action)
 		end
 
 		-- If the player has not won or lost
-		if not gameEnd and not evaluating then
+		if not evaluating then
 
 			-- Get the 6 card nodes
 			local cardNodes = {gui.get_node("card1"),gui.get_node("card2"),gui.get_node("card3"),gui.get_node("card4"),gui.get_node("card5"),gui.get_node("card6")}
 
 			-- Checks if the player clicked any of the card
-
+			-- Iterate through the card nodes array
 			for i=1,#cardNodes do
-
+				-- Check if this node was the one clicked on 
 				if gui.pick_node(cardNodes[i], action.x, action.y) then
+					-- If the node isn't already flipped over
 					if flippedOver[i] ~= 1 then
+						-- Call the flip function with the node number
 						flip(i)
 					end
 				end
-
 			end
 
 		-- If the game has ended (the player has lost or won)
@@ -246,7 +256,8 @@ function on_input(self, action_id, action)
 
 			-- Get the playAgain button
 			local playAgain = gui.get_node("playAgain")
-			-- if the user clicks the play again button
+			
+			-- If the user clicks the play again button
 			if gui.pick_node(playAgain, action.x, action.y) then
 				-- Call reset to reset the game
 				Reset()
@@ -261,11 +272,12 @@ end
 -- Executes when the script receives a message
 function on_message(self, message_id, message, sender)
 
-	-- If message id is update (sent from the loader)
+	-- If message id is Update (sent from the loader)
 	if message_id == hash("Update") then
 
+		-- Sets the text for the Tokens text
 		gui.set_text(gui.get_node("TokenText"),tokens)
-
+		-- Calls reset to set the game back to the beginning
 		Reset()
 		
 	end
