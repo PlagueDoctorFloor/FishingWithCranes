@@ -1,6 +1,5 @@
 -- 
 -- TODO:
--- Condense the won and lost functions into one thing
 -- 
 
 -- Boolean keeping track of whether the minigame has started
@@ -81,7 +80,7 @@ function on_message(self, message_id, message, sender)
 		gui.set_text(gui.get_node("TokenText"),tokens)
 
 	-- If the message ID is won, sent from the FlyingFish script
-	elseif message_id == hash("Won") then
+	elseif message_id == hash("gameEnd") then
 
 		-- Sets gameEnd true
 		gameEnd = true
@@ -90,25 +89,19 @@ function on_message(self, message_id, message, sender)
 		-- Sets the game end label and text to visible
 		gui.set_visible(gui.get_node("GameEnd"), true)
 		gui.set_visible(gui.get_node("GameEndText"), true)
-		-- Sets the game end text to "You Win!"
-		gui.set_text(gui.get_node("GameEndText"), "You Win!")
 		-- Sets the play again button and text to visible
 		gui.set_visible(gui.get_node("playAgain"), true)
 		gui.set_visible(gui.get_node("playAgainText"), true)
 
-	-- If the message ID is Lost, sent from the FlyingFish script
-	elseif message_id == hash("Lost") then
-
-		-- Sets gameEnd true
-		gameEnd = true
-		-- Sets the game end label and text to visible
-		gui.set_visible(gui.get_node("GameEnd"), true)
-		gui.set_visible(gui.get_node("GameEndText"), true)
-		-- Sets the game end text to "You Lost!"
-		gui.set_text(gui.get_node("GameEndText"), "You Lost")
-		-- Sets the play again button and text to visible
-		gui.set_visible(gui.get_node("playAgain"), true)
-		gui.set_visible(gui.get_node("playAgainText"), true)
+		-- If the result is 1, meaning the player won
+		if message.result == 1 then
+			-- Sets the game end text to "You Win!"
+			gui.set_text(gui.get_node("GameEndText"), "You Win!")
+		-- If the result is 0, meaning the player lost
+		elseif message.result == 0 then
+			-- Sets the game end text to "You Lost!"
+			gui.set_text(gui.get_node("GameEndText"), "You Lost")
+		end
 
 	-- If the message ID is Course, sent by the FlappyLevelSpawn script
 	elseif message_id == hash("Course") then
