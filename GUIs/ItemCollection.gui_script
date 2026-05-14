@@ -1,10 +1,18 @@
+--
+-- TODO:
+--
 
+-- Variable to keep track of which set is being displayed
 local setSelected = 0
 
+-- Array holding the names of all the items grouped by set position
 local Names = {{"Carp","Needlefish","Small Plant"},{"Rainbow Trout","Sculpin","Medium Plant"},{"Alligator Gar","Marlin","Large Plant"},{"Ghost Knifefish","Sturgeon","Rocks"},{"Arowana","Mola Mola","Cave"},{"Elephantfish","Blenny","Rainbow Rocks"},{"Koi","Frogfish","Castle"},{"A Hundred Gar","Sea Dragon","Diver"}}
 
+-- Custom Function
+-- Handles displaying each specific node based on the passed information
 local function displayFish(found,number)
 
+	-- If the global variable value passed is greater than 0, meaning the user has found it
 	if found > 0 then
 
 		-- Sets the name text to the correct item using the name array
@@ -12,6 +20,7 @@ local function displayFish(found,number)
 		-- Sets the image node to visible
 		gui.set_visible(gui.get_node("fish"..number),true)
 
+	-- If the global variable value passes is 0
 	else
 
 		-- Sets the name node to a question mark
@@ -23,7 +32,6 @@ local function displayFish(found,number)
 
 end
 
-
 -- Custom Function
 -- Executes when the loader sends a message when the page is enabled
 -- Checks which items from the set have been found and updates their visibility.
@@ -32,16 +40,27 @@ local function updateDisplay()
 	-- Iterates 8 times, for each item in the set
 	for i=1,8,1 do
 
+		-- Gets each fish node
 		local currentNode = gui.get_node("fish"..i)
 
+		-- Checks which set is chosen
+		-- If set 1
 		if setSelected == 1 then
+			-- Set the sprite to the correct freshwater fish
 			gui.play_flipbook(currentNode, "freshwater-"..i)
+			-- Calls display fish to set the text and visibility, passing the correct global array position and the item number
 			displayFish(FreshwaterFish[i],i)
+		-- If set 2
 		elseif setSelected == 2 then
+			-- Set the sprite to the correct saltwater fish
 			gui.play_flipbook(currentNode, "saltwater-"..i)
+			-- Calls display fish to set the text and visibility, passing the correct global array position and the item number
 			displayFish(SaltwaterFish[i],i)
+		-- If set 3
 		elseif setSelected == 3 then
+			-- Set the sprite to the correct decor item
 			gui.play_flipbook(currentNode, "decor-"..i)
+			-- Calls display fish to set the text and visibility, passing the correct global array position and the item number
 			displayFish(TankDecor[i],i)
 		end
 
@@ -54,8 +73,9 @@ function on_message(self, message_id, message, sender)
 
 	-- If message id is Update (sent from the loader when the page is enabled)
 	if message_id == hash("Update") then
+		-- set setSelected to the set passed from the loader
 		setSelected = message.set
-		-- Calls custom function update display
+		-- Calls custom function Update to display the correct found items
 		updateDisplay()
 	end
 
@@ -137,14 +157,19 @@ function on_input(self, action_id, action)
 			-- Sends a nmessage to the loader to load the collection selection page
 			msg.post("Loader:/Loader", "load Collection")
 
+		-- If the user clicks anywhere else
 		else
 
+			-- Iterates through the item nodes
 			for i=1,#itemNodes do
-				
+
+				-- Checks if the item node was the one clicked
 				if gui.pick_node(itemNodes[i], action.x, action.y) then
 
+					-- Calls the loader to load the detailed fish scene, passing the set and fish number
 					msg.post("Loader:/Loader","load DetailedFish",{set = setSelected, fish = i})
 
+					-- Breaks to avoid unnecessary code execution
 					break
 
 				end
@@ -156,6 +181,8 @@ function on_input(self, action_id, action)
 	end
 	
 end
+
+-- Currently Unused Functions
 
 function update(self, dt)
 	--
