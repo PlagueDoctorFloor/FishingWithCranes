@@ -1,6 +1,5 @@
 --
 -- TODO:
--- 1. Consider combining the "no tokens" function to also display them
 -- 2. Do I need 2 variables to prevent clicking or can it be one?
 --
 
@@ -62,8 +61,6 @@ local function spawnFish(self)
 
 		-- Increase the global array position to keep track of how many of the selected fish are owned
 		FreshwaterFish[selectedFish] = FreshwaterFish[selectedFish]+1
-		-- Sets the fish node to true
-		gui.set_visible(gui.get_node("Fish"), true)
 		-- plays the right animation for the selected fish
 		gui.play_flipbook(gui.get_node("Fish"), "freshwater-"..selectedFish, allowClicks)
 
@@ -78,8 +75,6 @@ local function spawnFish(self)
 
 		-- Increase the global array position to keep track of how many of the selected fish are owned
 		SaltwaterFish[selectedFish] = SaltwaterFish[selectedFish]+1
-		-- Sets the fish node to true
-		gui.set_visible(gui.get_node("Fish"), true)
 		-- plays the right animation for the selected fish
 		gui.play_flipbook(gui.get_node("Fish"), "saltwater-"..selectedFish, allowClicks)
 
@@ -94,12 +89,13 @@ local function spawnFish(self)
 
 		-- Increase the global array position to keep track of how many of the selected items are owned
 		TankDecor[selectedFish] = TankDecor[selectedFish]+1
-		-- Sets the fish node to true
-		gui.set_visible(gui.get_node("Fish"), true)
 		-- plays the right animation for the selected item
 		gui.play_flipbook(gui.get_node("Fish"), "decor-"..selectedFish, allowClicks)
 		
 	end
+	
+	-- Sets the fish node to true
+	gui.set_visible(gui.get_node("Fish"), true)
 
 end
 
