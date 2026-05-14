@@ -35,8 +35,8 @@ local function winEvaluate()
 	
 	-- Iterate through the cardsPlace array
 	for i = 1,#cardsPlace, 1 do
-		-- Check if any of the positions are not equal to 0
-		if cardsPlace[i] ~= 0 then
+		-- Check if any of the positions are equal to 0
+		if flippedOver[i] == 0 then
 			-- Set winner to false as not all the cards have been revealed
 			winner = false
 		end								
@@ -92,14 +92,8 @@ end
 
 local function pairEvaluate()
 	
-	-- If the chosen cards values match
-	if cardsPlace[currentPairFlipped[1]] == cardsPlace[currentPairFlipped[2]] then
-		-- Set both cards value to 0
-		cardsPlace[currentPairFlipped[1]] = 0
-		cardsPlace[currentPairFlipped[2]] = 0
-
 	-- If the chosen cards don't match
-	else
+	if cardsPlace[currentPairFlipped[1]] ~= cardsPlace[currentPairFlipped[2]] then
 		-- Set both cards to their back animations
 		gui.play_flipbook(gui.get_node("card"..currentPairFlipped[1]), "fish-match-card-back")
 		gui.play_flipbook(gui.get_node("card"..currentPairFlipped[2]), "fish-match-card-back")
