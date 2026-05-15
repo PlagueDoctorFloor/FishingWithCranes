@@ -66,9 +66,9 @@ local function checkOne()
 	local freshFishFound = true
 
 	-- Iterate through the freshwater fish array
-	for j=1,#FreshwaterFish do
+	for j=1,#FreshwaterFishSeen do
 		-- Check if the position is equal to 0, meaning it's not been found
-		if FreshwaterFish[j] == 0 then
+		if FreshwaterFishSeen[j] == 0 then
 			-- Sets the "sentinel" variable false
 			freshFishFound = false
 		end
@@ -95,9 +95,9 @@ local function checkTwo()
 	local saltFishFound = true
 
 	-- Iterate through the saltwater fish array
-	for j=1,#SaltwaterFish do
+	for j=1,#SaltwaterFishSeen do
 		-- Check if the position is equal to 0, meaning it's not been found
-		if SaltwaterFish[j] == 0 then
+		if SaltwaterFishSeen[j] == 0 then
 			-- Sets the "sentinel" variable false
 			saltFishFound = false
 		end

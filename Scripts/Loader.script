@@ -12,10 +12,19 @@ tokens = 3
 
 -- Item's Encountered & Amount owned
 -- Freshwater set
+-- Whether fish has been seen ever
+FreshwaterFishSeen = {0,0,0,0,0,0,0,0}
+-- How many of the fish are owned
 FreshwaterFish = {0,0,0,0,0,0,0,0}
 -- Saltwater set
+-- Whether fish has been seen ever
+SaltwaterFishSeen = {0,0,0,0,0,0,0,0}
+-- How many of the fish are owned
 SaltwaterFish = {0,0,0,0,0,0,0,0}
 -- Tank Decor set
+-- Whether fish has been seen ever
+TankDecorSeen = {0,0,0,0,0,0,0,0}
+-- How many of the fish are owned
 TankDecor = {0,0,0,0,0,0,0,0}
 
 -- Integer keeping track of total fish pulled

@@ -40,7 +40,7 @@ local function displayStickers()
 		-- iterate through the global array
 		for i=1,8,1 do
 			-- Check if the position is not 0
-			if FreshwaterFish[i] ~= 0 then
+			if FreshwaterFishSeen[i] ~= 0 then
 				-- Set the node visible
 				gui.set_visible(gui.get_node("fish"..i),true)
 				-- Set the node to the correct sprite
@@ -58,7 +58,7 @@ local function displayStickers()
 		-- iterate through the global array
 		for i=1,8,1 do
 			-- Check if the position is not 0
-			if SaltwaterFish[i] ~= 0 then
+			if SaltwaterFishSeen[i] ~= 0 then
 				-- Set the node visible
 				gui.set_visible(gui.get_node("fish"..i),true)
 				-- Set the node to the correct sprite
@@ -76,7 +76,7 @@ local function displayStickers()
 		-- iterate through the global array
 		for i=1,8,1 do
 			-- Check if the position is not 0
-			if TankDecor[i] ~= 0 then
+			if TankDecorSeen[i] ~= 0 then
 				-- Set the node visible
 				gui.set_visible(gui.get_node("fish"..i),true)
 				-- Set the node to the correct sprite

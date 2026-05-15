@@ -1,6 +1,5 @@
 --
 -- TODO:
--- 2. Do I need 2 variables to prevent clicking or can it be one?
 --
 
 -- Local Variables
@@ -54,7 +53,9 @@ local function spawnFish(self)
 	if setSelected == 1 then
 		
 		-- Check if the selected fish is set to 0 in the global variable, meaning it's never been pulled before
-		if FreshwaterFish[selectedFish] == 0 then
+		if FreshwaterFishSeen[selectedFish] == 0 then
+			-- Set the position in the fishSeen array to 1
+			FreshwaterFishSeen[selectedFish] = 1
 			-- Sets the new fish glitter to visible
 			gui.set_visible(gui.get_node("NewFishGlitter"), true)
 		end
@@ -68,7 +69,9 @@ local function spawnFish(self)
 	elseif setSelected == 2 then
 
 		-- Check if the selected fish is set to 0 in the global variable, meaning it's never been pulled before
-		if SaltwaterFish[selectedFish] == 0 then
+		if SaltwaterFishSeen[selectedFish] == 0 then
+			-- Set the position in the fishSeen array to 1
+			SaltwaterFishSeen[selectedFish] = 1
 			-- Sets the new fish glitter to visible
 			gui.set_visible(gui.get_node("NewFishGlitter"), true)
 		end
@@ -82,7 +85,9 @@ local function spawnFish(self)
 	elseif setSelected == 3 then
 
 		-- Check if the selected item is set to 0 in the global variable, meaning it's never been pulled before
-		if TankDecor[selectedFish] == 0 then
+		if TankDecorSeen[selectedFish] == 0 then
+			-- Set the position in the fishSeen array to 1
+			TankDecorSeen[selectedFish] = 1
 			-- Sets the new fish glitter to visible
 			gui.set_visible(gui.get_node("NewFishGlitter"), true)
 		end
