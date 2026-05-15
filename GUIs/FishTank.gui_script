@@ -1,6 +1,5 @@
 -- 
 -- TODO:
--- 1. Make it so you can only do one thing at a time - can't delete while choosing items
 -- 
 
 -- Boolean keeping track of whether we are in screenshot mode
