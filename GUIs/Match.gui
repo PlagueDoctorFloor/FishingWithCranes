@@ -297,5 +297,31 @@ nodes {
   inherit_alpha: true
   visible: false
 }
+nodes {
+  position {
+    x: 205.0
+    y: 210.0
+  }
+  scale {
+    x: 1.8
+    y: 2.5
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "Get All Matches \n"
+  "In 10 Flips \n"
+  "Or Less!"
+  font: "Permanent Marker"
+  id: "Sign Text"
+  inherit_alpha: true
+}
 material: "/builtins/materials/gui.material"
 adjust_reference: ADJUST_REFERENCE_PARENT
