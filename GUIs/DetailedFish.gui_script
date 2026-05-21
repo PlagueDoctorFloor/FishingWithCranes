@@ -1,6 +1,5 @@
 --
 -- TODO:
--- 1. Optimize display fish through called code
 -- 
 
 -- Arrays which contain the names in order of all the items in the sets
@@ -17,7 +16,42 @@ local fishSelect = 0
 -- Boolean to determine whether the fish has been seen or not
 local haveFish = false
 
+-- Custom function
+-- Handles displaying when a fish is not found
+local function noFish(fish,fishName,numberOwned,fishSelect)
 
+	-- Set haveFish to false 
+	haveFish = false
+	-- Set the sprite to unknown
+	gui.play_flipbook(fish, "unknown-fish")
+	-- Set the name to question mark
+	gui.set_text(fishName,fishSelect.." : ?")
+	-- Set the number owned text to 0
+	gui.set_text(numberOwned,"# Owned: 0")
+	-- Set the trade button and text to not visible
+	gui.set_enabled(gui.get_node("TradeButton"), false)
+	gui.set_visible(gui.get_node("TradeText"), false)
+	
+end
+
+-- Custom function
+-- Takes in an integer that represents the number of the item the user currently has
+-- If it's larger than 2, it displays the trade button. If less it hides the trade button.
+local function tradeButton(fishHad)
+
+	-- If the player owns 3 or more copies of the fish
+	if fishHad > 2 then
+		-- Set the trade button and text to visible
+		gui.set_enabled(gui.get_node("TradeButton"), true)
+		gui.set_visible(gui.get_node("TradeText"), true)
+	-- If the player has 2 or less copies of the fish
+	else
+		-- sets the trade button and text to not visible
+		gui.set_enabled(gui.get_node("TradeButton"), false)
+		gui.set_visible(gui.get_node("TradeText"), false)
+	end
+	
+end
 
 -- Custom function
 -- Updates the displayed nodes with the proper item information
@@ -56,31 +90,15 @@ local function displayFish()
 			-- Set the owned number of this fish
 			gui.set_text(numberOwned,"# Owned: "..FreshwaterFish[fishSelect])
 
-			-- If the player owns 3 or more copies of the fish
-			if FreshwaterFish[fishSelect] > 2 then
-				-- Set the trade button and text to visible
-				gui.set_enabled(gui.get_node("TradeButton"), true)
-				gui.set_visible(gui.get_node("TradeText"), true)
-			-- If the player has 2 or less copies of the fish
-			else
-				-- sets the trade button and text to not visible
-				gui.set_enabled(gui.get_node("TradeButton"), false)
-				gui.set_visible(gui.get_node("TradeText"), false)
-			end
+			-- Calls tradeButton, passing it the number of item owned
+			tradeButton(FreshwaterFish[fishSelect])
 			
 		-- if the selected fish position in the global array is equal to 0
 		elseif FreshwaterFishSeen[fishSelect] == 0 then
-			-- Set haveFish to false 
-			haveFish = false
-			-- Set the sprite to unknown
-			gui.play_flipbook(fish, "unknown-fish")
-			-- Set the name to question mark
-			gui.set_text(fishName,"?")
-			-- Set the number owned text to 0
-			gui.set_text(numberOwned,"# Owned: 0")
-			-- Set the trade button and text to not visible
-			gui.set_enabled(gui.get_node("TradeButton"), false)
-			gui.set_visible(gui.get_node("TradeText"), false)
+
+			-- Calls noFish to display the unowned sprites
+			noFish(fish,fishName,numberOwned,fishSelect)
+			
 		end
 
 	-- If the set is the saltwater set
@@ -98,31 +116,15 @@ local function displayFish()
 			-- Set the owned number of this fish
 			gui.set_text(numberOwned,"# Owned: "..SaltwaterFish[fishSelect])
 
-			-- If the player owns 3 or more copies of the fish
-			if SaltwaterFish[fishSelect] > 2 then
-				-- Set the trade button and text to visible
-				gui.set_enabled(gui.get_node("TradeButton"), true)
-				gui.set_visible(gui.get_node("TradeText"), true)
-			-- If the player has 2 or less copies of the fish
-			else
-				-- sets the trade button and text to not visible
-				gui.set_enabled(gui.get_node("TradeButton"), false)
-				gui.set_visible(gui.get_node("TradeText"), false)
-			end
-
+			-- Calls tradeButton, passing it the number of item owned
+			tradeButton(SaltwaterFish[fishSelect])
+				
 		-- if the selected fish position in the global array is equal to 0
 		elseif SaltwaterFishSeen[fishSelect] == 0 then
-			-- Set haveFish to false 
-			haveFish = false
-			-- Set the sprite to unknown
-			gui.play_flipbook(fish, "unknown-fish")
-			-- Set the name to question mark
-			gui.set_text(fishName,"?")
-			-- Set the number owned text to 0
-			gui.set_text(numberOwned,"# Owned: 0")
-			-- Set the trade button and text to not visible
-			gui.set_enabled(gui.get_node("TradeButton"), false)
-			gui.set_visible(gui.get_node("TradeText"), false)
+
+			-- Calls noFish to display the unowned sprites
+			noFish(fish,fishName,numberOwned,fishSelect)
+		
 		end
 
 	-- If the set is the decor set
@@ -140,31 +142,15 @@ local function displayFish()
 			-- Set the owned number of this item
 			gui.set_text(numberOwned,"# Owned: "..TankDecor[fishSelect])
 
-			-- If the player owns 3 or more copies of the item
-			if TankDecor[fishSelect] > 2 then
-				-- Set the trade button and text to visible
-				gui.set_enabled(gui.get_node("TradeButton"), true)
-				gui.set_visible(gui.get_node("TradeText"), true)
-			-- If the player has 2 or less copies of the item
-			else
-				-- sets the trade button and text to not visible
-				gui.set_enabled(gui.get_node("TradeButton"), false)
-				gui.set_visible(gui.get_node("TradeText"), false)
-			end
+			-- Calls tradeButton, passing it the number of item owned
+			tradeButton(TankDecor[fishSelect])
 
 		-- if the selected item position in the global array is equal to 0
 		elseif TankDecorSeen[fishSelect] == 0 then
-			-- Set haveFish to false 
-			haveFish = false
-			-- Set the sprite to unknown
-			gui.play_flipbook(fish, "unknown-fish")
-			-- Set the name to question mark
-			gui.set_text(fishName,"?")
-			-- Set the number owned text to 0
-			gui.set_text(numberOwned,"# Owned: 0")
-			-- Set the trade button and text to not visible
-			gui.set_enabled(gui.get_node("TradeButton"), false)
-			gui.set_visible(gui.get_node("TradeText"), false)
+
+			-- Calls noFish to display the unowned sprites
+			noFish(fish,fishName,numberOwned,fishSelect)
+			
 		end
 	end
 
