@@ -6,12 +6,6 @@
 -- Boolean to keep track of whether the game has started
 local gameStart = false
 
--- Boolean to keep track of whether the game was won
-local gameWin = false
-
--- Boolean to keep track of whether the game was lost
-local gameLost = false
-
 -- Integer to help with accerleration 
 local dy = 200
 
@@ -33,8 +27,6 @@ local function reset()
 	go.set_position(vmath.vector3(640,360,0),"FlyingFish")
 	-- Resets the variables to their starting values
 	gameStart = false
-	gameWin = false
-	gameLost = false
 	dy = 200
 	dead = false
 	
@@ -126,6 +118,8 @@ function on_message(self, message_id, message, sender)
 
 		-- If the other group is the winTrigger
 		elseif message.other_group == hash("WinTrigger") then
+			-- Set dead to true
+			dead = true
 			-- Set gameStart to false
 			gameStart = false
 			-- Send a message to the coral object telling it the player died
@@ -134,8 +128,6 @@ function on_message(self, message_id, message, sender)
 			tokens = tokens+1
 			-- Send a message to the GUI to tell it the player won
 			msg.post("/FlappyFishGUI","gameEnd",{result = 1})
-			-- set gameWin to true
-			gameWin = true
 			-- Set the course in the global CoursesComplete array to 1 to indicate it was beat
 			coursesComplete[currentCourse] = 1
 		end
