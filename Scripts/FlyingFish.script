@@ -1,6 +1,5 @@
 -- 
 -- TODO:
--- 1. Do we need win, lost, and died?
 -- 
 
 -- Boolean to keep track of whether the game has started
