@@ -1,0 +1,6 @@
+name: "Title Screen"
+instances {
+  id: "TitleScreen"
+  prototype: "/Objects/TitleScreen.go"
+}
+scale_along_z: 0

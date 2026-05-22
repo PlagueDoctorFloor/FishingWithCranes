@@ -28,6 +28,15 @@ local function allowClicks(self)
 	
 end
 
+local function fadeIn(self)
+
+	--gui.set_color(self.black, vmath.vector4(0, 0, 0, 1))
+	local to_color = gui.get_color(self.black)
+	to_color.w = 0
+	gui.animate(self.black, gui.PROP_COLOR, to_color, gui.EASING_OUT, 1.5)
+	
+end
+
 -- Custom Function
 -- sets the "no tokens" UI elements to not visible when the user clicks after triggering them
 local function noTokens(self)
@@ -167,12 +176,35 @@ local function craneSetup()
 
 	-- Sets craneSelected to true so the user can only interact with crane-related nodes
 	craneSelected = true
+	
 	-- Sets all of the set selection buttons to not visible
-	gui.set_enabled(gui.get_node("FreshwaterSelect"), false)
-	gui.set_enabled(gui.get_node("SaltwaterSelect"), false)
-	gui.set_enabled(gui.get_node("DecorSelect"), false)
+	
+	--gui.set_color(self.black, vmath.vector4(0, 0, 0, 1))
+	local to_color = gui.get_color(gui.get_node("FreshwaterSelect"))
+	to_color.w = 0
+	gui.animate(gui.get_node("FreshwaterSelect"), gui.PROP_COLOR, to_color, gui.EASING_OUT, .5)
+	
+	--gui.set_color(self.black, vmath.vector4(0, 0, 0, 1))
+	local to_color = gui.get_color(gui.get_node("SaltwaterSelect"))
+	to_color.w = 0
+	gui.animate(gui.get_node("SaltwaterSelect"), gui.PROP_COLOR, to_color, gui.EASING_OUT, .5)
+	
+	--gui.set_color(self.black, vmath.vector4(0, 0, 0, 1))
+	local to_color = gui.get_color(gui.get_node("DecorSelect"))
+	to_color.w = 0
+	gui.animate(gui.get_node("DecorSelect"), gui.PROP_COLOR, to_color, gui.EASING_OUT, .5)
+	
+	--gui.set_enabled(gui.get_node("FreshwaterSelect"), false)
+	--gui.set_enabled(gui.get_node("SaltwaterSelect"), false)
+	--gui.set_enabled(gui.get_node("DecorSelect"), false)
+
+	local to_color = gui.get_color(gui.get_node("Crane"))
+	to_color.w = 1
+	gui.animate(gui.get_node("Crane"), gui.PROP_COLOR, to_color, gui.EASING_OUT, .5)
+	
 	-- Sets the Crane visible
-	gui.set_enabled(gui.get_node("Crane"), true)
+	--gui.set_enabled(gui.get_node("Crane"), true)
+	
 	-- Sets the return arrow to visible
 	gui.set_enabled(gui.get_node("ReturnArrow"), true)
 	-- Changes the label text to say "Claw Machine"
@@ -187,12 +219,32 @@ local function selectSetup()
 
 	-- Sets craneSelected to true so the user can't interact with crane-related nodes
 	craneSelected = false
+
+	local to_color = gui.get_color(gui.get_node("Crane"))
+	to_color.w = 0
+	gui.animate(gui.get_node("Crane"), gui.PROP_COLOR, to_color, gui.EASING_OUT, .5)
+
+	--gui.set_color(self.black, vmath.vector4(0, 0, 0, 1))
+	local to_color = gui.get_color(gui.get_node("FreshwaterSelect"))
+	to_color.w = 1
+	gui.animate(gui.get_node("FreshwaterSelect"), gui.PROP_COLOR, to_color, gui.EASING_OUT, .5)
+
+	--gui.set_color(self.black, vmath.vector4(0, 0, 0, 1))
+	local to_color = gui.get_color(gui.get_node("SaltwaterSelect"))
+	to_color.w = 1
+	gui.animate(gui.get_node("SaltwaterSelect"), gui.PROP_COLOR, to_color, gui.EASING_OUT, .5)
+
+	--gui.set_color(self.black, vmath.vector4(0, 0, 0, 1))
+	local to_color = gui.get_color(gui.get_node("DecorSelect"))
+	to_color.w = 1
+	gui.animate(gui.get_node("DecorSelect"), gui.PROP_COLOR, to_color, gui.EASING_OUT, .5)
+	
 	-- Sets all of the set selection buttons to visible
-	gui.set_enabled(gui.get_node("FreshwaterSelect"), true)
-	gui.set_enabled(gui.get_node("SaltwaterSelect"), true)
-	gui.set_enabled(gui.get_node("DecorSelect"), true)
+	--gui.set_enabled(gui.get_node("FreshwaterSelect"), true)
+	--gui.set_enabled(gui.get_node("SaltwaterSelect"), true)
+	--gui.set_enabled(gui.get_node("DecorSelect"), true)
 	-- Sets the Crane not visible
-	gui.set_enabled(gui.get_node("Crane"), false)
+	--gui.set_enabled(gui.get_node("Crane"), false)
 	-- Sets the return arrow to not visible
 	gui.set_enabled(gui.get_node("ReturnArrow"), false)
 	-- Changes the label text to say "Choose Set"
@@ -376,6 +428,7 @@ function on_message(self, message_id, message, sender)
 		
 		-- Update the gui token text
 		gui.set_text(gui.get_node("TokenText"),tokens)
+		fadeIn(self)
 
 	-- If the message id is "Coin Done" (sent from the loader when the coin sound effect is finished)
 	elseif message_id == hash("Coin Done") then
@@ -398,6 +451,8 @@ function init(self)
 
 	-- Updates the token GUI text
 	gui.set_text(gui.get_node("TokenText"),tokens)
+
+	self.black = gui.get_node("black")
 	
 end
 

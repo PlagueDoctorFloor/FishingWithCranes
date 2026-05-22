@@ -1,0 +1,10 @@
+images {
+  image: "/Visual Assets/Background/background.png"
+}
+images {
+  image: "/Visual Assets/Background/background-unblurred.png"
+}
+images {
+  image: "/Visual Assets/Raw Images/Late Stage Fixes/title-screen.png"
+}
+extrude_borders: 2

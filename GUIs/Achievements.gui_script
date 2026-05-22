@@ -271,8 +271,6 @@ local function updateAchievements()
 					
 				end
 
-				print(result)
-
 				if not result then
 					allAchievements = false
 				end
