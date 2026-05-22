@@ -157,7 +157,7 @@ nodes {
     z: 0.0
   }
   type: TYPE_TEXT
-  text: "Sunnyphantic"
+  text: "SunnyPhantic"
   font: "Permanent Marker"
   id: "text3"
   inherit_alpha: true
