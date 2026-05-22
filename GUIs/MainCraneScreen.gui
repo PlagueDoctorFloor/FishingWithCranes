@@ -448,6 +448,45 @@ nodes {
 }
 nodes {
   position {
+    x: 375.0
+    y: 75.0
+  }
+  scale {
+    x: 0.3
+    y: 0.2
+  }
+  type: TYPE_BOX
+  texture: "CranePageGUI/label"
+  id: "CreditLabel"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 375.0
+    y: 75.0
+  }
+  scale {
+    x: 1.8
+    y: 1.8
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "Credits"
+  font: "Permanent Marker"
+  id: "CreditText"
+  inherit_alpha: true
+}
+nodes {
+  position {
     x: 640.0
     y: 360.0
   }
@@ -464,6 +503,7 @@ nodes {
   id: "black"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
+  visible: false
 }
 material: "/builtins/materials/gui.material"
 adjust_reference: ADJUST_REFERENCE_PARENT

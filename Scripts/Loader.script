@@ -138,6 +138,11 @@ local function disableSender(fragment)
 	-- Title Screen
 	elseif fragment == hash("TitleScreen") then
 		msg.post("#TitleScreen","disable")
+
+	-- Credits
+	elseif fragment == hash("Credits") then
+		msg.post("#Credits","disable")
+		
 	end
 	
 end
@@ -160,6 +165,7 @@ function init(self)
 	msg.post("#FishMatch","load")
 	msg.post("#FlappyFish", "load")
 	msg.post("#FishTank", "load")
+	msg.post("#Credits", "load")
 
 	-- Begins playing the background song
 	sound.play("go#BackgroundSong")
@@ -285,7 +291,13 @@ function on_message(self, message_id, message, sender)
 
 		-- Passes the sender fragment to disable to sender
 		disableSender(sender.fragment)
-		
+
+	elseif message_id == hash("load Credits") then
+		-- enable the credits page
+		msg.post("#Credits", "enable")
+
+		-- Passes the sender fragment to disable to sender
+		disableSender(sender.fragment)
 	end
 	
 end

@@ -1,0 +1,6 @@
+name: "Credits"
+instances {
+  id: "CreditsGUI"
+  prototype: "/Objects/CreditsGUI.go"
+}
+scale_along_z: 0
