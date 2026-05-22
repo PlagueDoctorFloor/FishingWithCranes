@@ -2,9 +2,6 @@ images {
   image: "/Visual Assets/Raw Images/GUI/label.png"
 }
 images {
-  image: "/Visual Assets/Raw Images/Minigames/flappy-fish-background.png"
-}
-images {
   image: "/Visual Assets/Raw Images/Fish-20260329T033519Z-1-001/Fish/Freshwater/freshwater-1.png"
 }
 images {
@@ -84,5 +81,11 @@ images {
 }
 images {
   image: "/Visual Assets/Raw Images/Decorations/Decorations/decor-4.png"
+}
+images {
+  image: "/Visual Assets/Raw Images/Late Stage Fixes/flappy-fish-background(1).png"
+}
+images {
+  image: "/Visual Assets/Raw Images/Late Stage Fixes/natural-gravel.png"
 }
 extrude_borders: 2
