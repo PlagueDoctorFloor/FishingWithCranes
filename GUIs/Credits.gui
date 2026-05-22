@@ -1,3 +1,262 @@
 script: "/GUIs/Credits.gui_script"
+fonts {
+  name: "Permanent Marker"
+  font: "/Visual Assets/Fonts/Permanent Marker.font"
+}
+textures {
+  name: "Credits"
+  texture: "/Visual Assets/SpriteAtlas/Credits.atlas"
+}
+nodes {
+  position {
+    x: 640.0
+    y: 360.0
+  }
+  type: TYPE_BOX
+  texture: "Credits/background"
+  id: "Background"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 100.0
+    y: 630.0
+  }
+  scale {
+    x: 0.25
+    y: 0.25
+  }
+  type: TYPE_BOX
+  texture: "Credits/x-out-button"
+  id: "X"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 500.0
+    y: 350.0
+  }
+  scale {
+    y: 2.4
+  }
+  type: TYPE_BOX
+  texture: "Credits/label"
+  id: "box"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 1000.0
+    y: 350.0
+  }
+  scale {
+    y: 2.4
+  }
+  type: TYPE_BOX
+  texture: "Credits/label"
+  id: "box1"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 500.0
+    y: 565.0
+  }
+  scale {
+    x: 2.5
+    y: 2.5
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "Thank You For \n"
+  "Playing Our Game!"
+  font: "Permanent Marker"
+  id: "text"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 500.0
+    y: 400.0
+  }
+  scale {
+    x: 1.5
+    y: 1.5
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "Fishing With Cranes was \n"
+  "created for Jerbobs Silly Jam, \n"
+  "and extended for the \n"
+  "Gone Fishing Jam."
+  font: "Permanent Marker"
+  id: "text1"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 1000.0
+    y: 600.0
+  }
+  scale {
+    x: 1.5
+    y: 1.5
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "All Art, including backgrounds, \n"
+  "UI elemements, and sprites:"
+  font: "Permanent Marker"
+  id: "text2"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 1000.0
+    y: 550.0
+  }
+  scale {
+    x: 2.0
+    y: 2.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "Sunnyphantic"
+  font: "Permanent Marker"
+  id: "text3"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 1000.0
+    y: 150.0
+  }
+  scale {
+    x: 1.5
+    y: 1.5
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "All music and sound effects:"
+  font: "Permanent Marker"
+  id: "text4"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 1000.0
+    y: 100.0
+  }
+  scale {
+    x: 2.0
+    y: 2.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "ComposerRicardo"
+  font: "Permanent Marker"
+  id: "text5"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 1000.0
+    y: 400.0
+  }
+  scale {
+    x: 1.5
+    y: 1.5
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "All Code:"
+  font: "Permanent Marker"
+  id: "text6"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 1000.0
+    y: 350.0
+  }
+  scale {
+    x: 2.0
+    y: 2.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "PlagueDoctorFloor"
+  font: "Permanent Marker"
+  id: "text7"
+  inherit_alpha: true
+}
 material: "/builtins/materials/gui.material"
 adjust_reference: ADJUST_REFERENCE_PARENT
