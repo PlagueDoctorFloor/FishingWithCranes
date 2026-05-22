@@ -204,6 +204,7 @@ function on_message(self, message_id, message, sender)
 	elseif message_id == hash("load Collection") then
 		-- Enable the collection proxy
 		msg.post("#Collection", "enable")
+		msg.post("Collection:/CollectionGUI#Collection","Opening")
 
 		-- Passes the sender fragment to disable to sender
 		disableSender(sender.fragment)
@@ -270,6 +271,7 @@ function on_message(self, message_id, message, sender)
 	elseif message_id == hash("load FishTank") then
 		-- enable the Fish Tank page
 		msg.post("#FishTank","enable")
+		msg.post("FishTank:/FishTankGUI#FishTank","Opening")
 
 		-- Passes the sender fragment to disable to sender
 		disableSender(sender.fragment)
