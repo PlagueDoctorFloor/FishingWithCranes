@@ -73,13 +73,13 @@ local function displayFish()
 	local tokensText = gui.get_node("TokenText")
 
 	-- Sets the token text to the current global value
-	gui.set_text(tokensText,tokens)
+	gui.set_text(tokensText,data["tokens"])
 
 	-- If the set is the freshwater set
 	if setSelect == 1 then
 
 		-- Check if the selected fish position in the global array is not equal to 0
-		if FreshwaterFishSeen[fishSelect] ~= 0 then
+		if data["FreshwaterFishSeen"][fishSelect] ~= 0 then
 			
 			-- Set haveFish to true
 			haveFish = true
@@ -88,13 +88,13 @@ local function displayFish()
 			-- Set the correct name for the fish
 			gui.set_text(fishName, FreshFishNames[fishSelect])
 			-- Set the owned number of this fish
-			gui.set_text(numberOwned,"# Owned: "..FreshwaterFish[fishSelect])
+			gui.set_text(numberOwned,"# Owned: "..data["FreshwaterFish"][fishSelect])
 
 			-- Calls tradeButton, passing it the number of item owned
-			tradeButton(FreshwaterFish[fishSelect])
+			tradeButton(data["FreshwaterFish"][fishSelect])
 			
 		-- if the selected fish position in the global array is equal to 0
-		elseif FreshwaterFishSeen[fishSelect] == 0 then
+		elseif data["FreshwaterFishSeen"][fishSelect] == 0 then
 
 			-- Calls noFish to display the unowned sprites
 			noFish(fish,fishName,numberOwned,fishSelect)
@@ -105,7 +105,7 @@ local function displayFish()
 	elseif setSelect == 2 then
 
 		-- Check if the selected fish position in the global array is not equal to 0
-		if SaltwaterFishSeen[fishSelect] ~= 0 then
+		if data["SaltwaterFishSeen"][fishSelect] ~= 0 then
 
 			-- Set haveFish to true
 			haveFish = true
@@ -114,13 +114,13 @@ local function displayFish()
 			-- Set the correct name for the fish
 			gui.set_text(fishName, SaltFishNames[fishSelect])
 			-- Set the owned number of this fish
-			gui.set_text(numberOwned,"# Owned: "..SaltwaterFish[fishSelect])
+			gui.set_text(numberOwned,"# Owned: "..data["SaltwaterFish"][fishSelect])
 
 			-- Calls tradeButton, passing it the number of item owned
-			tradeButton(SaltwaterFish[fishSelect])
+			tradeButton(data["SaltwaterFish"][fishSelect])
 				
 		-- if the selected fish position in the global array is equal to 0
-		elseif SaltwaterFishSeen[fishSelect] == 0 then
+		elseif data["SaltwaterFishSeen"][fishSelect] == 0 then
 
 			-- Calls noFish to display the unowned sprites
 			noFish(fish,fishName,numberOwned,fishSelect)
@@ -131,7 +131,7 @@ local function displayFish()
 	elseif setSelect == 3 then
 
 		-- Check if the selected item position in the global array is not equal to 0
-		if TankDecorSeen[fishSelect] ~= 0 then
+		if data["TankDecorSeen"][fishSelect] ~= 0 then
 
 			-- Set haveFish to true
 			haveFish = true
@@ -140,13 +140,13 @@ local function displayFish()
 			-- Set the correct name for the item
 			gui.set_text(fishName, DecorNames[fishSelect])
 			-- Set the owned number of this item
-			gui.set_text(numberOwned,"# Owned: "..TankDecor[fishSelect])
+			gui.set_text(numberOwned,"# Owned: "..data["TankDecor"][fishSelect])
 
 			-- Calls tradeButton, passing it the number of item owned
-			tradeButton(TankDecor[fishSelect])
+			tradeButton(data["TankDecor"][fishSelect])
 
 		-- if the selected item position in the global array is equal to 0
-		elseif TankDecorSeen[fishSelect] == 0 then
+		elseif data["TankDecorSeen"][fishSelect] == 0 then
 
 			-- Calls noFish to display the unowned sprites
 			noFish(fish,fishName,numberOwned,fishSelect)
@@ -248,19 +248,20 @@ function on_input(self, action_id, action)
 				-- If it's the freshwater set
 				if setSelect == 1 then
 					-- Remove 3 from the position in the global array
-					FreshwaterFish[fishSelect] = FreshwaterFish[fishSelect] - 3
+					data["FreshwaterFish"][fishSelect] = data["FreshwaterFish"][fishSelect] - 3
 				-- If it's the saltwater set
 				elseif setSelect == 2 then
 					-- Remove 3 from the position in the global array
-					SaltwaterFish[fishSelect] = SaltwaterFish[fishSelect] - 3
+					data["SaltwaterFish"][fishSelect] = data["SaltwaterFish"][fishSelect] - 3
 				-- If it's the decor set
 				elseif setSelect == 3 then
 					-- Remove 3 from the position in the global array
-					TankDecor[fishSelect] = TankDecor[fishSelect] - 3
+					data["TankDecor"][fishSelect] = data["TankDecor"][fishSelect] - 3
 				end
 
 				-- Add one token to the global tokens
-				tokens = tokens+1
+				data["tokens"] = data["tokens"]+1
+				sys.save(path,data)
 				-- Call display fish to update the relevant nodes
 				displayFish()
 				
@@ -273,9 +274,11 @@ function on_input(self, action_id, action)
 			gui.set_scale(fish, vmath.vector3(.9,.9,0))
 			
 			-- If haveFish is true, meaning the fish sprite is not unknown
-			if haveFish then
+			if setSelect ~= 3 and haveFish then
 				-- Increase the petFish counter
-				petFish = petFish+1
+				data["petFish"] = data["petFish"]+1
+
+				sys.save(path,data)
 				-- Send a message to the loader to play a fish blub sound
 				msg.post("Loader:/Loader","Sound", {sound = 1})
 			end

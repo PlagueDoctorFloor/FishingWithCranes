@@ -1,7 +1,12 @@
 --
-
+--
+-- 
 
 local clickAllowed = false
+
+local deleteDecision = false
+
+local hasSave = false
 
 local function loadCrane(self)
 
@@ -10,6 +15,9 @@ local function loadCrane(self)
 end
 
 local function screenFade(self)
+
+	data["firstLoad"] = true
+	
 	local to_color = gui.get_color(self.black)
 	to_color.w = 1
 	gui.animate(self.black, gui.PROP_COLOR, to_color, gui.EASING_IN, 1, 0, loadCrane)
@@ -20,6 +28,17 @@ local function textFlash(self)
 	to_color.w = 1
 	gui.animate(self.clickText, gui.PROP_COLOR, to_color, gui.EASING_IN, 1.8, 0, nil, gui.PLAYBACK_LOOP_PINGPONG)
 	clickAllowed = true
+
+	if hasSave then
+		local to_color = gui.get_color(self.deleteButton)
+		to_color.w = 1
+		gui.animate(self.deleteButton, gui.PROP_COLOR, to_color, gui.EASING_IN, 1, 0, textFlash)
+
+		local to_color = gui.get_color(self.deleteText)
+		to_color.w = 1
+		gui.animate(self.deleteText, gui.PROP_COLOR, to_color, gui.EASING_IN, 1, 0, textFlash)
+	end
+	
 end
 
 local function show_title(self)
@@ -42,6 +61,10 @@ function init(self)
 	self.logo = gui.get_node("Sign")
 	self.clickText = gui.get_node("Text")
 	self.black = gui.get_node("Black")
+	self.deleteText = gui.get_node("DeleteText")
+	self.deleteButton = gui.get_node("DeleteLabel")
+	self.Sure = gui.get_node("DeleteSign")
+	
 
 	show_background(self)
 end
@@ -50,8 +73,37 @@ function on_input(self, action_id, action)
 
 	if clickAllowed then
 		if action_id == hash("LeftClick") and action.pressed then
-			screenFade(self)
+
+			if deleteDecision then
+				if gui.pick_node(gui.get_node("yesButton"), action.x, action.y) then
+					os.remove(path)
+					newData()
+					gui.set_enabled(self.Sure,false)
+					gui.set_visible(self.deleteButton,false)
+					gui.set_visible(self.deleteText,false)
+					deleteDecision = false
+				elseif gui.pick_node(gui.get_node("noButton"), action.x, action.y) then
+					gui.set_enabled(self.Sure,false)
+					deleteDecision = false
+				end
+			else
+				if gui.pick_node(self.deleteButton, action.x, action.y) then
+					gui.set_enabled(self.Sure,true)
+					deleteDecision = true
+				else
+					screenFade(self)
+				end
+			end
+			
 		end
+	end
+	
+end
+
+function on_message(self, message_id, message, sender)
+
+	if message_id == hash("info") then
+		hasSave = message.delete
 	end
 	
 end
@@ -65,12 +117,6 @@ end
 function update(self, dt)
 	-- Add update code here
 	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
-end
-
-function on_message(self, message_id, message, sender)
-	-- Add message-handling code here
-	-- Learn more: https://defold.com/manuals/message-passing/
 	-- Remove this function if not needed
 end
 

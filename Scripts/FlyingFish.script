@@ -124,11 +124,13 @@ function on_message(self, message_id, message, sender)
 			-- Send a message to the coral object telling it the player died
 			msg.post(courseID,"died")
 			-- Add one to the global token variable
-			tokens = tokens+1
+			data["tokens"] = data["tokens"]+1
 			-- Send a message to the GUI to tell it the player won
 			msg.post("/FlappyFishGUI","gameEnd",{result = 1})
 			-- Set the course in the global CoursesComplete array to 1 to indicate it was beat
-			coursesComplete[currentCourse] = 1
+			data["coursesComplete"][currentCourse] = 1
+
+			sys.save(path,data)
 		end
 
 	-- If the message ID is reset

@@ -49,19 +49,19 @@ local function updateDisplay()
 			-- Set the sprite to the correct freshwater fish
 			gui.play_flipbook(currentNode, "freshwater-"..i)
 			-- Calls display fish to set the text and visibility, passing the correct global array position and the item number
-			displayFish(FreshwaterFishSeen[i],i)
+			displayFish(data["FreshwaterFishSeen"][i],i)
 		-- If set 2
 		elseif setSelected == 2 then
 			-- Set the sprite to the correct saltwater fish
 			gui.play_flipbook(currentNode, "saltwater-"..i)
 			-- Calls display fish to set the text and visibility, passing the correct global array position and the item number
-			displayFish(SaltwaterFishSeen[i],i)
+			displayFish(data["SaltwaterFishSeen"][i],i)
 		-- If set 3
 		elseif setSelected == 3 then
 			-- Set the sprite to the correct decor item
 			gui.play_flipbook(currentNode, "decor-"..i)
 			-- Calls display fish to set the text and visibility, passing the correct global array position and the item number
-			displayFish(TankDecorSeen[i],i)
+			displayFish(data["TankDecorSeen"][i],i)
 		end
 
 	end

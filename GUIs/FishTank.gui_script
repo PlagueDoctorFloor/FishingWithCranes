@@ -39,7 +39,7 @@ local function displayStickers()
 		-- iterate through the global array
 		for i=1,8,1 do
 			-- Check if the position is not 0
-			if FreshwaterFishSeen[i] ~= 0 then
+			if data["FreshwaterFishSeen"][i] ~= 0 then
 				-- Set the node visible
 				gui.set_visible(gui.get_node("fish"..i),true)
 				-- Set the node to the correct sprite
@@ -57,7 +57,7 @@ local function displayStickers()
 		-- iterate through the global array
 		for i=1,8,1 do
 			-- Check if the position is not 0
-			if SaltwaterFishSeen[i] ~= 0 then
+			if data["SaltwaterFishSeen"][i] ~= 0 then
 				-- Set the node visible
 				gui.set_visible(gui.get_node("fish"..i),true)
 				-- Set the node to the correct sprite
@@ -75,7 +75,7 @@ local function displayStickers()
 		-- iterate through the global array
 		for i=1,8,1 do
 			-- Check if the position is not 0
-			if TankDecorSeen[i] ~= 0 then
+			if data["TankDecorSeen"][i] ~= 0 then
 				-- Set the node visible
 				gui.set_visible(gui.get_node("fish"..i),true)
 				-- Set the node to the correct sprite
@@ -271,8 +271,6 @@ function on_input(self, action_id, action)
 				-- Sets all nodes to visible
 				gui.set_visible(currentlyVisible[i],true)
 			end
-			-- Call display stickers in case it's decor time to make sure everything's displayed correctly
-			displayStickers()
 			
 		end
 		
@@ -287,6 +285,25 @@ function on_message(self, message_id, message, sender)
 		local to_color = gui.get_color(gui.get_node("black"))
 		to_color.w = 0
 		gui.animate(gui.get_node("black"), gui.PROP_COLOR, to_color, gui.EASING_OUT, .25)
+
+		-- Iterate through the currentlyVisible array
+		for i=1,#currentlyVisible,1 do
+			-- Sets all the nodes invisible
+			gui.set_visible(currentlyVisible[i],false)
+		end
+
+		-- Sets the currentlyVisible node with the nodes that should be visible with the decor screen closed
+		currentlyVisible = {gui.get_node("ScreenshotModeButton"),gui.get_node("ScreenshotModeText"),gui.get_node("ReturnArrow"),gui.get_node("DecorButton"),gui.get_node("DecorText"),gui.get_node("DeleteButton"),gui.get_node("DeleteText")}
+
+		-- Iterates through the currentlyVisible array
+		for i=1,#currentlyVisible,1 do
+			-- Sets all the nodes visible
+			gui.set_visible(currentlyVisible[i],true)
+		end
+
+		-- Sets decorTime to false
+		decorTime = false
+		
 	end
 	
 end

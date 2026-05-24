@@ -2,52 +2,46 @@
 -- TODO:
 --
 
-
 -- Global Variables
 
--- Tokens player has
-tokens = 3
+path = sys.get_save_file("FishingWithCrane", "testing")
+print(path)
 
--- Item's Encountered & Amount owned
--- Freshwater set
--- Whether fish has been seen ever
-FreshwaterFishSeen = {0,0,0,0,0,0,0,0}
--- How many of the fish are owned
-FreshwaterFish = {0,0,0,0,0,0,0,0}
--- Saltwater set
--- Whether fish has been seen ever
-SaltwaterFishSeen = {0,0,0,0,0,0,0,0}
--- How many of the fish are owned
-SaltwaterFish = {0,0,0,0,0,0,0,0}
--- Tank Decor set
--- Whether fish has been seen ever
-TankDecorSeen = {0,0,0,0,0,0,0,0}
--- How many of the fish are owned
-TankDecor = {0,0,0,0,0,0,0,0}
+data = sys.load(path)
 
--- Integer keeping track of total fish pulled
-TotalFishPulled = 0
--- Array to keep track of 50th fish pulled
--- Position 1: Set, Position 2: Fish Number
-FiftiethFish = {0,0}
+function newData()
 
--- Fish Tac Toe Statistics
--- Wins
-FishTacToeWins = 0
--- Losses
-FishTacToeLosses = 0
--- Stalemates
-FishTacToeStalemates = 0
+	print("no data found")
 
--- Number of Times Match Game Played
-MatchPlayed = 0
+	progressData = {
+		firstLoad = false,
+		tokens = 3,
+		FreshwaterFishSeen = {0,0,0,0,0,0,0,0},
+		FreshwaterFish = {0,0,0,0,0,0,0,0},
+		SaltwaterFishSeen = {0,0,0,0,0,0,0,0},
+		SaltwaterFish = {0,0,0,0,0,0,0,0},
+		TankDecorSeen = {0,0,0,0,0,0,0,0},
+		TankDecor = {0,0,0,0,0,0,0,0},
+		TotalFishPulled = 0,
+		FiftiethFish = {0,0},
+		FishTacToeWins = 0,
+		FishTacToeLosses = 0,
+		FishTacToeStalemates = 0,
+		MatchPlayed = 0,
+		coursesComplete = {0,0,0},
+		petFish = 0
+	}
 
--- Array To Keep Track Of Flappy Fish Course Completes
--- Each position corresponds to a course, which are flipped when the user completes it
-coursesComplete = {0,0,0}
+	sys.save(path,progressData)
+	data = sys.load(path)
 
--- Integer keeping track of times fish is clicked in detailed inventory screen
-petFish = 0
+end
+
+if next(data) == nil then
+
+	newData()
+
+end
 
 -- Custom Function
 -- Used when the coin sound finishes playing, triggered from clicking the crane
@@ -193,7 +187,8 @@ function on_message(self, message_id, message, sender)
 
 			-- Sends a message to the loaded proxy enabling it, making it visible
 			msg.post(sender, "enable")
-			
+			msg.post("TitleScreen:/TitleScreen#TitleScreen", "info", {delete = data["firstLoad"]})
+							
 		end
 
 	-- Message received to load the ManeCraneScreen, where you can pick sets and pull on the crane

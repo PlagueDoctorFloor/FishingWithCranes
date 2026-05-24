@@ -1,4 +1,4 @@
-name: "Title Screen"
+name: "TitleScreen"
 instances {
   id: "TitleScreen"
   prototype: "/Objects/TitleScreen.go"

@@ -62,6 +62,43 @@ nodes {
 }
 nodes {
   position {
+    x: 100.0
+    y: 680.0
+  }
+  scale {
+    x: 0.3
+    y: 0.15
+  }
+  type: TYPE_BOX
+  texture: "Title Screen/label"
+  id: "DeleteLabel"
+  inherit_alpha: true
+  alpha: 0.0
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 100.0
+    y: 680.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "Delete Save"
+  font: "Permanent Marker"
+  id: "DeleteText"
+  inherit_alpha: true
+  alpha: 0.0
+}
+nodes {
+  position {
     x: 640.0
     y: 360.0
   }
@@ -79,6 +116,128 @@ nodes {
   inherit_alpha: true
   alpha: 0.0
   size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 640.0
+    y: 600.0
+  }
+  scale {
+    x: 1.25
+  }
+  type: TYPE_BOX
+  texture: "Title Screen/tall-big-sign"
+  id: "DeleteSign"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+  enabled: false
+}
+nodes {
+  position {
+    x: 10.0
+    y: -200.0
+  }
+  scale {
+    x: 3.0
+    y: 3.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "Are You Sure?"
+  font: "Permanent Marker"
+  id: "SureText"
+  parent: "DeleteSign"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: -90.0
+    y: -350.0
+  }
+  scale {
+    x: 0.3
+    y: 0.2
+  }
+  type: TYPE_BOX
+  texture: "Title Screen/label"
+  id: "yesButton"
+  parent: "DeleteSign"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 100.0
+    y: -350.0
+  }
+  scale {
+    x: 0.3
+    y: 0.2
+  }
+  type: TYPE_BOX
+  texture: "Title Screen/label"
+  id: "noButton"
+  parent: "DeleteSign"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: -90.0
+    y: -350.0
+  }
+  scale {
+    x: 2.0
+    y: 2.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "Yes"
+  font: "Permanent Marker"
+  id: "yesText"
+  parent: "DeleteSign"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 100.0
+    y: -350.0
+  }
+  scale {
+    x: 2.0
+    y: 2.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "No"
+  font: "Permanent Marker"
+  id: "noText"
+  parent: "DeleteSign"
+  inherit_alpha: true
 }
 material: "/builtins/materials/gui.material"
 adjust_reference: ADJUST_REFERENCE_PARENT

@@ -7,7 +7,7 @@ local courseID = 0
 
 -- Custom Function
 -- Chooses one of the 3 courses and calls the correct factory to spawn it
-function spawnCourse()
+local function spawnCourse()
 
 	-- Chooses a random number between 1 and 3
 	local select = math.random(1,3)

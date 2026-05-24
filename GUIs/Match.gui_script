@@ -49,11 +49,11 @@ local function winEvaluate()
 		-- Set gameEnd to true
 		gameEnd = true	
 		-- Increase global tokens
-		tokens = tokens+1
+		data["tokens"] = data["tokens"]+1
 		-- Increase global match played
-		MatchPlayed = MatchPlayed +1
+		data["MatchPlayed"] = data["MatchPlayed"]+1
 		-- Update On Screen Tokens Text
-		gui.set_text(gui.get_node("TokenText"),tokens)
+		gui.set_text(gui.get_node("TokenText"),data["tokens"])
 		-- Set end game text to visible
 		gui.set_visible(gui.get_node("endGameText"),true)
 		-- Set end game text to You Win!
@@ -61,6 +61,8 @@ local function winEvaluate()
 		-- Set the play again button to visible
 		gui.set_visible(gui.get_node("playAgain"), true)
 		gui.set_visible(gui.get_node("playAgainText"),true)
+
+		sys.save(path,data)
 
 		-- Return to avoid unnecessary code execution
 		return
@@ -71,7 +73,7 @@ local function winEvaluate()
 		-- Set gameEnd to true
 		gameEnd = true
 		-- Increase global match played
-		MatchPlayed = MatchPlayed +1
+		data["MatchPlayed"] = data["MatchPlayed"] +1
 		-- Set end game text to visible
 		gui.set_visible(gui.get_node("endGameText"),true)
 		-- Set end game text to You Lose!
@@ -79,6 +81,8 @@ local function winEvaluate()
 		-- Set the play again button to visible
 		gui.set_visible(gui.get_node("playAgain"), true)
 		gui.set_visible(gui.get_node("playAgainText"),true)
+
+		sys.save(path,data)
 
 		-- Return to avoid unnecessary code execution
 		return
@@ -210,7 +214,7 @@ function init(self)
 	-- Acquires input focus
 	msg.post(".","acquire_input_focus")
 	-- Sets the on screen token text
-	gui.set_text(gui.get_node("TokenText"),tokens)
+	gui.set_text(gui.get_node("TokenText"),data["tokens"])
 	-- Seeds the random 
 	math.randomseed(socket.gettime() * 100000)
 	-- Calls cardSet to set up the game
@@ -278,7 +282,7 @@ function on_message(self, message_id, message, sender)
 	if message_id == hash("Update") then
 
 		-- Sets the text for the Tokens text
-		gui.set_text(gui.get_node("TokenText"),tokens)
+		gui.set_text(gui.get_node("TokenText"),data["tokens"])
 		-- Calls reset to set the game back to the beginning
 		Reset()
 		

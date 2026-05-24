@@ -77,7 +77,12 @@ function on_message(self, message_id, message, sender)
 	if message_id == hash("Update") then
 
 		-- Updates the token text with the global variable
-		gui.set_text(gui.get_node("TokenText"),tokens)
+		gui.set_text(gui.get_node("TokenText"),data["tokens"])
+		-- Calls reset
+		reset()
+		-- Sends a message to the flying fish and level spawn scrip to reset
+		msg.post("/FlyingFish","Reset")
+		msg.post("/LevelSpawn","Reset")
 
 	-- If the message ID is won, sent from the FlyingFish script
 	elseif message_id == hash("gameEnd") then
@@ -85,7 +90,7 @@ function on_message(self, message_id, message, sender)
 		-- Sets gameEnd true
 		gameEnd = true
 		-- Updates the token text with the global variable
-		gui.set_text(gui.get_node("TokenText"),tokens)
+		gui.set_text(gui.get_node("TokenText"),data["tokens"])
 		-- Sets the game end label and text to visible
 		gui.set_visible(gui.get_node("GameEnd"), true)
 		gui.set_visible(gui.get_node("GameEndText"), true)
@@ -116,7 +121,7 @@ function init(self)
 	-- Acquires input focus
 	msg.post(".","acquire_input_focus")
 	-- Updates the token text with the global variable
-	gui.set_text(gui.get_node("TokenText"),tokens)
+	gui.set_text(gui.get_node("TokenText"),data["tokens"])
 end
 
 -- Unused Functions

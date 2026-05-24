@@ -352,7 +352,7 @@ nodes {
   text: "Thank you to everyone who\n"
   "contributed, playtested, and\n"
   "emotionally supported this\n"
-  "games development."
+  "game\'s development."
   font: "Permanent Marker"
   id: "text11"
   inherit_alpha: true

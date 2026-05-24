@@ -66,9 +66,9 @@ local function checkOne()
 	local freshFishFound = true
 
 	-- Iterate through the freshwater fish array
-	for j=1,#FreshwaterFishSeen do
+	for j=1,#data["FreshwaterFishSeen"] do
 		-- Check if the position is equal to 0, meaning it's not been found
-		if FreshwaterFishSeen[j] == 0 then
+		if data["FreshwaterFishSeen"][j] == 0 then
 			-- Sets the "sentinel" variable false
 			freshFishFound = false
 		end
@@ -95,9 +95,9 @@ local function checkTwo()
 	local saltFishFound = true
 
 	-- Iterate through the saltwater fish array
-	for j=1,#SaltwaterFishSeen do
+	for j=1,#data["SaltwaterFishSeen"] do
 		-- Check if the position is equal to 0, meaning it's not been found
-		if SaltwaterFishSeen[j] == 0 then
+		if data["SaltwaterFishSeen"][j] == 0 then
 			-- Sets the "sentinel" variable false
 			saltFishFound = false
 		end
@@ -121,7 +121,7 @@ end
 local function checkThree()
 
 	-- Checks if the global variable TotalFishPulled is equal to or greater than 50
-	if TotalFishPulled >= 50 then
+	if data["TotalFishPulled"] >= 50 then
 
 		-- Sets the position in the achieved array to true
 		achieved[3] = true
@@ -130,7 +130,7 @@ local function checkThree()
 		gui.set_visible(gui.get_node("achivement3"), true)
 
 		-- Saves the string of the sprite for the achievement based on the fish saved in the global fiftiethfish array
-		fiftiethFish = "achievement-3-"..FiftiethFish[1].."-"..FiftiethFish[2]
+		fiftiethFish = "achievement-3-"..data["FiftiethFish"][1].."-"..data["FiftiethFish"][2]
 
 		-- Sets the node to the correct sprite
 		gui.play_flipbook(gui.get_node("achivement3"), fiftiethFish)
@@ -147,7 +147,7 @@ end
 local function checkFour()
 
 	-- If global MatchPlayed is 10 or greater
-	if MatchPlayed >= 10 then
+	if data["MatchPlayed"] >= 10 then
 
 		-- Sets the position in the achieved array to true
 		achieved[4] = true
@@ -167,7 +167,7 @@ end
 local function checkFive()
 
 	-- If global FishTacToeStalemates is equal to or greater than 10
-	if FishTacToeStalemates >= 10 then
+	if data["FishTacToeStalemates"] >= 10 then
 
 		-- Sets the position in the achieved array to true
 		achieved[5] = true
@@ -186,7 +186,7 @@ end
 local function checkSix()
 
 	-- If all positions in coursesComplete 
-	if coursesComplete[1] == 1 and coursesComplete[2] == 1 and coursesComplete[3] == 1 then 
+	if data["coursesComplete"][1] == 1 and data["coursesComplete"][2] == 1 and data["coursesComplete"][3] == 1 then 
 
 		-- Sets the position in the achieved array to true
 		achieved[6] = true
@@ -205,7 +205,7 @@ end
 local function checkSeven()
 
 	-- If global petFish is greater than or equal to 100
-	if petFish >= 100 then
+	if data["petFish"] >= 100 then
 
 		-- Sets the position in the achieved array to true
 		achieved[7] = true

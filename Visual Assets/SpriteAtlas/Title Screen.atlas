@@ -7,4 +7,10 @@ images {
 images {
   image: "/Visual Assets/Raw Images/Late Stage Fixes/title-screen.png"
 }
+images {
+  image: "/Visual Assets/Raw Images/GUI/label.png"
+}
+images {
+  image: "/Visual Assets/Raw Images/GUI/tall-big-sign.png"
+}
 extrude_borders: 2

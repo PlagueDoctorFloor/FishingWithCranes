@@ -61,22 +61,22 @@ local function evaluate(player)
 		-- Check if the last move was the player
 		if winner == 1 then
 			-- Increases the global token value
-			tokens = tokens+1
+			data["tokens"] = data["tokens"]+1
 			-- Update the token text
-			gui.set_text(gui.get_node("TokenText"), tokens)
+			gui.set_text(gui.get_node("TokenText"), data["tokens"])
 			-- Increases the global tacker of fishtactoe wins
-			FishTacToeWins = FishTacToeWins+1
+			data["FishTacToeWins"] = data["FishTacToeWins"]+1
 			-- Update the win text with the global number of wins
-			gui.set_text(gui.get_node("winsInformation"),"Wins: "..FishTacToeWins)
+			gui.set_text(gui.get_node("winsInformation"),"Wins: "..data["FishTacToeWins"])
 			-- Sets the end game text to "You Win!"
 			gui.set_text(gui.get_node("endGameText"),"You Win!")
 
 		-- Check if the last move was the bot
 		elseif winner == 2 then
 			-- Update the global fishtactoe lost tracker
-			FishTacToeLosses = FishTacToeLosses+1
+			data["FishTacToeLosses"] = data["FishTacToeLosses"]+1
 			-- Update the losses number with the global fishtactoe losses
-			gui.set_text(gui.get_node("lossInformation"),"Losses: "..FishTacToeLosses)
+			gui.set_text(gui.get_node("lossInformation"),"Losses: "..data["FishTacToeLosses"])
 			-- Sets the end game text to "You Lose!"
 			gui.set_text(gui.get_node("endGameText"),"You Lose!")
 
@@ -88,6 +88,8 @@ local function evaluate(player)
 		gui.set_enabled(gui.get_node("playAgain"), true)
 		gui.set_visible(gui.get_node("playAgain"), true)
 		gui.set_visible(gui.get_node("playAgainText"),true)
+
+		sys.save(path,data)
 
 		-- Returns to avoid executing unnecessary code
 		return
@@ -111,9 +113,9 @@ local function evaluate(player)
 		gameEnd = true
 
 		-- updates the global fishtactoe stalemate counter
-		FishTacToeStalemates = FishTacToeStalemates+1
+		data["FishTacToeStalemates"] = data["FishTacToeStalemates"]+1
 		-- Update the losses number with the global fishtactoe losses
-		gui.set_text(gui.get_node("stalemateInformation"),"Stalemates: "..FishTacToeStalemates)
+		gui.set_text(gui.get_node("stalemateInformation"),"Stalemates: "..data["FishTacToeStalemates"])
 		-- Sets the end game text to visible
 		gui.set_visible(gui.get_node("endGameText"),true)
 		-- Sets the end game text to "Stalement"
@@ -122,6 +124,8 @@ local function evaluate(player)
 		gui.set_enabled(gui.get_node("playAgain"), true)
 		gui.set_visible(gui.get_node("playAgain"), true)
 		gui.set_visible(gui.get_node("playAgainText"),true)
+
+		sys.save(path,data)
 
 		-- Returns to avoid executing unnecessary code
 		return
@@ -222,7 +226,7 @@ function init(self)
 	-- Acquires input focus
 	msg.post(".","acquire_input_focus")
 	-- Sets the token text to the global variable
-	gui.set_text(gui.get_node("TokenText"),tokens)
+	gui.set_text(gui.get_node("TokenText"),data["tokens"])
 	-- Sets the random seed based on the clock
 	math.randomseed(socket.gettime() * 100000)
 end
@@ -289,7 +293,11 @@ function on_message(self, message_id, message, sender)
 	-- If the message id is Update (sent from the loader whenever the page is enabled)
 	if message_id == hash("Update") then
 		-- Updates the tokens text
-		gui.set_text(gui.get_node("TokenText"),tokens)
+		gui.set_text(gui.get_node("TokenText"),data["tokens"])
+		gui.set_text(gui.get_node("stalemateInformation"),"Stalemates: "..data["FishTacToeStalemates"])
+		gui.set_text(gui.get_node("winsInformation"),"Wins: "..data["FishTacToeWins"])
+		gui.set_text(gui.get_node("lossInformation"),"Losses: "..data["FishTacToeLosses"])
+		Reset()
 
 	elseif message_id == hash("Change Turns") then
 		-- If the message was sent by the players input
