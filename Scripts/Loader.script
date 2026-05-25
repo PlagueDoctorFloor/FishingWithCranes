@@ -2,7 +2,7 @@
 -- Load Global Variables
 
 -- Gets path to file (platform specific)
-path = sys.get_save_file("FishingWithCrane", "testing")
+path = sys.get_save_file("FishingWithCrane", "progress")
 
 -- Loads the data from that
 data = sys.load(path)
