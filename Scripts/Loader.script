@@ -1,44 +1,64 @@
---
--- TODO:
---
 
--- Global Variables
+-- Load Global Variables
 
+-- Gets path to file (platform specific)
 path = sys.get_save_file("FishingWithCrane", "testing")
-print(path)
 
+-- Loads the data from that
 data = sys.load(path)
 
+-- Custom funciton
+-- Called when a player does not have a save file
+-- Sets up a Lua table with all global variables set to initial values
+-- Saves the Lua table to the file
+-- Loads the table into the data variable
 function newData()
 
-	print("no data found")
-
+	-- Lua Table of global variables
 	progressData = {
+		-- Variable to keep track of whether the user has data
 		firstLoad = false,
+		-- Users token number
 		tokens = 3,
+		-- Array keeping track of what freshwater fish the player has seen
 		FreshwaterFishSeen = {0,0,0,0,0,0,0,0},
+		-- Array keeping track of how many of each freshwater fish the player has
 		FreshwaterFish = {0,0,0,0,0,0,0,0},
+		-- Array keeping track of what saltwater fish the player has seen
 		SaltwaterFishSeen = {0,0,0,0,0,0,0,0},
+		-- Array keeping track of how many of each saltwater fish the player has
 		SaltwaterFish = {0,0,0,0,0,0,0,0},
+		-- Array keeping track of what decor the player has seen
 		TankDecorSeen = {0,0,0,0,0,0,0,0},
+		-- Array keeping track of how many of each decor the player has
 		TankDecor = {0,0,0,0,0,0,0,0},
+		-- Integer to keep track of total fish pulled from the crane
 		TotalFishPulled = 0,
+		-- Array to keep track of the fiftieth fish pulled. Position 1 = set, Position 2 = number
 		FiftiethFish = {0,0},
+		-- Fish Tac Toe variables, keeps track of the number of times the player wins, losses, and stalemates
 		FishTacToeWins = 0,
 		FishTacToeLosses = 0,
 		FishTacToeStalemates = 0,
+		-- Number of times Match is played
 		MatchPlayed = 0,
+		-- Array keeping track of which flappy fish courses have been completed
 		coursesComplete = {0,0,0},
+		-- Integer keeping track of how many times a fish has been clicked
 		petFish = 0
 	}
 
+	-- Saves the array to the file path
 	sys.save(path,progressData)
+	-- Loads the fresh array to the data variable
 	data = sys.load(path)
 
 end
 
+-- Checks if the data variable is empty after being loaded
 if next(data) == nil then
 
+	-- Calls newData() to load the global variables to the file
 	newData()
 
 end
@@ -187,6 +207,7 @@ function on_message(self, message_id, message, sender)
 
 			-- Sends a message to the loaded proxy enabling it, making it visible
 			msg.post(sender, "enable")
+			-- Sends a message to the title screen with whether firstLoad is true or false
 			msg.post("TitleScreen:/TitleScreen#TitleScreen", "info", {delete = data["firstLoad"]})
 							
 		end
@@ -205,6 +226,7 @@ function on_message(self, message_id, message, sender)
 	elseif message_id == hash("load Collection") then
 		-- Enable the collection proxy
 		msg.post("#Collection", "enable")
+		-- Sends a message to the collection seen to let it know to reset
 		msg.post("Collection:/CollectionGUI#Collection","Opening")
 
 		-- Passes the sender fragment to disable to sender
@@ -272,6 +294,7 @@ function on_message(self, message_id, message, sender)
 	elseif message_id == hash("load FishTank") then
 		-- enable the Fish Tank page
 		msg.post("#FishTank","enable")
+		-- Send a message to the fish tank to update it's opening animation
 		msg.post("FishTank:/FishTankGUI#FishTank","Opening")
 
 		-- Passes the sender fragment to disable to sender
@@ -295,52 +318,4 @@ function on_message(self, message_id, message, sender)
 		disableSender(sender.fragment)
 	end
 	
-end
-
-
--- Functions Below Not Currently Used
-
-function final(self)
-	-- Add finalization code here
-	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
-end
-
-function update(self, dt)
-	-- Add update code here
-	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
-end
-
-function late_update(self, dt)
-	-- This function is called at the end of update cycle but before render
-	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
-end
-
-function fixed_update(self, dt)
-	-- This function is called if 'Fixed Update Frequency' is enabled in the Engine section of game.project
-	-- Can be coupled with fixed updates of the physics simulation if 'Use Fixed Timestep' is enabled in
-	-- Physics section of game.project
-	-- Add update code here
-	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
-end
-
-function on_input(self, action_id, action)
-	-- Add input-handling code here. The game object this script is attached to
-	-- must have acquired input focus:
-	--
-	--    msg.post(".", "acquire_input_focus")
-	--
-	-- All mapped input bindings will be received. Mouse and touch input will
-	-- be received regardless of where on the screen it happened.
-	-- Learn more: https://defold.com/manuals/input/
-	-- Remove this function if not needed
-end
-
-function on_reload(self)
-	-- Add reload-handling code here
-	-- Learn more: https://defold.com/manuals/hot-reload/
-	-- Remove this function if not needed
 end

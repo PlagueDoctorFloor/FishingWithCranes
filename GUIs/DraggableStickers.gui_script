@@ -1,7 +1,5 @@
 -- 
 -- WARNING: THIS IS IMPLEMENTED IN A BAD AND STUPID WAY. BUT IT IS FUNCTIONAL FOR THE PURPOSES OF THIS GAME SO I AM LEAVING IT
--- TODO: 
--- 1. Look into how new stickers interact with deleting/prevent player from moving/deleting while the new sticker menu is open
 -- 
 
 -- Variables local to all stickers
@@ -154,6 +152,7 @@ function on_input(self, action_id, action)
 									msg.post("/Spawner","deleteSticker",{number = self.number})
 									-- set self.sticker to nil
 									self.sticker = nil
+									-- Returns the for loop to stop iterating
 									return
 								end
 							end
@@ -170,24 +169,4 @@ function on_input(self, action_id, action)
 
 		end
 	end
-end
-
--- Unused Functions
-
-function final(self)
-	-- Add finalization code here
-	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
-end
-
-function update(self, dt)
-	-- Add update code here
-	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
-end
-
-function on_reload(self)
-	-- Add reload-handling code here
-	-- Learn more: https://defold.com/manuals/hot-reload/
-	-- Remove this function if not needed
 end

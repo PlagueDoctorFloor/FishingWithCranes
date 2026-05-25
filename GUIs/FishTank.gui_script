@@ -1,6 +1,3 @@
--- 
--- TODO:
--- 
 
 -- Boolean keeping track of whether we are in screenshot mode
 local screenshotMode = false
@@ -278,14 +275,22 @@ function on_input(self, action_id, action)
 	
 end
 
+-- Executes when the function receives a message
 function on_message(self, message_id, message, sender)
 
+	-- if the message_id is Opening, from the loader
 	if message_id == hash("Opening") then
+		-- Sets the color of the black node to black with full alpha value
 		gui.set_color(gui.get_node("black"), vmath.vector4(0,0,0,1))
+		-- Gets the color of the node
 		local to_color = gui.get_color(gui.get_node("black"))
+		-- sets the alpha value to 0
 		to_color.w = 0
+		-- animates the black node going from full alpha to no alpha in 1/4th of a second
 		gui.animate(gui.get_node("black"), gui.PROP_COLOR, to_color, gui.EASING_OUT, .25)
 
+		-- Sets the decorTime menu to invisible 
+		
 		-- Iterate through the currentlyVisible array
 		for i=1,#currentlyVisible,1 do
 			-- Sets all the nodes invisible
@@ -306,24 +311,4 @@ function on_message(self, message_id, message, sender)
 		
 	end
 	
-end
-
--- Unused Functions
-
-function final(self)
-	-- Add finalization code here
-	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
-end
-
-function update(self, dt)
-	-- Add update code here
-	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
-end
-
-function on_reload(self)
-	-- Add reload-handling code here
-	-- Learn more: https://defold.com/manuals/hot-reload/
-	-- Remove this function if not needed
 end

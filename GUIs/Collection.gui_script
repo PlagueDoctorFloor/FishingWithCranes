@@ -1,7 +1,6 @@
---
--- TODO:
---
 
+-- Custom Function
+-- loads the Fish Tank scene
 local function loadFishTank()
 	
 	-- Call the loader to load the fish tank
@@ -97,10 +96,14 @@ function on_input(self, action_id, action)
 					if i < 4 then
 						-- Sends a message to the loader to load the item collection scene, passing the set number
 						msg.post("Loader:/Loader", "load itemCollection", {set = i})
+						
 					-- If i is greater then 3, only the fish tank
 					else 
+						-- Gets the color of the black node (currently 0 alpha)
 						local to_color = gui.get_color(gui.get_node("black"))
+						-- Sets the color alpha value to 1
 						to_color.w = 1
+						-- Animates the black node easing in from invisible to visible in .5 seconds then calls loadFishTank
 						gui.animate(gui.get_node("black"), gui.PROP_COLOR, to_color, gui.EASING_IN, .5, 0, loadFishTank)
 					end
 
@@ -114,32 +117,15 @@ function on_input(self, action_id, action)
 
 end
 
+-- Executes upon script receiving messages
 function on_message(self, message_id, message, sender)
-	
+
+	-- If the message ID is opening from the loader
 	if message_id == hash("Opening") then
 
+		-- Sets the black node back to 0 alpha again (so it's not just a black screen)
 		gui.set_color(gui.get_node("black"), vmath.vector4(0,0,0,0))
 		
 	end
 	
-end
-
--- Unused Functions
-
-function final(self)
-	-- Add finalization code here
-	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
-end
-
-function update(self, dt)
-	-- Add update code here
-	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
-end
-
-function on_reload(self)
-	-- Add reload-handling code here
-	-- Learn more: https://defold.com/manuals/hot-reload/
-	-- Remove this function if not needed
 end

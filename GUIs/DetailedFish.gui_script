@@ -1,6 +1,3 @@
---
--- TODO:
--- 
 
 -- Arrays which contain the names in order of all the items in the sets
 local FreshFishNames = {"Carp","Rainbow Trout","Alligator Gar","Ghost Knifefish","Arowana","Elephantfish","Koi","A Hundred Gar"}
@@ -41,14 +38,18 @@ local function tradeButton(fishHad)
 
 	-- If the player owns 3 or more copies of the fish
 	if fishHad > 2 then
+		
 		-- Set the trade button and text to visible
 		gui.set_enabled(gui.get_node("TradeButton"), true)
 		gui.set_visible(gui.get_node("TradeText"), true)
+		
 	-- If the player has 2 or less copies of the fish
 	else
+	
 		-- sets the trade button and text to not visible
 		gui.set_enabled(gui.get_node("TradeButton"), false)
 		gui.set_visible(gui.get_node("TradeText"), false)
+		
 	end
 	
 end
@@ -261,6 +262,7 @@ function on_input(self, action_id, action)
 
 				-- Add one token to the global tokens
 				data["tokens"] = data["tokens"]+1
+				-- Saves variable change to the save file
 				sys.save(path,data)
 				-- Call display fish to update the relevant nodes
 				displayFish()
@@ -277,7 +279,7 @@ function on_input(self, action_id, action)
 			if setSelect ~= 3 and haveFish then
 				-- Increase the petFish counter
 				data["petFish"] = data["petFish"]+1
-
+				-- Saves variable change to the save file
 				sys.save(path,data)
 				-- Send a message to the loader to play a fish blub sound
 				msg.post("Loader:/Loader","Sound", {sound = 1})
@@ -293,24 +295,4 @@ function on_input(self, action_id, action)
 		
 	end
 	
-end
-
--- Unused Functions
-
-function final(self)
-	-- Add finalization code here
-	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
-end
-
-function update(self, dt)
-	-- Add update code here
-	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
-end
-
-function on_reload(self)
-	-- Add reload-handling code here
-	-- Learn more: https://defold.com/manuals/hot-reload/
-	-- Remove this function if not needed
 end

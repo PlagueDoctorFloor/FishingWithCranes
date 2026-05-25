@@ -1,33 +1,19 @@
 
+-- Executes when the script receives input
 function on_input(self, action_id, action)
 
+	-- If the user right clicks on the X node
 	if action_id == hash("LeftClick") and gui.pick_node(gui.get_node("X"), action.x, action.y) then
 
+		-- Call the loader to load the crane scene
 		msg.post("Loader:/Loader", "load Crane")
 		
 	end
 	
 end
 
+-- Executes when the script first is loaded
 function init(self)
 	-- Acquires input focus
 	msg.post(".", "acquire_input_focus")
-end
-
-function final(self)
-	-- Add finalization code here
-	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
-end
-
-function update(self, dt)
-	-- Add update code here
-	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
-end
-
-function on_reload(self)
-	-- Add reload-handling code here
-	-- Learn more: https://defold.com/manuals/hot-reload/
-	-- Remove this function if not needed
 end

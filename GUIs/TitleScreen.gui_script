@@ -1,62 +1,116 @@
---
---
--- 
 
+-- Variable to keep the user from clicking until the animations finish
 local clickAllowed = false
 
+-- Variable to control active buttons 
 local deleteDecision = false
 
+-- Variable to signal whether the player has an 
 local hasSave = false
 
+-- Custom Function
+-- Calls loader to load Crane
 local function loadCrane(self)
 
+	-- Sends a message to the loader to load the main crane screen scene
 	msg.post("Loader:/Loader", "load Crane")
 	
 end
 
+-- Custom Function
+-- Handles Fading out before transitioning to the crane
 local function screenFade(self)
 
+	-- Sets firstLoad to true, so in the future it displays the delete button
+	-- this data will not actually save until the user makes actual progress
 	data["firstLoad"] = true
-	
+
+	-- Gets the color of the of the node (Current Alpha = 0)
 	local to_color = gui.get_color(self.black)
+	-- Sets the Alpha value to 1, so full visibility 
 	to_color.w = 1
+	-- Animates the node moving from it's current color values to the new color values
+	-- Eases consistently over a duration of 1 second
+	-- Calls the loadCrane function when it finishes
 	gui.animate(self.black, gui.PROP_COLOR, to_color, gui.EASING_IN, 1, 0, loadCrane)
+	
 end
 
+-- Custom Function
+-- Called after the title fades in
+-- Flashes the text
+-- Fades in the delete button if the user has a save.
 local function textFlash(self)
+
+	-- Gets the color of the of the node (Current Alpha = 0)
 	local to_color = gui.get_color(self.clickText)
+	-- Sets the Alpha value to 1, so full visibility 
 	to_color.w = 1
+	-- Animates the node moving from it's current color values to the new color values
+	-- Eases consistently over a duration of 1.8 seconds
+	-- Repeats back and forth endlessly
 	gui.animate(self.clickText, gui.PROP_COLOR, to_color, gui.EASING_IN, 1.8, 0, nil, gui.PLAYBACK_LOOP_PINGPONG)
+	-- Sets click Allowed to true to begin receiving user inputs after it flashes once
 	clickAllowed = true
 
+	-- If hasSave is true, so the user has progress
 	if hasSave then
+		-- Gets the color of the of the node (Current Alpha = 0)
 		local to_color = gui.get_color(self.deleteButton)
+		-- Sets the Alpha value to 1, so full visibility 
 		to_color.w = 1
-		gui.animate(self.deleteButton, gui.PROP_COLOR, to_color, gui.EASING_IN, 1, 0, textFlash)
+		-- Animates the node moving from it's current color values to the new color values
+		-- Eases consistently over a duration of 1 second
+		gui.animate(self.deleteButton, gui.PROP_COLOR, to_color, gui.EASING_IN, 1)
 
+		-- Gets the color of the of the node (Current Alpha = 0)
 		local to_color = gui.get_color(self.deleteText)
+		-- Sets the Alpha value to 1, so full visibility 
 		to_color.w = 1
-		gui.animate(self.deleteText, gui.PROP_COLOR, to_color, gui.EASING_IN, 1, 0, textFlash)
+		-- Animates the node moving from it's current color values to the new color values
+		-- Eases consistently over a duration of 1 second
+		gui.animate(self.deleteText, gui.PROP_COLOR, to_color, gui.EASING_IN, 1)
 	end
 	
 end
 
+-- Custom Function
+-- Fades the title in
 local function show_title(self)
+	
+	-- Gets the color of the of the node (Current Alpha = 0)
 	local to_color = gui.get_color(self.logo)
+	-- Sets the Alpha value to 1, so full visibility 
 	to_color.w = 1
+	-- Animates the node moving from it's current color values to the new color values
+	-- Eases consistently over a duration of 1 second
+	-- Calls textFlash when it finishes
 	gui.animate(self.logo, gui.PROP_COLOR, to_color, gui.EASING_IN, 1, 0, textFlash)
+	
 end
 
+-- Custom Function
+-- Fades the background in
 local function show_background(self)
-	local d = .75
+
+	-- Gets the color of the of the node (Current Alpha = 0)
 	local to_color = gui.get_color(self.background)
+	-- Sets the Alpha value to 1, so full visibility 
 	to_color.w = 1
-	gui.animate(self.background, gui.PROP_COLOR, to_color, gui.EASING_IN, 1, d, show_title)
+	-- Animates the node moving from it's current color values to the new color values
+	-- Eases consistently over a duration of 1 second
+	-- Calls show_title when it finishes
+	gui.animate(self.background, gui.PROP_COLOR, to_color, gui.EASING_IN, 1, .75, show_title)
+	
 end
 
+-- Executes when the collection is first loaded
 function init(self)
+	
+	-- Acquires input focus
 	msg.post(".", "acquire_input_focus")
 
+	-- Save all the needed nodes to the internal variables
 	self.background = gui.get_node("background")
 	self.logo = gui.get_node("Sign")
 	self.clickText = gui.get_node("Text")
@@ -64,35 +118,70 @@ function init(self)
 	self.deleteText = gui.get_node("DeleteText")
 	self.deleteButton = gui.get_node("DeleteLabel")
 	self.Sure = gui.get_node("DeleteSign")
-	
 
+	-- Calls show_background to start the chain of fading in
 	show_background(self)
 end
 
+-- Executes when the script receives input
 function on_input(self, action_id, action)
 
+	-- If clickAllowed has been set to true (the flashing text has started)
 	if clickAllowed then
+
+		-- If the user left clicks and it's a press (only executes once)
 		if action_id == hash("LeftClick") and action.pressed then
 
+			-- If deleteDecision is true, meaning the user has clicked on the delete save button
+			-- and is seeing the "are you sure?" message
 			if deleteDecision then
+				
+				-- If the user clicks the yes button
 				if gui.pick_node(gui.get_node("yesButton"), action.x, action.y) then
+					
+					-- Calls the os to remove the file at the global path variable
 					os.remove(path)
+					-- Calls global newData from the loader to form a fresh save
 					newData()
+					-- Unenables the sure message, making it and all it's children invisible
 					gui.set_enabled(self.Sure,false)
+					-- Sets the delete button invisible
 					gui.set_visible(self.deleteButton,false)
 					gui.set_visible(self.deleteText,false)
+					-- Sets the deleteDecision variable false so the user can click again
 					deleteDecision = false
+					-- Sets hasSave to false since they don't have one anymore
+					hasSave = false
+
+				-- If the user clicks the no button
 				elseif gui.pick_node(gui.get_node("noButton"), action.x, action.y) then
+
+					-- Unenables the sure message, making it and all it's children invisible
 					gui.set_enabled(self.Sure,false)
+					-- Sets the deleteDecision variable false so the user can click again
 					deleteDecision = false
+					
 				end
-			else
-				if gui.pick_node(self.deleteButton, action.x, action.y) then
+
+			-- If deleteDecision is false, the user has not clicked the delete button
+		else
+			
+				-- If the user clicks the delete button and has a save (so they can't accidentally click on it when invisible)
+				if gui.pick_node(self.deleteButton, action.x, action.y) and hasSave then
+					
+					-- Enables (sets visible) the "Are you sure" sign and buttons
 					gui.set_enabled(self.Sure,true)
+					-- sets deleteDecision to true
 					deleteDecision = true
+					
+				-- If the user clicks anywhere else
 				else
+
+					-- Calls screenFade to fade out and transition to the game
 					screenFade(self)
+					
 				end
+				
 			end
 			
 		end
@@ -100,28 +189,13 @@ function on_input(self, action_id, action)
 	
 end
 
+-- Executes when the script receives a message
 function on_message(self, message_id, message, sender)
 
+	-- Receives a message with the id "info" from the loader
 	if message_id == hash("info") then
+		-- Sets the hasSave variable to the passed value of firstLoad
 		hasSave = message.delete
 	end
 	
-end
-
-function final(self)
-	-- Add finalization code here
-	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
-end
-
-function update(self, dt)
-	-- Add update code here
-	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
-end
-
-function on_reload(self)
-	-- Add reload-handling code here
-	-- Learn more: https://defold.com/manuals/hot-reload/
-	-- Remove this function if not needed
 end

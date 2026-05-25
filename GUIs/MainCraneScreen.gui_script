@@ -1,6 +1,3 @@
---
--- TODO:
---
 
 -- Local Variables
 
@@ -23,17 +20,22 @@ local clickAllowed = true
 -- Used at the end of the fish pulling chain to reinstate clicking when an animation ends
 local function allowClicks(self)
 
+	-- Saves the changes variables to the save file
 	sys.save(path,data)
 	-- Sets clickAllowed to true, allowing the game to process inputs again
 	clickAllowed = true
 	
 end
 
+-- Custom Function
+-- Fades the screen in the first time the it's transitioned to
 local function fadeIn(self)
 
-	--gui.set_color(self.black, vmath.vector4(0, 0, 0, 1))
+	-- Gets the color of the specified node
 	local to_color = gui.get_color(self.black)
+	-- Sets the alpha value to 0 (invisible)
 	to_color.w = 0
+	-- Eases the node color from 1 to 0 over 1.5 seconds
 	gui.animate(self.black, gui.PROP_COLOR, to_color, gui.EASING_OUT, 1.5)
 	
 end
@@ -42,7 +44,7 @@ end
 -- sets the "no tokens" UI elements to not visible when the user clicks after triggering them
 local function noTokens(self)
 	
-	-- Sets the label and texts to not visibl
+	-- Sets the label and texts to not visible
 	gui.set_visible(gui.get_node("NoTokensLabel"), false)
 	gui.set_visible(gui.get_node("NoTokensText"), false)
 	
@@ -182,35 +184,41 @@ local function craneSetup()
 	
 	-- Sets all of the set selection buttons to not visible
 	
-	--gui.set_color(self.black, vmath.vector4(0, 0, 0, 1))
+	-- Get the color of the specified node
 	local to_color = gui.get_color(gui.get_node("FreshwaterSelect"))
+	-- Set the alpha value to 0 (invisible)
 	to_color.w = 0
+	-- Ease the node from full visibility to invisible in half a second
 	gui.animate(gui.get_node("FreshwaterSelect"), gui.PROP_COLOR, to_color, gui.EASING_OUT, .5)
 	
-	--gui.set_color(self.black, vmath.vector4(0, 0, 0, 1))
+	-- Get the color of the specified node
 	local to_color = gui.get_color(gui.get_node("SaltwaterSelect"))
+	-- Set the alpha value to 0 (invisible)
 	to_color.w = 0
+	-- Ease the node from full visibility to invisible in half a second
 	gui.animate(gui.get_node("SaltwaterSelect"), gui.PROP_COLOR, to_color, gui.EASING_OUT, .5)
 	
-	--gui.set_color(self.black, vmath.vector4(0, 0, 0, 1))
+	-- Get the color of the specified node
 	local to_color = gui.get_color(gui.get_node("DecorSelect"))
+	-- Set the alpha value to 0 (invisible)
 	to_color.w = 0
+	-- Ease the node from full visibility to invisible in half a second
 	gui.animate(gui.get_node("DecorSelect"), gui.PROP_COLOR, to_color, gui.EASING_OUT, .5)
-	
-	--gui.set_enabled(gui.get_node("FreshwaterSelect"), false)
-	--gui.set_enabled(gui.get_node("SaltwaterSelect"), false)
-	--gui.set_enabled(gui.get_node("DecorSelect"), false)
 
+	-- Fades the Crane to visible
+
+	-- Get the color of the specified node
 	local to_color = gui.get_color(gui.get_node("Crane"))
+	-- Set the alpha value to 1 (visible)
 	to_color.w = 1
+	-- Ease the node from invisible to full visibility in half a second
 	gui.animate(gui.get_node("Crane"), gui.PROP_COLOR, to_color, gui.EASING_OUT, .5)
 	
-	-- Sets the Crane visible
-	--gui.set_enabled(gui.get_node("Crane"), true)
 	
 	-- Sets the return arrow to visible
 	gui.set_enabled(gui.get_node("ReturnArrow"), true)
-	-- Changes the label text to say "Claw Machine"
+	
+	-- Changes the label text to reflect the chosen set
 	if setSelected == 1 then
 		gui.set_text(gui.get_node("CraneLabelText"),"Freshwater")
 	elseif setSelected == 2 then
@@ -228,21 +236,37 @@ local function selectSetup(num)
 
 	-- Sets craneSelected to true so the user can't interact with crane-related nodes
 	craneSelected = false
-		
+
+	-- Fade the crane to invisible
+
+	-- Get the color of the specified node
 	local to_color = gui.get_color(gui.get_node("Crane"))
+	-- Set the alpha value to 0 (invisible)
 	to_color.w = 0
+	-- Ease the node from full visibility to invisible in half a second
 	gui.animate(gui.get_node("Crane"), gui.PROP_COLOR, to_color, gui.EASING_OUT, .5)
 
+	-- Fade the select buttons to visible
+
+	-- Get the color of the specified node
 	local to_color = gui.get_color(gui.get_node("FreshwaterSelect"))
+	-- Set the alpha value to 1 (visible)
 	to_color.w = 1
+	-- Ease the node from invisible to full visibility in half a second
 	gui.animate(gui.get_node("FreshwaterSelect"), gui.PROP_COLOR, to_color, gui.EASING_OUT, .5)
 
+	-- Get the color of the specified node
 	local to_color = gui.get_color(gui.get_node("SaltwaterSelect"))
+	-- Set the alpha value to 1 (visible)
 	to_color.w = 1
+	-- Ease the node from invisible to full visibility in half a second
 	gui.animate(gui.get_node("SaltwaterSelect"), gui.PROP_COLOR, to_color, gui.EASING_OUT, .5)
 
+	-- Get the color of the specified node
 	local to_color = gui.get_color(gui.get_node("DecorSelect"))
+	-- Set the alpha value to 1 (visible)
 	to_color.w = 1
+	-- Ease the node from invisible to full visibility in half a second
 	gui.animate(gui.get_node("DecorSelect"), gui.PROP_COLOR, to_color, gui.EASING_OUT, .5)
 	
 	-- Sets the return arrow to not visible
@@ -329,8 +353,10 @@ function on_input(self, action_id, action)
 				-- Sends a message to the loader to load the achievements page
 				msg.post("Loader:/Loader", "load Achievement")
 
+			-- If the player clicks on the credits button
 			elseif gui.pick_node(credits, action.x, action.y) then
 
+				-- Sends a message ot the loader to load the credits page
 				msg.post("Loader:/Loader", "load Credits")
 
 			end
@@ -406,8 +432,10 @@ function on_input(self, action_id, action)
 					-- Sends a message to the loader to load the achievements page
 					msg.post("Loader:/Loader", "load Achievement")
 					
+				-- If the player clicks on the credits button
 				elseif gui.pick_node(credits, action.x, action.y) then
 
+					-- Sends a message ot the loader to load the credits page
 					msg.post("Loader:/Loader", "load Credits")
 			
 				end
@@ -438,6 +466,7 @@ function on_message(self, message_id, message, sender)
 		
 		-- Update the gui token text
 		gui.set_text(gui.get_node("TokenText"),data["tokens"])
+		-- Calls fadeIn
 		fadeIn(self)
 
 	-- If the message id is "Coin Done" (sent from the loader when the coin sound effect is finished)
@@ -462,26 +491,7 @@ function init(self)
 	-- Updates the token GUI text
 	gui.set_text(gui.get_node("TokenText"),data["tokens"])
 
+	-- Sets the black box node to an internal variable
 	self.black = gui.get_node("black")
 	
-end
-
--- Currently Unused Functions
-
-function final(self)
-	-- Add finalization code here
-	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
-end
-
-function update(self, dt)
-	-- Add update code here
-	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
-end
-
-function on_reload(self)
-	-- Add reload-handling code here
-	-- Learn more: https://defold.com/manuals/hot-reload/
-	-- Remove this function if not needed
 end

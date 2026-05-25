@@ -1,6 +1,3 @@
--- 
--- TODO:
--- 
 
 -- Boolean keeping track of whether the minigame has started
 local gameStart = false
@@ -122,24 +119,4 @@ function init(self)
 	msg.post(".","acquire_input_focus")
 	-- Updates the token text with the global variable
 	gui.set_text(gui.get_node("TokenText"),data["tokens"])
-end
-
--- Unused Functions
-
-function final(self)
-	-- Add finalization code here
-	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
-end
-
-function update(self, dt)
-	-- Add update code here
-	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
-end
-
-function on_reload(self)
-	-- Add reload-handling code here
-	-- Learn more: https://defold.com/manuals/hot-reload/
-	-- Remove this function if not needed
 end

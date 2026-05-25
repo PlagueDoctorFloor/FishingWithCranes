@@ -1,6 +1,3 @@
---
--- TODO:
---
 
 -- Array holding the text that will display once the achievemnent is achieved/what the acheivement is, saved in order
 local achievementText = {"Collect All\nFreshwater Fish","Collect All\nSaltwater Fish","Collect 50 Fish","Play Match\n10 Times","Stalemate In\nTic Tac Toe\n10 Times","Win All 3\nFlapping Fish\nMaps","Pet Fish 100 Times","Get All Achievements"}
@@ -74,7 +71,7 @@ local function checkOne()
 		end
 	end 
 
-	-- Iff the sentinel variable is still true, meaning no fish were false
+	-- If the sentinel variable is still true, meaning no fish were false
 	if freshFishFound then
 		-- Sets achievement one to true
 		achieved[1] = true
@@ -224,54 +221,76 @@ end
 -- Checks global variables to determine if the achievement variables need to be set to true and the the nodes set to visible
 local function updateAchievements()
 
+	-- Gets the 3 nodes that change on interaction
 	local achievementHighlight = gui.get_node("AchievementHighlight")
 	local achievementHighlightText = gui.get_node("AchievementHighlightText")
 	local hintTextNode = gui.get_node("HintText")
+	-- Set those 3 nodes to not visible
 	gui.set_visible(gui.get_node("AchievementHighlight"), false)
 	gui.set_visible(gui.get_node("AchievementHighlightText"), false)
 	gui.set_visible(gui.get_node("HintText"), false)
 
+	-- If he's not achieved all achievements already
 	if not achieved[8] then
 		-- Sentinel variable set up to keep track if all achievements are achieved.
 		local allAchievements = true
 
+		-- Iterate through all achievements except the last one
 		for i=1,#achieved-1 do
-			
+
+			-- Checks if the achievement is already marked done
 			if not achieved[i] then
 
+				-- Sets up a sentinel variable
 				local result = false
 
+				-- if it's achievement one
 				if i == 1 then
 
+					-- Checks achievement one and saves the result
 					result = checkOne()
 
+				-- If it's achievement two
 				elseif i == 2 then
 
+					-- Check achievement two and saves the result
 					result = checkTwo()
 
+				-- If it's achievement three
 				elseif i == 3 then
 
+					-- Checks achievement three and saves the result
 					result = checkThree()
 
+				-- If it's achievement four
 				elseif i == 4 then
 
+					-- Checks achievement four and saves the result
 					result = checkFour()
 
+				-- If it's achievement five
 				elseif i == 5 then
 
+					-- Checks achievement five and saves the result
 					result = checkFive()
 
+				-- If it's achievement six
 				elseif i == 6 then
 
+					-- Checks achievement six and saves the result
 					result = checkSix()
 
+				-- If it's achievement seven
 				elseif i == 7 then
 
+					-- Checks achievement seven and saves the result
 					result = checkSeven()
 					
 				end
 
+				-- If result comes back false during any iteration
 				if not result then
+					-- Sets allAchievements to false
 					allAchievements = false
 				end
 
@@ -306,6 +325,7 @@ function on_input(self, action_id, action)
 	-- If no specific input is being received
 	if action_id == nil then
 
+		-- Get array of all the item glow nodes
 		local itemGlows = {gui.get_node("fish1glow"),gui.get_node("fish2glow"),gui.get_node("fish3glow"),gui.get_node("fish4glow"),gui.get_node("fish5glow"),gui.get_node("fish6glow"),gui.get_node("fish7glow"),gui.get_node("fish8glow")}
 
 		-- Sentinel variable to determine if the user is currently hovering ofer a node
@@ -334,6 +354,7 @@ function on_input(self, action_id, action)
 
 				end
 
+				-- Break to avoid unnecessary code execution
 				break
 
 			end
@@ -353,21 +374,25 @@ function on_input(self, action_id, action)
 		
 	end
 
-	-- If the user left clicks 
+	-- If the user left clicks, executes once cause of pressed
 	if action_id == hash("LeftClick") and action.pressed then
 
+		-- Iterate through the achievements array
 		for i=1,#achievements do
 
 			-- Check if one of the nodes is being hovered over
 			if gui.pick_node(achievements[i], action.x, action.y) then
 
+				-- if the player clicked on the return node
 				if i == 9 then
 					
 					-- Calls the loader to load the main crane screen
 					msg.post("Loader:/Loader", "load Crane")
 
+				-- If the user clicks on any other node on screen
 				else
 
+					-- Else, call displayAchievementHint passing the number of the achievement
 					displayAchievementHint(i)
 
 				end
@@ -388,24 +413,4 @@ function on_message(self, message_id, message, sender)
 		-- Calls update achievements
 		updateAchievements()
 	end
-end
-
--- Unused Functions
-
-function final(self)
-	-- Add finalization code here
-	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
-end
-
-function update(self, dt)
-	-- Add update code here
-	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
-end
-
-function on_reload(self)
-	-- Add reload-handling code here
-	-- Learn more: https://defold.com/manuals/hot-reload/
-	-- Remove this function if not needed
 end

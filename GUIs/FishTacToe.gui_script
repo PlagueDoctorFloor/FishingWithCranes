@@ -1,6 +1,3 @@
--- 
--- TODO:
--- 
 
 -- Local Variables
 -- Array that keeps track of the board positions
@@ -89,6 +86,7 @@ local function evaluate(player)
 		gui.set_visible(gui.get_node("playAgain"), true)
 		gui.set_visible(gui.get_node("playAgainText"),true)
 
+		-- Saves the changed values to the save file
 		sys.save(path,data)
 
 		-- Returns to avoid executing unnecessary code
@@ -110,6 +108,7 @@ local function evaluate(player)
 	-- Checks if there is no winner, and also there are no open spaces left
 	if not noSpacesLeft then
 
+		-- Sets gameEnd to true 
 		gameEnd = true
 
 		-- updates the global fishtactoe stalemate counter
@@ -125,6 +124,7 @@ local function evaluate(player)
 		gui.set_visible(gui.get_node("playAgain"), true)
 		gui.set_visible(gui.get_node("playAgainText"),true)
 
+		-- Saves the changed values to the save file
 		sys.save(path,data)
 
 		-- Returns to avoid executing unnecessary code
@@ -292,13 +292,16 @@ function on_message(self, message_id, message, sender)
 
 	-- If the message id is Update (sent from the loader whenever the page is enabled)
 	if message_id == hash("Update") then
-		-- Updates the tokens text
+		
+		-- Updates the tokens text & the gameEnd information board
 		gui.set_text(gui.get_node("TokenText"),data["tokens"])
 		gui.set_text(gui.get_node("stalemateInformation"),"Stalemates: "..data["FishTacToeStalemates"])
 		gui.set_text(gui.get_node("winsInformation"),"Wins: "..data["FishTacToeWins"])
 		gui.set_text(gui.get_node("lossInformation"),"Losses: "..data["FishTacToeLosses"])
+		-- Calls reset 
 		Reset()
 
+	-- If it receives message Change Turns from itself
 	elseif message_id == hash("Change Turns") then
 		-- If the message was sent by the players input
 		if message.caller == 1 then
@@ -313,24 +316,4 @@ function on_message(self, message_id, message, sender)
 		end
 	end	
 	
-end
-
--- Unused Functions
-
-function final(self)
-	-- Add finalization code here
-	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
-end
-
-function update(self, dt)
-	-- Add update code here
-	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
-end
-
-function on_reload(self)
-	-- Add reload-handling code here
-	-- Learn more: https://defold.com/manuals/hot-reload/
-	-- Remove this function if not needed
 end
